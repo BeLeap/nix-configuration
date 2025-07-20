@@ -1,8 +1,10 @@
 { pkgs, ... }:
 {
   programs.ghostty = {
+    enable = true;
+
     # Installed using brew on macOS
-    enable = !pkgs.stdenv.isDarwin;
+    package = if pkgs.stdenv.isDarwin then null else pkgs.ghostty;
 
     settings = {
       theme = "catppuccin-frappe";
