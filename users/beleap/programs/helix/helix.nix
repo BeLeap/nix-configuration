@@ -1,4 +1,4 @@
-_: {
+{ pkgs, ... }: {
   programs.helix = {
     enable = true;
 
@@ -54,6 +54,10 @@ _: {
         timeout = 60;
         required-root-pattern = ["build.gradle" "build.gradle.kts" "pom.xml"];
       };
+      language-server.typescript-language-server = with pkgs.nodePackages; {
+        command = "${typescript-language-server}/bin/typescript-language-server";
+        args = [ "--stdio" "--tsserver-path=${typescript}/lib/node_modules/typescript/lib" ];
+      };
 
       language = [
         {
@@ -72,10 +76,8 @@ _: {
         }
         {
           name = "bash";
-          indent.tab-width = 4;
-          indent.unit = "    ";
-          formatter.command = "shfmt";
-          formatter.args = ["-i" "4"];
+          indent = { tab-width = 4; unit = "    ";};
+          formatter = { command = "shfmt"; args = ["-i" "4"]; };
           auto-format = true;
         }
         {
@@ -94,17 +96,10 @@ _: {
         name = name;
         auto-format = true;
         language-servers = [
-          { name = "typescrpit-language-server"; except-featuers = ["format"]; }
+          { name = "typescript-language-server"; except-features = ["format"]; }
           "biome"
         ];
       }) ["javascript" "typescript" "jsx" "tsx" "json"];
-
-      grammar = [
-        {
-          name = "dockerfile";
-          source = { git = "https://github.com/camdencheek/tree-sitter-dockerfile"; rev = "main"; };
-        }
-      ];
     };
   };
 }
