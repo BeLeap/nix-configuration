@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, ... }:
+  outputs = inputs@{ self, nix-darwin, home-manager, ... }:
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#beleap-m1air
@@ -21,6 +21,12 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configurations/macos/beleap-m1air/configuartion.nix
+        home-manager.darwinModules.home-manager
+        {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.beleap = ./users/beleap/darwin.nix;
+        }
       ];
     };
   };
