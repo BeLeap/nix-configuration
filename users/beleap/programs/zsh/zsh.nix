@@ -38,6 +38,9 @@ _: {
       gf = "git fetch --all --prune";
       gd = "git diff";
 
+      ll = "ls -l";
+      lla = "ls -la";
+
       e = "$EDITOR";
 
       sozsh = "source ~/.zshrc";
