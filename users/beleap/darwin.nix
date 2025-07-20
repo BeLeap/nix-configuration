@@ -21,6 +21,5 @@
     pkgs.utm
     pkgs.wireshark
     pkgs.cascadia-code
-    pkgs.ghostty
   ];
 }
