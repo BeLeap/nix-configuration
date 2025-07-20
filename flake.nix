@@ -18,6 +18,7 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#beleap-m1air
     darwinConfigurations."beleap-m1air" = nix-darwin.lib.darwinSystem {
+      specialArgs = { inherit inputs; };
       modules = [
         ./configurations/macos/beleap-m1air/configuartion.nix
       ];
