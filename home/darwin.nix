@@ -1,6 +1,7 @@
 {
   pkgs,
   kind,
+  username,
   ...
 }:
 {
@@ -17,8 +18,8 @@
   # changes in each release.
   home.stateVersion = "25.11";
 
-  home.username = "beleap";
-  home.homeDirectory = "/Users/beleap";
+  home.username = username;
+  home.homeDirectory = "/Users/${username}";
 
   home.packages = [
     pkgs.htop
