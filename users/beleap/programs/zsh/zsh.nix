@@ -7,6 +7,9 @@ _: {
     autosuggestion = {
       enable = true;
     };
+    syntaxHighlighting = {
+      enable = true;
+    };
 
     shellAliases = {
       ga = "git add";
