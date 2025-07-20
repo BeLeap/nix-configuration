@@ -18,9 +18,23 @@
   };
 
   statusline = {
-    left = ["mode" "spinner"];
-    center = ["file-name" "read-only-indicator" "file-modification-indicator"];
-    right = ["diagnostics" "selections" "position" "file-encoding" "file-line-ending" "file-type"];
+    left = [
+      "mode"
+      "spinner"
+    ];
+    center = [
+      "file-name"
+      "read-only-indicator"
+      "file-modification-indicator"
+    ];
+    right = [
+      "diagnostics"
+      "selections"
+      "position"
+      "file-encoding"
+      "file-line-ending"
+      "file-type"
+    ];
   };
 
   lsp = {
