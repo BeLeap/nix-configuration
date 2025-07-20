@@ -5,10 +5,6 @@
     (import ../common/common.nix { inherit username; })
   ];
 
-  nixpkgs = {
-    config.allowUnfree = true;
-  };
-
   environment.systemPackages = [ ];
   programs.zsh.enable = true;
 
