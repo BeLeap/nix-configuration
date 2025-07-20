@@ -4,6 +4,10 @@ _: {
 
     autocd = true;
 
+    autosuggestion = {
+      enable = true;
+    };
+
     shellAliases = {
       ga = "git add";
       gc = "git commit -v";
