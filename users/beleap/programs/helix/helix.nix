@@ -43,22 +43,7 @@
     };
 
     languages = {
-      language-server.biome = {
-        command = "biome";
-        args = ["lsp-proxy"];
-        required-root-patterns = ["biome.json"];
-      };
-      language-server.kotlin-ls = {
-        command = "kotlin-ls";
-        args = ["--stdio"];
-        timeout = 60;
-        required-root-pattern = ["build.gradle" "build.gradle.kts" "pom.xml"];
-      };
-      language-server.typescript-language-server = with pkgs.nodePackages; {
-        command = "${typescript-language-server}/bin/typescript-language-server";
-        args = [ "--stdio" "--tsserver-path=${typescript}/lib/node_modules/typescript/lib" ];
-      };
-
+      language-server = import ./language-servers.nix { inherit pkgs; };
       language = import ./languages.nix;
     };
   };
