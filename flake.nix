@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, ... }:
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#beleap-m1air
