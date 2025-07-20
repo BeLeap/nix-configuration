@@ -2,7 +2,7 @@
 {
   imports = [
     ../../common/common.nix
-    ../common/brew.nix
+    ../common/common.nix
   ];
 
   nixpkgs = {
