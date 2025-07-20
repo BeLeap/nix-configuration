@@ -33,7 +33,7 @@
             nix-darwin.lib.darwinSystem {
               specialArgs = { inherit inputs kind; };
               modules = [
-                ./configurations/macos/beleap-m1air/configuartion.nix
+                (./. + "/configurations/macos/${name}/configuartion.nix")
                 home-manager.darwinModules.home-manager
                 {
                   home-manager.useGlobalPkgs = true;
