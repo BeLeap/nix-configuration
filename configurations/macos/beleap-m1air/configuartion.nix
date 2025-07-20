@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  nixpkgs = {
+    config.allowUnfree = true;
+  };
+
   environment.systemPackages = [];
   programs.zsh.enable = true;
   
