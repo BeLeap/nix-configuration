@@ -31,7 +31,7 @@
               username = (if kind == "personal" then "beleap" else value.username);
             in
             nix-darwin.lib.darwinSystem {
-              specialArgs = { inherit inputs kind; };
+              specialArgs = { inherit inputs kind username; };
               modules = [
                 (./. + "/configurations/macos/${name}/configuartion.nix")
                 home-manager.darwinModules.home-manager

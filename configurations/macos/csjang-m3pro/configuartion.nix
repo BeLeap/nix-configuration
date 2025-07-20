@@ -1,8 +1,8 @@
-{ inputs, username, ... }:
+{ inputs, ... }:
 {
   imports = [
     ../../common/common.nix
-    (import ../common/common.nix { inherit username; })
+    ../common/common.nix
   ];
 
   nixpkgs = {
