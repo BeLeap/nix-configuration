@@ -24,12 +24,14 @@
     pkgs.discord
   ];
 
-  imports = [
-    ./programs/zsh/zsh.nix
-    ./programs/helix/helix.nix
-    ./programs/ghostty/ghostty.nix
-    ./programs/starship/starship.nix
-    ./programs/carapace/carapace.nix
-  ]
-  ++ map (p: (./. + "/programs/${p}")) [ "lsd" ];
+  imports =
+    [ ]
+    ++ map (p: (./. + "/programs/${p}")) [
+      "zsh"
+      "lsd"
+      "starship"
+      "carapace"
+      "helix"
+      "ghostty"
+    ];
 }
