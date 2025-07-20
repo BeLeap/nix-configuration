@@ -21,6 +21,7 @@
     pkgs.utm
     pkgs.wireshark
     pkgs.cascadia-code
+    pkgs.discord
   ];
 
   imports = [
