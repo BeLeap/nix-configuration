@@ -70,8 +70,10 @@ _: {
         }
         {
           name = "bash";
-          indent = { tab-width = 4; unit = "    "; };
-          formatter = { command = "shfmt"; args = ["-i" "4"]; };
+          indent.tab-width = 4;
+          indent.unit = "    ";
+          formatter.command = "shfmt";
+          formatter.args = ["-i" "4"];
           auto-format = true;
         }
         {
