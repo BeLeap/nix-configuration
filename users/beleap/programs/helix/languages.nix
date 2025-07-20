@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 [
   {
     name = "rust";
@@ -16,7 +17,7 @@
   {
     name = "bash";
     indent = { tab-width = 4; unit = "    ";};
-    formatter = { command = "shfmt"; args = ["-i" "4"]; };
+    formatter = { command = "${pkgs.shfmt}/bin/shfmt"; args = ["-i" "4"]; };
     auto-format = true;
   }
   {
@@ -27,6 +28,11 @@
     roots = ["build.gradle" "build.gradle.kts" "settings.gradle" "settings.gradle.kts" "pom.xml"];
     auto-format = true;
     language-servers = ["kotlin-ls"];
+  }
+  {
+    name = "nix";
+    language-servers = ["nil"];
+    formatter = { command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt"; };
   }
 ]
 ++
