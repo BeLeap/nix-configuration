@@ -17,5 +17,6 @@
 
   home.packages = [
     pkgs.htop
+    pkgs.nil
   ];
 }
