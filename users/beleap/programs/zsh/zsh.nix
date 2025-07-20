@@ -38,6 +38,8 @@ _: {
       gf = "git fetch --all --prune";
       gd = "git diff";
 
+      e = "$EDITOR";
+
       sozsh = "source ~/.zshrc";
     };
   };
