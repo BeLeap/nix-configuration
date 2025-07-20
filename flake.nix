@@ -49,7 +49,7 @@
             beleap-m1air = {
               kind = "personal";
             };
-            csjang-m4pro = {
+            csjang-m3pro = {
               kind = "work";
               username = "cs.jang";
             };
