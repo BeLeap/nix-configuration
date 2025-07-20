@@ -36,6 +36,7 @@ _: {
       gst = "git status";
       gp = "git push";
       gf = "git fetch --all --prue";
+      gd = "git diff";
 
       sozsh = "source ~/.zshrc";
     };
