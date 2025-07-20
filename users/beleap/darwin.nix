@@ -30,5 +30,6 @@
     ./programs/ghostty/ghostty.nix
     ./programs/starship/starship.nix
     ./programs/carapace/carapace.nix
+    ./programs/lsd/lsd.nix
   ];
 }
