@@ -33,6 +33,7 @@
     name = "nix";
     language-servers = ["nil"];
     formatter = { command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt"; };
+    auto-format = true;
   }
 ]
 ++
