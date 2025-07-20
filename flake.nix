@@ -26,8 +26,11 @@
         builtins.mapAttrs
           (
             name: value:
+            let
+              kind = value.kind;
+            in
             nix-darwin.lib.darwinSystem {
-              specialArgs = { inherit inputs; };
+              specialArgs = { inherit inputs kind; };
               modules = [
                 ./configurations/macos/beleap-m1air/configuartion.nix
                 home-manager.darwinModules.home-manager
@@ -36,13 +39,14 @@
                   home-manager.useUserPackages = true;
                   home-manager.backupFileExtension = "bak";
                   home-manager.users.beleap = ./users/beleap/darwin.nix;
+                  home-manager.extraSpecialArgs = { inherit kind; };
                 }
               ];
             }
           )
           {
             beleap-m1air = {
-              personal = true;
+              kind = "personal";
             };
           };
 

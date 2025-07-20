@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  kind,
+  ...
+}:
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -21,8 +25,8 @@
     pkgs.utm
     pkgs.wireshark
     pkgs.cascadia-code
-    pkgs.discord
-  ];
+  ]
+  ++ (if (kind == "personal") then [ pkgs.discord ] else [ ]);
 
   imports =
     [ ]
