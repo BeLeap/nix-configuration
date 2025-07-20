@@ -29,5 +29,6 @@
     ./programs/helix/helix.nix
     ./programs/ghostty/ghostty.nix
     ./programs/starship/starship.nix
+    ./programs/carapace/carapace.nix
   ];
 }
