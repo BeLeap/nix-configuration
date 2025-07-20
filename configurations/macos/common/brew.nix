@@ -5,6 +5,7 @@ _: {
     brews = [];
     casks = [
       "wireshark"
+      "firefox@developer-edition"
     ];
   };
 }
