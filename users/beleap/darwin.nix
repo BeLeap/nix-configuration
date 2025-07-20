@@ -18,5 +18,6 @@
   home.packages = [
     pkgs.htop
     pkgs.nil
+    pkgs.utm
   ];
 }
