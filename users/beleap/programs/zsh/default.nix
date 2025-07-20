@@ -37,6 +37,7 @@ _: {
       gp = "git push";
       gf = "git fetch --all --prune";
       gd = "git diff";
+      ggr = "cd $(git rev-parse --show-toplevel 2>/dev/null)";
 
       e = "$EDITOR";
 
