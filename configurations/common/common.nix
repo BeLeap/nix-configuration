@@ -11,4 +11,11 @@ _: {
     ];
     options = "--delete-older-than 3d";
   };
+
+  nixpkgs = {
+    config.allowUnfree = true;
+  };
+
+  # Necessary for using flakes on this system.
+  nix.settings.experimental-features = "nix-command flakes";
 }
