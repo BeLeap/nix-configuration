@@ -1,5 +1,5 @@
 _: {
-  brew = {
+  homebrew = {
     enable = true;
 
     brews = [];

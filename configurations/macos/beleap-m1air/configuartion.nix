@@ -1,6 +1,7 @@
 { inputs, pkgs, ... }: {
   imports = [
     ../../common/common.nix
+    ../common/brew.nix
   ];
 
   nixpkgs = {
