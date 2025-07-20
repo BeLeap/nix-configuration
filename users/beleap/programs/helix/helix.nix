@@ -17,14 +17,14 @@ _: {
           hidden = false;
           git-ignore = false;
           git-global = false;
-          git-exclued = false;
+          git-exclude = false;
         };
 
         soft-wrap = {
           enable = true;
         };
 
-        status-line = {
+        statusline = {
           left = ["mode" "spinner"];
           center = ["file-name" "read-only-indicator" "file-modification-indicator"];
           right = ["diagnostics" "selections" "position" "file-encoding" "file-line-ending" "file-type"];
@@ -36,7 +36,7 @@ _: {
         };
 
         whitespace.render.tab = "all";
-        editor.indent-guides.render = true;
+        indent-guides.render = true;
       };
     };
   };
