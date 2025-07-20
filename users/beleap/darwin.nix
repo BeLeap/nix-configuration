@@ -22,4 +22,8 @@
     pkgs.wireshark
     pkgs.cascadia-code
   ];
+
+  imports = [
+    ./programs/helix/helix.nix
+  ];
 }
