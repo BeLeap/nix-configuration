@@ -25,6 +25,7 @@
   ];
 
   imports = [
+    ./programs/zsh/zsh.nix
     ./programs/helix/helix.nix
     ./programs/ghostty/ghostty.nix
     ./programs/starship/starship.nix
