@@ -17,7 +17,6 @@
 
   home.packages = [
     pkgs.htop
-    pkgs.nil
     pkgs.utm
     pkgs.wireshark
     pkgs.cascadia-code
