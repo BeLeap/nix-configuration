@@ -41,5 +41,6 @@
       "zoxide"
       "direnv"
       "git"
+      "fzf"
     ];
 }
