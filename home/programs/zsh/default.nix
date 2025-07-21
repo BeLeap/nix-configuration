@@ -28,6 +28,8 @@ _: {
 
       # Spell-check
       setopt correct_all
+
+      export PATH=/run/current-system/sw/bin:$PATH
     '';
 
     shellAliases = {
