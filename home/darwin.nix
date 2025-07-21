@@ -27,6 +27,8 @@
     pkgs.cascadia-code
     pkgs.ipcalc
     pkgs.kubectl
+    pkgs.kubectl-node-shell
+    pkgs.kubectl-view-secret
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
