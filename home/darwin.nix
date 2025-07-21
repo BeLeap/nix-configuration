@@ -25,12 +25,13 @@
     pkgs.utm
     pkgs.wireshark
     pkgs.cascadia-code
-    pkgs.ipcalc
     pkgs.kubectl
     pkgs.kubectl-node-shell
     pkgs.kubectl-view-secret
     pkgs.kubectx
+    pkgs.ipcalc
     pkgs.mtr
+    pkgs.arping
     pkgs.ncdu
     pkgs.yq
     pkgs.watchexec
