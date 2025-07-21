@@ -45,6 +45,12 @@ _: {
       gl = "git pull --rebase";
       gr = "git rebase --autostash --autosquash";
 
+      prcm = "gh pr create --assignee @me";
+      prv = "gh pr view";
+      prvw = "gh pr view -w";
+      prm = "gh pr merge";
+      prmd = "gh pr merge -d";
+
       e = "$EDITOR";
 
       sozsh = "source ~/.zshrc";
