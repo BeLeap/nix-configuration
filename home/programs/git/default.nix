@@ -17,5 +17,29 @@
       ".helix"
       "CLAUDE.md"
     ];
+
+    extraConfig = {
+      push = {
+        autoSetupRemote = true;
+      };
+      rerere = {
+        enable = true;
+      };
+      column = {
+        ui = "auto";
+      };
+      branch = {
+        sort = "-commiterdate";
+      };
+      fetch = {
+        writeCommitGraph = true;
+      };
+      help = {
+        autocorret = "prompt";
+      };
+      pack = {
+        usePathWalk = true;
+      };
+    };
   };
 }
