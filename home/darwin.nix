@@ -1,6 +1,5 @@
 {
   pkgs,
-  kind,
   metadata,
   ...
 }:
@@ -28,7 +27,7 @@
     pkgs.cascadia-code
     pkgs.ipcalc
   ]
-  ++ (if (kind == "personal") then [ pkgs.discord ] else [ ]);
+  ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
   imports =
     [ ]
