@@ -21,6 +21,11 @@
       nixpkgs,
       ...
     }:
+    let
+      overlays = [
+        (import ./pkgs/overlay.nix)
+      ];
+    in
     {
       darwinConfigurations =
         builtins.mapAttrs
@@ -46,6 +51,7 @@
             nix-darwin.lib.darwinSystem {
               specialArgs = { inherit inputs metadata; };
               modules = [
+                { nixpkgs.overlays = overlays; }
                 (./. + "/configurations/macos/${name}/configuartion.nix")
                 home-manager.darwinModules.home-manager
                 {

@@ -1,0 +1,9 @@
+branch=$(git branch --list master main | head -n 1 | awk '{print $1}')
+if [ -z "$branch" ]; then
+    echo "Neither master nor main branch exists."
+    exit 1
+fi
+
+echo "Creating RC PR to branch: $branch"
+
+gh pr create --assignee @me --base $branch --title "RC" --body "RC $(date -u +%Y-%m-%dT%H:%M:%S)"

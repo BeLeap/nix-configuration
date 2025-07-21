@@ -36,6 +36,7 @@
     pkgs.ncdu
     pkgs.yq
     pkgs.watchexec
+    pkgs.beleap-utils
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
