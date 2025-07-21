@@ -40,6 +40,7 @@ _: {
       gf = "git fetch --all --prune";
       gd = "git diff";
       ggr = "cd $(git rev-parse --show-toplevel 2>/dev/null)";
+      gl = "git pull --rebase";
 
       e = "$EDITOR";
 
