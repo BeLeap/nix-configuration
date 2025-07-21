@@ -38,5 +38,6 @@
       "carapace"
       "helix"
       "ghostty"
+      "zoxide"
     ];
 }
