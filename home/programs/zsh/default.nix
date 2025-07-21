@@ -30,8 +30,8 @@ _: {
       setopt correct_all
 
       bindkey -v
-      bindkey ^R history-incremental-search-backward
-      bindkey ^S history-incremental-search-forward
+      bindkey \^R history-incremental-search-backward
+      bindkey \^S history-incremental-search-forward
 
       export PATH=/run/current-system/sw/bin:$PATH
     '';
