@@ -29,6 +29,7 @@
     pkgs.kubectl
     pkgs.kubectl-node-shell
     pkgs.kubectl-view-secret
+    pkgs.mtr
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
