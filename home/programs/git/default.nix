@@ -6,6 +6,10 @@
     userName = metadata.username;
     userEmail = metadata.email;
 
+    aliases = {
+      adog = "log --all --decorate --oneline --graph";
+    };
+
     ignores = [
       "root.mark"
       ".tool-versions"
