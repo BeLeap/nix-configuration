@@ -26,6 +26,7 @@
     pkgs.wireshark
     pkgs.cascadia-code
     pkgs.ipcalc
+    pkgs.kubectl
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
