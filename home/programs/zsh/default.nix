@@ -43,6 +43,7 @@ _: {
       gd = "git diff";
       ggr = "cd $(git rev-parse --show-toplevel 2>/dev/null)";
       gl = "git pull --rebase";
+      gr = "git rebase --autostash --autosquash";
 
       e = "$EDITOR";
 
