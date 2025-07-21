@@ -39,5 +39,6 @@
       "helix"
       "ghostty"
       "zoxide"
+      "direnv"
     ];
 }
