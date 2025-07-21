@@ -32,6 +32,7 @@
     pkgs.mtr
     pkgs.ncdu
     pkgs.yq
+    pkgs.watchexec
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
