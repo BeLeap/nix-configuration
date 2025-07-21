@@ -15,6 +15,8 @@
           right_format = "$kubernetes";
 
           kubernetes.disabled = false;
+          shlvl.disabled = false;
+          shlvl.format = "\\[[$shlvl]($style)\\]";
         };
   };
 }
