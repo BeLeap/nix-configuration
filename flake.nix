@@ -28,10 +28,18 @@
             name: value:
             let
               kind = value.kind;
-              username = (if kind == "personal" then "beleap" else value.username);
+              metadata =
+                let
+                  username = (if kind == "personal" then "BeLeap" else value.username);
+                  usernameLower = nixpkgs.lib.toLower metadata.username;
+                  email = (if kind == "personal" then "beleap@beleap.dev" else value.email);
+                in
+                {
+                  inherit username usernameLower email;
+                };
             in
             nix-darwin.lib.darwinSystem {
-              specialArgs = { inherit inputs kind username; };
+              specialArgs = { inherit inputs kind metadata; };
               modules = [
                 (./. + "/configurations/macos/${name}/configuartion.nix")
                 home-manager.darwinModules.home-manager
@@ -39,8 +47,8 @@
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
                   home-manager.backupFileExtension = "bak";
-                  home-manager.users."${username}" = ./home/darwin.nix;
-                  home-manager.extraSpecialArgs = { inherit kind username; };
+                  home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
+                  home-manager.extraSpecialArgs = { inherit kind metadata; };
                 }
               ];
             }
@@ -52,6 +60,7 @@
             csjang-m3pro = {
               kind = "work";
               username = "cs.jang";
+              email = "cs.jang@toss.im";
             };
           };
     };

@@ -1,8 +1,8 @@
-{ inputs, username, ... }:
+{ inputs, metadata, ... }:
 {
   imports = [
     ../../common/common.nix
-    (import ../common/common.nix { inherit username; })
+    (import ../common/common.nix { inherit metadata; })
   ];
 
   environment.systemPackages = [ ];

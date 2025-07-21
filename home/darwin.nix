@@ -1,7 +1,7 @@
 {
   pkgs,
   kind,
-  username,
+  metadata,
   ...
 }:
 {
@@ -18,8 +18,8 @@
   # changes in each release.
   home.stateVersion = "25.11";
 
-  home.username = username;
-  home.homeDirectory = "/Users/${username}";
+  home.username = metadata.usernameLower;
+  home.homeDirectory = "/Users/${metadata.usernameLower}";
 
   home.packages = [
     pkgs.htop
@@ -40,5 +40,6 @@
       "ghostty"
       "zoxide"
       "direnv"
+      "git"
     ];
 }

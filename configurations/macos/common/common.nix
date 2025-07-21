@@ -1,4 +1,4 @@
-{ username, ... }:
+{ metadata, ... }:
 {
   imports = [
     ./brew.nix
@@ -6,8 +6,8 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
-  users.users."${username}" = {
-    home = "/Users/${username}";
+  users.users."${metadata.usernameLower}" = {
+    home = "/Users/${metadata.usernameLower}";
   };
-  system.primaryUser = username;
+  system.primaryUser = metadata.usernameLower;
 }
