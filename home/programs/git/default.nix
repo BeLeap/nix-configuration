@@ -29,7 +29,7 @@
         ui = "auto";
       };
       branch = {
-        sort = "-commiterdate";
+        sort = "-committerdate";
       };
       fetch = {
         writeCommitGraph = true;
