@@ -29,6 +29,7 @@
     pkgs.kubectl
     pkgs.kubectl-node-shell
     pkgs.kubectl-view-secret
+    pkgs.kubectx
     pkgs.mtr
     pkgs.ncdu
     pkgs.yq
