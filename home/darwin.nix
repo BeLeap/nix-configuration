@@ -32,6 +32,7 @@
     pkgs.ipcalc
     pkgs.mtr
     pkgs.arping
+    pkgs.mitmproxy
     pkgs.ncdu
     pkgs.yq
     pkgs.watchexec
