@@ -42,5 +42,6 @@
       "direnv"
       "git"
       "fzf"
+      "k9s"
     ];
 }
