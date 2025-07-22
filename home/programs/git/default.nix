@@ -16,8 +16,7 @@
       ".envrc"
       ".helix"
       "CLAUDE.md"
-      "flake.nix"
-      "flake.lock"
+      "shell.nix"
     ];
 
     extraConfig = {
