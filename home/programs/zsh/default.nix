@@ -30,8 +30,6 @@ _: {
       setopt correct_all
 
       bindkey -v
-
-      export PATH=/run/current-system/sw/bin:$PATH
     '';
 
     shellAliases = {
