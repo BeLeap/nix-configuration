@@ -8,6 +8,7 @@
 
   users.users."${metadata.usernameLower}" = {
     home = "/Users/${metadata.usernameLower}";
+    shell = pkgs.zsh;
   };
   system.primaryUser = metadata.usernameLower;
 }
