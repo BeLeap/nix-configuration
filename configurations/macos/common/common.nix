@@ -1,4 +1,4 @@
-{ metadata, ... }:
+{ metadata, pkgs, ... }:
 {
   imports = [
     ./brew.nix
