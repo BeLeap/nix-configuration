@@ -38,6 +38,7 @@
     pkgs.watchexec
     pkgs.beleap-utils
     pkgs.gnupg
+    pkgs.oauth2c
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
