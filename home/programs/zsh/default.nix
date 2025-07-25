@@ -52,7 +52,7 @@ _: {
 
       e = "$EDITOR";
 
-      ku = "k9s"
+      ku = "k9s";
 
       sozsh = "source ~/.zshrc";
     };
