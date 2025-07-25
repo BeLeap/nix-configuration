@@ -43,6 +43,7 @@ _: {
       gl = "git pull --rebase";
       gr = "git rebase --autostash --autosquash";
       gsw = "git switch";
+      glp = "git pull --rebase && git push";
 
       prcm = "gh pr create --assignee @me";
       prv = "gh pr view";
