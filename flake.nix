@@ -11,6 +11,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    kubectl-check = {
+      url = "github:BeLeap/kubectl-check";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -23,7 +28,7 @@
     }:
     let
       overlays = [
-        (import ./pkgs/overlay.nix)
+        (import ./pkgs/overlay.nix { kubectl-check = inputs.kubectl-check; })
       ];
     in
     {

@@ -40,6 +40,7 @@
     pkgs.gnupg
     pkgs.oauth2c
     pkgs.curl
+    pkgs.kubectl-check
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 

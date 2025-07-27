@@ -53,6 +53,7 @@ _: {
 
       e = "$EDITOR";
 
+      k = "kubectl-check";
       ku = "k9s";
 
       sozsh = "source ~/.zshrc";
