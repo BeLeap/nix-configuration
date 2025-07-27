@@ -1,4 +1,4 @@
-{ 
+{
   inputs,
   metadata,
   pkgs,
@@ -7,7 +7,7 @@
 {
   imports = [
     ../../common/common.nix
-    (import ../common/common.nix { inherit metadata okgs; })
+    (import ../common/common.nix { inherit metadata pkgs; })
   ];
 
   environment.systemPackages = [ ];
