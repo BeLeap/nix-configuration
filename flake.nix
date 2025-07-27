@@ -12,6 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Custom Packages
     kubectl-check = {
       url = "github:BeLeap/kubectl-check";
       inputs.nixpkgs.follows = "nixpkgs";
