@@ -11,6 +11,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Custom Packages
     kubectl-check = {
@@ -64,12 +68,16 @@
               specialArgs = { inherit inputs metadata; };
               modules = [
                 { nixpkgs.overlays = overlays; }
+                inputs.mac-app-util.darwinModules.default
                 (./. + "/configurations/macos/${name}/configuartion.nix")
                 home-manager.darwinModules.home-manager
                 {
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
                   home-manager.backupFileExtension = "bak";
+                  home-manager.sharedModules = [
+                    inputs.mac-app-util.homeManagerModules.default
+                  ];
                   home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
                   home-manager.extraSpecialArgs = { inherit metadata; };
                 }
