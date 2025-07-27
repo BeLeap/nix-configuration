@@ -41,6 +41,7 @@
     pkgs.oauth2c
     pkgs.curl
     pkgs.kubectl-check
+    pkgs.boda
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 

@@ -17,6 +17,10 @@
       url = "github:BeLeap/kubectl-check";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    boda = {
+      url = "github:BeLeap/boda";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,8 +32,10 @@
       ...
     }:
     let
-      overlays = [
-        (import ./pkgs/overlay.nix { kubectl-check = inputs.kubectl-check; })
+      overlays = with inputs; [
+        (import ./pkgs/overlay.nix {
+          inherit kubectl-check boda;
+        })
       ];
     in
     {
