@@ -42,6 +42,7 @@
     pkgs.curl
     pkgs.kubectl-check
     pkgs.boda
+    pkgs.claude-code
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
