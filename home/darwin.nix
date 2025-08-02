@@ -46,20 +46,22 @@
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
-  imports =
-    [ ]
-    ++ map (p: (./. + "/programs/${p}")) [
-      "zsh"
-      "lsd"
-      "starship"
-      "carapace"
-      "helix"
-      "ghostty"
-      "zoxide"
-      "direnv"
-      "git"
-      "fzf"
-      "k9s"
-      "gh"
-    ];
+  imports = [
+    ./common.nix
+  ]
+  ++ map (p: (./. + "/programs/${p}")) [
+    "zsh"
+    "lsd"
+    "starship"
+    "carapace"
+    "helix"
+    "ghostty"
+    "zoxide"
+    "direnv"
+    "git"
+    "fzf"
+    "k9s"
+    "gh"
+    "bash"
+  ];
 }
