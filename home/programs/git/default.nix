@@ -17,6 +17,7 @@
       ".helix"
       "CLAUDE.md"
       "shell.nix"
+      "*.TEMP.*"
     ];
 
     extraConfig = {
