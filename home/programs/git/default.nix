@@ -18,6 +18,7 @@
       "CLAUDE.md"
       "shell.nix"
       "*.TEMP.*"
+      ".claude"
     ];
 
     extraConfig = {
