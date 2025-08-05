@@ -11,4 +11,5 @@
     shell = pkgs.zsh;
   };
   system.primaryUser = metadata.usernameLower;
+  environment.shells = [pkgs.zsh];
 }
