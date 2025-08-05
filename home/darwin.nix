@@ -25,6 +25,7 @@
     pkgs.utm
     pkgs.wireshark
     pkgs.cascadia-code
+    pkgs.nanum-gothic-coding
     pkgs.kubectl
     pkgs.kubectl-node-shell
     pkgs.kubectl-view-secret
