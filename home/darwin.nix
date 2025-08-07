@@ -44,6 +44,7 @@
     pkgs.kubectl-check
     pkgs.boda
     pkgs.claude-code
+    pkgs.kotlin-ls
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
