@@ -45,6 +45,7 @@
     pkgs.boda
     pkgs.claude-code
     pkgs.kotlin-ls
+    pkgs.kubernetes-helm
   ]
   ++ (if (metadata.kind == "personal") then [ pkgs.discord ] else [ ]);
 
