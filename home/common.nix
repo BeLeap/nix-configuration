@@ -59,6 +59,7 @@
       "k9s"
       "gh"
       "bash"
+      "firefox"
     ];
 
   home.shellAliases = {
