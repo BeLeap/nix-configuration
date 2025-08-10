@@ -36,67 +36,74 @@
       ...
     }:
     let
+      lib = nixpkgs.lib;
       overlays = with inputs; [
         (import ./pkgs/overlay.nix {
           inherit kubectl-check boda;
         })
       ];
-    in
-    {
-      darwinConfigurations =
-        builtins.mapAttrs
+      metadatas =
+        builtins.map
           (
-            name: value:
+            initial:
             let
-              metadata =
-                let
-                  kind = value.kind;
-                  username = (if kind == "personal" then "BeLeap" else value.username);
-                  usernameLower = nixpkgs.lib.toLower metadata.username;
-                  email = (if kind == "personal" then "beleap@beleap.dev" else value.email);
-                  os = value.os;
-                in
-                {
-                  inherit
-                    kind
-                    username
-                    usernameLower
-                    email
-                    os
-                    ;
-                };
+              username = (if initial.kind == "personal" then "BeLeap" else initial.username);
+              usernameLower = lib.toLower username;
+              email = (if initial.kind == "personal" then "beleap@beleap.dev" else initial.email);
             in
-            nix-darwin.lib.darwinSystem {
-              specialArgs = { inherit inputs metadata; };
-              modules = [
-                { nixpkgs.overlays = overlays; }
-                inputs.mac-app-util.darwinModules.default
-                (./. + "/configurations/macos/${name}/configuartion.nix")
-                home-manager.darwinModules.home-manager
-                {
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.backupFileExtension = "bak";
-                  home-manager.sharedModules = [
-                    inputs.mac-app-util.homeManagerModules.default
-                  ];
-                  home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
-                  home-manager.extraSpecialArgs = { inherit metadata; };
-                }
-              ];
-            }
+            initial // { inherit username usernameLower email; }
           )
-          {
-            beleap-m1air = {
+          [
+            {
+              name = "beleap-m1air";
               kind = "personal";
               os = "macos";
-            };
-            csjang-m3pro = {
+            }
+            {
+              name = "csjang-m3pro";
               kind = "work";
               username = "cs.jang";
               email = "cs.jang@toss.im";
               os = "macos";
-            };
-          };
+            }
+            {
+              name = "utm-personal";
+              kind = "personal";
+              os = "nixos";
+            }
+          ];
+    in
+    {
+      darwinConfigurations = lib.pipe metadatas [
+        (metadatas: builtins.filter (metadata: metadata.os == "macos") metadatas)
+        (
+          metadatas:
+          (lib.foldl (
+            acc: metadata:
+            acc
+            // {
+              "${metadata.name}" = nix-darwin.lib.darwinSystem {
+                specialArgs = { inherit inputs metadata; };
+                modules = [
+                  { nixpkgs.overlays = overlays; }
+                  inputs.mac-app-util.darwinModules.default
+                  (./. + "/configurations/macos/${metadata.name}/configuartion.nix")
+                  home-manager.darwinModules.home-manager
+                  {
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                    home-manager.backupFileExtension = "bak";
+                    home-manager.sharedModules = [
+                      inputs.mac-app-util.homeManagerModules.default
+                    ];
+                    home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
+                    home-manager.extraSpecialArgs = { inherit metadata; };
+                  }
+                ];
+              };
+            }
+          ) { } metadatas)
+        )
+      ];
     };
 }
