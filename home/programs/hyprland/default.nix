@@ -17,4 +17,8 @@
       ];
     };
   };
+
+  services.hyprpolkitagent = {
+    enable = true;
+  };
 }
