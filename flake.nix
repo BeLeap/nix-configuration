@@ -87,11 +87,13 @@
           {
             beleap-m1air = {
               kind = "personal";
+              os = "macos";
             };
             csjang-m3pro = {
               kind = "work";
               username = "cs.jang";
               email = "cs.jang@toss.im";
+              os = "macos";
             };
           };
     };
