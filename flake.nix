@@ -100,6 +100,9 @@
                   (./configurations/nixos/common)
                   (./. + "/configurations/nixos/${metadata.name}/configuration.nix")
                   home-manager.nixosModules.home-manager
+                  {
+                    home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
+                  }
                 ];
               };
             }

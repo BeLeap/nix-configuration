@@ -5,6 +5,9 @@
   ...
 }:
 {
+  programs.home-manager.enable = true;
+  home.stateVersion = "25.11";
+
   home.packages = [
     pkgs.htop
     pkgs.wireshark
@@ -37,6 +40,24 @@
   ])
   ++ (lib.optionals (metadata.kind == "work") [ pkgs.claude-code ]);
 
+  imports =
+    [ ]
+    ++ map (p: (./. + "/programs/${p}")) [
+      "zsh"
+      "lsd"
+      "starship"
+      "carapace"
+      "helix"
+      "ghostty"
+      "zoxide"
+      "direnv"
+      "git"
+      "fzf"
+      "k9s"
+      "gh"
+      "bash"
+    ];
+
   home.shellAliases = {
     ga = "git add";
     gc = "git commit -v";
@@ -63,4 +84,12 @@
 
     sozsh = "source ~/.zshrc";
   };
+  home.sessionVariables = {
+    LANG = "en_US.UTF-8";
+    LC_CTYPE = "en_US.UTF-8";
+    LC_ALL = "en_US.UTF-8";
+    EDITOR = "hx";
+  };
+
+  home.username = metadata.usernameLower;
 }
