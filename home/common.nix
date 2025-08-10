@@ -52,7 +52,7 @@
       "starship"
       "carapace"
       "helix"
-      "ghostty"
+      "alacritty"
       "zoxide"
       "direnv"
       "git"
