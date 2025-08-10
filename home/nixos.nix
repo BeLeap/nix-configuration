@@ -5,6 +5,7 @@
   ]
   ++ map (p: (./. + "/programs/${p}")) [
     "hyprland"
+    "rofi"
   ];
 
   home.packages = with pkgs; [
