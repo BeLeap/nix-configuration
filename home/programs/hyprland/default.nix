@@ -20,6 +20,10 @@
         kb_variant = "colemak";
         kb_options = "ctrl:nocaps,korean:ralt_hangul";
       };
+
+      monitor = [
+        ", preferred, auto, 1"
+      ];
     };
   };
 
