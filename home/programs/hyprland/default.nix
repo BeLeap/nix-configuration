@@ -15,6 +15,11 @@
       bind = [
         "$mod, x, exec, ${pkgs.foot}/bin/foot"
       ];
+
+      input = {
+        kb_variant = "colemak";
+        kb_options = "ctrl:nocaps,korean:ralt_hangul";
+      };
     };
   };
 
