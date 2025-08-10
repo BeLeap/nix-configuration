@@ -6,6 +6,8 @@
     xwayland.enable = true;
     systemd.enable = true;
 
+    withUWSM = true;
+
     settings = {
       "$mod" = "SUPER";
 
