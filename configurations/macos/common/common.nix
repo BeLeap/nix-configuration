@@ -1,7 +1,7 @@
 { metadata, pkgs, ... }:
 {
   imports = [
-    (import ./brew.nix { inherit metadata; })
+    ./brew.nix
   ];
 
   security.pam.services.sudo_local.touchIdAuth = true;

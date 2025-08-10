@@ -1,4 +1,5 @@
-{ metadata, ... }: {
+{ metadata, lib, ... }:
+{
   homebrew = {
     enable = true;
 
@@ -7,6 +8,7 @@
       # nixpkgs darwin ghostty is broken
       # See https://github.com/ghostty-org/ghostty/discussions/4359
       "ghostty"
-    ] ++ (if (metadata.kind == "personal") then [ "logseq" ] else [ ]);
+    ]
+    ++ (lib.optionals (metadata.kind == "personal") [ "logseq" ]);
   };
 }
