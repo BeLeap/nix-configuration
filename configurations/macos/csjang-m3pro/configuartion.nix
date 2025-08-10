@@ -3,11 +3,6 @@
   ...
 }:
 {
-  imports = [
-    ../../common/common.nix
-    ../common/common.nix
-  ];
-
   environment.systemPackages = [ ];
   programs.zsh.enable = true;
 

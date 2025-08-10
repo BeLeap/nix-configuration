@@ -79,6 +79,7 @@
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "bak";
         }
+        (./configurations/common)
       ];
     in
     {
@@ -94,6 +95,7 @@
                 specialArgs = { inherit inputs metadata; };
                 modules = commonModules ++ [
                   inputs.mac-app-util.darwinModules.default
+                  (./configurations/macos/common)
                   (./. + "/configurations/macos/${metadata.name}/configuartion.nix")
                   home-manager.darwinModules.home-manager
                   {
