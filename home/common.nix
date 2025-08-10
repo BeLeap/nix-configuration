@@ -1,4 +1,38 @@
-_: {
+{
+  metadata,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  home.packages = [
+    pkgs.htop
+    pkgs.utm
+    pkgs.wireshark
+    pkgs.cascadia-code
+    pkgs.nanum-gothic-coding
+    pkgs.kubectl
+    pkgs.kubectl-node-shell
+    pkgs.kubectl-view-secret
+    pkgs.kubectx
+    pkgs.ipcalc
+    pkgs.mtr
+    pkgs.arping
+    pkgs.mitmproxy
+    pkgs.ncdu
+    pkgs.yq
+    pkgs.watchexec
+    pkgs.beleap-utils
+    pkgs.gnupg
+    pkgs.oauth2c
+    pkgs.curl
+    pkgs.kubectl-check
+    pkgs.boda
+    pkgs.claude-code
+    pkgs.kotlin-ls
+    pkgs.kubernetes-helm
+  ]
+  ++ (lib.optionals (metadata.kind == "personal") [ pkgs.discord ]);
   home.shellAliases = {
     ga = "git add";
     gc = "git commit -v";
