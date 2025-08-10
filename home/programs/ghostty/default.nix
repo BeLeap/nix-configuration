@@ -15,7 +15,7 @@
         "NanumGothicCoding"
       ];
       font-feature = "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'liga'";
-      font-size = 18;
+      font-size = 14;
 
       window-padding-x = 10;
       window-title-font-family = "Cascadia Code NF";
