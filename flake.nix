@@ -54,6 +54,7 @@
                   username = (if kind == "personal" then "BeLeap" else value.username);
                   usernameLower = nixpkgs.lib.toLower metadata.username;
                   email = (if kind == "personal" then "beleap@beleap.dev" else value.email);
+                  os = value.os;
                 in
                 {
                   inherit
@@ -61,6 +62,7 @@
                     username
                     usernameLower
                     email
+                    os
                     ;
                 };
             in

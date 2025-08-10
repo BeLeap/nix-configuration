@@ -7,7 +7,6 @@
 {
   home.packages = [
     pkgs.htop
-    pkgs.utm
     pkgs.wireshark
     pkgs.cascadia-code
     pkgs.nanum-gothic-coding
@@ -28,11 +27,12 @@
     pkgs.curl
     pkgs.kubectl-check
     pkgs.boda
-    pkgs.claude-code
     pkgs.kotlin-ls
     pkgs.kubernetes-helm
   ]
-  ++ (lib.optionals (metadata.kind == "personal") [ pkgs.discord ]);
+  ++ (lib.optionals (metadata.os == "macos") [ pkgs.utm ])
+  ++ (lib.optionals (metadata.kind == "personal") [ pkgs.discord ])
+  ++ (lib.optionals (metadata.kind == "work") [ pkgs.claude-code ]);
 
   home.shellAliases = {
     ga = "git add";
