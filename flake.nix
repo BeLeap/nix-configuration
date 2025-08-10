@@ -98,6 +98,7 @@
                 specialArgs = { inherit inputs metadata; };
                 modules = (commonModules metadata) ++ [
                   (./. + "/configurations/nixos/${metadata.name}/configuration.nix")
+                  home-manager.nixosModules.home-manager
                 ];
               };
             }
