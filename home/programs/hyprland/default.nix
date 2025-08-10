@@ -4,9 +4,10 @@
     enable = true;
 
     xwayland.enable = true;
-    systemd.enable = true;
-
-    enableXdgAutostart = true;
+    systemd = {
+      enable = true;
+      enableXdgAutostart = true;
+    };
 
     settings = {
       "$mod" = "SUPER";
