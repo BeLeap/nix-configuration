@@ -16,7 +16,7 @@
         "$mod, x, exec, ${pkgs.foot}/bin/foot"
         "$mod, t, exec, ${pkgs.alacritty}/bin/alacritty"
         "$mod, r, exec, ${pkgs.rofi}/bin/rofi -show drun"
-        "$mod, q, killactive"
+        "$mod shift, k, killactive"
       ];
 
       decoration = {
