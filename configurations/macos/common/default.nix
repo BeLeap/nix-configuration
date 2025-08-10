@@ -10,8 +10,6 @@
     home = "/Users/${metadata.usernameLower}";
     shell = pkgs.zsh;
   };
-  system.primaryUser = metadata.usernameLower;
-  environment.shells = [ pkgs.zsh ];
 
   nix.gc = {
     automatic = true;
