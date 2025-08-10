@@ -6,7 +6,7 @@
     xwayland.enable = true;
     systemd.enable = true;
 
-    withUWSM = true;
+    enableXdgAutostart = true;
 
     settings = {
       "$mod" = "SUPER";
