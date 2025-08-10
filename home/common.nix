@@ -8,40 +8,41 @@
   programs.home-manager.enable = true;
   home.stateVersion = "25.11";
 
-  home.packages = [
-    pkgs.htop
-    pkgs.wireshark
-    pkgs.cascadia-code
-    pkgs.nanum-gothic-coding
-    pkgs.kubectl
-    pkgs.kubectl-node-shell
-    pkgs.kubectl-view-secret
-    pkgs.kubectx
-    pkgs.ipcalc
-    pkgs.mtr
-    pkgs.arping
-    pkgs.mitmproxy
-    pkgs.ncdu
-    pkgs.yq
-    pkgs.watchexec
-    pkgs.beleap-utils
-    pkgs.gnupg
-    pkgs.oauth2c
-    pkgs.curl
-    pkgs.kubectl-check
-    pkgs.boda
-    pkgs.kotlin-ls
-    pkgs.kubernetes-helm
-  ]
-  ++ (lib.optionals (metadata.os == "darwin") [ pkgs.utm ])
-  ++ (lib.optionals (metadata.kind == "personal") [
-    pkgs.gemini-cli
-  ])
-  # Discord packages is not supported on aarch64-linux
-  ++ (lib.optionals (
-    metadata.kind == "personal" && (metadata.os == "darwin" || metadata.platform == "x86_64-linux")
-  ) [ pkgs.discord ])
-  ++ (lib.optionals (metadata.kind == "work") [ pkgs.claude-code ]);
+  home.packages =
+    with pkgs;
+    [
+      htop
+      wireshark
+      cascadia-code
+      nanum-gothic-coding
+      kubectl
+      kubectl-node-shell
+      kubectl-view-secret
+      kubectx
+      ipcalc
+      mtr
+      arping
+      mitmproxy
+      ncdu
+      yq
+      watchexec
+      beleap-utils
+      gnupg
+      oauth2c
+      curl
+      kubectl-check
+      boda
+      kotlin-ls
+      kubernetes-helm
+    ]
+    ++ (lib.optionals (metadata.kind == "personal") [
+      pkgs.gemini-cli
+    ])
+    # Discord packages is not supported on aarch64-linux
+    ++ (lib.optionals (
+      metadata.kind == "personal" && (metadata.os == "darwin" || metadata.platform == "x86_64-linux")
+    ) [ pkgs.discord ])
+    ++ (lib.optionals (metadata.kind == "work") [ pkgs.claude-code ]);
 
   imports =
     [ ]
