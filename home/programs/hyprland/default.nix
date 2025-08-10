@@ -15,6 +15,7 @@
       bind = [
         "$mod, x, exec, ${pkgs.foot}/bin/foot"
         "$mod, t, exec, ${pkgs.ghostty}/bin/ghostty"
+        "$mod, r, exec, ${pkgs.rofi}/bin/rofi -show drun"
       ];
 
       decoration = {
