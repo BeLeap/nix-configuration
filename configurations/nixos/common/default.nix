@@ -16,11 +16,21 @@
     ];
   };
 
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
+
   services = {
     displayManager = {
       enable = true;
-      ly = {
+      sddm = {
         enable = true;
+
+        wayland = {
+          enable = true;
+        };
       };
     };
   };
