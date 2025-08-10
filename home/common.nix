@@ -33,6 +33,7 @@
     pkgs.kubernetes-helm
   ]
   ++ (lib.optionals (metadata.kind == "personal") [ pkgs.discord ]);
+
   home.shellAliases = {
     ga = "git add";
     gc = "git commit -v";
