@@ -27,7 +27,7 @@
       };
 
       monitor = [
-        ", highres, auto, 1"
+        ", preferred, auto, 1"
       ];
     };
   };
