@@ -50,26 +50,41 @@
               username = (if initial.kind == "personal" then "BeLeap" else initial.username);
               usernameLower = lib.toLower username;
               email = (if initial.kind == "personal" then "beleap@beleap.dev" else initial.email);
+              platform = "${initial.arch}-${initial.os}";
             in
-            initial // { inherit username usernameLower email; }
+            initial
+            // {
+              inherit
+                username
+                usernameLower
+                email
+                platform
+                ;
+            }
           )
           [
             {
               name = "beleap-m1air";
               kind = "personal";
-              os = "macos";
+              os = "darwin";
+              arch = "aarch64";
+              distribution = "macos";
             }
             {
               name = "csjang-m3pro";
               kind = "work";
               username = "cs.jang";
               email = "cs.jang@toss.im";
-              os = "macos";
+              os = "darwin";
+              arch = "aarch64";
+              distribution = "macos";
             }
             {
               name = "utm-personal";
               kind = "personal";
-              os = "nixos";
+              os = "linux";
+              arch = "aarch64";
+              distribution = "nixos";
             }
           ];
       commonModules = (
@@ -87,7 +102,7 @@
     in
     {
       nixosConfigurations = lib.pipe metadatas [
-        (metadatas: builtins.filter (metadata: metadata.os == "nixos") metadatas)
+        (metadatas: builtins.filter (metadata: metadata.distribution == "nixos") metadatas)
         (
           metadatas:
           (lib.foldl (
@@ -110,7 +125,7 @@
         )
       ];
       darwinConfigurations = lib.pipe metadatas [
-        (metadatas: builtins.filter (metadata: metadata.os == "macos") metadatas)
+        (metadatas: builtins.filter (metadata: metadata.distribution == "macos") metadatas)
         (
           metadatas:
           (lib.foldl (
