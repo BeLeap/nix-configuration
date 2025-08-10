@@ -28,6 +28,7 @@
       };
 
       monitor = [
+        "Virtual-1, 1920x1080@60, auto, 1"
         ", preferred, auto, 1"
       ];
     };
