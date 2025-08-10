@@ -12,4 +12,16 @@
   };
   system.primaryUser = metadata.usernameLower;
   environment.shells = [ pkgs.zsh ];
+
+  nix.gc = {
+    automatic = true;
+    interval = [
+      {
+        Hour = 3;
+        Minute = 15;
+        Weekday = 7;
+      }
+    ];
+    options = "--delete-older-than 3d";
+  };
 }

@@ -97,6 +97,7 @@
               "${metadata.name}" = nixpkgs.lib.nixosSystem {
                 specialArgs = { inherit inputs metadata; };
                 modules = (commonModules metadata) ++ [
+                  (./configurations/nixos/common)
                   (./. + "/configurations/nixos/${metadata.name}/configuration.nix")
                   home-manager.nixosModules.home-manager
                 ];
