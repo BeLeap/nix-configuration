@@ -17,6 +17,10 @@
         "$mod, t, exec, ${pkgs.ghostty}/bin/ghostty"
       ];
 
+      decoration = {
+        rounding = 10;
+      };
+
       input = {
         kb_variant = "colemak";
         kb_options = "ctrl:nocaps,korean:ralt_hangul";
