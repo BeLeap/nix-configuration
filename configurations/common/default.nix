@@ -10,7 +10,10 @@
   environment.shells = [ pkgs.zsh ];
 
   # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
+  nix.settings = {
+    experimental-features = "nix-command flakes";
+    min-free = "1M";
+  };
 
   time.timeZone = "Asia/Seoul";
 
