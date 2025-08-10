@@ -28,7 +28,7 @@
       };
 
       monitor = [
-        "Virtual-1, 3840x2160@60, auto, 1.5"
+        "Virtual-1, 3840x2160@60, auto, 1.6"
         ", preferred, auto, 1"
       ];
     };
