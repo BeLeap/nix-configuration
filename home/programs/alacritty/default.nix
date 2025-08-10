@@ -15,6 +15,8 @@ _: {
         padding = {
           x = 10;
         };
+        startup_mode = "Maximized";
+        decorations = "Buttonless";
       };
     };
   };
