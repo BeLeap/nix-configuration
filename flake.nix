@@ -86,6 +86,24 @@
       );
     in
     {
+      nixosConfigurations = lib.pipe metadatas [
+        (metadatas: builtins.filter (metadata: metadata.os == "nixos") metadatas)
+        (
+          metadatas:
+          (lib.foldl (
+            acc: metadata:
+            acc
+            // {
+              "${metadata.name}" = nixpkgs.lib.nixosSystem {
+                specialArgs = { inherit inputs metadata; };
+                modules = (commonModules metadata) ++ [
+                  (./. + "/configurations/nixos/${metadata.name}/configuration.nix")
+                ];
+              };
+            }
+          ) { } metadatas)
+        )
+      ];
       darwinConfigurations = lib.pipe metadatas [
         (metadatas: builtins.filter (metadata: metadata.os == "macos") metadatas)
         (
