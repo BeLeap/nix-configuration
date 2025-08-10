@@ -6,6 +6,8 @@
     options = "--delete-older-than 30d";
   };
 
+  hardware.graphics.enable = true;
+
   security.polkit.enable = true;
 
   users.users."${metadata.usernameLower}" = {
