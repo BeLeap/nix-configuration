@@ -72,6 +72,14 @@
               os = "nixos";
             }
           ];
+      commonModules = [
+        { nixpkgs.overlays = overlays; }
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "bak";
+        }
+      ];
     in
     {
       darwinConfigurations = lib.pipe metadatas [
@@ -84,15 +92,11 @@
             // {
               "${metadata.name}" = nix-darwin.lib.darwinSystem {
                 specialArgs = { inherit inputs metadata; };
-                modules = [
-                  { nixpkgs.overlays = overlays; }
+                modules = commonModules ++ [
                   inputs.mac-app-util.darwinModules.default
                   (./. + "/configurations/macos/${metadata.name}/configuartion.nix")
                   home-manager.darwinModules.home-manager
                   {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.backupFileExtension = "bak";
                     home-manager.sharedModules = [
                       inputs.mac-app-util.homeManagerModules.default
                     ];
