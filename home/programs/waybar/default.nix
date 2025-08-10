@@ -6,7 +6,7 @@ _: {
 
     settings = {
       mainBar = {
-        modules-left = [ "hyprland/workspace" ];
+        modules-left = [ "hyprland/workspaces" ];
       };
     };
   };
