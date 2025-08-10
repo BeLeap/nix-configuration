@@ -14,6 +14,7 @@
 
       bind = [
         "$mod, x, exec, ${pkgs.foot}/bin/foot"
+        "$mod, t, exec, ${pkgs.ghostty}/bin/ghostty"
       ];
 
       input = {
