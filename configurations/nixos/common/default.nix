@@ -6,6 +6,8 @@
     options = "--delete-older-than 30d";
   };
 
+  security.polkit.enable = true;
+
   users.users."${metadata.usernameLower}" = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
