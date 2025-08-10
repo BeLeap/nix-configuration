@@ -6,6 +6,7 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  system.primaryUser = metadata.usernameLower;
   users.users."${metadata.usernameLower}" = {
     home = "/Users/${metadata.usernameLower}";
     shell = pkgs.zsh;

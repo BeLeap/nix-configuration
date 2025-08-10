@@ -1,11 +1,10 @@
-{ metadata, pkgs, ... }:
+{ pkgs, ... }:
 {
   nix.optimise.automatic = true;
 
   nixpkgs = {
     config.allowUnfree = true;
   };
-  system.primaryUser = metadata.usernameLower;
 
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];
