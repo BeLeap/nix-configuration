@@ -31,7 +31,10 @@
     pkgs.kubernetes-helm
   ]
   ++ (lib.optionals (metadata.os == "macos") [ pkgs.utm ])
-  ++ (lib.optionals (metadata.kind == "personal") [ pkgs.discord ])
+  ++ (lib.optionals (metadata.kind == "personal") [
+    pkgs.discord
+    pkgs.gemini-cli
+  ])
   ++ (lib.optionals (metadata.kind == "work") [ pkgs.claude-code ]);
 
   home.shellAliases = {
