@@ -10,6 +10,12 @@ _: {
           family = "Cascadia Code NF";
         };
       };
+
+      window = {
+        padding = {
+          x = 10;
+        };
+      };
     };
   };
 }
