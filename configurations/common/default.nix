@@ -13,4 +13,10 @@
   nix.settings.experimental-features = "nix-command flakes";
 
   time.timeZone = "Asia/Seoul";
+
+  environment.systemPackages = with pkgs; [
+    vim
+    curl
+    git
+  ];
 }
