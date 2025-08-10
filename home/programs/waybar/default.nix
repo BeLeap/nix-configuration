@@ -5,7 +5,9 @@ _: {
     systemd.enable = true;
 
     settings = {
-      modules-left = [ "hyprland/workspace" ];
+      mainBar = {
+        modules-left = [ "hyprland/workspace" ];
+      };
     };
   };
 }
