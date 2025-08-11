@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
+  metadata,
   config,
   lib,
   pkgs,
@@ -18,7 +19,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "utm-personal";
+  networking.hostName = "${metadata.name}-${metadata.kind}";
 
   services.openssh.enable = true;
   services.spice-vdagentd.enable = true;

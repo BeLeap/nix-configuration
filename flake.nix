@@ -80,7 +80,7 @@
               distribution = "macos";
             }
             {
-              name = "utm-personal";
+              name = "utm";
               kind = "personal";
               os = "linux";
               arch = "aarch64";
