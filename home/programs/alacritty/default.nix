@@ -14,6 +14,7 @@ _: {
       window = {
         padding = {
           x = 10;
+	  y = 10;
         };
         startup_mode = "Maximized";
         decorations = "Buttonless";
