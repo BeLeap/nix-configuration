@@ -9,7 +9,7 @@ _: {
         normal = {
           family = "Cascadia Code NF";
         };
-        size = 14;
+        size = 16;
       };
 
       window = {
