@@ -8,7 +8,15 @@ _: {
     };
 
     userSettings = {
-      # NOTE: use colemak after home-manager fixes
+      mode.main.binding = {
+        alt-h = "focus left";
+        alt-j = "focus down";
+        alt-k = "focus up";
+        alt-l = "focus right";
+      };
+    }
+    # NOTE: use colemak after home-manager fixes
+    // {
       key-mapping = {
         preset = "qwerty";
       };
@@ -49,13 +57,6 @@ _: {
         comma = "comma";
         period = "period";
         slash = "slash";
-      };
-
-      mode.main.binding = {
-        alt-h = "focus left";
-        alt-j = "focus down";
-        alt-k = "focus up";
-        alt-l = "focus right";
       };
     };
   };
