@@ -9,7 +9,8 @@ _: {
 
     userSettings = {
       key-mapping = {
-        preset = "colemak";
+        # NOTE: use colemak after home-manager fixes
+        preset = "dvorak";
       };
     };
   };
