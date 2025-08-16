@@ -27,6 +27,13 @@ _: {
           };
           run = [ "layout floating" ];
         }
+        {
+          check-further-callbacks = false;
+          "if" = {
+            app-id = "org.alacritty";
+          };
+          run = [ "move-node-to-workspace 2" ];
+        }
       ];
     }
     # NOTE: use colemak after home-manager fixes
