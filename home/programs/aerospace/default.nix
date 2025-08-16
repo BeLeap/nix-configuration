@@ -51,6 +51,14 @@ _: {
           };
           run = [ "move-node-to-workspace 3" ];
         }
+        {
+          check-further-callbacks = false;
+          "if" = {
+            app-name-regex-substring = ".*";
+            during-aerospace-startup = true;
+          };
+          run = [ "move-node-to-workspace 1" ];
+        }
       ];
     }
     # NOTE: use colemak after home-manager fixes
