@@ -1,4 +1,5 @@
-_: {
+{ lib, ... }:
+{
   programs.aerospace = {
     enable = true;
 
@@ -19,15 +20,28 @@ _: {
         alt-j = "focus down";
         alt-k = "focus up";
         alt-l = "focus right";
-
-        alt-1 = "workspace 1";
-        alt-2 = "workspace 2";
-        alt-3 = "workspace 3";
-
-        alt-shift-1 = "move-node-to-workspace 1";
-        alt-shift-2 = "move-node-to-workspace 2";
-        alt-shift-3 = "move-node-to-workspace 3";
-      };
+      }
+      // builtins.listToAttrs (
+        (lib.flatten (
+          lib.map
+            (e: [
+              {
+                name = "alt-${e}";
+                value = "workspace ${e}";
+              }
+              {
+                name = "alt-shift-${e}";
+                value = "move-node-to-workspace ${e}";
+              }
+            ])
+            [
+              "1"
+              "2"
+              "3"
+              "4"
+            ]
+        ))
+      );
 
       on-window-detected = [
         {
