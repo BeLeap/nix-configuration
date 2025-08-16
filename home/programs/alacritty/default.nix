@@ -9,12 +9,13 @@ _: {
         normal = {
           family = "Cascadia Code NF";
         };
+        size = 14;
       };
 
       window = {
         padding = {
           x = 10;
-	  y = 10;
+          y = 10;
         };
         startup_mode = "Maximized";
         decorations = "Buttonless";
