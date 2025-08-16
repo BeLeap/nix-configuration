@@ -18,6 +18,16 @@ _: {
         alt-2 = "workspace 2";
         alt-3 = "workspace 3";
       };
+
+      on-window-detected = [
+        {
+          check-further-callbacks = true;
+          "if" = {
+            window-title-regex-substring = "Picture-in-Picture";
+          };
+          run = [ "layout floating" ];
+        }
+      ];
     }
     # NOTE: use colemak after home-manager fixes
     // {
