@@ -38,6 +38,13 @@ _: {
           run = [ "layout floating" ];
         }
         {
+          check-further-callbacks = true;
+          "if" = {
+            app-id = "com.kakao.KakaoTalkMac";
+          };
+          run = [ "layout floating" ];
+        }
+        {
           check-further-callbacks = false;
           "if" = {
             app-id = "org.alacritty";
