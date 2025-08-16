@@ -38,6 +38,13 @@ _: {
           };
           run = [ "move-node-to-workspace 2" ];
         }
+        {
+          check-further-callbacks = false;
+          "if" = {
+            app-id = "org.mozilla.firefoxdeveloperedition";
+          };
+          run = [ "move-node-to-workspace 3" ];
+        }
       ];
     }
     # NOTE: use colemak after home-manager fixes
