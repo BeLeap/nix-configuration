@@ -21,25 +21,24 @@
         alt-k = "focus up";
         alt-l = "focus right";
       }
-      // builtins.listToAttrs (
+      // lib.listToAttrs (
         (lib.flatten (
-          lib.map
-            (e: [
-              {
-                name = "alt-${e}";
-                value = "workspace ${e}";
-              }
-              {
-                name = "alt-shift-${e}";
-                value = "move-node-to-workspace ${e}";
-              }
-            ])
+          lib.map (
+            e:
+            let
+              index = toString e;
+            in
             [
-              "1"
-              "2"
-              "3"
-              "4"
+              {
+                name = "alt-${index}";
+                value = "workspace ${index}";
+              }
+              {
+                name = "alt-shift-${index}";
+                value = "move-node-to-workspace ${index}";
+              }
             ]
+          ) (lib.genList (x: x + 1) 9)
         ))
       );
 
