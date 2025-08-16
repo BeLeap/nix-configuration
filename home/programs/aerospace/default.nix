@@ -62,7 +62,6 @@ _: {
           check-further-callbacks = false;
           "if" = {
             app-name-regex-substring = ".*";
-            during-aerospace-startup = true;
           };
           run = [ "move-node-to-workspace 1" ];
         }
