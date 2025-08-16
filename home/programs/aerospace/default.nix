@@ -8,6 +8,12 @@ _: {
     };
 
     userSettings = {
+      exec-on-workspace-change = [
+        "/bin/bash"
+        "-c"
+        "aerospace move-node-to-workspace --window-id $(aerospace list-windows --all --format \"%{window-title}%{tab}%{window-id}\" | grep Picture-in-Picture | cut -f2 | tee /tmp/pip-window-id) $AEROSPACE_FOCUSED_WORKSPACE"
+      ];
+
       mode.main.binding = {
         alt-h = "focus left";
         alt-j = "focus down";
