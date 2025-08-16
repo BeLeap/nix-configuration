@@ -13,6 +13,10 @@ _: {
         alt-j = "focus down";
         alt-k = "focus up";
         alt-l = "focus right";
+
+        alt-1 = "workspace 1";
+        alt-2 = "workspace 2";
+        alt-3 = "workspace 3";
       };
     }
     # NOTE: use colemak after home-manager fixes
