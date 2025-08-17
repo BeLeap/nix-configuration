@@ -34,6 +34,7 @@
       boda
       kotlin-ls
       kubernetes-helm
+      ghc
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
