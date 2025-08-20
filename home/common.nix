@@ -35,6 +35,7 @@
       kotlin-ls
       kubernetes-helm
       ghc
+      yaml-language-server
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
