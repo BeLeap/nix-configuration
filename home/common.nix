@@ -36,7 +36,6 @@
       kubernetes-helm
       ghc
       yaml-language-server
-      jujutsu
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
@@ -65,6 +64,7 @@
       "bash"
       "firefox"
       "wezterm"
+      "jujutsu"
     ];
 
   home.shellAliases = {
