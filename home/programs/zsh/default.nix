@@ -5,7 +5,7 @@ _: {
     autocd = true;
 
     autosuggestion = {
-      enable = true;
+      enable = false;
     };
     syntaxHighlighting = {
       enable = true;
