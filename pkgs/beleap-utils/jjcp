@@ -1,1 +1,22 @@
-jj commit -m "[$2] $1"
+if [[ -z "$1" ]]; then
+    echo "message is required"
+    exit 1
+fi
+
+prefix=""
+message=""
+
+if [[ -z "$2" ]]; then
+    prefix=$(cat)
+
+    if [[ -z "$prefix" ]]; then
+        echo "prefix is required"
+        exit 1
+    fi
+    message=$1
+else
+    prefix=$1
+    message=$2
+fi
+
+jj commit -m "[$prefix] $message"

@@ -1,1 +1,3 @@
-gh issue list --json number,title -t '{{range .}}{{.number}} {{.title}}{{"\n"}}{{end}}' | fzf
+issue=$(gh issue list --json number,title -t '{{range .}}{{.number}} {{.title}}{{"\n"}}{{end}}' | fzf)
+
+echo $issue | awk '{print "#"$1}'
