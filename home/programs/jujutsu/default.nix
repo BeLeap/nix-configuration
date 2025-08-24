@@ -9,7 +9,10 @@
         name = metadata.username;
       };
       ui = {
-        default-command = "log";
+        default-command = [
+          "log"
+          "--limit=10"
+        ];
         paginate = "never";
       };
     };
