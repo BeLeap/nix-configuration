@@ -71,6 +71,13 @@
         {
           check-further-callbacks = false;
           "if" = {
+            app-id = "com.github.wez.wezterm";
+          };
+          run = [ "move-node-to-workspace 2" ];
+        }
+        {
+          check-further-callbacks = false;
+          "if" = {
             app-id = "org.mozilla.firefoxdeveloperedition";
           };
           run = [ "move-node-to-workspace 3" ];
