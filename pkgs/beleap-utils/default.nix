@@ -8,5 +8,6 @@ pkgs.symlinkJoin {
     (pkgs.writeShellScriptBin "fcd" (builtins.readFile ./fcd))
     (pkgs.writeShellScriptBin "jjcp" (builtins.readFile ./jjcp))
     (pkgs.writeShellScriptBin "gh-issue" (builtins.readFile ./gh-issue))
+    (pkgs.writeShellScriptBin "jjsb" (builtins.readFile ./jjsb))
   ];
 }
