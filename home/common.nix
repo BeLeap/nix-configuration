@@ -36,7 +36,7 @@
       kubernetes-helm
       ghc
       yaml-language-server
-      jj
+      jujutsu
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
