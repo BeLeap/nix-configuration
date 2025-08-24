@@ -63,6 +63,7 @@
       "gh"
       "bash"
       "firefox"
+      "wezterm"
     ];
 
   home.shellAliases = {
