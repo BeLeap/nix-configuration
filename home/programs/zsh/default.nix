@@ -5,7 +5,7 @@ _: {
     autocd = true;
 
     autosuggestion = {
-      enable = false;
+      enable = true;
     };
     syntaxHighlighting = {
       enable = true;
@@ -27,7 +27,7 @@ _: {
       setopt extended_glob
 
       # Spell-check
-      setopt correct_all
+      # setopt correct_all
 
       bindkey -v
     '';
