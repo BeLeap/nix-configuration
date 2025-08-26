@@ -21,6 +21,7 @@ _: {
         window_frame = {
           font = wezterm.font("Cascadia Code NF"),
         },
+        window_decorations = "RESIZE",
       }
     '';
   };
