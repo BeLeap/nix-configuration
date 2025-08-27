@@ -4,6 +4,6 @@
     enable = true;
 
     brews = [ ];
-    casks = [ ] ++ (lib.optionals (metadata.kind == "personal") [ "logseq" ]);
+    casks = [ "wezterm" ] ++ (lib.optionals (metadata.kind == "personal") [ "logseq" ]);
   };
 }
