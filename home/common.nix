@@ -101,4 +101,10 @@
   };
 
   home.username = metadata.usernameLower;
+
+  home.file = {
+    ".claude/CLAUDE.md" = {
+      text = builtins.readFile ../files/CLAUDE.md;
+    };
+  };
 }
