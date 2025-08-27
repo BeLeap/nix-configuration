@@ -54,7 +54,6 @@
       "starship"
       "carapace"
       "helix"
-      "alacritty"
       "zoxide"
       "direnv"
       "git"
