@@ -1,0 +1,4 @@
+set -x
+
+pip-aerospace $1 | tee /tmp/pip-aerospace.log
+

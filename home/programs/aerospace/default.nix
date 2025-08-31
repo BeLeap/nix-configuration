@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   programs.aerospace = {
     enable = true;
@@ -14,9 +14,8 @@
       };
 
       exec-on-workspace-change = [
-        "/bin/bash"
-        "-c"
-        "aerospace move-node-to-workspace --window-id $(aerospace list-windows --all --format \"%{window-title}%{tab}%{window-id}\" | grep Picture-in-Picture | cut -f2 | tee /tmp/pip-window-id) $AEROSPACE_FOCUSED_WORKSPACE"
+        "${pkgs.beleap-utils}/bin/aerospace-workspace-change"
+        "$AEROSPACE_FOCUSED_WORKSPACE"
       ];
 
       mode.main.binding = {
