@@ -65,6 +65,7 @@
       "firefox"
       "wezterm"
       "jujutsu"
+      "ssh"
     ];
 
   home.shellAliases = {
