@@ -7,6 +7,7 @@ rustPlatform.buildRustPackage rec {
     owner = "ynqa";
     repo = "empiriqa";
     tag = version;
+    hash = "sha256-TLjbhNUAykkKbChbVkm5pAC63RpmIxQjy5vFTom3XKQ=";
   };
-  cargoLock.lockFile = ./Cargo.lock;
+  cargoHash = "sha256-Walh+rR42AGMEvWXNawXn0Mg97ctyw2goidBQZDR4s0=";
 }
