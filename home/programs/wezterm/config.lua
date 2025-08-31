@@ -26,4 +26,12 @@ config.keys = {
   { key = 'l', mods = 'LEADER', action = wezterm.action.ActivatePaneDirection 'Right' },
 };
 
+for i = 1, 8 do
+  table.insert(config.keys, {
+    key = tostring(i),
+    mods = 'LEADER',
+    action = wezterm.action.ActivateTab(i - 1),
+  })
+end
+
 return config;
