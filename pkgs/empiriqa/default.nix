@@ -1,6 +1,7 @@
-{ pkgs, fetchFromGitHub }:
-pkgs.rustPlatform.buildRustPackage rec {
+{ rustPlatform, fetchFromGitHub }:
+rustPlatform.buildRustPackage rec {
   pname = "empiriqa";
+  name = pname;
   version = "v0.1.0";
   src = fetchFromGitHub {
     owner = "ynqa";
