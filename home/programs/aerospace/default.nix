@@ -15,7 +15,7 @@
 
       exec-on-workspace-change = [
         "${pkgs.beleap-utils}/bin/aerospace-workspace-change"
-        "$AEROSPACE_FOCUSED_WORKSPACE"
+        "${pkgs.beleap-utils}/bin:${pkgs.aerospace}/bin"
       ];
 
       mode.main.binding = {

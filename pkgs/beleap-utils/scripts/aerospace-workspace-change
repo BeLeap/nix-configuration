@@ -1,4 +1,6 @@
 set -x
 
-pip-aerospace $1 | tee /tmp/pip-aerospace.log
+PATH=$1:$PATH
+
+pip-aerospace | tee /tmp/pip-aerospace.log
 
