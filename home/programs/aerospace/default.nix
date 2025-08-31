@@ -63,13 +63,6 @@
         {
           check-further-callbacks = false;
           "if" = {
-            app-id = "org.alacritty";
-          };
-          run = [ "move-node-to-workspace 1" ];
-        }
-        {
-          check-further-callbacks = false;
-          "if" = {
             app-id = "com.github.wez.wezterm";
           };
           run = [ "move-node-to-workspace 1" ];
@@ -80,6 +73,13 @@
             app-id = "org.mozilla.firefoxdeveloperedition";
           };
           run = [ "move-node-to-workspace 2" ];
+        }
+        {
+          check-further-callbacks = false;
+          "if" = {
+            window-title-regex-substring = "1Password";
+          };
+          run = [ "layout floating" ];
         }
         {
           check-further-callbacks = false;
