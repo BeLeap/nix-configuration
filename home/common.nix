@@ -36,6 +36,7 @@
       kubernetes-helm
       ghc
       yaml-language-server
+      empiriqa
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
