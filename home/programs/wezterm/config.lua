@@ -1,5 +1,7 @@
 local config = {};
 
+config.term = "xterm-256color";
+
 config.font = wezterm.font_with_fallback {
   { family = "Cascadia Code NF" },
   { family = "NanumGothicCoding" },
