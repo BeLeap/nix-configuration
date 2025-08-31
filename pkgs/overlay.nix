@@ -7,4 +7,5 @@ final: prev:
   boda = boda.packages.${prev.system}.default;
   kotlin-ls = prev.callPackage ./kotlin-ls { };
   wezterm-null = import ./wezterm-null prev;
+  empiriqa = prev.callPackage ./empiriqa { };
 }
