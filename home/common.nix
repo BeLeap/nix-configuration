@@ -37,6 +37,7 @@
       ghc
       yaml-language-server
       empiriqa
+      direnv
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
