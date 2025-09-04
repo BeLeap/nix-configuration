@@ -106,7 +106,7 @@
 
   home.file = {
     ".claude/CLAUDE.md" = {
-      text = builtins.readFile ../files/CLAUDE.md;
+      text = builtins.readFile ../files/AGENTS.md;
     };
   };
 }
