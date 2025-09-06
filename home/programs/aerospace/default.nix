@@ -86,7 +86,7 @@
           "if" = {
             app-name-regex-substring = ".*";
           };
-          run = [ "move-node-to-workspace 3" ];
+          run = [ "move-node-to-workspace 9" ];
         }
       ];
     };
