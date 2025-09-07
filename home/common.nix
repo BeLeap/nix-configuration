@@ -39,6 +39,7 @@
       empiriqa
       gnumake
       kind
+      podman
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
