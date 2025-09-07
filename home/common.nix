@@ -98,6 +98,8 @@
     k = "kubectl-check";
     ku = "k9s";
 
+    docker = "podman";
+
     sozsh = "source ~/.zshrc";
   };
   home.sessionVariables = {
