@@ -38,6 +38,7 @@
       yaml-language-server
       empiriqa
       gnumake
+      kind
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.gemini-cli
