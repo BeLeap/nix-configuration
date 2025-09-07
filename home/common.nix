@@ -89,6 +89,9 @@
     prm = "gh pr merge";
     prmd = "gh pr merge -d";
 
+    jjgf = "jj git fetch --all-remotes";
+    jjgp = "jj git push --allow-new";
+
     e = "$EDITOR";
 
     k = "kubectl-check";
