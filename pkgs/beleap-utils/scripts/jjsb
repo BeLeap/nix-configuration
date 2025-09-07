@@ -1,1 +1,7 @@
-jj bookmark set $1 -r @-
+if [[ "$1" == "-" ]]; then
+	read -r bookmark
+else
+	bookmark=$1
+fi
+
+jj bookmark set $bookmark -r @-
