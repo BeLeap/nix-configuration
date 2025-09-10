@@ -42,7 +42,7 @@
       podman
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
-      pkgs.gemini-cli
+      pkgs.codex
     ])
     # Discord packages is not supported on aarch64-linux
     ++ (lib.optionals (
