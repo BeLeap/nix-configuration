@@ -114,6 +114,6 @@
   home.file =
     { }
     // lib.genAttrs [ ".claude/CLAUDE.md" ] (_: {
-      text = builtins.readFile ../files/AGENT.md;
+      text = builtins.readFile ../files/AGENTS.md;
     });
 }
