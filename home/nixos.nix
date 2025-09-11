@@ -10,7 +10,7 @@
   ];
 
   home.packages = with pkgs; [
-    alacritty
+    wezterm
   ];
 
   home.homeDirectory = "/home/${metadata.usernameLower}";
