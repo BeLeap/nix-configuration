@@ -86,6 +86,13 @@
               arch = "aarch64";
               distribution = "nixos";
             }
+            {
+              name = "vm";
+              kind = "personal";
+              os = "linux";
+              arch = "aarch64";
+              distribution = "nixos";
+            }
           ];
       commonModules = (
         metadata: [
@@ -110,6 +117,7 @@
             acc
             // {
               "${metadata.name}" = nixpkgs.lib.nixosSystem {
+                system = "${metadata.arch}-${metadata.os}";
                 specialArgs = { inherit inputs metadata; };
                 modules = (commonModules metadata) ++ [
                   (./configurations/nixos/common)
