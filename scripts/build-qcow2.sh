@@ -1,1 +1,3 @@
-nix build '.#nixosConfigurations.vm.config.system.build.qcow2'
+name=$1
+
+nix build ".#nixosConfigurations.$name.config.system.build.qcow2"

@@ -51,6 +51,7 @@
               usernameLower = lib.toLower username;
               email = (if initial.kind == "personal" then "beleap@beleap.dev" else initial.email);
               platform = "${initial.arch}-${initial.os}";
+              configPath = initial.configPath or initial.name;
             in
             initial
             // {
@@ -59,6 +60,7 @@
                 usernameLower
                 email
                 platform
+                configPath
                 ;
             }
           )
@@ -87,7 +89,8 @@
               distribution = "nixos";
             }
             {
-              name = "vm";
+              name = "vm-aarch64-personal";
+              configPath = "vm";
               kind = "personal";
               os = "linux";
               arch = "aarch64";
@@ -117,11 +120,11 @@
             acc
             // {
               "${metadata.name}" = nixpkgs.lib.nixosSystem {
-                system = "${metadata.arch}-${metadata.os}";
+                system = metadata.platform;
                 specialArgs = { inherit inputs metadata; };
                 modules = (commonModules metadata) ++ [
                   (./configurations/nixos/common)
-                  (./. + "/configurations/nixos/${metadata.name}/configuration.nix")
+                  (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
                   home-manager.nixosModules.home-manager
                   {
                     home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
@@ -145,7 +148,7 @@
                 modules = (commonModules metadata) ++ [
                   inputs.mac-app-util.darwinModules.default
                   (./configurations/macos/common)
-                  (./. + "/configurations/macos/${metadata.name}/configuartion.nix")
+                  (./. + "/configurations/macos/${metadata.configPath}/configuartion.nix")
                   home-manager.darwinModules.home-manager
                   {
                     home-manager.sharedModules = [
