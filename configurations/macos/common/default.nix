@@ -23,4 +23,11 @@
     ];
     options = "--delete-older-than 3d";
   };
+  nix.settings = {
+    trusted-users = [ "@admin" ];
+  };
+
+  nix.linux-builder = {
+    enable = true;
+  };
 }
