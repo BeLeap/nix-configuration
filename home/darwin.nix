@@ -1,6 +1,5 @@
 {
   metadata,
-  pkgs,
   ...
 }:
 {
@@ -11,9 +10,7 @@
     "aerospace"
   ];
 
-  home.packages = with pkgs; [
-    utm
-  ];
+  home.packages = [ ];
 
   home.homeDirectory = "/Users/${metadata.usernameLower}";
 }
