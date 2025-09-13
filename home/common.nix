@@ -45,9 +45,9 @@
       pkgs.codex
     ])
     # Discord packages is not supported on aarch64-linux
-    ++ (lib.optionals (
-      metadata.kind == "personal" && (metadata.os == "darwin" || metadata.platform == "x86_64-linux")
-    ) [ pkgs.discord ])
+    ++ (lib.optionals (metadata.kind == "personal" && (metadata.platform == "x86_64-linux")) [
+      pkgs.discord
+    ])
     ++ (lib.optionals (metadata.kind == "work") [ pkgs.claude-code ]);
 
   imports =
