@@ -12,8 +12,8 @@
         default-command = [
           "log"
           "--limit=10"
+          "--no-pager"
         ];
-        paginate = "never";
       };
     };
   };
