@@ -40,6 +40,7 @@
       gnumake
       kind
       podman
+      podman-compose
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.codex
