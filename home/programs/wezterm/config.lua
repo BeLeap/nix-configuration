@@ -25,6 +25,8 @@ config.keys = {
   { key = '%', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = '"', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
 
+  { key = 'q', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
+
   { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
   { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
   { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
