@@ -5,7 +5,6 @@
 
     brews = [ ];
     casks = [
-      "wezterm"
       "meetingbar"
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
