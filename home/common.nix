@@ -41,6 +41,7 @@
       kind
       podman
       podman-compose
+      croc
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.codex
