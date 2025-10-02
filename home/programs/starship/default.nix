@@ -17,6 +17,7 @@
 
           kubernetes.disabled = false;
           shlvl.disabled = false;
+          shlvl.threshold = 3;
           shlvl.format = "\\[[$shlvl]($style)\\]";
         };
   };
