@@ -71,6 +71,7 @@
               os = "darwin";
               arch = "aarch64";
               distribution = "macos";
+              gui = true;
             }
             {
               name = "csjang-m3pro";
@@ -80,6 +81,7 @@
               os = "darwin";
               arch = "aarch64";
               distribution = "macos";
+              gui = true;
             }
             {
               name = "vm-aarch64-personal";
@@ -88,6 +90,7 @@
               os = "linux";
               arch = "aarch64";
               distribution = "nixos";
+              gui = false;
             }
           ];
       commonModules = (
