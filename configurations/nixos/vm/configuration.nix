@@ -1,4 +1,9 @@
-{ pkgs, modulesPath, ... }:
+{
+  pkgs,
+  modulesPath,
+  nixpkgs,
+  ...
+}:
 {
   imports = [
     "${modulesPath}/virtualisation/qemu-vm.nix"
@@ -13,6 +18,7 @@
   services.getty.autologinUser = "beleap";
 
   virtualisation.graphics = false;
+  virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
 
   environment.systemPackages = with pkgs; [
     cowsay

@@ -114,14 +114,13 @@
             // {
               "${metadata.name}" = nixpkgs.lib.nixosSystem {
                 system = metadata.platform;
-                specialArgs = { inherit inputs metadata; };
+                specialArgs = { inherit inputs metadata nixpkgs; };
                 modules = (commonModules metadata) ++ [
                   (./configurations/nixos/common)
                   (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
                   home-manager.nixosModules.home-manager
                   {
                     home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
-                    virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
                   }
                 ];
               };
