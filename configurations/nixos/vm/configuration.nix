@@ -2,6 +2,7 @@
   pkgs,
   modulesPath,
   nixpkgs,
+  metadata,
   ...
 }:
 {
@@ -15,7 +16,7 @@
   networking.useDHCP = false;
   networking.interfaces.eth0.useDHCP = true;
 
-  services.getty.autologinUser = "beleap";
+  services.getty.autologinUser = metadata.usernameLower;
   security.sudo.wheelNeedsPassword = false;
 
   virtualisation.graphics = false;
