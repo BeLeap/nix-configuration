@@ -18,6 +18,8 @@
 
   virtualisation.graphics = false;
   virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+  virtualisation.memorySize = 4096;
+  virtualisation.cores = 4;
 
   environment.systemPackages = with pkgs; [
     cowsay
