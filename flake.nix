@@ -82,13 +82,6 @@
               distribution = "macos";
             }
             {
-              name = "utm";
-              kind = "personal";
-              os = "linux";
-              arch = "aarch64";
-              distribution = "nixos";
-            }
-            {
               name = "vm-aarch64-personal";
               configPath = "vm";
               kind = "personal";
