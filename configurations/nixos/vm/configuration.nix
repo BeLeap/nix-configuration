@@ -1,11 +1,18 @@
-{ pkgs, ... }:
+{ pkgs, modulesPath, ... }:
 {
   imports = [
-    ./qcow.nix
+    "${modulesPath}/virtualisation/qemu-vm.nix"
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.useDHCP = false;
+  networking.interfaces.eth0.useDHCP = true;
+
+  services.getty.autologinUser = "beleap";
+
+  virtualisation.graphics = false;
 
   environment.systemPackages = with pkgs; [
     cowsay

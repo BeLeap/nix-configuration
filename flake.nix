@@ -128,6 +128,7 @@
                   home-manager.nixosModules.home-manager
                   {
                     home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
+                    virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
                   }
                 ];
               };
