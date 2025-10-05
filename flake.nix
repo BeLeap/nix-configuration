@@ -84,7 +84,7 @@
               gui = true;
             }
             {
-              name = "vm-aarch64-personal";
+              name = "vm-arm64-Darwin-personal";
               configPath = "vm";
               kind = "personal";
               os = "linux";
