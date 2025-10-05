@@ -35,7 +35,7 @@
     displayManager = {
       enable = metadata.gui;
       sddm = {
-        enable = true;
+        enable = metadata.gui;
 
         wayland = {
           enable = true;
