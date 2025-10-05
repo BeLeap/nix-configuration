@@ -1,7 +1,5 @@
 {
-  pkgs,
   modulesPath,
-  nixpkgs,
   metadata,
   ...
 }:
@@ -20,7 +18,6 @@
   security.sudo.wheelNeedsPassword = false;
 
   virtualisation.graphics = false;
-  virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
   virtualisation.memorySize = 4096;
   virtualisation.cores = 4;
 

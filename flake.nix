@@ -45,24 +45,18 @@
       metadatas =
         builtins.map
           (
-            initial:
+            defined:
             let
-              username = (if initial.kind == "personal" then "BeLeap" else initial.username);
-              usernameLower = lib.toLower username;
-              email = (if initial.kind == "personal" then "beleap@beleap.dev" else initial.email);
-              platform = "${initial.arch}-${initial.os}";
-              configPath = initial.configPath or initial.name;
+              initial = rec {
+                username = "BeLeap";
+                usernameLower = lib.toLower username;
+                email = "beleap@beleap.dev";
+                platform = "${defined.arch}-${defined.os}";
+                configPath = defined.configPath or defined.name;
+                extraModules = [ ];
+              };
             in
-            initial
-            // {
-              inherit
-                username
-                usernameLower
-                email
-                platform
-                configPath
-                ;
-            }
+            initial // defined
           )
           [
             {
@@ -91,6 +85,11 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
+              extraModules = [
+                {
+                  virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+                }
+              ];
             }
           ];
       commonModules = (
@@ -118,14 +117,17 @@
               "${metadata.name}" = nixpkgs.lib.nixosSystem {
                 system = metadata.platform;
                 specialArgs = { inherit inputs metadata nixpkgs; };
-                modules = (commonModules metadata) ++ [
-                  (./configurations/nixos/common)
-                  (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
-                  home-manager.nixosModules.home-manager
-                  {
-                    home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
-                  }
-                ];
+                modules =
+                  (commonModules metadata)
+                  ++ [
+                    (./configurations/nixos/common)
+                    (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
+                    home-manager.nixosModules.home-manager
+                    {
+                      home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
+                    }
+                  ]
+                  ++ (metadata.extraModules);
               };
             }
           ) { } metadatas)
@@ -141,18 +143,21 @@
             // {
               "${metadata.name}" = nix-darwin.lib.darwinSystem {
                 specialArgs = { inherit inputs metadata; };
-                modules = (commonModules metadata) ++ [
-                  inputs.mac-app-util.darwinModules.default
-                  (./configurations/macos/common)
-                  (./. + "/configurations/macos/${metadata.configPath}/configuartion.nix")
-                  home-manager.darwinModules.home-manager
-                  {
-                    home-manager.sharedModules = [
-                      inputs.mac-app-util.homeManagerModules.default
-                    ];
-                    home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
-                  }
-                ];
+                modules =
+                  (commonModules metadata)
+                  ++ [
+                    inputs.mac-app-util.darwinModules.default
+                    (./configurations/macos/common)
+                    (./. + "/configurations/macos/${metadata.configPath}/configuartion.nix")
+                    home-manager.darwinModules.home-manager
+                    {
+                      home-manager.sharedModules = [
+                        inputs.mac-app-util.homeManagerModules.default
+                      ];
+                      home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
+                    }
+                  ]
+                  ++ (metadata.extraModules);
               };
             }
           ) { } metadatas)
