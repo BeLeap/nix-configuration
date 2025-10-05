@@ -1,4 +1,9 @@
-{ metadata, pkgs, ... }:
+{
+  metadata,
+  pkgs,
+  lib,
+  ...
+}:
 {
   nix.gc = {
     automatic = true;
@@ -6,7 +11,7 @@
     options = "--delete-older-than 30d";
   };
 
-  hardware.graphics.enable = true;
+  hardware.graphics.enable = metadata.gui;
 
   security.polkit.enable = true;
 
@@ -21,14 +26,14 @@
   };
 
   programs.hyprland = {
-    enable = true;
+    enable = metadata.gui;
     withUWSM = true;
     xwayland.enable = true;
   };
 
   services = {
     displayManager = {
-      enable = true;
+      enable = metadata.gui;
       sddm = {
         enable = true;
 
@@ -40,7 +45,7 @@
   };
 
   i18n.inputMethod = {
-    enable = true;
+    enable = metadata.gui;
     type = "kime";
     kime = {
       extraConfig = ''
@@ -141,7 +146,12 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  environment.systemPackages = with pkgs; [
-    wl-clipboard
-  ];
+  environment.systemPackages =
+    [ ]
+    ++ (lib.optionals (metadata.gui) (
+      with pkgs;
+      [
+        wl-clipboard
+      ]
+    ));
 }
