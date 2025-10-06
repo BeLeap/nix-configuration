@@ -53,7 +53,8 @@
                 email = "beleap@beleap.dev";
                 platform = "${defined.arch}-${defined.os}";
                 configPath = defined.configPath or defined.name;
-                extraModules = [ ];
+                extraModule = [ ];
+                extraConfig = { };
               };
             in
             initial // defined
@@ -85,7 +86,15 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
-              extraModules = [
+              extraConfig = {
+                sharedDirectories = {
+                  defaultShared = {
+                    source = "/Users/beleap/shared";
+                    target = "/home/beleap/shared";
+                  };
+                };
+              };
+              extraModule = [
                 {
                   virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
                 }
@@ -127,7 +136,7 @@
                       home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
                     }
                   ]
-                  ++ (metadata.extraModules);
+                  ++ (metadata.extraModule);
               };
             }
           ) { } metadatas)
@@ -157,7 +166,7 @@
                       home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
                     }
                   ]
-                  ++ (metadata.extraModules);
+                  ++ (metadata.extraModule);
               };
             }
           ) { } metadatas)
