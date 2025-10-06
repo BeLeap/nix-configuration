@@ -87,7 +87,7 @@
               distribution = "nixos";
               gui = false;
               extraConfig = {
-                sharedDirectories = {
+                virtualisation.sharedDirectories = {
                   defaultShared = {
                     source = "/Users/beleap/shared";
                     target = "/home/beleap/shared";

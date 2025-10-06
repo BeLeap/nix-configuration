@@ -28,7 +28,6 @@
   virtualisation.cores = 4;
 
   virtualisation.diskSize = 128 * 1024;
-  virtualisation.sharedDirectories = metadata.extraConfig.sharedDirectories;
   virtualisation.writableStoreUseTmpfs = false;
 
   virtualisation.useHostCerts = true;
