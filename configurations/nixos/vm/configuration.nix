@@ -13,6 +13,12 @@
 
   # networking.useDHCP = false;
   # networking.interfaces.eth0.useDHCP = true;
+  # FIXME: use automatically set dnses
+  # temporary fix by using well-known dns
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
 
   services.getty.autologinUser = metadata.usernameLower;
   security.sudo.wheelNeedsPassword = false;
