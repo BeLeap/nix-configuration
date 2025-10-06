@@ -1,6 +1,5 @@
 {
   metadata,
-  pkgs,
   lib,
   ...
 }:
@@ -16,14 +15,7 @@
     ]
   ));
 
-  home.packages =
-    [ ]
-    ++ (lib.optionals (metadata.gui) (
-      with pkgs;
-      [
-        wezterm
-      ]
-    ));
+  home.packages = [ ];
 
   home.homeDirectory = "/home/${metadata.usernameLower}";
 }

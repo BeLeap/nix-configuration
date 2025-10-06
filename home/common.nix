@@ -56,24 +56,29 @@
 
   imports =
     [ ]
-    ++ map (p: (./. + "/programs/${p}")) [
-      "zsh"
-      "lsd"
-      "starship"
-      "carapace"
-      "helix"
-      "zoxide"
-      "direnv"
-      "git"
-      "fzf"
-      "k9s"
-      "gh"
-      "bash"
-      "firefox"
-      "wezterm"
-      "jujutsu"
-      "ssh"
-    ];
+    ++ map (p: (./. + "/programs/${p}")) (
+      [
+        "zsh"
+        "lsd"
+        "starship"
+        "carapace"
+        "helix"
+        "zoxide"
+        "direnv"
+        "git"
+        "fzf"
+        "k9s"
+        "gh"
+        "bash"
+        "jujutsu"
+        "ssh"
+        "nh"
+      ]
+      ++ (lib.optionals (metadata.gui) [
+        "firefox"
+        "wezterm"
+      ])
+    );
 
   home.shellAliases = {
     ga = "git add";
