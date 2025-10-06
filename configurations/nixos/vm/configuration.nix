@@ -27,6 +27,8 @@
   virtualisation.memorySize = 4096;
   virtualisation.cores = 4;
 
+  virtualisation.diskSize = 128 * 1024;
+
   environment.systemPackages = [ ];
 
   system.stateVersion = "25.05";
