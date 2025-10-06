@@ -29,6 +29,8 @@
 
   virtualisation.diskSize = 128 * 1024;
 
+  virtualisation.useHostCerts = true;
+
   environment.systemPackages = [ ];
 
   system.stateVersion = "25.05";
