@@ -87,6 +87,9 @@
               distribution = "nixos";
               gui = false;
               extraConfig = {
+                boot.binfmt.emulatedSystems = [
+                  "x86_64-linux"
+                ];
                 virtualisation.sharedDirectories = {
                   defaultShared = {
                     source = "/Users/beleap/shared";
