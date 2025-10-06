@@ -17,6 +17,8 @@ config.window_frame = {
 config.color_scheme = "Catppuccin Frappe";
 config.window_decorations = "RESIZE";
 
+config.use_fancy_tab_bar = false;
+
 config.leader = { key = 'a', mods = 'CTRL', timout_milliseconds = 1000 };
 config.keys = {
    -- Double tap CTRL-a to send CTRL-a to terminal
