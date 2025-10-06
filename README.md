@@ -13,19 +13,5 @@ sudo nix --extra-experimental-features "nix-command flakes" run "nix-darwin/mast
 #### Switch
 
 ```sh
-sudo darwin-rebuild switch --flake ".#beleap-m1air"
-```
-
-### Home
-
-#### Switch
-
-```sh
-home-manager switch
-```
-
-#### Build
-
-```sh
-home-manager build
+nh darwin switch
 ```
