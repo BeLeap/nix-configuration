@@ -31,6 +31,8 @@
 
   virtualisation.useHostCerts = true;
 
+  virtualisation.qemu.guestAgent.enable = true;
+
   environment.systemPackages = [ ];
 
   system.stateVersion = "25.05";
