@@ -8,4 +8,5 @@ final: prev:
   kotlin-ls = prev.callPackage ./kotlin-ls { };
   wezterm-null = import ./wezterm-null prev;
   empiriqa = prev.callPackage ./empiriqa { };
+  dnsi = prev.callPackage ./dnsi { };
 }

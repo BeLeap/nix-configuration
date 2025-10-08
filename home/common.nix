@@ -42,7 +42,7 @@
       podman
       podman-compose
       croc
-      dig
+      dnsi
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.codex
