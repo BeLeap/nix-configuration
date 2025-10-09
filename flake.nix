@@ -45,19 +45,22 @@
       metadatas =
         builtins.map
           (
-            defined:
+            override:
             let
-              initial = rec {
+              base = {
                 username = "BeLeap";
-                usernameLower = lib.toLower username;
                 email = "beleap@beleap.dev";
-                platform = "${defined.arch}-${defined.os}";
-                configPath = defined.configPath or defined.name;
                 extraModule = [ ];
                 extraConfig = { };
               };
+              effective = base // override;
+              resolved = effective // {
+                usernameLower = lib.toLower effective.username;
+                platform = "${effective.arch}-${effective.os}";
+                configPath = effective.configPath or effective.name;
+              };
             in
-            initial // defined
+            resolved
           )
           [
             {
