@@ -43,6 +43,7 @@
       podman-compose
       croc
       dnsi
+      pchar
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.codex

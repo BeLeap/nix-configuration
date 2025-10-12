@@ -9,4 +9,5 @@ final: prev:
   wezterm-null = import ./wezterm-null prev;
   empiriqa = prev.callPackage ./empiriqa { };
   dnsi = prev.callPackage ./dnsi { };
+  pchar = prev.callPackage ./pchar { };
 }
