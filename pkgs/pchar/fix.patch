@@ -1,0 +1,14 @@
+diff --git a/Makefile b/Makefile
+index 132c1b3..8c8a1b2 100644
+--- a/Makefile
++++ b/Makefile
+@@ -52,7 +52,7 @@ DFLAGS=	 -DSIZEOF_BOOL=0 -DHAVE_SOCKLEN_T=1 -DSTDC_HEADERS=1 -DHAVE_UNISTD_H=1 -
+ #
+ LDFLAGS=
+ LIBS=-lm 
+-IFLAGS= -I$(srcdir)
++IFLAGS= -iquote $(srcdir)
+ 
+ #
+ # Other cc options get defined here.
+
