@@ -43,6 +43,9 @@
       pack = {
         usePathWalk = true;
       };
+      init = {
+        defaultBranch = "master";
+      };
     };
   };
 }
