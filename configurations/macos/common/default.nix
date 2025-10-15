@@ -7,6 +7,11 @@
   system.defaults = {
     dock.autohide = true;
 
+    dock.persistent-apps = [
+      "/Applications/Firefox Developer Edition.app"
+      { app = "${pkgs.wezterm}/Applications/WezTerm.app"; }
+    ];
+
     finder = {
       AppleShowAllExtensions = true;
       AppleShowAllFiles = true;
