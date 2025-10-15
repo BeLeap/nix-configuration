@@ -3,6 +3,8 @@
   homebrew = {
     enable = true;
 
+    onActivation.cleanup = "uninstall";
+
     brews = [ ];
     casks = [
       "meetingbar"
