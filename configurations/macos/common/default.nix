@@ -18,6 +18,7 @@
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       { app = "${pkgs.discord}/Applications/Discord.app"; }
+      "/Applications/Logseq.app"
     ]);
 
     finder = {
