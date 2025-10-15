@@ -16,6 +16,11 @@
       ShowStatusBar = true;
       NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
     };
+
+    screencapture = {
+      target = "clipboard";
+      show-thumbnail = true;
+    };
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
