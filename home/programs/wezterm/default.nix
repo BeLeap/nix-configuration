@@ -1,9 +1,6 @@
-{ metadata, pkgs, ... }:
-{
+_: {
   programs.wezterm = {
     enable = true;
-
-    package = if metadata.os == "macos" then pkgs.wezterm-null else pkgs.wezterm;
 
     enableBashIntegration = true;
     enableZshIntegration = true;
