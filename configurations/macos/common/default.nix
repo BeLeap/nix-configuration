@@ -1,4 +1,9 @@
-{ metadata, pkgs, ... }:
+{
+  metadata,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./brew.nix
@@ -10,7 +15,10 @@
     dock.persistent-apps = [
       "/Applications/Firefox Developer Edition.app"
       { app = "${pkgs.wezterm}/Applications/WezTerm.app"; }
-    ];
+    ]
+    ++ (lib.optionals (metadata.kind == "personal") [
+      { app = "${pkgs.discord}/Applications/Discord.app"; }
+    ]);
 
     finder = {
       AppleShowAllExtensions = true;
