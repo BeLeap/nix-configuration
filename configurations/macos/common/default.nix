@@ -4,6 +4,20 @@
     ./brew.nix
   ];
 
+  system.defaults = {
+    dock.autohide = true;
+
+    finder = {
+      AppleShowAllExtensions = true;
+      AppleShowAllFiles = true;
+
+      NewWindowTarget = "Other";
+
+      ShowStatusBar = true;
+      NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
+    };
+  };
+
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system.primaryUser = metadata.usernameLower;
