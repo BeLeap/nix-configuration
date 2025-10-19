@@ -9,31 +9,39 @@
     ./brew.nix
   ];
 
-  system.defaults = {
-    dock.autohide = true;
-
-    dock.persistent-apps = [
-      "/Applications/Firefox Developer Edition.app"
-      { app = "${pkgs.wezterm}/Applications/WezTerm.app"; }
-    ]
-    ++ (lib.optionals (metadata.kind == "personal") [
-      { app = "${pkgs.discord}/Applications/Discord.app"; }
-      "/Applications/Logseq.app"
-    ]);
-
-    finder = {
-      AppleShowAllExtensions = true;
-      AppleShowAllFiles = true;
-
-      NewWindowTarget = "Other";
-
-      ShowStatusBar = true;
-      NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
+  system = {
+    keyboard = {
+      enableKeyMapping = true;
+      nonUS.remapTilde = false;
     };
 
-    screencapture = {
-      target = "clipboard";
-      show-thumbnail = true;
+    defaults = {
+
+      dock.autohide = true;
+
+      dock.persistent-apps = [
+        "/Applications/Firefox Developer Edition.app"
+        { app = "${pkgs.wezterm}/Applications/WezTerm.app"; }
+      ]
+      ++ (lib.optionals (metadata.kind == "personal") [
+        { app = "${pkgs.discord}/Applications/Discord.app"; }
+        "/Applications/Logseq.app"
+      ]);
+
+      finder = {
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
+
+        NewWindowTarget = "Other";
+
+        ShowStatusBar = true;
+        NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
+      };
+
+      screencapture = {
+        target = "clipboard";
+        show-thumbnail = true;
+      };
     };
   };
 
