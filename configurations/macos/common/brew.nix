@@ -8,6 +8,7 @@
     brews = [ ];
     casks = [
       "meetingbar"
+      "karabiner-elements"
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       "logseq"
