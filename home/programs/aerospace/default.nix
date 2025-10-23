@@ -9,7 +9,7 @@
     };
 
     userSettings = {
-      default-root-container-layout = "accordion";
+      default-root-container-layout = "tiles";
 
       key-mapping = {
         preset = "colemak";
