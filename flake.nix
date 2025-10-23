@@ -106,6 +106,33 @@
                 }
               ];
             }
+            {
+              name = "vm-arm64-Darwin-work";
+              configPath = "vm";
+              kind = "work";
+              username = "cs.jang";
+              email = "cs.jang@toss.im";
+              os = "linux";
+              arch = "aarch64";
+              distribution = "nixos";
+              gui = false;
+              extraConfig = {
+                boot.binfmt.emulatedSystems = [
+                  "x86_64-linux"
+                ];
+                virtualisation.sharedDirectories = {
+                  defaultShared = {
+                    source = "/Users/cs.jang/shared";
+                    target = "/home/cs.jang/shared";
+                  };
+                };
+              };
+              extraModule = [
+                {
+                  virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+                }
+              ];
+            }
           ];
       commonModules = (
         metadata: [
