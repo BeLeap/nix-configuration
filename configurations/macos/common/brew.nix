@@ -13,6 +13,7 @@
     ++ (lib.optionals (metadata.kind == "personal") [
       "logseq"
       "1password"
+      "tailscale"
     ]);
   };
 }
