@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,11 +38,26 @@
     }:
     let
       lib = nixpkgs.lib;
-      overlays = with inputs; [
-        (import ./pkgs/overlay.nix {
-          inherit kubectl-check boda;
-        })
-      ];
+      overlays =
+        { system }:
+        with inputs;
+        [
+          (import ./pkgs/overlay.nix {
+            inherit kubectl-check boda;
+          })
+          (
+            final: prev:
+            let
+              unstable = import inputs.nixpkgs-unstable {
+                inherit (prev) system;
+                config = prev.config;
+              };
+            in
+            {
+              pkgs-unstable = unstable;
+            }
+          )
+        ];
       metadatas =
         builtins.map
           (
@@ -136,7 +152,6 @@
           ];
       commonModules = (
         metadata: [
-          { nixpkgs.overlays = overlays; }
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
@@ -159,17 +174,20 @@
               "${metadata.name}" = nixpkgs.lib.nixosSystem {
                 system = metadata.platform;
                 specialArgs = { inherit inputs metadata nixpkgs; };
-                modules =
-                  (commonModules metadata)
-                  ++ [
-                    (./configurations/nixos/common)
-                    (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
-                    home-manager.nixosModules.home-manager
-                    {
-                      home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
-                    }
-                  ]
-                  ++ (metadata.extraModule);
+                modules = [
+                  {
+                    nixpkgs.overlays = overlays { system = metadata.platform; };
+                  }
+                ]
+                ++ (commonModules metadata)
+                ++ [
+                  (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
+                  home-manager.nixosModules.home-manager
+                  {
+                    home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
+                  }
+                ]
+                ++ (metadata.extraModule);
               };
             }
           ) { } metadatas)
@@ -185,21 +203,25 @@
             // {
               "${metadata.name}" = nix-darwin.lib.darwinSystem {
                 specialArgs = { inherit inputs metadata; };
-                modules =
-                  (commonModules metadata)
-                  ++ [
-                    inputs.mac-app-util.darwinModules.default
-                    (./configurations/macos/common)
-                    (./. + "/configurations/macos/${metadata.configPath}/configuartion.nix")
-                    home-manager.darwinModules.home-manager
-                    {
-                      home-manager.sharedModules = [
-                        inputs.mac-app-util.homeManagerModules.default
-                      ];
-                      home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
-                    }
-                  ]
-                  ++ (metadata.extraModule);
+                modules = [
+                  {
+                    nixpkgs.overlays = overlays { system = metadata.platform; };
+                  }
+                ]
+                ++ (commonModules metadata)
+                ++ [
+                  inputs.mac-app-util.darwinModules.default
+                  (./configurations/macos/common)
+                  (./. + "/configurations/macos/${metadata.configPath}/configuartion.nix")
+                  home-manager.darwinModules.home-manager
+                  {
+                    home-manager.sharedModules = [
+                      inputs.mac-app-util.homeManagerModules.default
+                    ];
+                    home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
+                  }
+                ]
+                ++ (metadata.extraModule);
               };
             }
           ) { } metadatas)
