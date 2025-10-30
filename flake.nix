@@ -175,6 +175,7 @@
                 ]
                 ++ (commonModules metadata)
                 ++ [
+                  (./configurations/nixos/common)
                   (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
                   home-manager.nixosModules.home-manager
                   {

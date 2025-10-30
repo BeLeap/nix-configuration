@@ -16,6 +16,4 @@
   ));
 
   home.packages = [ ];
-
-  home.homeDirectory = "/home/${metadata.usernameLower}";
 }

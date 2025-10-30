@@ -15,8 +15,11 @@
 
   security.polkit.enable = true;
 
+  users.groups.beleap = { };
   users.users."${metadata.usernameLower}" = {
     isNormalUser = true;
+    home = "/home/${metadata.usernameLower}";
+    group = "beleap";
     extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
 
