@@ -4,16 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -205,14 +203,10 @@
                 ]
                 ++ (commonModules metadata)
                 ++ [
-                  inputs.mac-app-util.darwinModules.default
                   (./configurations/macos/common)
                   (./. + "/configurations/macos/${metadata.configPath}/configuartion.nix")
                   home-manager.darwinModules.home-manager
                   {
-                    home-manager.sharedModules = [
-                      inputs.mac-app-util.homeManagerModules.default
-                    ];
                     home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
                   }
                 ]
