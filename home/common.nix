@@ -108,8 +108,6 @@
     ku = "k9s";
 
     docker = "podman";
-
-    sozsh = "source ~/.zshrc";
   };
   home.sessionVariables = {
     LANG = "en_US.UTF-8";

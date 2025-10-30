@@ -31,5 +31,9 @@ _: {
 
       bindkey -v
     '';
+
+    shellAliases = {
+      sozsh = "source ~/.zshrc";
+    };
   };
 }
