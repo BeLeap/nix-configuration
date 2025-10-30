@@ -46,7 +46,7 @@
       crane
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
-      pkgs.codex
+      pkgs.unstable.codex
       pkgs._1password-cli
     ])
     # Discord packages is not supported on aarch64-linux
