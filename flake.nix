@@ -45,18 +45,12 @@
           (import ./pkgs/overlay.nix {
             inherit kubectl-check boda;
           })
-          (
-            final: prev:
-            let
-              unstable = import inputs.nixpkgs-unstable {
-                inherit (prev) system;
-                config = prev.config;
-              };
-            in
-            {
-              pkgs-unstable = unstable;
-            }
-          )
+          (final: prev: {
+            unstable = import inputs.nixpkgs-unstable {
+              inherit (prev) system;
+              config = prev.config;
+            };
+          })
         ];
       metadatas =
         builtins.map
