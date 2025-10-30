@@ -32,9 +32,9 @@ _: {
       bindkey -v
 
       fcd() {
-          local file
-          local dir
-          file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+        local file
+        local dir
+        file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
       }
     '';
 
