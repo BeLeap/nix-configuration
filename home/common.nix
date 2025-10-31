@@ -55,7 +55,7 @@
     ])
     ++ (lib.optionals (metadata.kind == "work") [
       pkgs.claude-code
-      pkgs.go-jira
+      pkgs.unstable.jira-cli-go
     ]);
 
   imports =
