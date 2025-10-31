@@ -44,6 +44,7 @@
       croc
       dnsi
       crane
+      coreutils-full
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs.unstable.codex
