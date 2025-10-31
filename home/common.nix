@@ -53,7 +53,10 @@
     ++ (lib.optionals (metadata.kind == "personal" && (metadata.platform == "x86_64-linux")) [
       pkgs.discord
     ])
-    ++ (lib.optionals (metadata.kind == "work") [ pkgs.claude-code ]);
+    ++ (lib.optionals (metadata.kind == "work") [
+      pkgs.claude-code
+      pkgs.go-jira
+    ]);
 
   imports =
     [ ]
