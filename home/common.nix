@@ -119,6 +119,8 @@
     LC_CTYPE = "en_US.UTF-8";
     LC_ALL = "en_US.UTF-8";
     EDITOR = "hx";
+
+    MAKEFLAGS = "-j$(nproc)";
   };
 
   home.username = metadata.usernameLower;
