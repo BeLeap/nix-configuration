@@ -25,6 +25,9 @@
       push = {
         autoSetupRemote = true;
       };
+      pull = {
+        rebase = true;
+      };
       rerere = {
         enable = true;
       };
