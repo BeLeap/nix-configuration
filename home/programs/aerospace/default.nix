@@ -65,7 +65,7 @@
         alt-k = "focus up";
         alt-l = "focus right";
 
-        cmd-enter = "exec-and-forget open -n ${pkgs.wezterm}/Applications/Wezterm.app";
+        alt-enter = "exec-and-forget open -n ${pkgs.wezterm}/Applications/Wezterm.app";
       }
       // lib.listToAttrs (
         (lib.flatten (
