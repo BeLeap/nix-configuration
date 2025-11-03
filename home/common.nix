@@ -39,8 +39,6 @@
       empiriqa
       gnumake
       kind
-      podman
-      podman-compose
       croc
       dnsi
       crane
@@ -79,6 +77,7 @@
         "jujutsu"
         "ssh"
         "nh"
+        "podman"
       ]
       ++ (lib.optionals (metadata.gui) [
         "firefox"
