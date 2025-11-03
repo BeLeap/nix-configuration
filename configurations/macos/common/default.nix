@@ -35,6 +35,7 @@
         NewWindowTarget = "Other";
 
         ShowStatusBar = true;
+        ShowPathbar = true;
         NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
       };
 
