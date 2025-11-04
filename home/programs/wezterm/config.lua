@@ -17,7 +17,7 @@ config.window_frame = {
 config.color_scheme = "Catppuccin Frappe";
 config.window_decorations = "RESIZE";
 
-config.use_fancy_tab_bar = false;
+config.use_fancy_tab_bar = true;
 
 config.leader = { key = 'a', mods = 'CTRL', timout_milliseconds = 1000 };
 config.keys = {
