@@ -36,20 +36,7 @@
     }:
     let
       lib = nixpkgs.lib;
-      overlays =
-        { system }:
-        with inputs;
-        [
-          (import ./pkgs/overlay.nix {
-            inherit kubectl-check boda;
-          })
-          (final: prev: {
-            unstable = import inputs.nixpkgs-unstable {
-              inherit (prev) system;
-              config = prev.config;
-            };
-          })
-        ];
+      callPackage = lib.callPackageWith (inputs // { inherit lib; });
       metadatas =
         builtins.map
           (
@@ -142,79 +129,21 @@
               ];
             }
           ];
-      commonModules = (
-        metadata: [
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "bak";
-            home-manager.extraSpecialArgs = { inherit metadata; };
-          }
-          (./configurations/common)
-        ]
-      );
     in
-    {
-      nixosConfigurations = lib.pipe metadatas [
-        (metadatas: builtins.filter (metadata: metadata.distribution == "nixos") metadatas)
-        (
-          metadatas:
-          (lib.foldl (
-            acc: metadata:
-            acc
-            // {
-              "${metadata.name}" = nixpkgs.lib.nixosSystem {
-                system = metadata.platform;
-                specialArgs = { inherit inputs metadata nixpkgs; };
-                modules = [
-                  {
-                    nixpkgs.overlays = overlays { system = metadata.platform; };
-                  }
-                ]
-                ++ (commonModules metadata)
-                ++ [
-                  (./configurations/nixos/common)
-                  (./. + "/configurations/nixos/${metadata.configPath}/configuration.nix")
-                  home-manager.nixosModules.home-manager
-                  {
-                    home-manager.users."${metadata.usernameLower}" = ./home/nixos.nix;
-                  }
-                ]
-                ++ (metadata.extraModule);
-              };
-            }
-          ) { } metadatas)
-        )
-      ];
-      darwinConfigurations = lib.pipe metadatas [
-        (metadatas: builtins.filter (metadata: metadata.distribution == "macos") metadatas)
-        (
-          metadatas:
-          (lib.foldl (
-            acc: metadata:
-            acc
-            // {
-              "${metadata.name}" = nix-darwin.lib.darwinSystem {
-                specialArgs = { inherit inputs metadata; };
-                modules = [
-                  {
-                    nixpkgs.overlays = overlays { system = metadata.platform; };
-                  }
-                ]
-                ++ (commonModules metadata)
-                ++ [
-                  (./configurations/macos/common)
-                  (./. + "/configurations/macos/${metadata.configPath}/configuartion.nix")
-                  home-manager.darwinModules.home-manager
-                  {
-                    home-manager.users."${metadata.usernameLower}" = ./home/darwin.nix;
-                  }
-                ]
-                ++ (metadata.extraModule);
-              };
-            }
-          ) { } metadatas)
-        )
-      ];
-    };
+    lib.fold
+      (
+        metadata: acc:
+        let
+          system = callPackage ./mkSystem.nix { inherit metadata; };
+        in
+        ({
+          nixosConfigurations = acc.nixosConfigurations // system.nixosConfigurations;
+          darwinConfigurations = acc.darwinConfigurations // system.darwinConfigurations;
+        })
+      )
+      {
+        nixosConfigurations = { };
+        darwinConfigurations = { };
+      }
+      metadatas;
 }
