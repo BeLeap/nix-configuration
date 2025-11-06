@@ -3,7 +3,10 @@
   homebrew = {
     enable = true;
 
-    onActivation.cleanup = "uninstall";
+    onActivation = {
+      cleanup = "zap";
+      extraFlags = [ "--verbose" ];
+    };
 
     brews = [ ];
     casks = [
