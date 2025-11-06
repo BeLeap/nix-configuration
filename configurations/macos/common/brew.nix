@@ -8,6 +8,9 @@
       extraFlags = [ "--verbose" ];
     };
 
+    taps = [
+      "imshuhao/kdeconnect"
+    ];
     brews = [ ];
     casks = [
       "meetingbar"
@@ -17,6 +20,7 @@
       "logseq"
       "1password"
       "tailscale-app"
+      "imshuhao/kdeconnect/kdeconnect"
     ]);
   };
 }
