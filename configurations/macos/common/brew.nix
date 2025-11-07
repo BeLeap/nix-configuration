@@ -8,9 +8,11 @@
       extraFlags = [ "--verbose" ];
     };
 
-    taps = [
-      "imshuhao/kdeconnect"
-    ];
+    taps =
+      [ ]
+      ++ (lib.optionals (metadata.kind == "presonal") [
+        "imshuhao/kdeconnect"
+      ]);
     brews = [ ];
     casks = [
       "meetingbar"
