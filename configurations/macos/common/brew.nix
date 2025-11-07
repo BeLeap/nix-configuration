@@ -10,7 +10,7 @@
 
     taps =
       [ ]
-      ++ (lib.optionals (metadata.kind == "presonal") [
+      ++ (lib.optionals (metadata.kind == "personal") [
         "imshuhao/kdeconnect"
       ]);
     brews = [ ];
