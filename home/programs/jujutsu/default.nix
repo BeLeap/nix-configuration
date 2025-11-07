@@ -1,7 +1,8 @@
-{ metadata, ... }:
+{ metadata, pkgs, ... }:
 {
   programs.jujutsu = {
     enable = true;
+    package = pkgs.unstable.jujutsu;
 
     settings = {
       user = {
