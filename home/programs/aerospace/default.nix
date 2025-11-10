@@ -65,6 +65,9 @@
         alt-k = "focus up";
         alt-l = "focus right";
 
+        alt-f = "layout floating";
+        alt-t = "layout tiling";
+
         alt-enter = "exec-and-forget open -n ${pkgs.wezterm}/Applications/Wezterm.app";
       }
       // lib.listToAttrs (
