@@ -17,6 +17,7 @@
     casks = [
       "meetingbar"
       "karabiner-elements"
+      "wireshark-chmodbpf"
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       "logseq"
