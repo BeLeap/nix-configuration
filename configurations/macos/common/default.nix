@@ -82,9 +82,4 @@
       };
     };
   };
-
-  services.tailscale = {
-    enable = metadata.kind == "personal";
-    overrideLocalDns = true;
-  };
 }
