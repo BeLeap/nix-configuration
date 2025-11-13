@@ -8,4 +8,5 @@ final: prev:
   kotlin-ls = prev.callPackage ./kotlin-ls { };
   empiriqa = prev.callPackage ./empiriqa { };
   dnsi = prev.callPackage ./dnsi { };
+  kdeconnect-mac = prev.callPackage ./kdeconnect-mac { };
 }

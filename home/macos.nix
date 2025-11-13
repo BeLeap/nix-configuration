@@ -8,6 +8,7 @@
   ]
   ++ map (p: (./. + "/programs/${p}")) [
     "aerospace"
+    "kdeconnect-mac"
   ];
 
   home.packages = [ ];
