@@ -24,7 +24,7 @@
       arping
       mitmproxy
       ncdu
-      yq
+      yq-go
       watchexec
       beleap-utils
       gnupg
