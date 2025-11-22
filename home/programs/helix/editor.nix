@@ -43,5 +43,6 @@
   };
 
   whitespace.render.tab = "all";
+  whitespace.chracters.tab = "→";
   indent-guides.render = true;
 }
