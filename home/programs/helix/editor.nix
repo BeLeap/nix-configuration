@@ -42,7 +42,12 @@
     display-inlay-hints = true;
   };
 
-  whitespace.render.tab = "all";
-  whitespace.chracters.tab = "→";
-  indent-guides.render = true;
+  whitespace.render = {
+    tab = "all";
+  };
+  whitespace.chracters = {
+    tab = "→";
+    tabpad = "·";
+  };
+  indent-guides.render = false;
 }
