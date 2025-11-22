@@ -49,5 +49,7 @@
     tab = "→";
     tabpad = "·";
   };
+  # NOTE: indent guide conflicts with tab whitespace rendenring.
+  # https://github.com/helix-editor/helix/issues/6051
   indent-guides.render = false;
 }
