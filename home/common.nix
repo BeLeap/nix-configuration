@@ -53,10 +53,14 @@
     ++ (lib.optionals (metadata.kind == "personal" && (metadata.platform == "x86_64-linux")) [
       pkgs.discord
     ])
-    ++ (lib.optionals (metadata.kind == "work") [
-      pkgs.claude-code
-      pkgs.unstable.jira-cli-go
-    ]);
+    ++ (lib.optionals (metadata.kind == "work") (
+      with pkgs;
+      [
+        claude-code
+        unstable.jira-cli-go
+        jetbrains.idea-ultimate
+      ]
+    ));
 
   imports =
     [ ]

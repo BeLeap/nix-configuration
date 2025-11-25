@@ -1,5 +1,6 @@
 {
   metadata,
+  lib,
   ...
 }:
 {
@@ -11,7 +12,10 @@
     "kdeconnect-mac"
   ];
 
-  home.packages = [ ];
+  home.packages =
+    [ ]
+    ++ (lib.optionals (metadata.kind == "personal") [ ])
+    ++ (lib.optionals (metadata.kind == "work") [ ]);
 
   home.homeDirectory = "/Users/${metadata.usernameLower}";
 }
