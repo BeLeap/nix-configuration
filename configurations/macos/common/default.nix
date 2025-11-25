@@ -27,6 +27,10 @@
       ++ (lib.optionals (metadata.kind == "personal") [
         { app = "${pkgs.discord}/Applications/Discord.app"; }
         "/Applications/Logseq.app"
+      ])
+      ++ (lib.optionals (metadata.kind == "work") [
+        { app = "${pkgs.jetbrains.idea-ultimate}/Applications/IntelliJ IDEA.app"; }
+        { app = "${pkgs.jetbrains.datagrip}/Applications/DataGrip.app"; }
       ]);
 
       finder = {
