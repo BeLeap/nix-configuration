@@ -20,5 +20,10 @@
       "1password"
       "tailscale-app"
     ]);
+    masApps =
+      { }
+      // (lib.optionals (metadata.kind == "personal") {
+        KakaoTalk = 869223134;
+      });
   };
 }
