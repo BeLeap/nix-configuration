@@ -1,4 +1,5 @@
 {
+  pkgs,
   metadata,
   lib,
   ...
@@ -13,7 +14,10 @@
   ];
 
   home.packages =
-    [ ]
+    with pkgs;
+    [
+      mas
+    ]
     ++ (lib.optionals (metadata.kind == "personal") [ ])
     ++ (lib.optionals (metadata.kind == "work") [ ]);
 
