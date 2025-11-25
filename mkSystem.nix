@@ -9,6 +9,8 @@ inputs@{
 
   home-manager,
 
+  beleap-overlay,
+
   kubectl-check,
   boda,
 }:
@@ -20,6 +22,7 @@ let
         (import ./pkgs/overlay.nix {
           inherit (inputs) kubectl-check boda;
         })
+        (import beleap-overlay)
         (final: prev: {
           unstable = import inputs.nixpkgs-unstable {
             inherit (prev) system config;

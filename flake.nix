@@ -15,6 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    beleap-overlay.url = "github:BeLeap/nix-overlay";
+
     # Custom Packages
     kubectl-check = {
       url = "github:BeLeap/kubectl-check";
