@@ -24,7 +24,6 @@
       { }
       // (lib.optionals (metadata.kind == "personal") {
         KakaoTalk = 869223134;
-        "Microsoft OneNote" = 784801555;
       });
   };
 }
