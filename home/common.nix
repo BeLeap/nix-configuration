@@ -46,7 +46,6 @@
       gtrash
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
-      pkgs.unstable.codex
       pkgs._1password-cli
     ])
     # Discord packages is not supported on aarch64-linux
@@ -83,6 +82,7 @@
         "ssh"
         "nh"
         "podman"
+        "codex"
       ]
       ++ (lib.optionals (metadata.gui) [
         "firefox"
