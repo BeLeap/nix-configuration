@@ -136,6 +136,6 @@
   home.file =
     { }
     // lib.genAttrs [ ".claude/CLAUDE.md" ".codex/AGENTS.md" ] (_: {
-      text = builtins.readFile ../files/AGENTS.md;
+      source = ../files/AGENTS.md;
     });
 }
