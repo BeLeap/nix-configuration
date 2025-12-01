@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  # NOTE: npx requires nodejs in PATH environment
+  home.packages = [
+    pkgs.nodejs_24
+  ];
   programs.codex = {
     enable = true;
     package = pkgs.unstable.codex;
