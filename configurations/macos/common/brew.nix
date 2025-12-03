@@ -22,7 +22,7 @@
     ]);
     masApps =
       { }
-      // (lib.optionals (metadata.kind == "personal") {
+      // (lib.optionalAttrs (metadata.kind == "personal") {
         KakaoTalk = 869223134;
       });
   };
