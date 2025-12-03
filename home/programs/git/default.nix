@@ -19,6 +19,7 @@
       "shell.nix"
       "*.TEMP.*"
       ".claude"
+      ".profileconfig.json"
     ];
 
     extraConfig = {
