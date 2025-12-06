@@ -3,11 +3,24 @@
   programs.git = {
     enable = true;
 
-    userName = metadata.username;
-    userEmail = metadata.email;
+    settings = {
+      user = {
+        name = metadata.username;
+        email = metadata.email;
+      };
 
-    aliases = {
-      adog = "log --all --decorate --oneline --graph";
+      alias = {
+        adog = "log --all --decorate --oneline --graph";
+      };
+      push.autoSetupRemote = true;
+      pull.rebase = true;
+      rerere.enable = true;
+      column.ui = "auto";
+      branch.sort = "-committerdate";
+      fetch.writeCommitGraph = true;
+      help.autocorret = "prompt";
+      pack.usePathWalk = true;
+      init.defaultBranch = "master";
     };
 
     ignores = [
@@ -21,35 +34,5 @@
       ".claude"
       ".profileconfig.json"
     ];
-
-    extraConfig = {
-      push = {
-        autoSetupRemote = true;
-      };
-      pull = {
-        rebase = true;
-      };
-      rerere = {
-        enable = true;
-      };
-      column = {
-        ui = "auto";
-      };
-      branch = {
-        sort = "-committerdate";
-      };
-      fetch = {
-        writeCommitGraph = true;
-      };
-      help = {
-        autocorret = "prompt";
-      };
-      pack = {
-        usePathWalk = true;
-      };
-      init = {
-        defaultBranch = "master";
-      };
-    };
   };
 }
