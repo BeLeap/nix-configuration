@@ -26,6 +26,11 @@
           "@-"
         ];
       };
+      remotes = {
+        origin = {
+          "auto-track-bookmarks" = "glob:*";
+        };
+      };
     };
   };
 }
