@@ -2,6 +2,7 @@
   metadata,
   pkgs,
   lib,
+  config,
   ...
 }:
 {
@@ -134,7 +135,9 @@
   home.username = metadata.usernameLower;
 
   home.file =
-    { }
+    {
+      "dl".source = lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Download";
+    }
     // lib.genAttrs [ ".claude/CLAUDE.md" ".codex/AGENTS.md" ] (_: {
       source = ../files/AGENTS.md;
     });
