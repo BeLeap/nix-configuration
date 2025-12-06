@@ -136,7 +136,7 @@
 
   home.file =
     {
-      "dl".source = lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Download";
+      "dl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Download";
     }
     // lib.genAttrs [ ".claude/CLAUDE.md" ".codex/AGENTS.md" ] (_: {
       source = ../files/AGENTS.md;
