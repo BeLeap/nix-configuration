@@ -2,10 +2,12 @@
 {
   programs.ssh = {
     enable = true;
-    # enableDefaultConfig = false;
+    enableDefaultConfig = false;
 
     matchBlocks =
-      { }
+      {
+        "*" = { };
+      }
       // (
         if (metadata.kind == "personal" && metadata.gui) then
           {
