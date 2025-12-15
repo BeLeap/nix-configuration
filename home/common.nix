@@ -111,7 +111,7 @@
     prmd = "gh pr merge -d";
 
     jgf = "jj git fetch --all-remotes";
-    jgp = "jj git push --allow-new";
+    jgp = "jj git push";
 
     e = "$EDITOR";
 
