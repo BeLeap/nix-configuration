@@ -26,11 +26,6 @@
           "@-"
         ];
       };
-      git = {
-        # Will be replaced by auto-track-bookmarks on v0.36.0
-        auto-local-bookmarks = true;
-        push-new-bookmarks = true;
-      };
       remotes = {
         origin = {
           auto-track-bookmarks = "glob:*";
