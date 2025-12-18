@@ -45,6 +45,7 @@
       crane
       coreutils-full
       gtrash
+      kubectl-sniff
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs._1password-cli
