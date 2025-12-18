@@ -13,7 +13,6 @@
         "start"
       ];
       RunAtLoad = true;
-      KeepAlive = true;
       StandardOutPath = "/tmp/podman-machine-start.out.log";
       StandardErrorPath = "/tmp/podman-machine-start.err.log";
     };
