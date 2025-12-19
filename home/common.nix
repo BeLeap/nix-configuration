@@ -59,8 +59,6 @@
       [
         claude-code
         unstable.jira-cli-go
-        jetbrains.idea-ultimate
-        jetbrains.datagrip
       ]
     ));
 

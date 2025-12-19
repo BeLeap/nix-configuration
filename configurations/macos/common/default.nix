@@ -29,8 +29,8 @@
         "/Applications/Logseq.app"
       ])
       ++ (lib.optionals (metadata.kind == "work") [
-        { app = "${pkgs.jetbrains.idea-ultimate}/Applications/IntelliJ IDEA.app"; }
-        { app = "${pkgs.jetbrains.datagrip}/Applications/DataGrip.app"; }
+        { app = "/Applications/IntelliJ IDEA.app"; }
+        { app = "/Applications/DataGrip.app"; }
       ]);
 
       finder = {
