@@ -25,7 +25,8 @@ let
         (import beleap-overlay)
         (final: prev: {
           unstable = import inputs.nixpkgs-unstable {
-            inherit (prev) system config;
+            inherit (prev) config;
+            inherit (prev.stdenv.hostPlatform) system;
           };
         })
       ];
