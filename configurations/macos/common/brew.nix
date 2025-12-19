@@ -1,7 +1,7 @@
 { metadata, lib, ... }:
 {
   homebrew = {
-    enable = true;
+    enable = !(metadata.kind == "airgap");
 
     onActivation = {
       cleanup = "zap";
