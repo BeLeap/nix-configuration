@@ -84,6 +84,13 @@
         {
           check-further-callbacks = false;
           "if" = {
+            app-id = "com.google.Chrome";
+          };
+          run = [ "move-node-to-workspace 2" ];
+        }
+        {
+          check-further-callbacks = false;
+          "if" = {
             window-title-regex-substring = "1Password";
           };
           run = [ "layout floating" ];
