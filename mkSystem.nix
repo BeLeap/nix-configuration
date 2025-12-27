@@ -20,11 +20,9 @@ let
   flatMap = f: l: (lib.flatten (lib.map f l));
   specialArgs = { inherit inputs metadata; };
   modules =
-    (map (p: (./. + "/modules/${p}")) [
-      "hmDefaultOptions"
-    ])
-    ++ flatMap (p: (callPackage (./. + "/modules/${p}") { })) [
+    flatMap (p: (callPackage (./. + "/modules/${p}") { })) [
       "overlay"
+      "hmDefaultOptions"
       "macAppUtil"
     ]
     ++ [
