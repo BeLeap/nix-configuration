@@ -20,14 +20,9 @@ let
   modules =
     map (p: (./. + "/modules/${p}")) [
       "overlay"
+      "hmDefaultOptions"
     ]
     ++ [
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "bak";
-        home-manager.extraSpecialArgs = { inherit metadata; };
-      }
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")
       (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
