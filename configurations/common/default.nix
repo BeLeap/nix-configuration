@@ -1,4 +1,4 @@
-{ pkgs, metadata, ... }:
+{ pkgs, ... }:
 {
   nix.optimise.automatic = true;
 
@@ -30,4 +30,3 @@
     git
   ];
 }
-// metadata.extraConfig
