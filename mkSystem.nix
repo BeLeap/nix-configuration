@@ -22,7 +22,7 @@ let
   modules =
     flatMap (p: (callPackage (./. + "/modules/${p}") { })) [
       "overlay"
-      "hmDefaultOptions"
+      "hm"
       "macAppUtil"
     ]
     ++ [
