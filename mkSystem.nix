@@ -17,50 +17,40 @@ inputs@{
 }:
 let
   specialArgs = { inherit inputs metadata; };
-  modules = [
-    {
-      nixpkgs.overlays = [
-        (import ./pkgs/overlay.nix {
-          inherit (inputs) kubectl-check boda;
-        })
-        (import beleap-overlay)
-        (final: prev: {
-          unstable = import inputs.nixpkgs-unstable {
-            inherit (prev) config;
-            inherit (prev.stdenv.hostPlatform) system;
-          };
-        })
-      ];
-    }
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.backupFileExtension = "bak";
-      home-manager.extraSpecialArgs = { inherit metadata; };
-    }
-    (./configurations/common)
-    (./. + "/configurations/${metadata.distribution}/common")
-    (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
-    (
+  modules =
+    map (p: (./. + "/modules/${p}")) [
+      "overlay"
+    ]
+    ++ [
       {
-        nixos = home-manager.nixosModules.home-manager;
-        macos = home-manager.darwinModules.home-manager;
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.backupFileExtension = "bak";
+        home-manager.extraSpecialArgs = { inherit metadata; };
       }
-      ."${metadata.distribution}"
-    )
-    ({
-      home-manager.users."${metadata.usernameLower}" = ./. + "/home/${metadata.distribution}.nix";
-    })
-  ]
-  ++ (lib.optionals (metadata.os == "darwin") [
-    mac-app-util.darwinModules.default
-    {
-      home-manager.sharedModules = [
-        mac-app-util.homeManagerModules.default
-      ];
-    }
-  ])
-  ++ metadata.extraModule;
+      (./configurations/common)
+      (./. + "/configurations/${metadata.distribution}/common")
+      (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
+      (
+        {
+          nixos = home-manager.nixosModules.home-manager;
+          macos = home-manager.darwinModules.home-manager;
+        }
+        ."${metadata.distribution}"
+      )
+      ({
+        home-manager.users."${metadata.usernameLower}" = ./. + "/home/${metadata.distribution}.nix";
+      })
+    ]
+    ++ (lib.optionals (metadata.os == "darwin") [
+      mac-app-util.darwinModules.default
+      {
+        home-manager.sharedModules = [
+          mac-app-util.homeManagerModules.default
+        ];
+      }
+    ])
+    ++ metadata.extraModule;
 in
 {
   nixosConfigurations = lib.optionalAttrs (metadata.distribution == "nixos") {
