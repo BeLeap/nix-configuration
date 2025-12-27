@@ -17,17 +17,16 @@ inputs@{
 }:
 let
   callPackage = lib.callPackageWith (inputs);
+  flatMap = f: l: (lib.flatten (lib.map f l));
   specialArgs = { inherit inputs metadata; };
   modules =
     (map (p: (./. + "/modules/${p}")) [
       "overlay"
       "hmDefaultOptions"
     ])
-    ++ lib.flatten (
-      lib.map (p: (callPackage (./. + "/modules/${p}") { })) [
-        "macAppUtil"
-      ]
-    )
+    ++ flatMap (p: (callPackage (./. + "/modules/${p}") { })) [
+      "macAppUtil"
+    ]
     ++ [
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")
