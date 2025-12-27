@@ -18,9 +18,12 @@ inputs@{
 let
   specialArgs = { inherit inputs metadata; };
   modules =
-    map (p: (./. + "/modules/${p}")) [
+    (map (p: (./. + "/modules/${p}")) [
       "overlay"
       "hmDefaultOptions"
+    ])
+    ++ lib.flatten [
+      (import ./modules/macAppUtil { inherit metadata mac-app-util; })
     ]
     ++ [
       (./configurations/common)
@@ -37,14 +40,6 @@ let
         home-manager.users."${metadata.usernameLower}" = ./. + "/home/${metadata.distribution}.nix";
       })
     ]
-    ++ (lib.optionals (metadata.os == "darwin") [
-      mac-app-util.darwinModules.default
-      {
-        home-manager.sharedModules = [
-          mac-app-util.homeManagerModules.default
-        ];
-      }
-    ])
     ++ metadata.extraModule;
 in
 {
