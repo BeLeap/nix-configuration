@@ -21,10 +21,10 @@ let
   specialArgs = { inherit inputs metadata; };
   modules =
     (map (p: (./. + "/modules/${p}")) [
-      "overlay"
       "hmDefaultOptions"
     ])
     ++ flatMap (p: (callPackage (./. + "/modules/${p}") { })) [
+      "overlay"
       "macAppUtil"
     ]
     ++ [
