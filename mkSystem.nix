@@ -29,16 +29,6 @@ let
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")
       (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
-      (
-        {
-          nixos = home-manager.nixosModules.home-manager;
-          macos = home-manager.darwinModules.home-manager;
-        }
-        ."${metadata.distribution}"
-      )
-      ({
-        home-manager.users."${metadata.usernameLower}" = ./. + "/home/${metadata.distribution}.nix";
-      })
     ]
     ++ metadata.extraModule;
 in
