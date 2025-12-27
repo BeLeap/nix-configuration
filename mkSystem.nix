@@ -8,6 +8,7 @@ inputs@{
   nix-darwin,
 
   home-manager,
+  mac-app-util,
 
   beleap-overlay,
 
@@ -51,6 +52,14 @@ let
       home-manager.users."${metadata.usernameLower}" = ./. + "/home/${metadata.distribution}.nix";
     })
   ]
+  ++ (lib.optionals (metadata.os == "darwin") [
+    mac-app-util.darwinModules.default
+    {
+      home-manager.sharedModules = [
+        mac-app-util.homeManagerModules.default
+      ];
+    }
+  ])
   ++ metadata.extraModule;
 in
 {
