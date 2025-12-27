@@ -49,7 +49,6 @@
                 username = "BeLeap";
                 email = "beleap@beleap.dev";
                 extraModule = [ ];
-                extraConfig = { };
               };
               effective = base // override;
               resolved = effective // {
@@ -87,20 +86,18 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
-              extraConfig = {
-                boot.binfmt.emulatedSystems = [
-                  "x86_64-linux"
-                ];
-                virtualisation.sharedDirectories = {
-                  defaultShared = {
-                    source = "/Users/beleap/shared";
-                    target = "/home/beleap/shared";
-                  };
-                };
-              };
               extraModule = [
                 {
                   virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+                  boot.binfmt.emulatedSystems = [
+                    "x86_64-linux"
+                  ];
+                  virtualisation.sharedDirectories = {
+                    defaultShared = {
+                      source = "/Users/beleap/shared";
+                      target = "/home/beleap/shared";
+                    };
+                  };
                 }
               ];
             }
@@ -114,20 +111,18 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
-              extraConfig = {
-                boot.binfmt.emulatedSystems = [
-                  "x86_64-linux"
-                ];
-                virtualisation.sharedDirectories = {
-                  defaultShared = {
-                    source = "/Users/cs.jang/shared";
-                    target = "/home/cs.jang/shared";
-                  };
-                };
-              };
               extraModule = [
                 {
                   virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+                  boot.binfmt.emulatedSystems = [
+                    "x86_64-linux"
+                  ];
+                  virtualisation.sharedDirectories = {
+                    defaultShared = {
+                      source = "/Users/cs.jang/shared";
+                      target = "/home/cs.jang/shared";
+                    };
+                  };
                 }
               ];
             }
