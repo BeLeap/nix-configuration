@@ -24,7 +24,7 @@ let
       "hmDefaultOptions"
     ])
     ++ lib.flatten [
-      (callPackage (./modules/macAppUtil) { })
+      (callPackage (./. + "/modules/macAppUtil") { })
     ]
     ++ [
       (./configurations/common)
