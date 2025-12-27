@@ -16,6 +16,7 @@ inputs@{
   boda,
 }:
 let
+  callPackage = lib.callPackageWith (inputs);
   specialArgs = { inherit inputs metadata; };
   modules =
     (map (p: (./. + "/modules/${p}")) [
@@ -23,7 +24,7 @@ let
       "hmDefaultOptions"
     ])
     ++ lib.flatten [
-      (import ./modules/macAppUtil { inherit metadata mac-app-util; })
+      (callPackage (./modules/macAppUtil) { })
     ]
     ++ [
       (./configurations/common)
