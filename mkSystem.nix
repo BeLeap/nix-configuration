@@ -16,24 +16,17 @@ inputs@{
   boda,
 }:
 let
-  callPackage = lib.callPackageWith (inputs);
-  specialArgs = { inherit inputs metadata; };
-  modules =
-    lib.debug.traceVal (
-      map
-        (
-          p:
-          let
-            module = callPackage (./. + "/modules/${p}") { };
-          in
-          lib.debug.traceVal module
-        )
-        [
-          "overlay"
-          "hmDefaultOptions"
-        ]
-    )
-    ++ [
+  specialArgs = {
+    inherit inputs metadata;
+    inherit nixpkgs-unstable beleap-overlay kubectl-check boda;
+  };
+  modules = lib.flatten [
+    [
+      ./modules/overlay
+      ./modules/hmDefaultOptions
+      ./modules/mac-app-utils
+    ]
+    [
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")
       (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
@@ -48,15 +41,8 @@ let
         home-manager.users."${metadata.usernameLower}" = ./. + "/home/${metadata.distribution}.nix";
       })
     ]
-    ++ (lib.optionals (metadata.os == "darwin") [
-      mac-app-util.darwinModules.default
-      {
-        home-manager.sharedModules = [
-          mac-app-util.homeManagerModules.default
-        ];
-      }
-    ])
-    ++ metadata.extraModule;
+    metadata.extraModule
+  ];
 in
 {
   nixosConfigurations = lib.optionalAttrs (metadata.distribution == "nixos") {
