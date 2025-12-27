@@ -23,9 +23,11 @@ let
       "overlay"
       "hmDefaultOptions"
     ])
-    ++ lib.flatten [
-      (callPackage (./. + "/modules/macAppUtil") { })
-    ]
+    ++ lib.flatten (
+      lib.map (p: (callPackage (./. + "/modules/${p}") { })) [
+        "macAppUtil"
+      ]
+    )
     ++ [
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")
