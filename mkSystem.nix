@@ -16,12 +16,23 @@ inputs@{
   boda,
 }:
 let
+  callPackage = lib.callPackageWith (inputs);
   specialArgs = { inherit inputs metadata; };
   modules =
-    map (p: (./. + "/modules/${p}")) [
-      "overlay"
-      "hmDefaultOptions"
-    ]
+    lib.debug.traceVal (
+      map
+        (
+          p:
+          let
+            module = callPackage (./. + "/modules/${p}") { };
+          in
+          lib.debug.traceVal module
+        )
+        [
+          "overlay"
+          "hmDefaultOptions"
+        ]
+    )
     ++ [
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")

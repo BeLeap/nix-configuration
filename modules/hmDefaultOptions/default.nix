@@ -1,4 +1,4 @@
-{ metadata, ... }:
+{ metadata }:
 {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
