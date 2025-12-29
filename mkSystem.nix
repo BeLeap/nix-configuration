@@ -24,6 +24,7 @@ let
       "overlay"
       "hm"
       "macAppUtil"
+      "config"
     ]
     ++ [
       (./configurations/common)
