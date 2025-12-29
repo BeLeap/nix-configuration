@@ -15,7 +15,7 @@ lib.optionalAttrs (metadata.kind == "work") {
             hooks = [
               {
                 type = "command";
-                command = "${pkgs.terminal-notifier} -title 'Claude Code' -message 'Needs permission'";
+                command = "${lib.getExe pkgs.terminal-notifier} -title 'Claude Code' -message 'Needs permission'";
               }
             ];
           }
