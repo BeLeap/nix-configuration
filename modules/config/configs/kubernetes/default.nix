@@ -29,6 +29,8 @@
           settings = {
             k9s = {
               skin = "catppuccin-frappe";
+              skipLatestRevCheck = true;
+              maxConnRetry = 3;
             };
           };
 
