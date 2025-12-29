@@ -1,14 +1,20 @@
 {
-  metadata,
-  lib,
-  ...
+  inputs,
 }:
 let
+  # base
+  lib = inputs.lib;
+  metadata = inputs.metadata;
+
+  # utils
   get =
     a: k: e:
     if (builtins.elem k (builtins.attrNames a)) then a."${k}" else e;
+
+  # handle configs
   configs = map (p: (import (./. + "/configs/${p}"))) [
     "common"
+    "overlay"
     "nix"
     "kubernetes"
   ];
