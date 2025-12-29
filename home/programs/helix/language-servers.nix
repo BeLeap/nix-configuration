@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   biome = {
-    command = "biome";
+    command = "${lib.getExe pkgs.biome}";
     args = [ "lsp-proxy" ];
     required-root-patterns = [ "biome.json" ];
   };
@@ -16,7 +16,7 @@
     ];
   };
   typescript-language-server = with pkgs.nodePackages; {
-    command = "${typescript-language-server}/bin/typescript-language-server";
+    command = "${lib.getExe typescript-language-server}";
     args = [
       "--stdio"
     ];

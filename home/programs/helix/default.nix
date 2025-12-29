@@ -13,7 +13,7 @@
     };
 
     languages = {
-      language-server = import ./language-servers.nix { inherit pkgs; };
+      language-server = import ./language-servers.nix { inherit pkgs lib; };
       language = import ./languages.nix { inherit pkgs lib; };
     };
   };
