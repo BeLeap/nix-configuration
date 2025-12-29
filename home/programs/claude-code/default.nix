@@ -7,7 +7,7 @@
 lib.optionalAttrs (metadata.kind == "work") {
   home.packages = [ pkgs.claude-code ];
   home.file = {
-    "~/.claude/settings.json".text = builtins.toJSON {
+    ".claude/settings.json".text = builtins.toJSON {
       hooks = {
         Notification = [
           {
