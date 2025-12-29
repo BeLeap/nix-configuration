@@ -16,10 +16,6 @@
       wireshark
       cascadia-code
       nanum-gothic-coding
-      kubectl
-      kubectl-node-shell
-      kubectl-view-secret
-      kubectx
       ipcalc
       mtr
       arping
@@ -31,23 +27,17 @@
       gnupg
       oauth2c
       curl
-      kubectl-check
       boda
-      kubernetes-helm
       ghc
       yaml-language-server
       empiriqa
       gnumake
-      kind
       croc
       dnsi
       crane
       coreutils-full
       gtrash
     ]
-    ++ (lib.optionals (!(metadata.os == "linux" && metadata.arch == "aarch64")) [
-      pkgs.kubectl-sniff
-    ])
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs._1password-cli
     ])
@@ -75,7 +65,6 @@
         "direnv"
         "git"
         "fzf"
-        "k9s"
         "gh"
         "bash"
         "jujutsu"
