@@ -1,11 +1,5 @@
 { pkgs, ... }:
 {
-  nix.optimise.automatic = true;
-
-  nixpkgs = {
-    config.allowUnfree = true;
-  };
-
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];
 

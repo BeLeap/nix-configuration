@@ -9,6 +9,7 @@ let
     if (builtins.elem k (builtins.attrNames a)) then a."${k}" else e;
   configs = map (p: (import (./. + "/configs/${p}"))) [
     "common"
+    "nix"
     "kubernetes"
   ];
   filtered = lib.flatten (
