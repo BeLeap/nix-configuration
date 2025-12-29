@@ -25,6 +25,16 @@
 
         programs.k9s = {
           enable = true;
+
+          settings = {
+            k9s = {
+              skin = "catppuccin-frappe";
+            };
+          };
+
+          skins = {
+            catppuccin-frappe = ./catppuccin-frappe.yaml;
+          };
         };
       };
   };
