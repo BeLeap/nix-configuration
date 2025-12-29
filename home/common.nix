@@ -33,7 +33,6 @@
       curl
       kubectl-check
       boda
-      kotlin-ls
       kubernetes-helm
       ghc
       yaml-language-server
