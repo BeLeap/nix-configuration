@@ -59,7 +59,6 @@
     ++ (lib.optionals (metadata.kind == "work") (
       with pkgs;
       [
-        claude-code
         unstable.jira-cli-go
       ]
     ));
@@ -85,6 +84,7 @@
         "nh"
         "podman"
         "codex"
+        "claude-code"
       ]
       ++ (lib.optionals (metadata.gui) [
         "firefox"
