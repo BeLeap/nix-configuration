@@ -18,6 +18,7 @@
           ];
         };
       };
+      approval_policy = "untrusted";
     };
   };
 }
