@@ -37,6 +37,7 @@
       crane
       coreutils-full
       gtrash
+      dive
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs._1password-cli
