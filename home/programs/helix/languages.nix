@@ -52,7 +52,7 @@
   }
   {
     name = "nix";
-    language-servers = [ "${lib.getExe pkgs.nil}" ];
+    language-servers = [ "nil" ];
     formatter = {
       command = "${lib.getExe pkgs.nixfmt}";
     };

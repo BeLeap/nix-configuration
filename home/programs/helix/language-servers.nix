@@ -22,6 +22,6 @@
     ];
   };
   nil = {
-    command = "${pkgs.nil}/bin/nil";
+    command = "${lib.getExe pkgs.nil}";
   };
 }
