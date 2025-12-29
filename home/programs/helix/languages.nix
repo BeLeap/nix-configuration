@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 [
   {
     name = "rust";
@@ -24,7 +24,7 @@
       unit = "    ";
     };
     formatter = {
-      command = "${pkgs.shfmt}/bin/shfmt";
+      command = "${lib.getExe pkgs.shfmt}";
       args = [
         "-i"
         "4"
