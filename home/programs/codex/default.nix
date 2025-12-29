@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # NOTE: npx requires nodejs in PATH environment
   home.packages = [
@@ -11,7 +11,7 @@
     settings = {
       mcp_servers = {
         context7 = {
-          command = "${pkgs.nodejs_24}/bin/npx";
+          command = "${lib.getExe' pkgs.nodejs_24 "npx"}";
           args = [
             "-y"
             "@upstash/context7-mcp"
