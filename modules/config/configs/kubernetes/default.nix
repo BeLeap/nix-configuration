@@ -36,6 +36,11 @@
             catppuccin-frappe = ./catppuccin-frappe.yaml;
           };
         };
+
+        home.shellAliases = {
+          k = "kubectl-check";
+          ku = "k9s";
+        };
       };
   };
 }

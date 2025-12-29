@@ -104,9 +104,6 @@
 
     e = "$EDITOR";
 
-    k = "kubectl-check";
-    ku = "k9s";
-
     docker = "podman";
 
     rm = "echo Use the full path i.e. '/bin/rm', consider using trash";
