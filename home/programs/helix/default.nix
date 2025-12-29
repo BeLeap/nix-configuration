@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.helix = {
     enable = true;
@@ -14,7 +14,7 @@
 
     languages = {
       language-server = import ./language-servers.nix { inherit pkgs; };
-      language = import ./languages.nix { inherit pkgs; };
+      language = import ./languages.nix { inherit pkgs lib; };
     };
   };
 }

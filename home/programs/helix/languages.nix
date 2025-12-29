@@ -52,9 +52,9 @@
   }
   {
     name = "nix";
-    language-servers = [ "nil" ];
+    language-servers = [ "${lib.getExec pkgs.nil}" ];
     formatter = {
-      command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+      command = "${lib.getExe pkgs.nixfmt}";
     };
     auto-format = true;
   }
