@@ -14,7 +14,6 @@ let
 
   # handle recipes
   recipes = map (p: (callPackage (./. + "/recipe/${p}") { })) [
-    "common"
     "overlay"
     "hm"
     "macAppUtil"
