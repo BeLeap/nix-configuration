@@ -20,14 +20,8 @@ let
     "nix"
     "kubernetes"
   ];
-  filtered = lib.flatten (
-    [ ]
-    ++ (map (c: get c "common" [ ]) configs)
-    ++ lib.optionals (metadata.distribution == "nixos") (map (c: get c "nixos" [ ]) configs)
-    ++ lib.optionals (metadata.distribution == "macos") (map (c: get c "macos" [ ]) configs)
-  );
 in
 lib.flatten (
-  (map (c: get c "config" { }) filtered)
-  ++ (map (c: { home-manager.users."${metadata.usernameLower}" = (get c "hm" { }); }) filtered)
+  (map (c: get c "base" { }) configs)
+  ++ (map (c: { home-manager.users."${metadata.usernameLower}" = (get c "hm" { }); }) configs)
 )

@@ -1,22 +1,26 @@
-_: {
-  common = {
-    config =
-      { ... }:
-      {
-        nix.optimise.automatic = true;
+{ lib, metadata }:
+{
+  base = [
+    {
+      nix.optimise.automatic = true;
 
-        nixpkgs = {
-          config.allowUnfree = true;
-        };
+      nixpkgs = {
+        config.allowUnfree = true;
+      };
 
-        # Necessary for using flakes on this system.
-        nix.settings = {
-          trusted-users = [ "@admin" ];
-          experimental-features = "nix-command flakes";
-          min-free = "1M";
-        };
+      # Necessary for using flakes on this system.
+      nix.settings = {
+        trusted-users = [ "@admin" ];
+        experimental-features = "nix-command flakes";
+        min-free = "1M";
+      };
 
-        nix.gc = {
+      nix.gc =
+        { }
+        // lib.optionalAttrs (metadata.distribution == "nixos") {
+          dates = "weekly";
+        }
+        // lib.optionalAttrs (metadata.distribution == "macos") {
           automatic = true;
           interval = [
             {
@@ -27,24 +31,20 @@ _: {
           ];
           options = "--delete-older-than 3d";
         };
-      };
-  };
-  macos = {
-    config =
-      { ... }:
-      {
-        nix.linux-builder = {
-          enable = true;
-          ephemeral = true;
+    }
+    (lib.optionalAttrs (metadata.distribution == "macos") {
+      nix.linux-builder = {
+        enable = true;
+        ephemeral = true;
 
-          config = {
-            virtualisation = {
-              darwin-builder = {
-                diskSize = 64 * 1024;
-              };
+        config = {
+          virtualisation = {
+            darwin-builder = {
+              diskSize = 64 * 1024;
             };
           };
         };
       };
-  };
+    })
+  ];
 }
