@@ -5,6 +5,7 @@ let
   # base
   lib = inputs.lib;
   metadata = inputs.metadata;
+  callPackage = lib.callPackageWith (inputs);
 
   # utils
   get =
@@ -12,9 +13,10 @@ let
     if (builtins.elem k (builtins.attrNames a)) then a."${k}" else e;
 
   # handle configs
-  configs = map (p: (import (./. + "/configs/${p}"))) [
+  configs = map (p: (callPackage (./. + "/configs/${p}") { })) [
     "common"
     "overlay"
+    "hm"
     "nix"
     "kubernetes"
   ];

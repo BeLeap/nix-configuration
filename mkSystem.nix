@@ -22,7 +22,6 @@ let
   modules =
     (import ./modules/config { inherit inputs; })
     ++ flatMap (p: (callPackage (./. + "/modules/${p}") { })) [
-      "hm"
       "macAppUtil"
     ]
     ++ [
