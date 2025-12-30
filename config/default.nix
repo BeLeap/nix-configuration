@@ -23,6 +23,9 @@ let
     "base"
     "nix"
 
+    "macos"
+    "nixos"
+
     # others
     "kubernetes"
   ];

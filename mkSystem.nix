@@ -21,7 +21,6 @@ let
   modules =
     (import ./config { inherit inputs; })
     ++ [
-      (./. + "/configurations/${metadata.distribution}/common")
       (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
     ]
     ++ metadata.extraModule;
