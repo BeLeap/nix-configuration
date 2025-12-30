@@ -1,14 +1,8 @@
 { lib, metadata }:
-{
+(lib.optionalAttrs (metadata.distribution == "nixos") {
   base =
     { pkgs, ... }:
     {
-      nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 30d";
-      };
-
       hardware.graphics.enable = metadata.gui;
 
       security.polkit.enable = true;
@@ -156,4 +150,4 @@
           ]
         ));
     };
-}
+})

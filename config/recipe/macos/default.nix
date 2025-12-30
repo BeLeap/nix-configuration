@@ -1,5 +1,5 @@
 { lib, metadata }:
-(lib.optinalAttrs (metadata.distribution == "macos") {
+(lib.optionalAttrs (metadata.distribution == "macos") {
   base =
     { pkgs, ... }:
     {
