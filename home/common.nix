@@ -38,6 +38,8 @@
       coreutils-full
       gtrash
       dive
+      pgcli
+      mycli
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs._1password-cli
