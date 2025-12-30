@@ -16,15 +16,10 @@ inputs@{
   boda,
 }:
 let
-  callPackage = lib.callPackageWith (inputs);
-  flatMap = f: l: (lib.flatten (lib.map f l));
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = { inherit inputs metadata; };
   modules =
     (import ./modules/config { inherit inputs; })
-    ++ flatMap (p: (callPackage (./. + "/modules/${p}") { })) [
-      "macAppUtil"
-    ]
     ++ [
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")

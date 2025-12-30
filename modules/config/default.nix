@@ -17,6 +17,7 @@ let
     "common"
     "overlay"
     "hm"
+    "macAppUtil"
     "nix"
     "kubernetes"
   ];
