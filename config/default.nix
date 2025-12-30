@@ -14,10 +14,16 @@ let
 
   # handle recipes
   recipes = map (p: (callPackage (./. + "/recipe/${p}") { })) [
+    # base setup
     "overlay"
     "hm"
     "macAppUtil"
+
+    # good to share among all hosts
+    "base"
     "nix"
+
+    # others
     "kubernetes"
   ];
 in
