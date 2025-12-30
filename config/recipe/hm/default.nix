@@ -17,7 +17,7 @@
   ++ [
     {
       home-manager.users."${metadata.usernameLower}" =
-        ./. + "../../../../../home/${metadata.distribution}.nix";
+        ./. + "../../../../home/${metadata.distribution}.nix";
     }
   ];
 }

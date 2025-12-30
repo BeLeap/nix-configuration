@@ -12,8 +12,8 @@ let
     a: k: e:
     if (builtins.elem k (builtins.attrNames a)) then a."${k}" else e;
 
-  # handle configs
-  configs = map (p: (callPackage (./. + "/configs/${p}") { })) [
+  # handle recipes
+  recipes = map (p: (callPackage (./. + "/recipe/${p}") { })) [
     "common"
     "overlay"
     "hm"
@@ -23,6 +23,6 @@ let
   ];
 in
 lib.flatten (
-  (map (c: get c "base" { }) configs)
-  ++ (map (c: { home-manager.users."${metadata.usernameLower}" = (get c "hm" { }); }) configs)
+  (map (c: get c "base" { }) recipes)
+  ++ (map (c: { home-manager.users."${metadata.usernameLower}" = (get c "hm" { }); }) recipes)
 )

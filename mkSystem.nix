@@ -19,7 +19,7 @@ let
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = { inherit inputs metadata; };
   modules =
-    (import ./modules/config { inherit inputs; })
+    (import ./config { inherit inputs; })
     ++ [
       (./configurations/common)
       (./. + "/configurations/${metadata.distribution}/common")
