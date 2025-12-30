@@ -1,5 +1,6 @@
 {
   inputs,
+  recipes,
 }:
 let
   # base
@@ -13,24 +14,9 @@ let
     if (builtins.elem k (builtins.attrNames a)) then a."${k}" else e;
 
   # handle recipes
-  recipes = map (p: (callPackage (./. + "/recipe/${p}") { })) [
-    # base setup
-    "overlay"
-    "hm"
-    "macAppUtil"
-
-    # good to share among all hosts
-    "base"
-    "nix"
-
-    "macos"
-    "nixos"
-
-    # others
-    "kubernetes"
-  ];
+  targets = map (p: (callPackage (./. + "/recipe/${p}") { })) recipes;
 in
 lib.flatten (
-  (map (c: get c "base" { }) recipes)
-  ++ (map (c: { home-manager.users."${metadata.usernameLower}" = (get c "hm" { }); }) recipes)
+  (map (c: get c "base" { }) targets)
+  ++ (map (c: { home-manager.users."${metadata.usernameLower}" = (get c "hm" { }); }) targets)
 )
