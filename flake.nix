@@ -86,6 +86,7 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
+              recipes = [ "vm" ];
             }
             {
               name = "vm-arm64-Darwin-work";
