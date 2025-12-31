@@ -20,4 +20,11 @@ _: {
         git
       ];
     };
+  hm =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        tldr
+      ];
+    };
 }
