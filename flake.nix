@@ -48,7 +48,7 @@
               base = {
                 username = "BeLeap";
                 email = "beleap@beleap.dev";
-                extraModule = [ ];
+                recipes = [ ];
               };
               effective = base // override;
               resolved = effective // {
@@ -86,20 +86,6 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
-              extraModule = [
-                {
-                  virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-                  boot.binfmt.emulatedSystems = [
-                    "x86_64-linux"
-                  ];
-                  virtualisation.sharedDirectories = {
-                    defaultShared = {
-                      source = "/Users/beleap/shared";
-                      target = "/home/beleap/shared";
-                    };
-                  };
-                }
-              ];
             }
             {
               name = "vm-arm64-Darwin-work";
@@ -111,20 +97,7 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
-              extraModule = [
-                {
-                  virtualisation.host.pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-                  boot.binfmt.emulatedSystems = [
-                    "x86_64-linux"
-                  ];
-                  virtualisation.sharedDirectories = {
-                    defaultShared = {
-                      source = "/Users/cs.jang/shared";
-                      target = "/home/cs.jang/shared";
-                    };
-                  };
-                }
-              ];
+              recipes = [ "vm" ];
             }
           ];
     in
@@ -132,7 +105,24 @@
       (
         metadata: acc:
         let
-          system = callPackage ./mkSystem.nix { inherit metadata; };
+          recipes = [
+            # base setup
+            "overlay"
+            "hm"
+            "macAppUtil"
+
+            # good to share among all hosts
+            "base"
+            "nix"
+
+            "macos"
+            "nixos"
+
+            # others
+            "kubernetes"
+          ]
+          ++ metadata.recipes;
+          system = callPackage ./mkSystem.nix { inherit metadata recipes; };
         in
         ({
           nixosConfigurations = acc.nixosConfigurations // system.nixosConfigurations;

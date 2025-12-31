@@ -2,6 +2,8 @@ inputs@{
   lib,
   metadata,
 
+  recipes,
+
   nixpkgs,
   nixpkgs-unstable,
 
@@ -18,28 +20,9 @@ inputs@{
 let
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = { inherit inputs metadata; };
-  recipes = [
-    # base setup
-    "overlay"
-    "hm"
-    "macAppUtil"
-
-    # good to share among all hosts
-    "base"
-    "nix"
-
-    "macos"
-    "nixos"
-
-    # others
-    "kubernetes"
+  modules = (import ./config { inherit inputs recipes; }) ++ [
+    (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
   ];
-  modules =
-    (import ./config { inherit inputs recipes; })
-    ++ [
-      (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
-    ]
-    ++ metadata.extraModule;
 in
 {
   nixosConfigurations = lib.optionalAttrs (metadata.distribution == "nixos") {
