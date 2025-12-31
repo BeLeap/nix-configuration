@@ -121,6 +121,7 @@
 
             # others
             "kubernetes"
+            "1password"
           ]
           ++ metadata.recipes;
           system = callPackage ./mkSystem.nix { inherit metadata recipes; };
