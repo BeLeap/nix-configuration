@@ -54,7 +54,6 @@
               resolved = effective // {
                 usernameLower = lib.toLower effective.username;
                 platform = "${effective.arch}-${effective.os}";
-                configPath = effective.configPath or effective.name;
               };
             in
             resolved
@@ -67,6 +66,7 @@
               arch = "aarch64";
               distribution = "macos";
               gui = true;
+              recipes = [ "macos/beleap-m1air" ];
             }
             {
               name = "csjang-m3pro";
@@ -80,17 +80,18 @@
             }
             {
               name = "vm-arm64-Darwin-personal";
-              configPath = "vm";
               kind = "personal";
               os = "linux";
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
-              recipes = [ "vm" ];
+              recipes = [
+                "vm"
+                "nixos/vm"
+              ];
             }
             {
               name = "vm-arm64-Darwin-work";
-              configPath = "vm";
               kind = "work";
               username = "cs.jang";
               email = "cs.jang@toss.im";
@@ -98,7 +99,10 @@
               arch = "aarch64";
               distribution = "nixos";
               gui = false;
-              recipes = [ "vm" ];
+              recipes = [
+                "vm"
+                "nixos/vm"
+              ];
             }
           ];
     in
