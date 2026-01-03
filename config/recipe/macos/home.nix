@@ -5,10 +5,7 @@
   ...
 }:
 {
-  imports = [
-    ./common.nix
-  ]
-  ++ map (p: (./. + "/programs/${p}")) [
+  imports = map (p: (./. + "/programs/${p}")) [
     "aerospace"
     "kdeconnect-mac"
   ];

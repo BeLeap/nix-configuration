@@ -94,5 +94,7 @@
         shell = pkgs.zsh;
       };
     };
-  hm = { };
+  hm = {
+    imports = [ ./home.nix ];
+  };
 })

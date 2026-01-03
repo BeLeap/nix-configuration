@@ -18,4 +18,7 @@
         ];
       };
     };
+  hm = {
+    imports = [ ./home.nix ];
+  };
 })
