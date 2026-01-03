@@ -1,11 +1,10 @@
 {
-  inputs,
   lib,
   metadata,
 }:
 (lib.optionalAttrs (metadata.distribution == "macos") {
   base =
-    { pkgs, ... }:
+    { pkgs, inputs, ... }:
     {
       environment.systemPackages = [ ];
 
