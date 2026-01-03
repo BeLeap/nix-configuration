@@ -13,11 +13,5 @@
     }
   ]
   ++ lib.optional (metadata.distribution == "nixos") home-manager.nixosModules.home-manager
-  ++ lib.optional (metadata.distribution == "macos") home-manager.darwinModules.home-manager
-  ++ [
-    {
-      home-manager.users."${metadata.usernameLower}" =
-        ./. + "../../../../home/${metadata.distribution}.nix";
-    }
-  ];
+  ++ lib.optional (metadata.distribution == "macos") home-manager.darwinModules.home-manager;
 }

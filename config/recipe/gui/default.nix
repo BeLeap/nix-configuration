@@ -131,4 +131,5 @@
       }
     ))
   ];
+  hm = { imports = [ ./home.nix ]; };
 }
