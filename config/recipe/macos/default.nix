@@ -27,7 +27,7 @@
         };
 
         taps = [ ];
-        brews = [ ];
+        brews = [ "mas" ];
         casks = [
           "meetingbar"
           "karabiner-elements"
