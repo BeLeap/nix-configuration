@@ -20,9 +20,7 @@ inputs@{
 let
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = { inherit inputs metadata; };
-  modules = (import ./config { inherit inputs recipes; }) ++ [
-    (./. + "/configurations/${metadata.distribution}/${metadata.configPath}/configuration.nix")
-  ];
+  modules = import ./config { inherit inputs recipes; };
 in
 {
   nixosConfigurations = lib.optionalAttrs (metadata.distribution == "nixos") {
