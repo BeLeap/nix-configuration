@@ -119,6 +119,8 @@
             "macos"
             "nixos"
 
+            "development"
+
             # others
             "kubernetes"
             "1password"
