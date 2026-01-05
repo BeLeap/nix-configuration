@@ -27,6 +27,7 @@
       gnupg
       oauth2c
       curl
+      fzf-make
       boda
       ghc
       yaml-language-server
