@@ -1,0 +1,119 @@
+name: Flake build diff
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  nixos-build-diff:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v28
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+      - uses: DeterminateSystems/magic-nix-cache@v8
+      - name: Prepare base worktree
+        run: |
+          set -euo pipefail
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          git worktree add /tmp/base FETCH_HEAD
+      - name: Build and diff NixOS configurations
+        run: |
+          set -euo pipefail
+          configs=$(nix eval --raw .#nixosConfigurations --apply 'configs: builtins.concatStringsSep "\n" (builtins.attrNames configs)')
+          if [ -z "$configs" ]; then
+            echo "No nixosConfigurations found." | tee diff.md
+            exit 0
+          fi
+          {
+            echo "## NixOS flake build diff"
+            echo ""
+            for name in $configs; do
+              echo "### $name"
+              head_path=$(nix build --no-link --print-out-paths ".#nixosConfigurations.${name}.config.system.build.toplevel")
+              base_path=$(cd /tmp/base && nix build --no-link --print-out-paths ".#nixosConfigurations.${name}.config.system.build.toplevel")
+              echo ""
+              echo "**Base:** \`$base_path\`"
+              echo "**Head:** \`$head_path\`"
+              echo ""
+              echo '```'
+              nix store diff-closures "$base_path" "$head_path"
+              echo '```'
+              echo ""
+            done
+          } | tee diff.md
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('diff.md', 'utf8');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
+  darwin-build-diff:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v28
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+      - uses: DeterminateSystems/magic-nix-cache@v8
+      - name: Prepare base worktree
+        run: |
+          set -euo pipefail
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          git worktree add /tmp/base FETCH_HEAD
+      - name: Build and diff darwin configurations
+        run: |
+          set -euo pipefail
+          configs=$(nix eval --raw .#darwinConfigurations --apply 'configs: builtins.concatStringsSep "\n" (builtins.attrNames configs)')
+          if [ -z "$configs" ]; then
+            echo "No darwinConfigurations found." | tee diff.md
+            exit 0
+          fi
+          {
+            echo "## Darwin flake build diff"
+            echo ""
+            for name in $configs; do
+              echo "### $name"
+              head_path=$(nix build --no-link --print-out-paths ".#darwinConfigurations.${name}.system")
+              base_path=$(cd /tmp/base && nix build --no-link --print-out-paths ".#darwinConfigurations.${name}.system")
+              echo ""
+              echo "**Base:** \`$base_path\`"
+              echo "**Head:** \`$head_path\`"
+              echo ""
+              echo '```'
+              nix store diff-closures "$base_path" "$head_path"
+              echo '```'
+              echo ""
+            done
+          } | tee diff.md
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('diff.md', 'utf8');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
