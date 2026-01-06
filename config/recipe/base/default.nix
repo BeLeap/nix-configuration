@@ -24,7 +24,7 @@ _: {
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        tldr
+        tealdeer
       ];
     };
 }
