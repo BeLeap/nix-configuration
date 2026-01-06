@@ -23,8 +23,11 @@ _: {
   hm =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        tealdeer
-      ];
+      programs.tealdeer = {
+        enable = true;
+        settings = {
+          tls_backend = "rustls-with-native-roots";
+        };
+      };
     };
 }
