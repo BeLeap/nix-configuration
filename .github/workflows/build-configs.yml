@@ -1,0 +1,110 @@
+name: Build NixOS and Darwin Configurations
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-configs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+        with:
+          nix_path: nixpkgs=channel:nixos-25.11
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Build configurations
+        id: build
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p artifacts
+
+          targets=(
+            "nixos:vm-arm64-Darwin-personal:nixosConfigurations.vm-arm64-Darwin-personal.config.system.build.toplevel"
+            "nixos:vm-arm64-Darwin-work:nixosConfigurations.vm-arm64-Darwin-work.config.system.build.toplevel"
+            "darwin:beleap-m1air:darwinConfigurations.beleap-m1air.system"
+            "darwin:csjang-m3pro:darwinConfigurations.csjang-m3pro.system"
+          )
+
+          status="success"
+          summary="## Nix build results"
+
+          for target in "${targets[@]}"; do
+            scope="${target%%:*}"
+            remainder="${target#*:}"
+            name="${remainder%%:*}"
+            attr=".#${remainder#*:}"
+            log_file="artifacts/${name//[:]/-}.log"
+
+            if nix build "$attr" 2>&1 | tee "$log_file"; then
+              summary+=$'\n- ✅ '$scope'/'$name': `'"$attr"'`'
+            else
+              status="failed"
+              summary+=$'\n- ❌ '$scope'/'$name': `'"$attr"'`'
+              summary+=$'\n\n````\n'
+              summary+=$(tail -n 200 "$log_file")
+              summary+=$'\n````\n'
+            fi
+          done
+
+          summary+=$'\n\n## Changes\n'
+          if [[ "$EVENT_NAME" == "pull_request" && -n "${BASE_REF}" ]]; then
+            git fetch origin "$BASE_REF"
+            diff_summary=$(git diff --stat "origin/${BASE_REF}...HEAD")
+          else
+            diff_summary=$(git show --stat --oneline -1)
+          fi
+
+          if [[ -z "$diff_summary" ]]; then
+            diff_summary="No changes detected."
+          fi
+
+          summary+=$'```\n'
+          summary+="$diff_summary"
+          summary+=$'\n```\n'
+
+          printf "%s\n" "$summary" > build-summary.md
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Comment with build results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('build-summary.md', 'utf8');
+            if (context.eventName === 'pull_request') {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body,
+              });
+            } else {
+              await github.rest.repos.createCommitComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: context.sha,
+                body,
+              });
+            }
+
+      - name: Fail if any build failed
+        if: steps.build.outputs.status == 'failed'
+        run: |
+          echo "One or more builds failed."
+          exit 1
