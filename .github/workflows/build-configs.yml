@@ -86,7 +86,10 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const body = fs.readFileSync('build-summary.md', 'utf8');
+            const summaryPath = 'build-summary.md';
+            const body = fs.existsSync(summaryPath)
+              ? fs.readFileSync(summaryPath, 'utf8')
+              : '## Nix build results\n\nBuild summary was not generated. Check workflow logs for details.';
             if (context.eventName === 'pull_request') {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
