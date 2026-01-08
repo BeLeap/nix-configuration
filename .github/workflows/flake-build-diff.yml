@@ -1,0 +1,102 @@
+name: Flake build diff
+
+on:
+  pull_request:
+    paths:
+      - "**/*.nix"
+      - "flake.lock"
+      - ".github/workflows/flake-build-diff.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            accept-flake-config = true
+
+      - name: Collect flake configs
+        id: configs
+        run: |
+          set -euo pipefail
+          configs=$(nix flake show --json | jq -r '.nixosConfigurations | keys[]')
+          if [ -z "$configs" ]; then
+            echo "No nixosConfigurations found."
+            echo "configs=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "configs<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$configs" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Build and diff nixosConfigurations
+        if: steps.configs.outputs.configs != ''
+        run: |
+          set -euo pipefail
+          base_ref="${{ github.event.pull_request.base.sha }}"
+          base_dir="$RUNNER_TEMP/base"
+          mkdir -p "$base_dir"
+          git worktree add "$base_dir" "$base_ref"
+
+          report="$RUNNER_TEMP/diff-report.md"
+          echo "# Nix flake build diff" > "$report"
+          echo "" >> "$report"
+
+          while IFS= read -r config; do
+            echo "## $config" >> "$report"
+            head_path=$(nix build ".#nixosConfigurations.${config}.config.system.build.toplevel" --no-link --print-out-paths)
+            base_path=$(nix build "${base_dir}#nixosConfigurations.${config}.config.system.build.toplevel" --no-link --print-out-paths)
+            echo "" >> "$report"
+            printf '%s\n' '```diff' >> "$report"
+            nix store diff-closures "$base_path" "$head_path" >> "$report"
+            printf '%s\n' '```' >> "$report"
+            echo "" >> "$report"
+          done <<< "${{ steps.configs.outputs.configs }}"
+
+          cat "$report" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Comment on PR with diff
+        if: steps.configs.outputs.configs != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync(process.env.RUNNER_TEMP + '/diff-report.md', 'utf8');
+            const marker = '<!-- nix-flake-build-diff -->';
+            const body = `${marker}\n${report}`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number,
+            });
+            const existing = comments.find(comment => comment.body && comment.body.startsWith(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }
