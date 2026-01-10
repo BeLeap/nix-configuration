@@ -1,0 +1,129 @@
+name: Build NixOS and Darwin Configurations
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-configs:
+    runs-on: macos-14
+
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - scope: nixos
+            name: vm-arm64-Darwin-personal
+            attr: nixosConfigurations.vm-arm64-Darwin-personal.config.system.build.toplevel
+          - scope: nixos
+            name: vm-arm64-Darwin-work
+            attr: nixosConfigurations.vm-arm64-Darwin-work.config.system.build.toplevel
+          - scope: darwin
+            name: beleap-m1air
+            attr: darwinConfigurations.beleap-m1air.system
+          - scope: darwin
+            name: csjang-m3pro
+            attr: darwinConfigurations.csjang-m3pro.system
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+        with:
+          nix_path: nixpkgs=channel:nixos-25.11
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Build configuration
+        id: build
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_REF: ${{ github.base_ref }}
+          TARGET_SCOPE: ${{ matrix.target.scope }}
+          TARGET_NAME: ${{ matrix.target.name }}
+          TARGET_ATTR: ${{ matrix.target.attr }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p artifacts
+
+          status="success"
+          summary="## Nix build results"
+          summary_file="build-summary.md"
+          : > "$summary_file"
+          trap 'printf "%s\n" "$summary" > "$summary_file"' EXIT
+
+          attr=".#${TARGET_ATTR}"
+          log_file="artifacts/${TARGET_NAME//[:]/-}.log"
+
+          if nix build "$attr" 2>&1 | tee "$log_file"; then
+            summary+=$'\n- ✅ '${TARGET_SCOPE}'/'${TARGET_NAME}': `'"$attr"'`'
+          else
+            status="failed"
+            summary+=$'\n- ❌ '${TARGET_SCOPE}'/'${TARGET_NAME}': `'"$attr"'`'
+            summary+=$'\n\n````\n'
+            summary+=$(tail -n 200 "$log_file")
+            summary+=$'\n````\n'
+          fi
+
+          summary+=$'\n\n## Changes\n'
+          if [[ "$EVENT_NAME" == "pull_request" && -n "${BASE_REF}" ]]; then
+            if git fetch origin "$BASE_REF"; then
+              diff_summary=$(git diff --stat "origin/${BASE_REF}...HEAD")
+            else
+              status="failed"
+              diff_summary="Failed to fetch base ref: ${BASE_REF}"
+            fi
+          else
+            if diff_summary=$(git show --stat --oneline -1); then
+              :
+            else
+              status="failed"
+              diff_summary="Failed to compute diff summary."
+            fi
+          fi
+
+          if [[ -z "$diff_summary" ]]; then
+            diff_summary="No changes detected."
+          fi
+
+          summary+=$'```\n'
+          summary+="$diff_summary"
+          summary+=$'\n```\n'
+
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Comment with build results
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('build-summary.md', 'utf8');
+            if (context.eventName === 'pull_request') {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body,
+              });
+            } else {
+              await github.rest.repos.createCommitComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                commit_sha: context.sha,
+                body,
+              });
+            }
+
+      - name: Fail if any build failed
+        if: steps.build.outputs.status == 'failed'
+        run: |
+          echo "One or more builds failed."
+          exit 1
