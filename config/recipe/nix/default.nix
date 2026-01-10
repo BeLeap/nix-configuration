@@ -6,6 +6,7 @@
 
       nixpkgs = {
         config.allowUnfree = true;
+        config.android_sdk.accept_license = true;
       };
 
       # Necessary for using flakes on this system.
