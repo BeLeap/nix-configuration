@@ -34,6 +34,8 @@ jobs:
           mkdir -p artifacts
 
           targets=(
+            "nixos:vm-arm64-Darwin-personal:nixosConfigurations.vm-arm64-Darwin-personal.config.system.build.toplevel"
+            "nixos:vm-arm64-Darwin-work:nixosConfigurations.vm-arm64-Darwin-work.config.system.build.toplevel"
             "darwin:beleap-m1air:darwinConfigurations.beleap-m1air.system"
             "darwin:csjang-m3pro:darwinConfigurations.csjang-m3pro.system"
           )
