@@ -1,0 +1,21 @@
+name: Build
+on:
+  push:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: "beleap-m1air"
+            runner: macos-latest
+            flakeAttr: ".#darwinConfigurations.beleap-m1air.system"
+    runs-on: ${{ matrix.runner }}
+    name: ${{ matrix.name }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@v31
+      - run: |
+          set -xeou pipefail
+          nix build "${{ matrix.flakeAttr }}"
