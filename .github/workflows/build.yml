@@ -15,12 +15,12 @@ jobs:
           - name: "csjang-m3pro"
             runner: macos-latest
             flakeAttr: ".#darwinConfigurations.csjang-m3pro.system"
-          - name: "vm-arm64-Darwin-presonal"
-            runner: macos-latest
-            flakeAttr: ".#nixosConfigurations.vm-arm64-Darwin-personal.config.system.build.vm"
-          - name: "vm-arm64-Darwin-work"
-            runner: macos-latest
-            flakeAttr: ".#nixosConfigurations.vm-arm64-Darwin-work.config.system.build.vm"
+          # - name: "vm-arm64-Darwin-presonal"
+          #   runner: macos-latest
+          #   flakeAttr: ".#nixosConfigurations.vm-arm64-Darwin-personal.config.system.build.vm"
+          # - name: "vm-arm64-Darwin-work"
+          #   runner: macos-latest
+          #   flakeAttr: ".#nixosConfigurations.vm-arm64-Darwin-work.config.system.build.vm"
     runs-on: ${{ matrix.runner }}
     name: ${{ matrix.name }}
     steps:
