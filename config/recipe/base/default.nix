@@ -25,6 +25,12 @@ _: {
     {
       programs.tealdeer = {
         enable = true;
+
+        settings = {
+          updates = {
+            tls_backend = "rustls-with-native-roots";
+          };
+        };
       };
     };
 }
