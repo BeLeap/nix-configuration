@@ -41,6 +41,7 @@
       dive
       pgcli
       mycli
+      ssm-session-manager-plugin
     ]
     ++ (lib.optionals (metadata.kind == "personal") [
       pkgs._1password-cli
