@@ -114,6 +114,7 @@
             # base setup
             "overlay"
             "hm"
+            "home"
             "macAppUtil"
 
             # good to share among all hosts
