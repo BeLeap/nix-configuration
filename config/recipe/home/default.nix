@@ -7,43 +7,50 @@ let
   isGui = metadata.gui;
   isX86Linux = metadata.platform == "x86_64-linux";
 
-  basePrograms = [
-    "shell/zsh"
-    "shell/bash"
-    "shell/starship"
-    "shell/carapace"
-    "shell/zoxide"
-    "editor/helix"
-    "vcs/git"
-    "vcs/jujutsu"
-    "vcs/gh"
-    "tools/direnv"
-    "tools/fzf"
-    "tools/lsd"
-    "tools/nh"
-    "tools/ssh"
-    "tools/podman"
-    "ai/codex"
-    "ai/claude-code"
-  ];
   guiPrograms = [
-    "gui/firefox"
-    "gui/wezterm"
+    "firefox"
+    "wezterm"
   ];
   macosPrograms = [
-    "macos/aerospace"
-    "macos/kdeconnect-mac"
+    "aerospace"
+    "kdeconnect-mac"
   ];
   nixosGuiPrograms = [
-    "wm/hyprland"
-    "wm/rofi"
-    "wm/waybar"
+    "hyprland"
+    "rofi"
+    "waybar"
   ];
 
-  baseImports = map (p: (./. + "/programs/${p}")) basePrograms;
-  guiImports = map (p: (./. + "/programs/${p}")) guiPrograms;
-  macosImports = map (p: (./. + "/programs/${p}")) macosPrograms;
-  nixosGuiImports = map (p: (./. + "/programs/${p}")) nixosGuiPrograms;
+  baseImports = map (p: (../home-shell + "/${p}")) [
+    "zsh"
+    "bash"
+    "starship"
+    "carapace"
+    "zoxide"
+  ]
+  ++ map (p: (../home-editor + "/${p}")) [
+    "helix"
+  ]
+  ++ map (p: (../home-vcs + "/${p}")) [
+    "git"
+    "jujutsu"
+    "gh"
+  ]
+  ++ map (p: (../home-tools + "/${p}")) [
+    "direnv"
+    "fzf"
+    "lsd"
+    "nh"
+    "ssh"
+    "podman"
+  ]
+  ++ map (p: (../home-ai + "/${p}")) [
+    "codex"
+    "claude-code"
+  ];
+  guiImports = map (p: (../home-gui + "/${p}")) guiPrograms;
+  macosImports = map (p: (../home-macos + "/${p}")) macosPrograms;
+  nixosGuiImports = map (p: (../home-wm + "/${p}")) nixosGuiPrograms;
 
   basePackages = with pkgs; [
     htop
