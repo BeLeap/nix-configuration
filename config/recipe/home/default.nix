@@ -8,36 +8,36 @@ let
   isX86Linux = metadata.platform == "x86_64-linux";
 
   basePrograms = [
-    "zsh"
-    "lsd"
-    "starship"
-    "carapace"
-    "helix"
-    "zoxide"
-    "direnv"
-    "git"
-    "fzf"
-    "gh"
-    "bash"
-    "jujutsu"
-    "ssh"
-    "nh"
-    "podman"
-    "codex"
-    "claude-code"
+    "shell/zsh"
+    "shell/bash"
+    "shell/starship"
+    "shell/carapace"
+    "shell/zoxide"
+    "editor/helix"
+    "vcs/git"
+    "vcs/jujutsu"
+    "vcs/gh"
+    "tools/direnv"
+    "tools/fzf"
+    "tools/lsd"
+    "tools/nh"
+    "tools/ssh"
+    "tools/podman"
+    "ai/codex"
+    "ai/claude-code"
   ];
   guiPrograms = [
-    "firefox"
-    "wezterm"
+    "gui/firefox"
+    "gui/wezterm"
   ];
   macosPrograms = [
-    "aerospace"
-    "kdeconnect-mac"
+    "macos/aerospace"
+    "macos/kdeconnect-mac"
   ];
   nixosGuiPrograms = [
-    "hyprland"
-    "rofi"
-    "waybar"
+    "wm/hyprland"
+    "wm/rofi"
+    "wm/waybar"
   ];
 
   baseImports = map (p: (./. + "/programs/${p}")) basePrograms;
