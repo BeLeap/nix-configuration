@@ -90,79 +90,70 @@ in
     lib.mkMerge [
       {
         programs.home-manager.enable = true;
-        home =
-          {
-            stateVersion = "25.05";
-            username = metadata.usernameLower;
-          }
-          // lib.optionalAttrs isMacos {
-            homeDirectory = "/Users/${metadata.usernameLower}";
-          };
-
-        home.packages = basePackages;
         imports = baseImports;
+        home = {
+          stateVersion = "25.05";
+          username = metadata.usernameLower;
+          packages = basePackages;
+          shellAliases = {
+            ga = "git add";
+            gc = "git commit -v";
+            gst = "git status";
+            gp = "git push";
+            gf = "git fetch --all --prune";
+            gd = "git diff";
+            ggr = "cd $(git rev-parse --show-toplevel 2>/dev/null)";
+            gl = "git pull --rebase";
+            gr = "git rebase --autostash --autosquash";
+            gsw = "git switch";
+            glp = "git pull --rebase && git push";
 
-        home.shellAliases = {
-          ga = "git add";
-          gc = "git commit -v";
-          gst = "git status";
-          gp = "git push";
-          gf = "git fetch --all --prune";
-          gd = "git diff";
-          ggr = "cd $(git rev-parse --show-toplevel 2>/dev/null)";
-          gl = "git pull --rebase";
-          gr = "git rebase --autostash --autosquash";
-          gsw = "git switch";
-          glp = "git pull --rebase && git push";
+            prcm = "gh pr create --assignee @me";
+            prv = "gh pr view";
+            prvw = "gh pr view -w";
+            prm = "gh pr merge";
+            prmd = "gh pr merge -d";
 
-          prcm = "gh pr create --assignee @me";
-          prv = "gh pr view";
-          prvw = "gh pr view -w";
-          prm = "gh pr merge";
-          prmd = "gh pr merge -d";
+            jgf = "jj git fetch --all-remotes";
+            jgp = "jj git push";
 
-          jgf = "jj git fetch --all-remotes";
-          jgp = "jj git push";
+            e = "$EDITOR";
 
-          e = "$EDITOR";
+            docker = "podman";
 
-          docker = "podman";
+            rm = "echo Use the full path i.e. '/bin/rm', consider using trash";
+            tp = "gtrash p";
+          };
+          sessionVariables = {
+            LANG = "en_US.UTF-8";
+            LC_CTYPE = "en_US.UTF-8";
+            LC_ALL = "en_US.UTF-8";
+            EDITOR = "hx";
 
-          rm = "echo Use the full path i.e. '/bin/rm', consider using trash";
-          tp = "gtrash p";
+            MAKEFLAGS = "-j$(nproc)";
+          };
+          file =
+            {
+              "dl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";
+            }
+            // lib.genAttrs [ ".claude/CLAUDE.md" ".codex/AGENTS.md" ] (_: {
+              source = ../../../files/AGENTS.md;
+            });
         };
-        home.sessionVariables = {
-          LANG = "en_US.UTF-8";
-          LC_CTYPE = "en_US.UTF-8";
-          LC_ALL = "en_US.UTF-8";
-          EDITOR = "hx";
-
-          MAKEFLAGS = "-j$(nproc)";
-        };
-
-        home.file =
-          {
-            "dl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";
-          }
-          // lib.genAttrs [ ".claude/CLAUDE.md" ".codex/AGENTS.md" ] (_: {
-            source = ../../../files/AGENTS.md;
-          });
       }
 
       (lib.mkIf isPersonal {
-        home.packages =
-          with pkgs;
-          [
-            _1password-cli
-          ]
-          # Discord packages is not supported on aarch64-linux
-          ++ lib.optional isX86Linux discord;
+        home.packages = with pkgs; [
+          _1password-cli
+        ];
+      })
+
+      (lib.mkIf (isPersonal && isX86Linux) {
+        home.packages = [ pkgs.discord ];
       })
 
       (lib.mkIf isWork {
-        home.packages = with pkgs; [
-          unstable.jira-cli-go
-        ];
+        home.packages = [ pkgs.unstable.jira-cli-go ];
       })
 
       (lib.mkIf isGui {
@@ -170,14 +161,17 @@ in
       })
 
       (lib.mkIf isMacos {
-        home.packages = [ pkgs.mas ];
+        home = {
+          homeDirectory = "/Users/${metadata.usernameLower}";
+          packages = [ pkgs.mas ];
+          file.".config/nixpkgs/config.nix".text = ''
+            {
+              allowUnfree = true;
+              android_sdk.accept_license = true;
+            }
+          '';
+        };
         imports = macosImports;
-        home.file.".config/nixpkgs/config.nix".text = ''
-          {
-            allowUnfree = true;
-            android_sdk.accept_license = true;
-          }
-        '';
       })
 
       (lib.mkIf (isNixos && isGui) {
