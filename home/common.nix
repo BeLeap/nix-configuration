@@ -114,6 +114,7 @@
 
     rm = "echo Use the full path i.e. '/bin/rm', consider using trash";
     tp = "gtrash p";
+    fm = "fzf-make";
   };
   home.sessionVariables = {
     LANG = "en_US.UTF-8";
