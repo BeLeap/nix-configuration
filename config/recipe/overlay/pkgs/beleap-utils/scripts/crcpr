@@ -1,9 +1,36 @@
-branch=$(git branch --list master main | head -n 1 | awk '{print $1}')
-if [ -z "$branch" ]; then
-    echo "Neither master nor main branch exists."
+all_branches=$(git branch --format='%(refname:short)')
+
+pick_branch() {
+    local prompt="$1"
+
+    if [ -z "$all_branches" ]; then
+        echo "No local branches found."
+        return 1
+    fi
+
+    echo "$all_branches" | fzf --prompt="${prompt}> "
+}
+
+head_branch=$(git branch --list develop | head -n 1 | awk '{print $1}')
+if [ -z "$head_branch" ]; then
+    head_branch=$(pick_branch "Select head branch") || exit 1
+fi
+
+base_branch=$(git branch --list master | head -n 1 | awk '{print $1}')
+if [ -z "$base_branch" ]; then
+    base_branch=$(pick_branch "Select base branch") || exit 1
+fi
+
+if [ "$head_branch" = "$base_branch" ]; then
+    echo "Head and base branches are the same: $head_branch"
     exit 1
 fi
 
-echo "Creating RC PR to branch: $branch"
+echo "Creating RC PR: $head_branch -> $base_branch"
 
-gh pr create --assignee @me --base $branch --title "RC" --body "RC $(date -u +%Y-%m-%dT%H:%M:%S)"
+gh pr create \
+    --assignee @me \
+    --base "$base_branch" \
+    --head "$head_branch" \
+    --title "RC" \
+    --body "RC $(date -u +%Y-%m-%dT%H:%M:%S)"
