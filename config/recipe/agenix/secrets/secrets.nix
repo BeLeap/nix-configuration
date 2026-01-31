@@ -3,5 +3,8 @@ let
   users = [ beleap ];
 in
 {
-  "some-secret.info.age".publicKeys = [ users ];
+  "some-secret.info.age" = {
+    publicKeys = users;
+    armor = true;
+  };
 }
