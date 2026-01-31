@@ -1,12 +1,9 @@
-{ agenix }:
+{ metadata, agenix }:
 {
   base = [
     agenix.nixosModules.default
-    (
-      { system }:
-      {
-        environment.systemPackages = [ agenix.packages.${system}.default ];
-      }
-    )
+    {
+      environment.systemPackages = [ agenix.packages.${metadata.platform}.default ];
+    }
   ];
 }
