@@ -10,8 +10,9 @@ inputs@{
   nix-darwin,
 
   home-manager,
-  mac-app-util,
 
+  agenix,
+  mac-app-util,
   beleap-overlay,
 
   kubectl-check,

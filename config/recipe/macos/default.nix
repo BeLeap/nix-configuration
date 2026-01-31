@@ -94,5 +94,4 @@
         shell = pkgs.zsh;
       };
     };
-  hm = { };
 })

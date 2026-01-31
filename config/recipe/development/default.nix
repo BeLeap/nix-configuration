@@ -1,9 +1,12 @@
 _: {
-  hm =
-    { pkgs, ... }:
-    {
-      home.packages = with pkgs; [
-        just
-      ];
-    };
+  hm = [
+    (
+      { pkgs, ... }:
+      {
+        home.packages = with pkgs; [
+          just
+        ];
+      }
+    )
+  ];
 }
