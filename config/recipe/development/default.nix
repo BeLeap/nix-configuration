@@ -47,10 +47,6 @@ _: {
           ++ (lib.optionals (metadata.kind == "personal") [
             pkgs._1password-cli
           ])
-          # Discord packages is not supported on aarch64-linux
-          ++ (lib.optionals (metadata.kind == "personal" && (metadata.platform == "x86_64-linux")) [
-            pkgs.discord
-          ])
           ++ (lib.optionals (metadata.kind == "work") (
             with pkgs;
             [
