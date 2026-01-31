@@ -16,7 +16,6 @@
     };
 
     agenix.url = "github:ryantm/agenix";
-
     mac-app-util.url = "github:hraban/mac-app-util";
     beleap-overlay.url = "github:BeLeap/nix-overlay";
 
