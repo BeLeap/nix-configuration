@@ -10,4 +10,14 @@
       };
     }
   ];
+  hm = [
+    {
+      age = {
+        identityPath = [ "~/.ssh/id_ed25519" ];
+        secrets = {
+          some-secret.file = "./secrets/some-secret.age";
+        };
+      };
+    }
+  ];
 }
