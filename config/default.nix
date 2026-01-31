@@ -16,7 +16,12 @@ let
   # handle recipes
   targets = map (p: (callPackage (./. + "/recipe/${p}") { })) recipes;
 in
-lib.flatten (
-  (map (c: get c "base" { }) targets)
-  ++ (map (c: { home-manager.users."${metadata.usernameLower}" = (get c "hm" { }); }) targets)
+lib.flatten ((map (c: get c "base" [ ]) targets))
+++ lib.flatten (
+  map (
+    c:
+    map (hm: {
+      home-manager.users."${metadata.usernameLower}" = hm;
+    }) (get c "hm" [ ])
+  ) targets
 )

@@ -20,17 +20,20 @@ _: {
         git
       ];
     };
-  hm =
-    { pkgs, ... }:
-    {
-      programs.tealdeer = {
-        enable = true;
+  hm = [
+    (
+      { pkgs, ... }:
+      {
+        programs.tealdeer = {
+          enable = true;
 
-        settings = {
-          updates = {
-            tls_backend = "rustls-with-native-roots";
+          settings = {
+            updates = {
+              tls_backend = "rustls-with-native-roots";
+            };
           };
         };
-      };
-    };
+      }
+    )
+  ];
 }

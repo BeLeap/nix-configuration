@@ -6,18 +6,23 @@
       environment.systemPackages = [ agenix.packages.${metadata.platform}.default ];
 
       age.secrets = {
-        some-secret.file = "./secrets/some-secret.age";
+        some-secret.file = ./secrets/some-secret.age;
       };
     }
   ];
-  hm = [
-    {
-      age = {
-        identityPath = [ "~/.ssh/id_ed25519" ];
-        secrets = {
-          some-secret.file = "./secrets/some-secret.age";
-        };
-      };
-    }
-  ];
+  # hm = [
+  #   {
+  #     modules = [
+  #       agenix.homeManagerModules.default
+  #     ];
+  #   }
+  #   {
+  #     age = {
+  #       identityPath = [ "~/.ssh/id_ed25519" ];
+  #       secrets = {
+  #         some-secret.file = "./secrets/some-secret.age";
+  #       };
+  #     };
+  #   }
+  # ];
 }
