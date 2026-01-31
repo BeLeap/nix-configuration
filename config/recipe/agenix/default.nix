@@ -17,7 +17,7 @@
     {
       imports = [ agenix.homeManagerModules.default ];
       age = {
-        identityPaths = [ "~/.ssh/id_ed25519" ];
+        identityPaths = [ ./keys/id_ed25519 ];
         secrets = {
           some-secret.file = ./secrets/some-secret.age;
         };
