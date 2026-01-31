@@ -120,6 +120,7 @@
             # good to share among all hosts
             "base"
             "nix"
+            "agenix"
 
             "macos"
             "nixos"
