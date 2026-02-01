@@ -56,7 +56,7 @@ _: {
 
         imports =
           [ ]
-          ++ map (p: (./. + "/../../../home/programs/${p}")) (
+          ++ map (p: (./. + "/programs/${p}")) (
             [
               "zsh"
               "lsd"
