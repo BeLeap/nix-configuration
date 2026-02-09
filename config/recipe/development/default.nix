@@ -78,7 +78,6 @@ _: {
             ]
             ++ (lib.optionals (metadata.gui) [
               "firefox"
-              "wezterm"
             ])
           );
 
