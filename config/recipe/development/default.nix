@@ -1,4 +1,7 @@
 _: {
+  recipes = [
+    "wezterm"
+  ];
   hm = [
     (
       {

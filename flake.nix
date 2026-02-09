@@ -126,7 +126,6 @@
             "nixos"
 
             "development"
-            "wezterm"
 
             # others
             "kubernetes"
