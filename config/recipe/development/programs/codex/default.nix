@@ -18,7 +18,8 @@
           ];
         };
       };
-      approval_policy = "untrusted";
+      approval_policy = "on-request";
+      runtime_metrics = true;
     };
   };
 }
