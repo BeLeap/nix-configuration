@@ -14,17 +14,23 @@ let
     if (builtins.elem k (builtins.attrNames a)) then a."${k}" else e;
 
   importRecipe = p: (callPackage (./. + "/recipe/${p}") { });
+  recursiveImport =
+    p:
+    let
+      recipe = importRecipe p;
+      innerRecipe = map importRecipe (get recipe "recipes" [ ]);
+    in
+    [ recipe ] ++ innerRecipe;
 
   # handle recipes
-  targets = map importRecipe recipes;
-  tn = targets ++ (map importRecipe (lib.flatten (map (t: get t "recipes" [ ]) targets)));
+  targets = lib.flatten (map recursiveImport recipes);
 in
-lib.flatten ((map (c: get c "base" [ ]) tn))
+lib.flatten ((map (c: get c "base" [ ]) targets))
 ++ lib.flatten (
   map (
     c:
     map (hm: {
       home-manager.users."${metadata.usernameLower}" = hm;
     }) (get c "hm" [ ])
-  ) tn
+  ) targets
 )
