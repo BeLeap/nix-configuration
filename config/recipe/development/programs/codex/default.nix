@@ -6,7 +6,7 @@
   ];
   programs.codex = {
     enable = true;
-    package = pkgs.unstable.codex;
+    package = pkgs.llm-agents.codex;
 
     settings = {
       mcp_servers = {
