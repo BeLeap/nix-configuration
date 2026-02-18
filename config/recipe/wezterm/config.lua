@@ -52,8 +52,8 @@ end
 
 for i = 1, 8 do
   table.insert(config.keys, {
-    key = tostring(i),
-    mods = 'LEADER|SHIFT',
+    key = 'phys:' .. tostring(i),
+    mods = 'SUPER|ALT',
     action = act.MoveTab(i - 1),
   })
 end
