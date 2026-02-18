@@ -50,6 +50,14 @@ for i = 1, 8 do
   })
 end
 
+for i = 1, 8 do
+  table.insert(config.keys, {
+    key = tostring(i),
+    mods = 'LEADER|SHIFT',
+    action = act.MoveTab(i - 1),
+  })
+end
+
 config.key_tables = {
   copy_mode = {
     { key = 'Escape', mods = 'NONE', action = act.CopyMode('Close') },
