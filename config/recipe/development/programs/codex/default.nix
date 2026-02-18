@@ -1,8 +1,10 @@
 { pkgs, lib, ... }:
 {
-  # NOTE: npx requires nodejs in PATH environment
-  home.packages = [
-    pkgs.nodejs_24
+  home.packages = with pkgs; [
+    # NOTE: npx requires nodejs in PATH environment
+    nodejs_24
+    # NOTE: codex prefer ripgrep
+    ripgrep
   ];
   programs.codex = {
     enable = true;
