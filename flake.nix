@@ -16,6 +16,7 @@
     };
 
     agenix.url = "github:ryantm/agenix";
+    llm-agents.url = "github:numtide/llm-agents.nix";
     mac-app-util.url = "github:hraban/mac-app-util";
     beleap-overlay.url = "github:BeLeap/nix-overlay";
 

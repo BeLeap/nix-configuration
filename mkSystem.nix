@@ -12,6 +12,7 @@ inputs@{
   home-manager,
 
   agenix,
+  llm-agents,
   mac-app-util,
   beleap-overlay,
 
