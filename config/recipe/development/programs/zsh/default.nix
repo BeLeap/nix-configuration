@@ -36,6 +36,14 @@ _: {
         local dir
         file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
       }
+
+      fe() {
+        local file
+        local editor
+        file=$(fzf +m -q "$1") || return
+        editor="''${EDITOR:-''${VISUAL:-vi}}"
+        "$editor" "$file"
+      }
     '';
 
     shellAliases = {
