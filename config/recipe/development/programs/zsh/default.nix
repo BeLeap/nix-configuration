@@ -41,7 +41,7 @@ _: {
         local file
         local editor
         file=$(fzf +m -q "$1") || return
-        editor="${EDITOR:-${VISUAL:-vi}}"
+        editor="''${EDITOR:-''${VISUAL:-vi}}"
         "$editor" "$file"
       }
     '';
