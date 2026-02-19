@@ -77,7 +77,6 @@ _: {
               "nh"
               "podman"
               "codex"
-              "claude-code"
             ]
             ++ (lib.optionals (metadata.gui) [
               "firefox"
