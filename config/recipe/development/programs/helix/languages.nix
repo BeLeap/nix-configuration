@@ -48,7 +48,7 @@
       "pom.xml"
     ];
     auto-format = true;
-    language-servers = [ "kotlin-ls" ];
+    language-servers = [ "kotlin-lsp" ];
   }
   {
     name = "nix";

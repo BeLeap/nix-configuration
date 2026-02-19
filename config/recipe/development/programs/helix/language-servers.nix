@@ -5,8 +5,8 @@
     args = [ "lsp-proxy" ];
     required-root-patterns = [ "biome.json" ];
   };
-  kotlin-ls = {
-    command = "${lib.getExe pkgs.kotlin-ls}";
+  kotlin-lsp = {
+    command = "${lib.getExe pkgs.kotlin-lsp}";
     args = [ "--stdio" ];
     timeout = 60;
     required-root-pattern = [
