@@ -9,11 +9,11 @@
         config.android_sdk.accept_license = true;
       };
 
-      # Necessary for using flakes on this system.
       nix.settings = {
         trusted-users = [ "@admin" ];
         experimental-features = "nix-command flakes";
         min-free = "1M";
+        accept-flake-config = true;
       };
 
       nix.gc =
