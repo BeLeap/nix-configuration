@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
-{
+_: {
+  hm = [
+    (
+      { lib, pkgs, ... }:
+      {
   programs.starship = {
     enable = true;
 
@@ -24,4 +27,7 @@
           os.disabled = false;
         };
   };
+}
+    )
+  ];
 }

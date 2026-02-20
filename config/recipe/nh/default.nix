@@ -1,5 +1,8 @@
-{ metadata, ... }:
-{
+_: {
+  hm = [
+    (
+      { metadata, ... }:
+      {
   programs.nh = {
     enable = true;
     flake =
@@ -15,4 +18,7 @@
       enable = true;
     };
   };
+}
+    )
+  ];
 }

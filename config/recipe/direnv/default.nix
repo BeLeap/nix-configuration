@@ -1,4 +1,8 @@
 _: {
+  hm = [
+    (
+      _:
+      {
   programs.direnv = {
     enable = true;
 
@@ -11,4 +15,7 @@ _: {
       warn_timeout = "1m";
     };
   };
+}
+    )
+  ];
 }

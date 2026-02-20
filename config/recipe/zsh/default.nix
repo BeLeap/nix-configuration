@@ -1,4 +1,8 @@
 _: {
+  hm = [
+    (
+      _:
+      {
   programs.zsh = {
     enable = true;
 
@@ -50,4 +54,7 @@ _: {
       sozsh = "source ~/.zshrc";
     };
   };
+}
+    )
+  ];
 }

@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
-{
+_: {
+  hm = [
+    (
+      { pkgs, lib, ... }:
+      {
   programs.helix = {
     enable = true;
     package = pkgs.unstable.helix;
@@ -17,4 +20,7 @@
       language = import ./languages.nix { inherit pkgs lib; };
     };
   };
+}
+    )
+  ];
 }

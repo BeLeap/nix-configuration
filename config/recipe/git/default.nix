@@ -1,5 +1,8 @@
-{ metadata, ... }:
-{
+_: {
+  hm = [
+    (
+      { metadata, ... }:
+      {
   programs.git = {
     enable = true;
 
@@ -35,4 +38,7 @@
       ".profileconfig.json"
     ];
   };
+}
+    )
+  ];
 }

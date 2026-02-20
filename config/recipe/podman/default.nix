@@ -1,5 +1,8 @@
-{ pkgs, metadata, ... }:
-{
+_: {
+  hm = [
+    (
+      { pkgs, metadata, ... }:
+      {
   home.packages = with pkgs; [
     podman
     podman-compose
@@ -17,4 +20,7 @@
       StandardErrorPath = "/tmp/podman-machine-start.err.log";
     };
   };
+}
+    )
+  ];
 }

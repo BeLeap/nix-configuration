@@ -1,5 +1,8 @@
-{ pkgs, lib, ... }:
-{
+_: {
+  hm = [
+    (
+      { pkgs, lib, ... }:
+      {
   home.packages = with pkgs; [
     # NOTE: npx requires nodejs in PATH environment
     nodejs_24
@@ -24,4 +27,7 @@
       runtime_metrics = true;
     };
   };
+}
+    )
+  ];
 }
