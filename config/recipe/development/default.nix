@@ -17,6 +17,7 @@
       "fzf"
       "gh"
       "bash"
+      "nushell"
       "jujutsu"
       "ssh"
       "nh"

@@ -11,6 +11,7 @@ _: {
 
           enableZshIntegration = true;
           enableBashIntegration = true;
+          enableNushellIntegration = true;
 
           settings =
             lib.recursiveUpdate
