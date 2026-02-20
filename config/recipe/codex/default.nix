@@ -1,33 +1,27 @@
 _: {
   hm = [
     (
-      { pkgs, lib, ... }:
+      { pkgs, ... }:
       {
-  home.packages = with pkgs; [
-    # NOTE: npx requires nodejs in PATH environment
-    nodejs_24
-    # NOTE: codex prefer ripgrep
-    ripgrep
-  ];
-  programs.codex = {
-    enable = true;
-    package = pkgs.llm-agents.codex;
+        home.packages = with pkgs; [
+          # NOTE: codex prefer ripgrep
+          ripgrep
+        ];
+        programs.codex = {
+          enable = true;
+          package = pkgs.llm-agents.codex;
 
-    settings = {
-      mcp_servers = {
-        context7 = {
-          command = "${lib.getExe' pkgs.nodejs_24 "npx"}";
-          args = [
-            "-y"
-            "@upstash/context7-mcp"
-          ];
+          settings = {
+            mcp_servers = {
+              context7 = {
+                url = "https://mcp.context7.com/mcp";
+              };
+            };
+            approval_policy = "on-request";
+            runtime_metrics = true;
+          };
         };
-      };
-      approval_policy = "on-request";
-      runtime_metrics = true;
-    };
-  };
-}
+      }
     )
   ];
 }
