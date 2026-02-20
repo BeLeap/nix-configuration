@@ -112,8 +112,9 @@
               ];
             }
           ];
+      systems = lib.unique (map (metadata: metadata.platform) metadatas);
     in
-    lib.fold
+    (lib.fold
       (
         metadata: acc:
         let
@@ -149,5 +150,9 @@
         nixosConfigurations = { };
         darwinConfigurations = { };
       }
-      metadatas;
+      metadatas
+    )
+    // {
+      formatter = lib.genAttrs systems (system: (import nixpkgs { inherit system; }).alejandra);
+    };
 }
