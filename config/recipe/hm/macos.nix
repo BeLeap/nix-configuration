@@ -4,14 +4,9 @@
   lib,
   ...
 }: {
-  imports =
-    [
-      ./common.nix
-    ]
-    ++ map (p: (./. + "/programs/${p}")) [
-      "aerospace"
-      "kdeconnect-mac"
-    ];
+  imports = [
+    ./common.nix
+  ];
 
   home.packages = with pkgs;
     [
