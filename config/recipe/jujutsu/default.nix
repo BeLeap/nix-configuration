@@ -1,42 +1,45 @@
 _: {
   hm = [
     (
-      { metadata, pkgs, ... }:
       {
-  programs.jujutsu = {
-    enable = true;
-    package = pkgs.unstable.jujutsu;
+        metadata,
+        pkgs,
+        ...
+      }: {
+        programs.jujutsu = {
+          enable = true;
+          package = pkgs.unstable.jujutsu;
 
-    settings = {
-      user = {
-        email = metadata.email;
-        name = metadata.username;
-      };
-      ui = {
-        default-command = [
-          "log"
-          "--limit=10"
-          "--no-pager"
-        ];
-      };
-      aliases = {
-        tug = [
-          "bookmark"
-          "move"
-          "--from"
-          "heads(::@- & bookmarks())"
-          "--to"
-          "@-"
-        ];
-      };
-      remotes = {
-        origin = {
-          auto-track-bookmarks = "glob:*";
+          settings = {
+            user = {
+              email = metadata.email;
+              name = metadata.username;
+            };
+            ui = {
+              default-command = [
+                "log"
+                "--limit=10"
+                "--no-pager"
+              ];
+            };
+            aliases = {
+              tug = [
+                "bookmark"
+                "move"
+                "--from"
+                "heads(::@- & bookmarks())"
+                "--to"
+                "@-"
+              ];
+            };
+            remotes = {
+              origin = {
+                auto-track-bookmarks = "glob:*";
+              };
+            };
+          };
         };
-      };
-    };
-  };
-}
+      }
     )
   ];
 }

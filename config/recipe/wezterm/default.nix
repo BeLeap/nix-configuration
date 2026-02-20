@@ -1,20 +1,24 @@
-{ lib, metadata }:
 {
+  lib,
+  metadata,
+}: {
   base = [
     (lib.optionalAttrs (metadata.distribution == "macos") {
       homebrew = {
-        casks = [ "wezterm" ];
+        casks = ["wezterm"];
       };
     })
   ];
   hm = [
     (
-      { pkgs, ... }:
-      {
+      {pkgs, ...}: {
         programs.wezterm = {
           enable = true;
 
-          package = (if (metadata.distribution == "macos") then pkgs.wezterm-null else pkgs.wezterm);
+          package =
+            if (metadata.distribution == "macos")
+            then pkgs.wezterm-null
+            else pkgs.wezterm;
 
           enableBashIntegration = true;
           enableZshIntegration = true;

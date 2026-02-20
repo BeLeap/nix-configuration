@@ -1,9 +1,10 @@
-{ lib, metadata }:
 {
+  lib,
+  metadata,
+}: {
   base = [
     (lib.optionalAttrs (metadata.distribution == "nixos") (
-      { pkgs, ... }:
-      {
+      {pkgs, ...}: {
         hardware.graphics.enable = true;
 
         programs.hyprland = {
@@ -127,7 +128,7 @@
           NIXOS_OZONE_WL = "1";
         };
 
-        environment.systemPackages = [ pkgs.wl-clipboard ];
+        environment.systemPackages = [pkgs.wl-clipboard];
       }
     ))
   ];

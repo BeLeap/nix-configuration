@@ -2,8 +2,7 @@
   lib,
   metadata,
   mac-app-util,
-}:
-{
+}: {
   base = lib.optionals (metadata.distribution == "macos") [
     mac-app-util.darwinModules.default
     {

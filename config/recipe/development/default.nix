@@ -32,10 +32,8 @@
         pkgs,
         metadata,
         ...
-      }:
-      {
-        home.packages =
-          with pkgs;
+      }: {
+        home.packages = with pkgs;
           [
             htop
             wireshark
@@ -74,8 +72,7 @@
             pkgs._1password-cli
           ])
           ++ (lib.optionals (metadata.kind == "work") (
-            with pkgs;
-            [
+            with pkgs; [
               unstable.jira-cli-go
             ]
           ));

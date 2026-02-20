@@ -1,12 +1,11 @@
 _: {
   hm = [
     (
-      _:
-      {
-  programs.gh = {
-    enable = true;
-  };
-}
+      _: {
+        programs.gh = {
+          enable = true;
+        };
+      }
     )
   ];
 }
