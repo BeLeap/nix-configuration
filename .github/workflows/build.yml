@@ -72,10 +72,10 @@ jobs:
             const fs = require('fs');
             const path = require('path');
 
-            const marker = '<!-- nh-darwin-switch-diff -->';
+            const marker = '<!-- diff -->';
             const files = fs.readdirSync('diffs').filter(file => file.endsWith('.md')).sort();
             const sections = files.map(file => fs.readFileSync(path.join('diffs', file), 'utf8').trim());
-            const body = `${marker}\n## nh darwin switch-style package diff\n\n${sections.join('\n\n')}`;
+            const body = `${marker}\n## package diff\n\n${sections.join('\n\n')}`;
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
