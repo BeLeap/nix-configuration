@@ -1,5 +1,7 @@
-{ lib, metadata }:
 {
+  lib,
+  metadata,
+}: {
   base = [
     {
       nix.optimise.automatic = true;
@@ -10,14 +12,14 @@
       };
 
       nix.settings = {
-        trusted-users = [ "@admin" ];
+        trusted-users = ["@admin"];
         experimental-features = "nix-command flakes";
         min-free = "1M";
         accept-flake-config = true;
       };
 
       nix.gc =
-        { }
+        {}
         // lib.optionalAttrs (metadata.distribution == "nixos") {
           dates = "weekly";
         }

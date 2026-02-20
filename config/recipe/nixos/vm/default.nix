@@ -1,40 +1,40 @@
-{ lib, metadata }:
-(lib.optionalAttrs (metadata.distribution == "nixos" && lib.hasPrefix "vm-" metadata.name) {
-  base =
-    { modulesPath, ... }:
-    {
-      imports = [
-        "${modulesPath}/virtualisation/qemu-vm.nix"
-      ];
+{
+  lib,
+  metadata,
+}: (lib.optionalAttrs (metadata.distribution == "nixos" && lib.hasPrefix "vm-" metadata.name) {
+  base = {modulesPath, ...}: {
+    imports = [
+      "${modulesPath}/virtualisation/qemu-vm.nix"
+    ];
 
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-      # networking.useDHCP = false;
-      # networking.interfaces.eth0.useDHCP = true;
-      # FIXME: use automatically set dnses
-      # temporary fix by using well-known dns
-      networking.nameservers = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
+    # networking.useDHCP = false;
+    # networking.interfaces.eth0.useDHCP = true;
+    # FIXME: use automatically set dnses
+    # temporary fix by using well-known dns
+    networking.nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
 
-      services.getty.autologinUser = metadata.usernameLower;
-      security.sudo.wheelNeedsPassword = false;
+    services.getty.autologinUser = metadata.usernameLower;
+    security.sudo.wheelNeedsPassword = false;
 
-      virtualisation.graphics = false;
-      virtualisation.memorySize = 4096;
-      virtualisation.cores = 4;
+    virtualisation.graphics = false;
+    virtualisation.memorySize = 4096;
+    virtualisation.cores = 4;
 
-      virtualisation.diskSize = 128 * 1024;
-      virtualisation.writableStoreUseTmpfs = false;
+    virtualisation.diskSize = 128 * 1024;
+    virtualisation.writableStoreUseTmpfs = false;
 
-      virtualisation.useHostCerts = true;
+    virtualisation.useHostCerts = true;
 
-      virtualisation.qemu.guestAgent.enable = true;
+    virtualisation.qemu.guestAgent.enable = true;
 
-      environment.systemPackages = [ ];
+    environment.systemPackages = [];
 
-      system.stateVersion = "25.05";
-    };
+    system.stateVersion = "25.05";
+  };
 })

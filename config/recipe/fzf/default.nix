@@ -1,15 +1,14 @@
 _: {
   hm = [
     (
-      _:
-      {
-  programs.fzf = {
-    enable = true;
+      _: {
+        programs.fzf = {
+          enable = true;
 
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-  };
-}
+          enableZshIntegration = true;
+          enableBashIntegration = true;
+        };
+      }
     )
   ];
 }

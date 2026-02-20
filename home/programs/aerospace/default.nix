@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   programs.aerospace = {
     enable = true;
 
@@ -20,25 +23,23 @@
         "${pkgs.beleap-utils}/bin:${pkgs.aerospace}/bin"
       ];
 
-      mode.main.binding = {
-        alt-h = "focus left";
-        alt-j = "focus down";
-        alt-k = "focus up";
-        alt-l = "focus right";
+      mode.main.binding =
+        {
+          alt-h = "focus left";
+          alt-j = "focus down";
+          alt-k = "focus up";
+          alt-l = "focus right";
 
-        alt-f = "layout floating";
-        alt-t = "layout tiling";
+          alt-f = "layout floating";
+          alt-t = "layout tiling";
 
-        alt-enter = "exec-and-forget open -n ${pkgs.wezterm}/Applications/Wezterm.app";
-      }
-      // lib.listToAttrs (
-        (lib.flatten (
+          alt-enter = "exec-and-forget open -n ${pkgs.wezterm}/Applications/Wezterm.app";
+        }
+        // lib.listToAttrs (lib.flatten (
           lib.map (
-            e:
-            let
+            e: let
               index = toString e;
-            in
-            [
+            in [
               {
                 name = "alt-${index}";
                 value = "workspace ${index}";
@@ -49,8 +50,7 @@
               }
             ]
           ) (lib.genList (x: x + 1) 9)
-        ))
-      );
+        ));
 
       on-window-detected = [
         {
@@ -58,49 +58,49 @@
           "if" = {
             window-title-regex-substring = "Picture-in-Picture";
           };
-          run = [ "layout floating" ];
+          run = ["layout floating"];
         }
         {
           check-further-callbacks = true;
           "if" = {
             app-id = "com.kakao.KakaoTalkMac";
           };
-          run = [ "layout floating" ];
+          run = ["layout floating"];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.github.wez.wezterm";
           };
-          run = [ "move-node-to-workspace 1" ];
+          run = ["move-node-to-workspace 1"];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "org.mozilla.firefoxdeveloperedition";
           };
-          run = [ "move-node-to-workspace 2" ];
+          run = ["move-node-to-workspace 2"];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-id = "com.google.Chrome";
           };
-          run = [ "move-node-to-workspace 2" ];
+          run = ["move-node-to-workspace 2"];
         }
         {
           check-further-callbacks = false;
           "if" = {
             window-title-regex-substring = "1Password";
           };
-          run = [ "layout floating" ];
+          run = ["layout floating"];
         }
         {
           check-further-callbacks = false;
           "if" = {
             app-name-regex-substring = ".*";
           };
-          run = [ "move-node-to-workspace 9" ];
+          run = ["move-node-to-workspace 9"];
         }
       ];
     };

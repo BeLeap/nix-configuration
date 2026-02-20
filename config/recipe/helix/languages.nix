@@ -1,20 +1,24 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  ...
+}:
 [
   {
     name = "rust";
     auto-format = true;
-    language-servers = [ "rust-analyzer" ];
+    language-servers = ["rust-analyzer"];
   }
   {
     name = "python";
-    language-servers = [ "pyright" ];
+    language-servers = ["pyright"];
   }
   {
     name = "dockerfile";
     scope = "source.dockerfile";
     file-types = [
       "Dockerfile"
-      { glob = "*Dockerfile*"; }
+      {glob = "*Dockerfile*";}
     ];
   }
   {
@@ -48,11 +52,11 @@
       "pom.xml"
     ];
     auto-format = true;
-    language-servers = [ "kotlin-lsp" ];
+    language-servers = ["kotlin-lsp"];
   }
   {
     name = "nix";
-    language-servers = [ "nil" ];
+    language-servers = ["nil"];
     formatter = {
       command = "${lib.getExe pkgs.nixfmt}";
     };
@@ -60,23 +64,23 @@
   }
 ]
 ++
-  # Javascript family
-  map
-    (name: {
-      name = name;
-      auto-format = true;
-      language-servers = [
-        {
-          name = "typescript-language-server";
-          except-features = [ "format" ];
-        }
-        "biome"
-      ];
-    })
-    [
-      "javascript"
-      "typescript"
-      "jsx"
-      "tsx"
-      "json"
-    ]
+# Javascript family
+map
+(name: {
+  name = name;
+  auto-format = true;
+  language-servers = [
+    {
+      name = "typescript-language-server";
+      except-features = ["format"];
+    }
+    "biome"
+  ];
+})
+[
+  "javascript"
+  "typescript"
+  "jsx"
+  "tsx"
+  "json"
+]

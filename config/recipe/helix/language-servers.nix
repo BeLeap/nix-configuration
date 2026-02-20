@@ -1,13 +1,16 @@
-{ pkgs, lib, ... }:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   biome = {
     command = "${lib.getExe pkgs.biome}";
-    args = [ "lsp-proxy" ];
-    required-root-patterns = [ "biome.json" ];
+    args = ["lsp-proxy"];
+    required-root-patterns = ["biome.json"];
   };
   kotlin-lsp = {
     command = "${lib.getExe pkgs.kotlin-lsp}";
-    args = [ "--stdio" ];
+    args = ["--stdio"];
     timeout = 60;
     required-root-pattern = [
       "build.gradle"

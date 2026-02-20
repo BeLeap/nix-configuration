@@ -1,17 +1,16 @@
 _: {
   hm = [
     (
-      { ... }:
-      {
-  programs.ssh = {
-    enable = true;
-    enableDefaultConfig = false;
+      {...}: {
+        programs.ssh = {
+          enable = true;
+          enableDefaultConfig = false;
 
-    matchBlocks = {
-      "*" = { };
-    };
-  };
-}
+          matchBlocks = {
+            "*" = {};
+          };
+        };
+      }
     )
   ];
 }

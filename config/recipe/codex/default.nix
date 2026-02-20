@@ -1,8 +1,7 @@
 _: {
   hm = [
     (
-      { pkgs, ... }:
-      {
+      { pkgs, ... }: {
         home.packages = with pkgs; [
           # NOTE: codex prefer ripgrep
           ripgrep
@@ -10,7 +9,6 @@ _: {
         programs.codex = {
           enable = true;
           package = pkgs.llm-agents.codex;
-
           settings = {
             mcp_servers = {
               context7 = {

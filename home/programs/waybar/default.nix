@@ -9,7 +9,7 @@ _: {
 
     settings = {
       mainBar = {
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = ["hyprland/workspaces"];
       };
     };
   };

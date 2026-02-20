@@ -6,10 +6,8 @@ _: {
         lib,
         metadata,
         ...
-      }:
-      {
-        home.packages =
-          with pkgs;
+      }: {
+        home.packages = with pkgs;
           [
             kubectl
             kubectl-node-shell
