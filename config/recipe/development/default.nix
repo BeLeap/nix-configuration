@@ -1,12 +1,35 @@
-_: {
-  recipes = [
-    "wezterm"
-  ];
+{
+  lib,
+  metadata,
+  ...
+}: {
+  recipes =
+    [
+      "wezterm"
+      "zsh"
+      "lsd"
+      "starship"
+      "carapace"
+      "helix"
+      "zoxide"
+      "direnv"
+      "git"
+      "fzf"
+      "gh"
+      "bash"
+      "jujutsu"
+      "ssh"
+      "nh"
+      "podman"
+      "codex"
+    ]
+    ++ (lib.optionals (metadata.gui) [
+      "firefox"
+    ]);
   hm = [
     (
       {
         pkgs,
-        lib,
         metadata,
         ...
       }:
@@ -56,32 +79,6 @@ _: {
               unstable.jira-cli-go
             ]
           ));
-
-        imports =
-          [ ]
-          ++ map (p: (./. + "/programs/${p}")) (
-            [
-              "zsh"
-              "lsd"
-              "starship"
-              "carapace"
-              "helix"
-              "zoxide"
-              "direnv"
-              "git"
-              "fzf"
-              "gh"
-              "bash"
-              "jujutsu"
-              "ssh"
-              "nh"
-              "podman"
-              "codex"
-            ]
-            ++ (lib.optionals (metadata.gui) [
-              "firefox"
-            ])
-          );
 
         home.shellAliases = {
           ga = "git add";
