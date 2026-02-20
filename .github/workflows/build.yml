@@ -25,7 +25,81 @@ jobs:
     name: ${{ matrix.name }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - uses: cachix/install-nix-action@v31
-      - run: |
+      - id: build
+        run: |
           set -xeou pipefail
-          nix build "${{ matrix.flakeAttr }}" --accept-flake-config
+          HEAD_PATH="$(nix build "${{ matrix.flakeAttr }}" --accept-flake-config --no-link --print-out-paths)"
+          echo "head_path=${HEAD_PATH}" >> "$GITHUB_OUTPUT"
+      - if: github.event_name == 'pull_request'
+        run: |
+          set -xeou pipefail
+          trap 'git worktree remove --force ../base' EXIT
+          git worktree add ../base "${{ github.event.pull_request.base.sha }}"
+          BASE_PATH="$(nix build "../base${{ matrix.flakeAttr }}" --accept-flake-config --no-link --print-out-paths)"
+
+          {
+            echo "### ${{ matrix.name }}"
+            echo
+            echo '```diff'
+            nix store diff-closures "$BASE_PATH" "${{ steps.build.outputs.head_path }}"
+            echo '```'
+          } > "diff-${{ matrix.name }}.md"
+      - if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: diff-${{ matrix.name }}
+          path: diff-${{ matrix.name }}.md
+
+  pr-comment:
+    if: github.event_name == 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          path: diffs
+          pattern: diff-*
+          merge-multiple: true
+      - name: Post PR diff comment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const marker = '<!-- nh-darwin-switch-diff -->';
+            const files = fs.readdirSync('diffs').filter(file => file.endsWith('.md')).sort();
+            const sections = files.map(file => fs.readFileSync(path.join('diffs', file), 'utf8').trim());
+            const body = `${marker}\n## nh darwin switch-style package diff\n\n${sections.join('\n\n')}`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
+
+            const existing = comments.find(comment =>
+              comment.user.type === 'Bot' && comment.body.includes(marker),
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
