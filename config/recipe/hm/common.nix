@@ -26,6 +26,6 @@
       "dl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";
     }
     // lib.genAttrs [".claude/CLAUDE.md" ".codex/AGENTS.md"] (_: {
-      source = ../files/AGENTS.md;
+      source = ../../../files/AGENTS.md;
     });
 }
