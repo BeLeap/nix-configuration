@@ -12,9 +12,11 @@ jobs:
           - name: "beleap-m1air"
             runner: macos-latest
             flakeAttr: ".#darwinConfigurations.beleap-m1air.system"
+            flakeAttrPath: "darwinConfigurations.beleap-m1air.system"
           - name: "csjang-m3pro"
             runner: macos-latest
             flakeAttr: ".#darwinConfigurations.csjang-m3pro.system"
+            flakeAttrPath: "darwinConfigurations.csjang-m3pro.system"
           # - name: "vm-arm64-Darwin-presonal"
           #   runner: macos-latest
           #   flakeAttr: ".#nixosConfigurations.vm-arm64-Darwin-personal.config.system.build.vm"
@@ -38,7 +40,7 @@ jobs:
           set -xeou pipefail
           trap 'git worktree remove --force ../base' EXIT
           git worktree add ../base "${{ github.event.pull_request.base.sha }}"
-          BASE_PATH="$(nix build "../base${{ matrix.flakeAttr }}" --accept-flake-config --no-link --print-out-paths)"
+          BASE_PATH="$(nix build "../base#${{ matrix.flakeAttrPath }}" --accept-flake-config --no-link --print-out-paths)"
 
           {
             echo "### ${{ matrix.name }}"
