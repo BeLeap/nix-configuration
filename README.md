@@ -2,7 +2,7 @@
 
 ## macOS
 
-### Configuartion
+### Configuration
 
 #### Initialize
 
