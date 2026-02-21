@@ -58,7 +58,7 @@
     name = "nix";
     language-servers = ["nil"];
     formatter = {
-      command = "${lib.getExe pkgs.nixfmt}";
+      command = "${lib.getExe pkgs.alejandra}";
     };
     auto-format = true;
   }
