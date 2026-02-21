@@ -27,6 +27,10 @@
     ++ lib.optional (metadata.distribution == "macos") home-manager.darwinModules.home-manager;
 
   hm = [
-    (if metadata.distribution == "macos" then ./macos.nix else ./nixos.nix)
+    (
+      if metadata.distribution == "macos"
+      then ./macos.nix
+      else ./nixos.nix
+    )
   ];
 }
