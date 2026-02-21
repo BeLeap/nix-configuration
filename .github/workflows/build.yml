@@ -24,6 +24,28 @@ jobs:
       - name: statix
         run: nix run nixpkgs#statix -- check .
 
+  success:
+    name: success
+    needs:
+      - lightweight-checks
+      - build
+      - pr-comment
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify required jobs succeeded
+        env:
+          LIGHTWEIGHT_RESULT: ${{ needs['lightweight-checks'].result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          PR_COMMENT_RESULT: ${{ needs['pr-comment'].result }}
+        run: |
+          set -euo pipefail
+          test "$LIGHTWEIGHT_RESULT" = "success"
+          test "$BUILD_RESULT" = "success"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            test "$PR_COMMENT_RESULT" = "success"
+          fi
+
   build:
     needs: lightweight-checks
     strategy:
