@@ -10,6 +10,9 @@ _: {
           podman
           podman-compose
         ];
+        home.shellAliases = {
+          docker = "podman";
+        };
         launchd.agents."podman-machine-start" = {
           enable = metadata.os == "darwin";
           config = {
