@@ -47,6 +47,27 @@ _: {
               editor="''${EDITOR:-''${VISUAL:-vi}}"
               "$editor" "$file"
             }
+
+            jjws() {
+              local feature repo_root repo_name workspace_dir revision
+              feature="$1"
+              revision="''${2:-master}"
+
+              if [[ -z "$feature" ]]; then
+                echo "usage: jjws <feature-name> [revision]"
+                return 1
+              fi
+
+              repo_root=$(jj root 2>/dev/null) || {
+                echo "jjws: not inside a jj repository"
+                return 1
+              }
+
+              repo_name=$(basename "$repo_root")
+              workspace_dir="/tmp/$repo_name/$feature"
+
+              jj workspace add "$workspace_dir" -r "$revision" && cd "$workspace_dir"
+            }
           '';
 
           shellAliases = {
