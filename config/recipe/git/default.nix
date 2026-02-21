@@ -33,7 +33,7 @@ _: {
             column.ui = "auto";
             branch.sort = "-committerdate";
             fetch.writeCommitGraph = true;
-            help.autocorret = "prompt";
+            help.autocorrect = "prompt";
             pack.usePathWalk = true;
             init.defaultBranch = "master";
           };
