@@ -1,6 +1,3 @@
-set -x
-
 PATH=$1:$PATH
 
 pip-aerospace | tee /tmp/pip-aerospace.log
-

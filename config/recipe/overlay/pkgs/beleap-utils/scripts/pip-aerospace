@@ -1,5 +1,3 @@
-set -x
-
 PIP_WINDOW_ID=$(aerospace list-windows --all --format "%{window-title}%{tab}%{window-id}" | grep Picture-in-Picture | cut -f2)
 
 if [[ -z $PIP_WINDOW_ID ]]; then
