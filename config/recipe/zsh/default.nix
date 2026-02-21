@@ -49,7 +49,7 @@ _: {
             }
 
             jjws() {
-              local feature repo_root repo_name workspace_dir revision
+              local feature repo_root repo_name workspace_base workspace_dir revision
               feature="$1"
               revision="''${2:-master}"
 
@@ -64,7 +64,13 @@ _: {
               }
 
               repo_name=$(basename "$repo_root")
-              workspace_dir="/tmp/$repo_name/$feature"
+              workspace_base="''${TMPDIR:-/tmp}/$repo_name"
+              workspace_dir="$workspace_base/$feature"
+
+              mkdir -p "$workspace_base" || {
+                echo "jjws: failed to create workspace base: $workspace_base"
+                return 1
+              }
 
               jj workspace add "$workspace_dir" -r "$revision" && cd "$workspace_dir"
             }
