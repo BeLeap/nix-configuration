@@ -10,7 +10,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  lightweight-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v31
+      - name: alejandra format check
+        run: nix run nixpkgs#alejandra -- --check .
+      - name: deadnix
+        run: nix run nixpkgs#deadnix -- .
+      - name: statix
+        run: nix run nixpkgs#statix -- check .
+
   build:
+    needs: lightweight-checks
     strategy:
       fail-fast: false
       matrix:

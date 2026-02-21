@@ -2,7 +2,7 @@
   lib,
   metadata,
 }: (lib.optionalAttrs (metadata.name == "beleap-m1air") {
-  base = {...}: {
+  base = _: {
     networking.knownNetworkServices = [
       "USB 10/100/1000 LAN"
       "USB 10/100/1000 LAN 2"

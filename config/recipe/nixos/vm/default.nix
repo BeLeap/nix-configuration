@@ -22,16 +22,15 @@
     services.getty.autologinUser = metadata.usernameLower;
     security.sudo.wheelNeedsPassword = false;
 
-    virtualisation.graphics = false;
-    virtualisation.memorySize = 4096;
-    virtualisation.cores = 4;
-
-    virtualisation.diskSize = 128 * 1024;
-    virtualisation.writableStoreUseTmpfs = false;
-
-    virtualisation.useHostCerts = true;
-
-    virtualisation.qemu.guestAgent.enable = true;
+    virtualisation = {
+      graphics = false;
+      memorySize = 4096;
+      cores = 4;
+      diskSize = 128 * 1024;
+      writableStoreUseTmpfs = false;
+      useHostCerts = true;
+      qemu.guestAgent.enable = true;
+    };
 
     environment.systemPackages = [];
 

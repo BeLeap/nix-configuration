@@ -67,7 +67,7 @@
 # Javascript family
 map
 (name: {
-  name = name;
+  inherit name;
   auto-format = true;
   language-servers = [
     {

@@ -9,18 +9,11 @@
   }: {
     environment.systemPackages = [];
 
-    # Set Git commit hash for darwin-version.
-    system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-
-    # Used for backwards compatibility, please read the changelog before changing.
-    # $ darwin-rebuild changelog
-    system.stateVersion = 6;
-
     # The platform the configuration will be used on.
     nixpkgs.hostPlatform = "aarch64-darwin";
 
     homebrew = {
-      enable = !(metadata.kind == "airgap");
+      enable = metadata.kind != "airgap";
 
       onActivation = {
         cleanup = "zap";
@@ -47,6 +40,13 @@
     };
 
     system = {
+      # Set Git commit hash for darwin-version.
+      configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+
+      # Used for backwards compatibility, please read the changelog before changing.
+      # $ darwin-rebuild changelog
+      stateVersion = 6;
+
       keyboard = {
         enableKeyMapping = true;
         nonUS.remapTilde = false;

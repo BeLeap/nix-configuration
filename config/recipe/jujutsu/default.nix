@@ -12,7 +12,7 @@ _: {
 
           settings = {
             user = {
-              email = metadata.email;
+              inherit (metadata) email;
               name = metadata.username;
             };
             ui = {

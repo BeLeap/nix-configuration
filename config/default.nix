@@ -3,8 +3,7 @@
   recipes,
 }: let
   # base
-  lib = inputs.lib;
-  metadata = inputs.metadata;
+  inherit (inputs) lib metadata;
   callPackage = lib.callPackageWith inputs;
 
   # utils

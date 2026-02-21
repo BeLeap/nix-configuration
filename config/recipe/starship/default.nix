@@ -21,13 +21,19 @@ _: {
             {
               right_format = "$kubernetes";
 
-              kubernetes.disabled = false;
+              kubernetes = {
+                disabled = false;
+              };
 
-              shlvl.disabled = false;
-              shlvl.threshold = 2;
-              shlvl.format = "\\[[$shlvl]($style)\\]";
+              shlvl = {
+                disabled = false;
+                threshold = 2;
+                format = "\\[[$shlvl]($style)\\]";
+              };
 
-              os.disabled = false;
+              os = {
+                disabled = false;
+              };
             };
         };
       }

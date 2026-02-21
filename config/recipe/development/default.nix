@@ -24,7 +24,7 @@
       "podman"
       "codex"
     ]
-    ++ (lib.optionals (metadata.gui) [
+    ++ (lib.optionals metadata.gui [
       "firefox"
     ]);
   hm = [
@@ -34,62 +34,64 @@
         metadata,
         ...
       }: {
-        home.packages = with pkgs;
-          [
-            htop
-            wireshark
-            cascadia-code
-            nanum-gothic-coding
-            ipcalc
-            mtr
-            arping
-            mitmproxy
-            pchar
-            ncdu
-            yq-go
-            watchexec
-            beleap-utils
-            gnupg
-            oauth2c
-            curl
-            fzf-make
-            boda
-            ghc
-            yaml-language-server
-            empiriqa
-            gnumake
-            croc
-            dnsi
-            crane
-            coreutils-full
-            gtrash
-            dive
-            # pgcli
-            # mycli
-            ssm-session-manager-plugin
-            awscli2
-            just
-          ]
-          ++ (lib.optionals (metadata.kind == "personal") [
-            pkgs._1password-cli
-          ])
-          ++ (lib.optionals (metadata.kind == "work") (
-            with pkgs; [
-              unstable.jira-cli-go
+        home = {
+          packages = with pkgs;
+            [
+              htop
+              wireshark
+              cascadia-code
+              nanum-gothic-coding
+              ipcalc
+              mtr
+              arping
+              mitmproxy
+              pchar
+              ncdu
+              yq-go
+              watchexec
+              beleap-utils
+              gnupg
+              oauth2c
+              curl
+              fzf-make
+              boda
+              ghc
+              yaml-language-server
+              empiriqa
+              gnumake
+              croc
+              dnsi
+              crane
+              coreutils-full
+              gtrash
+              dive
+              # pgcli
+              # mycli
+              ssm-session-manager-plugin
+              awscli2
+              just
             ]
-          ));
+            ++ (lib.optionals (metadata.kind == "personal") [
+              pkgs._1password-cli
+            ])
+            ++ (lib.optionals (metadata.kind == "work") (
+              with pkgs; [
+                unstable.jira-cli-go
+              ]
+            ));
 
-        home.shellAliases = {
-          e = "$EDITOR";
+          shellAliases = {
+            e = "$EDITOR";
 
-          rm = "echo Use the full path i.e. '/bin/rm', consider using trash";
-          tp = "gtrash p";
-          fm = "fzf-make";
-        };
+            rm = "echo Use the full path i.e. '/bin/rm', consider using trash";
+            tp = "gtrash p";
+            fm = "fzf-make";
+          };
 
-        home.sessionVariables = {
-          EDITOR = "hx";
-          MAKEFLAGS = "-j$(nproc)";
+          sessionVariables = {
+            EDITOR = "hx";
+            MAKEFLAGS = "-j$(nproc)";
+          };
         };
       }
     )
