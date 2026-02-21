@@ -16,7 +16,7 @@ _: {
             + (
               if (metadata.os == "darwin")
               then "darwinConfigurations"
-              else "nixosConfigurations "
+              else "nixosConfigurations"
             )
             + "."
             + metadata.name;
