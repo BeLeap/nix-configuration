@@ -44,6 +44,7 @@
             mtr
             arping
             mitmproxy
+            pchar
             ncdu
             yq-go
             watchexec
