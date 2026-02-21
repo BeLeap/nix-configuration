@@ -43,7 +43,7 @@
     nixpkgs,
     ...
   }: let
-    lib = nixpkgs.lib;
+    inherit (nixpkgs) lib;
     callPackage = lib.callPackageWith (inputs // {inherit lib;});
     mkMetadata = import ./lib/metadata.nix {inherit lib;};
     metadatas = map mkMetadata (import ./config/hosts.nix);

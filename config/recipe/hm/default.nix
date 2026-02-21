@@ -17,10 +17,12 @@
   base =
     [
       {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.backupFileExtension = "bak";
-        home-manager.extraSpecialArgs = {inherit metadata;};
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "bak";
+          extraSpecialArgs = {inherit metadata;};
+        };
       }
     ]
     ++ lib.optional (metadata.distribution == "nixos") home-manager.nixosModules.home-manager

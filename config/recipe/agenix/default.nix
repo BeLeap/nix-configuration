@@ -20,13 +20,13 @@ in {
     {
       environment.systemPackages = [agenix.packages.${metadata.platform}.default];
 
-      age = age;
+      inherit age;
     }
   ];
   hm = [
     {
       imports = [agenix.homeManagerModules.default];
-      age = age;
+      inherit age;
     }
   ];
 }

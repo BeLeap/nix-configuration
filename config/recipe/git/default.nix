@@ -21,7 +21,7 @@ _: {
           settings = {
             user = {
               name = metadata.username;
-              email = metadata.email;
+              inherit (metadata) email;
             };
 
             alias = {
