@@ -6,10 +6,6 @@ _: {
         pkgs,
         ...
       }: {
-        home.shellAliases = {
-          jgf = "jj git fetch --all-remotes";
-          jgp = "jj git push";
-        };
         programs.jujutsu = {
           enable = true;
           package = pkgs.unstable.jujutsu;
@@ -27,6 +23,13 @@ _: {
               ];
             };
             aliases = {
+              c = ["commit"];
+              p = ["git" "push"];
+              f = ["git" "fetch" "--all-remotes"];
+              st = ["status"];
+              l = ["log" "--limit=20"];
+              d = ["diff"];
+              e = ["edit"];
               tug = [
                 "bookmark"
                 "move"
