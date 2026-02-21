@@ -15,7 +15,7 @@ _: {
                 url = "https://mcp.context7.com/mcp";
               };
             };
-            approval_policy = "on-request";
+            approval_policy = "never";
             runtime_metrics = true;
           };
         };
