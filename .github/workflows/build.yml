@@ -50,7 +50,7 @@ jobs:
             echo "### ${{ matrix.name }}"
             echo
             echo '```diff'
-            nix store diff-closures "$BASE_PATH" "${{ steps.build.outputs.head_path }}"
+            nix store diff-closures "$BASE_PATH" "${{ steps.build.outputs.head_path }}" | perl -pe 's/\e\[[0-9;]*[A-Za-z]//g'
             echo '```'
           } > "diff-${{ matrix.name }}.md"
       - if: github.event_name == 'pull_request'
