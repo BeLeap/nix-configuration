@@ -1,7 +1,7 @@
 _: {
   hm = [
     (
-      { pkgs, ... }: {
+      {pkgs, ...}: {
         home.packages = with pkgs; [
           # NOTE: codex prefer ripgrep
           ripgrep
@@ -15,7 +15,7 @@ _: {
                 url = "https://mcp.context7.com/mcp";
               };
             };
-            approval_policy = "never";
+            approval_policy = "on-request";
             runtime_metrics = true;
           };
         };
