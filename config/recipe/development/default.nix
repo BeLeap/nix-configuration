@@ -97,9 +97,6 @@
           prm = "gh pr merge";
           prmd = "gh pr merge -d";
 
-          jgf = "jj git fetch --all-remotes";
-          jgp = "jj git push";
-
           e = "$EDITOR";
 
           docker = "podman";

@@ -6,6 +6,10 @@ _: {
         pkgs,
         ...
       }: {
+        home.shellAliases = {
+          jgf = "jj git fetch --all-remotes";
+          jgp = "jj git push";
+        };
         programs.jujutsu = {
           enable = true;
           package = pkgs.unstable.jujutsu;
