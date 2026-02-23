@@ -1,7 +1,8 @@
 _: {
   hm = [
     (
-      {config, pkgs, ...}: {
+      { config, pkgs, ... }:
+      {
         home.packages = with pkgs; [
           # NOTE: codex prefer ripgrep
           ripgrep
