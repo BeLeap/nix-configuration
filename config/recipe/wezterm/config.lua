@@ -16,6 +16,7 @@ config.window_frame = {
 
 config.color_scheme = "Catppuccin Frappe";
 config.window_decorations = "RESIZE";
+config.window_close_confirmation = "NeverPrompt";
 
 config.use_fancy_tab_bar = true;
 
@@ -27,7 +28,7 @@ config.keys = {
   { key = '%', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = '"', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
 
-  { key = 'q', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
+  { key = 'q', mods = 'LEADER', action = act.CloseCurrentPane { confirm = false } },
 
   { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
   { key = 'LeftArrow', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
