@@ -12,6 +12,7 @@
     ];
     secrets = {
       some-secret.file = ./secrets/some-secret.age;
+      context7-api-key.file = ./secrets/context7-api-key.age;
     };
   };
 in {

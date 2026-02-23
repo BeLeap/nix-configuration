@@ -6,4 +6,8 @@ in {
     publicKeys = users;
     armor = true;
   };
+  "context7-api-key.age" = {
+    publicKeys = users;
+    armor = true;
+  };
 }
