@@ -2,14 +2,9 @@
   metadata,
   agenix,
 }: let
+  common = import ../../lib/agenix/common.nix {inherit metadata;};
   age = {
-    identityPaths = [
-      (
-        if metadata.os == "darwin"
-        then "/Users/${metadata.usernameLower}/.ssh/id_ed25519"
-        else "/home/${metadata.usernameLower}/.ssh/id_ed25519"
-      )
-    ];
+    identityPaths = common.ageIdentityPaths;
     secrets = {
       some-secret.file = ./secrets/some-secret.age;
     };
@@ -24,9 +19,6 @@ in {
     }
   ];
   hm = [
-    {
-      imports = [agenix.homeManagerModules.default];
-      inherit age;
-    }
+    (import ../../lib/agenix/hm.nix {inherit agenix metadata;})
   ];
 }
