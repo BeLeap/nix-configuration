@@ -30,6 +30,11 @@ _: {
               l = ["log" "--limit=20"];
               d = ["diff"];
               e = ["edit"];
+              wl = ["workspace" "list"];
+              wa = ["workspace" "add"];
+              wf = ["workspace" "forget"];
+              wr = ["workspace" "root"];
+              wus = ["workspace" "update-stale"];
               tug = [
                 "bookmark"
                 "move"
