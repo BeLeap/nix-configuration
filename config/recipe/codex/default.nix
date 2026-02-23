@@ -38,7 +38,9 @@
                 ];
               };
             };
-            approval_policy = "on-request";
+            # Match `codex --full-auto` behavior by default.
+            approval_policy = "never";
+            sandbox_mode = "danger-full-access";
             runtime_metrics = true;
           };
         };
