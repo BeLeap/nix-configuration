@@ -1,7 +1,7 @@
 let
   keys = import ../../../../lib/agenix/keys.nix;
 in {
-  "some-secret.age" = {
+  "context7-api-key.age" = {
     publicKeys = [keys.beleap-m1air];
     armor = true;
   };
