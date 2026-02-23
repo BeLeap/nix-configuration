@@ -1,4 +1,9 @@
-{lib, ...}: {
+{
+  agenix,
+  lib,
+  metadata,
+  ...
+}: {
   hm = [
     (
       {
@@ -6,7 +11,7 @@
         pkgs,
         ...
       }: {
-        imports = [../../lib/agenix/hm.nix];
+        imports = [(import ../../../lib/agenix/hm.nix {inherit agenix metadata;})];
 
         home.packages = with pkgs; [
           # NOTE: codex prefer ripgrep

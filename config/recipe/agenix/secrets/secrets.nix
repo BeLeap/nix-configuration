@@ -1,8 +1,8 @@
 let
-  keys = import ../../../lib/agenix/keys.nix;
+  keys = import ../../../../lib/agenix/keys.nix;
 in {
   "some-secret.age" = {
-    publicKeys = [keys.beleap];
+    publicKeys = [keys.beleap-m1air];
     armor = true;
   };
 }

@@ -2,7 +2,7 @@
   metadata,
   agenix,
 }: let
-  common = import ../../lib/agenix/common.nix {inherit metadata;};
+  common = import ../../../lib/agenix/common.nix {inherit metadata;};
   age = {
     identityPaths = common.ageIdentityPaths;
     secrets = {
@@ -19,6 +19,6 @@ in {
     }
   ];
   hm = [
-    (import ../../lib/agenix/hm.nix {inherit agenix metadata;})
+    (import ../../../lib/agenix/hm.nix {inherit agenix metadata;})
   ];
 }
