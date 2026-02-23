@@ -30,6 +30,7 @@ jobs:
       - check
       - build
       - pr-comment
+      - push-comment
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
@@ -38,12 +39,16 @@ jobs:
           CHECK_RESULT: ${{ needs.check.result }}
           BUILD_RESULT: ${{ needs.build.result }}
           PR_COMMENT_RESULT: ${{ needs['pr-comment'].result }}
+          PUSH_COMMENT_RESULT: ${{ needs['push-comment'].result }}
         run: |
           set -euo pipefail
           test "$CHECK_RESULT" = "success"
           test "$BUILD_RESULT" = "success"
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             test "$PR_COMMENT_RESULT" = "success"
+          fi
+          if [ "${{ github.event_name }}" = "push" ]; then
+            test "$PUSH_COMMENT_RESULT" = "success"
           fi
 
   build:
@@ -76,11 +81,16 @@ jobs:
           set -xeou pipefail
           HEAD_PATH="$(nix build ".#${{ matrix.flakeAttrPath }}" --accept-flake-config --no-link --print-out-paths)"
           echo "head_path=${HEAD_PATH}" >> "$GITHUB_OUTPUT"
-      - if: github.event_name == 'pull_request'
+      - if: github.event_name == 'pull_request' || github.event_name == 'push'
         run: |
           set -xeou pipefail
           trap 'git worktree remove --force ../base' EXIT
-          git worktree add ../base "${{ github.event.pull_request.base.sha }}"
+          if [ "${{ github.event_name }}" = 'pull_request' ]; then
+            BASE_SHA="${{ github.event.pull_request.base.sha }}"
+          else
+            BASE_SHA="${{ github.event.before }}"
+          fi
+          git worktree add ../base "$BASE_SHA"
           BASE_PATH="$(nix build "../base#${{ matrix.flakeAttrPath }}" --accept-flake-config --no-link --print-out-paths)"
 
           {
@@ -90,7 +100,7 @@ jobs:
             nix store diff-closures "$BASE_PATH" "${{ steps.build.outputs.head_path }}" | perl -pe 's/\e\[[0-9;]*[A-Za-z]//g'
             echo '```'
           } > "diff-${{ matrix.name }}.md"
-      - if: github.event_name == 'pull_request'
+      - if: github.event_name == 'pull_request' || github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: diff-${{ matrix.name }}
@@ -146,3 +156,33 @@ jobs:
                 body,
               });
             }
+
+  push-comment:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          path: diffs
+          pattern: diff-*
+          merge-multiple: true
+      - name: Post commit diff comment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const files = fs.readdirSync('diffs').filter(file => file.endsWith('.md')).sort();
+            const sections = files.map(file => fs.readFileSync(path.join('diffs', file), 'utf8').trim());
+            const body = `## package diff\n\n${sections.join('\n\n')}`;
+
+            await github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body,
+            });
