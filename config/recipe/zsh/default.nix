@@ -49,14 +49,8 @@ _: {
             }
 
             jjws() {
-              local feature repo_root repo_name workspace_base workspace_dir revision
-              feature="$1"
-              revision="''${2:-master}"
-
-              if [[ -z "$feature" ]]; then
-                echo "usage: jjws <feature-name> [revision]"
-                return 1
-              fi
+              local bookmark repo_root repo_name workspace_base workspace_dir
+              bookmark="$1"
 
               repo_root=$(jj root 2>/dev/null) || {
                 echo "jjws: not inside a jj repository"
@@ -65,14 +59,24 @@ _: {
 
               repo_name=$(basename "$repo_root")
               workspace_base="''${TMPDIR:-/tmp}/$repo_name"
-              workspace_dir="$workspace_base/$feature"
+
+              if [[ -z "$bookmark" ]]; then
+                bookmark=$(jj bookmark list --template 'name ++ "\n"' | fzf) || return 1
+              fi
+
+              if [[ -z "$bookmark" ]]; then
+                echo "usage: jjws [bookmark]"
+                return 1
+              fi
+
+              workspace_dir="$workspace_base/$bookmark"
 
               mkdir -p "$workspace_base" || {
                 echo "jjws: failed to create workspace base: $workspace_base"
                 return 1
               }
 
-              jj workspace add "$workspace_dir" -r "$revision" && cd "$workspace_dir"
+              jj workspace add "$workspace_dir" -r "$bookmark" && cd "$workspace_dir"
             }
           '';
 
