@@ -59,7 +59,7 @@ _: {
               }
 
               repo_name=$(basename "$repo_root")
-              workspace_base="''${TMPDIR:-/tmp}/$repo_name"
+              workspace_base="$HOME/ws/$repo_name"
 
               if [[ -z "$name" ]]; then
                 echo "usage: jjws <name> [bookmark]"
