@@ -49,8 +49,9 @@ _: {
             }
 
             jjws() {
-              local bookmark repo_root repo_name workspace_base workspace_dir
-              bookmark="$1"
+              local name bookmark repo_root repo_name workspace_base workspace_dir
+              name="$1"
+              bookmark="$2"
 
               repo_root=$(jj root 2>/dev/null) || {
                 echo "jjws: not inside a jj repository"
@@ -60,16 +61,21 @@ _: {
               repo_name=$(basename "$repo_root")
               workspace_base="''${TMPDIR:-/tmp}/$repo_name"
 
+              if [[ -z "$name" ]]; then
+                echo "usage: jjws <name> [bookmark]"
+                return 1
+              fi
+
               if [[ -z "$bookmark" ]]; then
                 bookmark=$(jj bookmark list --template 'name ++ "\n"' | fzf) || return 1
               fi
 
               if [[ -z "$bookmark" ]]; then
-                echo "usage: jjws [bookmark]"
+                echo "usage: jjws <name> [bookmark]"
                 return 1
               fi
 
-              workspace_dir="$workspace_base/$bookmark"
+              workspace_dir="$workspace_base/$name"
 
               mkdir -p "$workspace_base" || {
                 echo "jjws: failed to create workspace base: $workspace_base"
