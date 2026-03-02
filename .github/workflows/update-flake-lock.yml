@@ -18,7 +18,7 @@ jobs:
       - uses: cachix/install-nix-action@v31
 
       - name: Update flake.lock
-        run: nix flake update
+        run: nix flake update --accept-flake-config
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
@@ -31,7 +31,7 @@ jobs:
             Automated daily update of `flake.lock`.
 
             - Triggered by GitHub Actions schedule
-            - Updated with `nix flake update`
+            - Updated with `nix flake update --accept-flake-config`
           labels: |
             dependencies
             automated
