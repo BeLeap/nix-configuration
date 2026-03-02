@@ -63,7 +63,7 @@
           ]
           ++ (lib.optionals (metadata.kind == "personal") [
             {app = "${pkgs.discord}/Applications/Discord.app";}
-            "/Applications/Logseq.app"
+            {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
           ])
           ++ (lib.optionals (metadata.kind == "work") [
             {app = "/Applications/IntelliJ IDEA.app";}
