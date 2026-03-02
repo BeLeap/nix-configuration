@@ -1,0 +1,37 @@
+name: Update flake.lock
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-flake-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: cachix/install-nix-action@v31
+
+      - name: Update flake.lock
+        run: nix flake update
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore(deps): update flake.lock"
+          branch: chore/update-flake-lock
+          delete-branch: true
+          title: "chore(deps): update flake.lock"
+          body: |
+            Automated daily update of `flake.lock`.
+
+            - Triggered by GitHub Actions schedule
+            - Updated with `nix flake update`
+          labels: |
+            dependencies
+            automated
