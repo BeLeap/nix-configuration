@@ -23,6 +23,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ secrets.PAT }}
           commit-message: "chore(deps): update flake.lock"
           branch: chore/update-flake-lock
           delete-branch: true
