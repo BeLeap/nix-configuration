@@ -39,6 +39,7 @@
               };
             };
             approval_policy = "on-request";
+            sandbox_mode = "workspace-write";
             runtime_metrics = true;
           };
         };
