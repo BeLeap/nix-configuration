@@ -17,5 +17,4 @@
   # others
   "kubernetes"
   "1password"
-  "joplin"
 ]

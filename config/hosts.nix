@@ -6,7 +6,10 @@
     arch = "aarch64";
     distribution = "macos";
     gui = true;
-    recipes = ["macos/beleap-m1air"];
+    recipes = [
+      "macos/beleap-m1air"
+      "personal"
+    ];
   }
   {
     name = "csjang-m3pro";
@@ -28,6 +31,7 @@
     recipes = [
       "vm"
       "nixos/vm"
+      "personal"
     ];
   }
   {
