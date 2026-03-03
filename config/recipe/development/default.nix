@@ -70,7 +70,7 @@
               ssm-session-manager-plugin
               awscli2
               just
-              vault
+              vault-bin
             ]
             ++ (lib.optionals (metadata.kind == "personal") [
               pkgs._1password-cli
