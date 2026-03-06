@@ -34,7 +34,7 @@
         metadata,
         lib,
         ...
-      }: {
+      }:
         let
           wsCleanupDays = 30;
           wsPath = "$HOME/ws";
