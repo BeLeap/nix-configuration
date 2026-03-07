@@ -35,14 +35,7 @@ _: {
               wf = ["workspace" "forget"];
               wr = ["workspace" "root"];
               wus = ["workspace" "update-stale"];
-              tug = [
-                "bookmark"
-                "move"
-                "--from"
-                "heads(::@- & bookmarks())"
-                "--to"
-                "@-"
-              ];
+              ba = ["bookmark" "advance"];
             };
             remotes = {
               origin = {
