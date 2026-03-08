@@ -43,9 +43,12 @@ _: {
               draft_commit_description = ''
                 concat(
                   description,
-                  "\n",
-                  "\nJJ: Changes in this commit:\n",
+                  "\n\n",
+                  "JJ: ignore-rest\n",
+                  "\nChanges in this commit:\n",
+                  "```diff\n",
                   diff.git(),
+                  "\n```\n",
                 )
               '';
             };
