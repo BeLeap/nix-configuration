@@ -48,6 +48,7 @@ _: {
             "*.TEMP.*"
             ".claude"
             ".profileconfig.json"
+            "journal/"
           ];
         };
       }
