@@ -44,8 +44,11 @@ _: {
                 concat(
                   description,
                   "\n",
+                  "JJ: ignore-rest\n",
                   "\nJJ: Changes in this commit:\n",
+                  "```diff\n",
                   diff.git(),
+                  "\n```\n",
                 )
               '';
             };
