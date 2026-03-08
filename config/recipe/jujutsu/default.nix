@@ -39,6 +39,16 @@ _: {
               b = ["bookmark"];
               ba = ["bookmark" "advance"];
             };
+            templates = {
+              draft_commit_description = ''
+                concat(
+                  description,
+                  "\n",
+                  "\nJJ: Changes in this commit:\n",
+                  diff.git(),
+                )
+              '';
+            };
             remotes = {
               origin = {
                 auto-track-bookmarks = "glob:*";
