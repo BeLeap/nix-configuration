@@ -45,10 +45,8 @@ _: {
                   description,
                   "\n\n",
                   "JJ: ignore-rest\n",
-                  "\nChanges in this commit:\n",
-                  "```diff\n",
+                  "JJ: ------------------------ >8 ------------------------\n",
                   diff.git(),
-                  "\n```\n",
                 )
               '';
             };

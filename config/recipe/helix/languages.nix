@@ -25,8 +25,12 @@
       "mdtxt"
       "mdtext"
       "mdx"
-      {glob = "*.jjdescription";}
     ];
+  }
+  {
+    name = "jjdescription";
+    comment-token = "JJ:";
+    file-types = [{glob = "*.jjdescription";}];
   }
   {
     name = "dockerfile";
