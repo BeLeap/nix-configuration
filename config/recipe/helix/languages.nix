@@ -14,6 +14,21 @@
     language-servers = ["pyright"];
   }
   {
+    name = "markdown";
+    file-types = [
+      "md"
+      "markdown"
+      "mdown"
+      "mkdn"
+      "mkd"
+      "mdwn"
+      "mdtxt"
+      "mdtext"
+      "mdx"
+      {glob = "*.jjdescription";}
+    ];
+  }
+  {
     name = "dockerfile";
     scope = "source.dockerfile";
     file-types = [
