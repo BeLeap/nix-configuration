@@ -16,3 +16,8 @@ tools to resolve library id and get library docs without me having to explicitly
 - Prefer explicit failures with clear error messages over silent fallbacks.
 - Surface error states in logs/output/UI so failures are easy to notice and debug.
 - If a temporary workaround is unavoidable, document the limitation and the real failure clearly.
+
+# Journal
+
+- Record work history and any information useful for the next task in
+  `journal/<date>/<appropriate_title>.md`.
