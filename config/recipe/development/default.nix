@@ -34,28 +34,7 @@
         metadata,
         lib,
         ...
-      }:
-        let
-          wsCleanupDays = 30;
-          wsPath = "$HOME/ws";
-          wsCleanupScript = pkgs.writeShellScript "ws-cleanup" ''
-            set -euo pipefail
-
-            if [ ! -d "${wsPath}" ]; then
-              echo "[ws-cleanup] Skip: ${wsPath} does not exist."
-              exit 0
-            fi
-
-            echo "[ws-cleanup] Removing first-level directories in ${wsPath} not accessed in the last ${toString wsCleanupDays} days."
-            find "${wsPath}" \
-              -mindepth 1 \
-              -maxdepth 1 \
-              -type d \
-              -atime +${toString wsCleanupDays} \
-              -print \
-              -exec rm -rf -- {} +
-          '';
-        in {
+      }: {
         home = {
           packages = with pkgs;
             [
@@ -116,7 +95,30 @@
             MAKEFLAGS = "-j$(nproc)";
           };
         };
+      }
+    )
+    (
+      {pkgs, ...}: let
+        wsCleanupDays = 30;
+        wsPath = "$HOME/ws";
+        wsCleanupScript = pkgs.writeShellScript "ws-cleanup" ''
+          set -euo pipefail
 
+          if [ ! -d "${wsPath}" ]; then
+            echo "[ws-cleanup] Skip: ${wsPath} does not exist."
+            exit 0
+          fi
+
+          echo "[ws-cleanup] Removing first-level directories in ${wsPath} not accessed in the last ${toString wsCleanupDays} days."
+          find "${wsPath}" \
+            -mindepth 1 \
+            -maxdepth 1 \
+            -type d \
+            -atime +${toString wsCleanupDays} \
+            -print \
+            -exec rm -rf -- {} +
+        '';
+      in {
         systemd.user = lib.mkIf (metadata.os == "linux") {
           services.ws-cleanup = {
             Unit = {
