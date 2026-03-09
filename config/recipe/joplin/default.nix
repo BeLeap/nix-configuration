@@ -2,7 +2,7 @@ _: {
   hm = [
     ({pkgs, ...}: {
       home.packages = with pkgs; [
-        joplin-cli
+        joplin-terminal
       ];
       programs.joplin-desktop = {
         enable = true;
