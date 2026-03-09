@@ -13,18 +13,15 @@
         (import ../../../lib/agenix/hm.nix {inherit agenix metadata;})
       ];
       age.secrets = {
-        joplin-settings.file = ./secrets/joplin-settings.age;
+        joplin-settings = {
+          file = ./secrets/joplin-settings.age;
+          path = "${config.home.homeDirectory}/.config/joplin/settings.json";
+        };
       };
 
       home.packages = with pkgs; [
         joplin-terminal
       ];
-      home.file.".config/joplin/settings.json" = {
-        source =
-          config.lib.file.mkOutOfStoreSymlink
-          config.age.secrets."joplin-settings".path;
-        force = true;
-      };
 
       programs.joplin-desktop = {
         enable = true;
