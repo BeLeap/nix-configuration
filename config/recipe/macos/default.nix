@@ -27,6 +27,7 @@
           "meetingbar"
           "karabiner-elements"
           "wireshark-chmodbpf"
+          "gureumkim"
         ]
         ++ (lib.optionals (metadata.kind == "personal") [
           "logseq"
