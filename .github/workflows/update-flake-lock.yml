@@ -31,8 +31,7 @@ jobs:
           body: |
             Automated daily update of `flake.lock`.
 
-            - Triggered by GitHub Actions schedule
-            - Updated with `nix flake update --accept-flake-config`
+            - Createdd by GitHub Actions
           labels: |
             dependencies
             automated
