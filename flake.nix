@@ -32,16 +32,6 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     mac-app-util.url = "github:hraban/mac-app-util";
     beleap-overlay.url = "github:BeLeap/nix-overlay";
-
-    # Custom Packages
-    kubectl-check = {
-      url = "github:BeLeap/kubectl-check";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    boda = {
-      url = "github:BeLeap/boda";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs @ {
