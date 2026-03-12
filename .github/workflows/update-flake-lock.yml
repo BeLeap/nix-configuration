@@ -31,7 +31,7 @@ jobs:
           body: |
             Automated daily update of `flake.lock`.
 
-            - Createdd by GitHub Actions
+            - Created by GitHub Actions
           labels: |
             dependencies
             automated
