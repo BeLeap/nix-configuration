@@ -25,6 +25,9 @@
           enable = true;
           package = pkgs.llm-agents.codex;
           settings = {
+            model = "gpt-5.4";
+            hide_agent_reasoning = false;
+
             mcp_servers = {
               context7 = {
                 url = "https://mcp.context7.com/mcp";
@@ -38,9 +41,27 @@
                 ];
               };
             };
+
             approval_policy = "on-request";
             sandbox_mode = "workspace-write";
+
             runtime_metrics = true;
+
+            tui = {
+              status_line = [
+                "model-with-reasoning"
+                "context-remaining"
+                "current-dir"
+                "model-name"
+                "git-branch"
+                "context-used"
+                "context-window-size"
+                "used-tokens"
+                "total-output-tokens"
+                "five-hour-limit"
+                "weekly-limit"
+              ];
+            };
           };
         };
         programs.zsh.initContent = lib.mkAfter ''
