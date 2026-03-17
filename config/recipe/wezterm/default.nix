@@ -1,9 +1,11 @@
 {
   lib,
   metadata,
-}: {
+}: let
+  useBrew = metadata.distribution == "macos" && metadata.kind != "airgap";
+in {
   base = [
-    (lib.optionalAttrs (metadata.distribution == "macos") {
+    (lib.optionalAttrs useBrew {
       homebrew = {
         casks = ["wezterm"];
       };
@@ -16,7 +18,7 @@
           enable = true;
 
           package =
-            if (metadata.distribution == "macos")
+            if useBrew
             then pkgs.wezterm-null
             else pkgs.wezterm;
 
