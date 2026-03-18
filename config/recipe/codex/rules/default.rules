@@ -1,0 +1,14 @@
+prefix_rule(pattern=["jj", "rebase"], decision="allow")
+prefix_rule(pattern=["jj", "status"], decision="allow")
+prefix_rule(pattern=["gh", "pr", "create"], decision="allow")
+prefix_rule(
+  pattern=["joplin", "rmnote"],
+  decision="forbidden",
+  justification="Joplin note deletion should remain explicitly user-approved.",
+)
+prefix_rule(
+  pattern=["joplin", "rmbook"],
+  decision="forbidden",
+  justification="Joplin notebook deletion should remain explicitly user-approved.",
+)
+prefix_rule(pattern=["joplin"], decision="allow")

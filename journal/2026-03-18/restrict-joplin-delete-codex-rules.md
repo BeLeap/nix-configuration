@@ -1,0 +1,7 @@
+- Confirmed the active Codex runtime already persisted command approval rules in `~/.codex/rules/default.rules`.
+- Checked Codex execpolicy behavior and verified the effective decision is the strictest across all matching prefix rules.
+- Updated [`config/recipe/codex/default.nix`](/Users/beleap/nix-configuration/config/recipe/codex/default.nix) to manage `~/.codex/rules/default.rules` declaratively through Home Manager using `home.file.*.source`.
+- Added the rule content as a standalone source file at [`config/recipe/codex/rules/default.rules`](/Users/beleap/nix-configuration/config/recipe/codex/rules/default.rules).
+- Added explicit `forbidden` prefix rules for `joplin rmnote` and `joplin rmbook`.
+- Kept the broader `prefix_rule(pattern=["joplin"], decision="allow")` so the rest of the Joplin subcommands continue to run without approval.
+- Left `approval_policy = "on-request"` unchanged because the requested exception scope was limited to Joplin delete subcommands, not all shell commands.

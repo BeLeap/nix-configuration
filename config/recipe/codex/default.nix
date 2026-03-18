@@ -18,6 +18,7 @@
           ripgrep
           nodejs
         ];
+        home.file.".codex/rules/default.rules".source = ./rules/default.rules;
         age.secrets = {
           context7-api-key.file = ./secrets/context7-api-key.age;
         };
