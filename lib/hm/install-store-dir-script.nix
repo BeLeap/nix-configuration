@@ -1,9 +1,7 @@
-{lib}: {
-  after ? ["writeBoundary"],
+{
   source,
   targetRelativePath,
-}:
-lib.hm.dag.entryAfter after ''
+}: ''
   target_dir="$HOME/${targetRelativePath}"
   target_parent="$(dirname "$target_dir")"
 
