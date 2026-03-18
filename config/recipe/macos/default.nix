@@ -59,7 +59,11 @@
         dock.persistent-apps =
           [
             "/Applications/Firefox Developer Edition.app"
-            "/Applications/WezTerm.app"
+            (
+              if (metadata.kind != "airgap")
+              then "/Applications/WezTerm.app"
+              else {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
+            )
             {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
           ]
           ++ (lib.optionals (metadata.kind == "personal") [
