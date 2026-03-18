@@ -15,6 +15,7 @@ _: {
       vim
       curl
       git
+      bind
     ];
   };
   hm = [
