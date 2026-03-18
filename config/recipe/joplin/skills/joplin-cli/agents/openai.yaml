@@ -1,0 +1,4 @@
+interface:
+  display_name: "Joplin CLI"
+  short_description: "Work with Joplin notes and todos via CLI"
+  default_prompt: "Use $joplin-cli to search, read, create, and update my Joplin notes with the required sync workflow."
