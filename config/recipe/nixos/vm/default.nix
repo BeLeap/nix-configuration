@@ -10,14 +10,7 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    # networking.useDHCP = false;
-    # networking.interfaces.eth0.useDHCP = true;
-    # FIXME: use automatically set dnses
-    # temporary fix by using well-known dns
-    networking.nameservers = [
-      "1.1.1.1"
-      "8.8.8.8"
-    ];
+    # Use the DNS servers provided by DHCP instead of pinning public resolvers.
 
     services.getty.autologinUser = metadata.usernameLower;
     security.sudo.wheelNeedsPassword = false;
