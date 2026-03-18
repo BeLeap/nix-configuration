@@ -1,4 +1,8 @@
-_: {
+{
+  lib,
+  metadata,
+  ...
+}: {
   base = {pkgs, ...}: {
     programs.zsh.enable = true;
     environment.shells = [pkgs.zsh];
@@ -11,11 +15,24 @@ _: {
 
     time.timeZone = "Asia/Seoul";
 
-    environment.systemPackages = with pkgs; [
-      vim
-      curl
-      git
-    ];
+    environment.systemPackages =
+      with pkgs;
+        [
+          vim
+          curl
+          git
+        ]
+        ++ lib.optionals (metadata.distribution == "nixos") [
+          bcc
+          bind
+          bpftrace
+          ethtool
+          iproute2
+          lsof
+          procps
+          strace
+          tcpdump
+        ];
   };
   hm = [
     (
