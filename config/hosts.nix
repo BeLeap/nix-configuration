@@ -12,6 +12,17 @@
     ];
   }
   {
+    name = "beleap-macmini";
+    kind = "personal";
+    os = "darwin";
+    arch = "aarch64";
+    distribution = "macos";
+    gui = true;
+    recipes = [
+      "personal"
+    ];
+  }
+  {
     name = "csjang-m3pro";
     kind = "work";
     username = "cs.jang";
