@@ -1,7 +1,4 @@
-{
-  lib,
-  metadata,
-}: (lib.optionalAttrs (metadata.name == "beleap-m1air") {
+{lib}: {
   base = _: {
     networking.knownNetworkServices = [
       "USB 10/100/1000 LAN"
@@ -12,4 +9,4 @@
       "Wi-Fi"
     ];
   };
-})
+}
