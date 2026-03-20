@@ -7,6 +7,7 @@
     distribution = "macos";
     gui = true;
     recipes = [
+      "macos"
       "beleap-m1air"
       "personal"
     ];
@@ -19,6 +20,7 @@
     distribution = "macos";
     gui = true;
     recipes = [
+      "macos"
       "beleap-macmini"
       "personal"
     ];
@@ -32,6 +34,9 @@
     arch = "aarch64";
     distribution = "macos";
     gui = true;
+    recipes = [
+      "macos"
+    ];
   }
   {
     name = "vm-arm64-Darwin-personal";

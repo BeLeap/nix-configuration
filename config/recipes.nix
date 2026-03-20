@@ -9,7 +9,6 @@
   "nix"
   "agenix"
 
-  "macos"
   "nixos"
 
   "development"

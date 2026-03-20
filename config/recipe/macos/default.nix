@@ -1,7 +1,7 @@
 {
   lib,
   metadata,
-}: (lib.optionalAttrs (metadata.distribution == "macos") {
+}: {
   base = {
     pkgs,
     inputs,
@@ -101,4 +101,11 @@
       shell = pkgs.zsh;
     };
   };
-})
+  hm = [
+    ({pkgs, ...}: {
+      home.sessionPath = [
+        "/opt/homebrew/bin"
+      ];
+    })
+  ];
+}
