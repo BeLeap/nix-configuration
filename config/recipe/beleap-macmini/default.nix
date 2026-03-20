@@ -1,7 +1,7 @@
 _: {
   base = _: {
     homebrew = {
-      brews = ["zeroclaw"];
+      brews = ["zeroclaw" "ollama"];
     };
   };
 }
