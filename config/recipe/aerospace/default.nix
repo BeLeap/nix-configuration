@@ -87,6 +87,13 @@ _: {
               {
                 check-further-callbacks = false;
                 "if" = {
+                  app-id = "org.nixos.firefoxdeveloperedition";
+                };
+                run = ["move-node-to-workspace 2"];
+              }
+              {
+                check-further-callbacks = false;
+                "if" = {
                   app-id = "com.google.Chrome";
                 };
                 run = ["move-node-to-workspace 2"];
