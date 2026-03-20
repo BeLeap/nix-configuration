@@ -19,6 +19,7 @@
     distribution = "macos";
     gui = true;
     recipes = [
+      "beleap-macmini"
       "personal"
     ];
   }
