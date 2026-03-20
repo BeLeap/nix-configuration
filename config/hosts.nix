@@ -7,7 +7,7 @@
     distribution = "macos";
     gui = true;
     recipes = [
-      "macos/beleap-m1air"
+      "beleap-m1air"
       "personal"
     ];
   }
