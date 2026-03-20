@@ -1,5 +1,5 @@
 _: {
-  base = {...}: {
+  base = _: {
     homebrew = {
       brews = ["zeroclaw"];
     };
