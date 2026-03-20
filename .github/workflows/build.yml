@@ -57,6 +57,9 @@ jobs:
           - name: "beleap-m1air"
             runner: macos-latest
             flakeAttrPath: "darwinConfigurations.beleap-m1air.system"
+          - name: "beleap-macmini"
+            runner: macos-latest
+            flakeAttrPath: "darwinConfigurations.beleap-macmini.system"
           - name: "csjang-m3pro"
             runner: macos-latest
             flakeAttrPath: "darwinConfigurations.csjang-m3pro.system"
