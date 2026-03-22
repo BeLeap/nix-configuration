@@ -17,7 +17,7 @@ _: {
         };
 
         sessionPath = [
-          "${config.home.homeDirectory}/.npm-global"
+          "${config.home.homeDirectory}/.npm-global/bin"
         ];
       };
     })
