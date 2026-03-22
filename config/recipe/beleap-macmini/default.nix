@@ -1,24 +1,58 @@
-_: {
+{
+  agenix,
+  metadata,
+  nix-openclaw,
+  nix-steipete-tools,
+}: {
   base = _: {
     homebrew = {
-      brews = ["zeroclaw" "ollama"];
+      brews = ["ollama"];
     };
   };
 
   hm = [
-    (_: {
-      launchd.agents = {
-        zeroclaw = {
-          enable = true;
-          config = {
-            Program = "/opt/homebrew/bin/zeroclaw";
-            ProgramArguments = ["daemon" "--host" "0.0.0.0" "--port" "80"];
-            KeepAlive = true;
-            RunAtLoad = true;
-            StandardOutPath = "/tmp/zeroclaw.log";
-            StandardErrorPath = "/tmp/zeroclaw.log";
+    nix-openclaw.homeManagerModules.openclaw
+    ({
+      config,
+      pkgs,
+      ...
+    }: {
+      imports = [(import ../../../lib/agenix/hm.nix {inherit agenix metadata;})];
+
+      age.secrets = {
+        discord-token.file = ./secrets/discord-token.age;
+      };
+
+      programs.openclaw = {
+        documents = ./documents;
+
+        config = {
+          gateway = {
+            mode = "local";
+          };
+          channels.discord = {
+            token = {
+              source = "file";
+              provider = config.age.secrets."discord-token".path;
+            };
           };
         };
+
+        instances.default = {
+          enable = true;
+          package = pkgs.openclaw;
+          stateDir = "~/.openclaw";
+          workspaceDir = "~/.openclaw/workspace";
+          launchd.enable = true;
+
+          plugins = [
+            nix-steipete-tools.packages.aarch64-darwin.peekaboo
+          ];
+        };
+      };
+    })
+    (_: {
+      launchd.agents = {
         ollama = {
           enable = true;
           config = {

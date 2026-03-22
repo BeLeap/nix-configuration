@@ -32,6 +32,9 @@
     llm-agents.url = "github:numtide/llm-agents.nix";
     mac-app-util.url = "github:hraban/mac-app-util";
     beleap-overlay.url = "github:BeLeap/nix-overlay";
+
+    nix-openclaw.url = "github:openclaw/nix-openclaw";
+    nix-steipete-tools.url = "github:openclaw/nix-steipete-tools";
   };
 
   outputs = inputs @ {

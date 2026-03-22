@@ -1,4 +1,5 @@
 {
   beleap-m1air = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqR0nOLKUM0sAeisBDdfgUhT0d/XzzArEi3I678XOND";
+  beleap-macmini = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC6qJ6Eb4GbcbcsxazcEUdDQbUGHIcE4bODRhPCfyWH2";
   csjang-m3pro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINJovX/XSmO5xarf85ZdX3/MVIFi5lyouHT56O6yTWey";
 }
