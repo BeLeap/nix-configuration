@@ -10,6 +10,7 @@
       "macos"
       "beleap-m1air"
       "personal"
+      "onedrive"
     ];
   }
   {
@@ -23,6 +24,7 @@
       "macos"
       "beleap-macmini"
       "personal"
+      "onedrive"
     ];
   }
   {
