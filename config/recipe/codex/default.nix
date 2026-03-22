@@ -16,7 +16,6 @@
         home.packages = with pkgs; [
           # NOTE: codex prefer ripgrep
           ripgrep
-          nodejs
         ];
         home.file.".codex/rules/default.rules".source = ./rules/default.rules;
         age.secrets = {

@@ -23,6 +23,7 @@
       "nh"
       "podman"
       "codex"
+      "nodejs"
     ]
     ++ (lib.optionals metadata.gui [
       "firefox"
