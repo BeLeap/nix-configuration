@@ -1,6 +1,10 @@
 _: {
   hm = [
-    ({pkgs, ...}: {
+    ({
+      pkgs,
+      config,
+      ...
+    }: {
       home = {
         packages = with pkgs; [
           nodejs
@@ -8,12 +12,12 @@ _: {
 
         file.".npmrc" = {
           text = ''
-            prefix = "~/.npm-global";
+            prefix = "${config.home.homeDirectory}/.npm-global";
           '';
         };
 
         sessionPath = [
-          "~/.npm-global"
+          "${config.home.homeDirectory}/.npm-global"
         ];
       };
     })
