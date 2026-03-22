@@ -1,9 +1,4 @@
 _: {
-  base = _: {
-    homebrew = {
-      casks = ["macfuse"];
-    };
-  };
   hm = [
     ({
       config,
