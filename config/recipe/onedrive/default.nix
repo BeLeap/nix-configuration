@@ -13,7 +13,17 @@ _: {
         enable = true;
         config = {
           Program = lib.getExe pkgs.rclone;
-          ProgramArguments = ["nfsmount" "OneDrive:" "${config.home.homeDirectory}/OneDrive"];
+          ProgramArguments = [
+            "nfsmount"
+            "OneDrive:"
+            "${config.home.homeDirectory}/OneDrive"
+            "--timeout"
+            "10s"
+            "--dir-cache-time"
+            "10m"
+            "--poll-interval"
+            "30s"
+          ];
           KeepAlive = true;
           RunAtLoad = true;
           StandardOutPath = "/tmp/onedrive-rclone.log";
