@@ -18,8 +18,8 @@ _: {
             ProgramArguments = ["serve"];
             KeepAlive = true;
             RunAtLoad = true;
-            StandardOutPath = "/tmp/ollama.log";
-            StandardErrorPath = "/tmp/ollama.log";
+            StandardOutPath = "/tmp/ollama.out.log";
+            StandardErrorPath = "/tmp/ollama.err.log";
             EnvironmentVariables = {
               OLLAMA_NUM_PARALLEL = "1";
               OLLAMA_MAX_LOADED_MODELS = "1";

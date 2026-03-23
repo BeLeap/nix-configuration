@@ -26,8 +26,8 @@ _: {
           ];
           KeepAlive = true;
           RunAtLoad = true;
-          StandardOutPath = "/tmp/onedrive-rclone.log";
-          StandardErrorPath = "/tmp/onedrive-rclone.log";
+          StandardOutPath = "/tmp/onedrive-rclone.out.log";
+          StandardErrorPath = "/tmp/onedrive-rclone.err.log";
         };
       };
     })
