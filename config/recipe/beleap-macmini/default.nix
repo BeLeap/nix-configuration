@@ -6,7 +6,10 @@ _: {
   };
 
   hm = [
-    (_: {
+    ({pkgs, ...}: {
+      home.packages = with pkgs; [
+        tigervnc
+      ];
       launchd.agents = {
         ollama = {
           enable = true;
