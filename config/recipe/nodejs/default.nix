@@ -12,7 +12,7 @@ _: {
 
         file.".npmrc" = {
           text = ''
-            prefix = "${config.home.homeDirectory}/.npm-global";
+            prefix = ${config.home.homeDirectory}/.npm-global;
           '';
         };
 
