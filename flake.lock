@@ -23,15 +23,17 @@
     },
     "beleap-overlay": {
       "inputs": {
+        "boda-flake": "boda-flake",
         "flake-utils": "flake-utils",
+        "kubectl-check-flake": "kubectl-check-flake",
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1773722680,
-        "narHash": "sha256-u9jvb/IX8aJZfw5OQBnqoyZFbrC3BXeznnRbvNw09jU=",
+        "lastModified": 1774418902,
+        "narHash": "sha256-uPy0ZE6/PGtPF3rsInOXN4kIDqbLMPBIhTLGXSefo08=",
         "owner": "BeLeap",
         "repo": "nix-overlay",
-        "rev": "d4008308bcfb7d44f77eb0dd037b22afa86f1cc5",
+        "rev": "75bcbdbc27dbe790d621544dea675e133d1531f2",
         "type": "github"
       },
       "original": {
@@ -62,6 +64,32 @@
       "original": {
         "owner": "numtide",
         "repo": "blueprint",
+        "type": "github"
+      }
+    },
+    "boda-flake": {
+      "inputs": {
+        "flake-utils": [
+          "beleap-overlay",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "beleap-overlay",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1757252778,
+        "narHash": "sha256-NCEOPctNTK16zMIycWICc+eG+HGMzJQXaLtDojCq8E8=",
+        "owner": "BeLeap",
+        "repo": "boda",
+        "rev": "420f11c739db8570b41da565d3ec00c52fb03cf4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BeLeap",
+        "ref": "master",
+        "repo": "boda",
         "type": "github"
       }
     },
@@ -290,6 +318,31 @@
       "original": {
         "owner": "vic",
         "repo": "import-tree",
+        "type": "github"
+      }
+    },
+    "kubectl-check-flake": {
+      "inputs": {
+        "flake-utils": [
+          "beleap-overlay",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "beleap-overlay",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753587878,
+        "narHash": "sha256-Az0g1GTNWAD5R9GBzx8A38h5/Nwfgy82SMxK06svSyM=",
+        "owner": "BeLeap",
+        "repo": "kubectl-check",
+        "rev": "0fbe4e9c76198ad865235f471e2783a911902313",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BeLeap",
+        "repo": "kubectl-check",
         "type": "github"
       }
     },

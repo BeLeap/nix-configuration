@@ -5,7 +5,7 @@ _: {
         inherit (inputs) kubectl-check boda;
       })
       inputs.llm-agents.overlays.default
-      (import inputs.beleap-overlay)
+      (inputs.beleap-overlay.overlay)
       (final: prev: {
         unstable = import inputs.nixpkgs-unstable {
           inherit (prev) config;
