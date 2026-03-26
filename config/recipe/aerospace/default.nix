@@ -101,6 +101,20 @@ _: {
               {
                 check-further-callbacks = false;
                 "if" = {
+                  app-id = "net.cozic.joplin-desktop";
+                };
+                run = ["move-node-to-workspace 3"];
+              }
+              {
+                check-further-callbacks = false;
+                "if" = {
+                  app-id = "notion.id";
+                };
+                run = ["move-node-to-workspace 3"];
+              }
+              {
+                check-further-callbacks = false;
+                "if" = {
                   window-title-regex-substring = "1Password";
                 };
                 run = ["layout floating"];
