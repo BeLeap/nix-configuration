@@ -71,6 +71,13 @@ _: {
                 run = ["layout floating"];
               }
               {
+                check-further-callbacks = true;
+                "if" = {
+                  app-id = "org.virtualbox.app.VirtualBoxVM";
+                };
+                run = ["layout floating"];
+              }
+              {
                 check-further-callbacks = false;
                 "if" = {
                   app-id = "com.github.wez.wezterm";
