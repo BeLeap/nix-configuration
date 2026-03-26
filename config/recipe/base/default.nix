@@ -44,6 +44,10 @@
   hm = [
     (
       {pkgs, ...}: {
+        home.packages = with pkgs; [
+          qbittorrent
+        ];
+
         programs.tealdeer = {
           enable = true;
 
