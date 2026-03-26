@@ -81,6 +81,11 @@
     };
     auto-format = true;
   }
+  {
+    name = "helm";
+    roots = ["Chart.yaml"];
+    language-servers = ["helm-ls"];
+  }
 ]
 ++
 # Javascript family
