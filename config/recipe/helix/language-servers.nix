@@ -27,4 +27,8 @@
   nil = {
     command = "${lib.getExe pkgs.nil}";
   };
+  helm-ls = {
+    command = "${lib.getExe pkgs.helm-ls}";
+    args = ["serve"];
+  };
 }
