@@ -73,6 +73,7 @@
               awscli2
               just
               vault-bin
+              ts
             ]
             ++ (lib.optionals (metadata.kind == "personal") [
               pkgs._1password-cli
