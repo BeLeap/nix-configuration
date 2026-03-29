@@ -1,7 +1,11 @@
 _: {
   base = _: {
     homebrew = {
-      brews = ["ollama"];
+      brews = [
+        "ollama"
+        "googleworkspace-cli"
+        "gcloud-cli"
+      ];
     };
   };
 
