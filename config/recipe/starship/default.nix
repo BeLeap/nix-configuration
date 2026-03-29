@@ -19,6 +19,8 @@ _: {
               with builtins; (fromTOML (readFile "${pkgs.starship}/share/starship/presets/bracketed-segments.toml"))
             )
             {
+              scan_timeout = 1;
+
               right_format = "$kubernetes";
 
               kubernetes = {
