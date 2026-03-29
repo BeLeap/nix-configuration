@@ -10,6 +10,7 @@ inputs @ {
   llm-agents,
   mac-app-util,
   beleap-overlay,
+  direnv-overlay,
 }: let
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = {inherit inputs metadata;};
