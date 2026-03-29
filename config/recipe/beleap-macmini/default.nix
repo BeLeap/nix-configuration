@@ -4,6 +4,7 @@ _: {
       brews = [
         "ollama"
         "googleworkspace-cli"
+        "gcloud-cli"
       ];
     };
   };
