@@ -1,5 +1,6 @@
-_: {
+{direnv-overlay}: {
   hm = [
+    direnv-overlay.homeManagerModules.default
     (
       {pkgs, ...}: {
         programs.direnv = {
@@ -14,6 +15,9 @@ _: {
             load_dotenv = true;
             warn_timeout = "1m";
           };
+        };
+        programs.direnv-overlay = {
+          enable = true;
         };
       }
     )
