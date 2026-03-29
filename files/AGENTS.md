@@ -24,6 +24,8 @@ tools to resolve library id and get library docs without me having to explicitly
 - Follow a tidy-first approach in code and system design decisions.
 - Leave code cleaner than you found it while preserving behavior.
 - Prefer cohesive, well-factored designs with clear boundaries and minimal complexity.
+- Adopt a broad **design for changeability** principle across all work, not just code: architecture, configuration, operations, and workflows should all stay easy to modify.
+  - Example (operational changeability): for long-running commands/processes, prefer approaches that are interruptible and restartable (or resumable) so changes can be applied safely without starting over.
 
 # Journal
 
