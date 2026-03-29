@@ -29,3 +29,5 @@ tools to resolve library id and get library docs without me having to explicitly
 
 - Record work history and any information useful for the next task in
   `journal/<date>/<appropriate_title>.md`.
+- Note: a coding agent is actively recording entries in `journal/`, so treat it as
+  an existing source of task history and operational context.
