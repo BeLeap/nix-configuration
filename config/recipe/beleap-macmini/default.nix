@@ -12,7 +12,10 @@ _: {
   };
 
   hm = [
-    (_: {
+    ({pkgs, ...}: {
+      home.packages = with pkgs; [
+        isync
+      ];
       launchd.agents = {
         ollama = {
           enable = true;
