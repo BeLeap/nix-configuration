@@ -17,7 +17,7 @@ _: {
         isync
       ];
       launchd.agents = {
-        ollama = {
+        mlx-lm = {
           enable = true;
           config = {
             Program = "/opt/homebrew/bin/mlx-lm.serve";
