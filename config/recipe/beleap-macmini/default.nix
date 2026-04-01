@@ -20,7 +20,7 @@ _: {
         mlx-lm = {
           enable = true;
           config = {
-            Program = "/opt/homebrew/bin/mlx-lm.serve";
+            Program = "/opt/homebrew/bin/mlx_lm.server";
             ProgramArguments = ["--model" "mlx-community/Qwen3.5-2B-4bit"];
             KeepAlive = true;
             RunAtLoad = true;
