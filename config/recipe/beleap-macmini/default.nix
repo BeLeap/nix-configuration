@@ -2,7 +2,7 @@ _: {
   base = _: {
     homebrew = {
       brews = [
-        "ollama"
+        "mlx-lm"
         "googleworkspace-cli"
       ];
       casks = [
@@ -20,12 +20,12 @@ _: {
         ollama = {
           enable = true;
           config = {
-            Program = "/opt/homebrew/bin/ollama";
-            ProgramArguments = ["serve"];
+            Program = "/opt/homebrew/bin/mlx-lm.serve";
+            ProgramArguments = ["--model" "mlx-community/Qwen3.5-2B-4bit"];
             KeepAlive = true;
             RunAtLoad = true;
-            StandardOutPath = "/tmp/ollama.out.log";
-            StandardErrorPath = "/tmp/ollama.err.log";
+            StandardOutPath = "/tmp/mlx-lm.out.log";
+            StandardErrorPath = "/tmp/mlx-lm.err.log";
             EnvironmentVariables = {
               OLLAMA_NUM_PARALLEL = "1";
               OLLAMA_MAX_LOADED_MODELS = "1";
