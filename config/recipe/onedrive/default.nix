@@ -16,7 +16,7 @@ _: {
           ProgramArguments = [
             "nfsmount"
             "OneDrive:"
-            "${config.home.homeDirectory}/OneDrive"
+            "${config.home.homeDirectory}/mnt/OneDrive"
             "--timeout"
             "10s"
             "--dir-cache-time"
