@@ -6,6 +6,7 @@ inputs @ {
   nixpkgs-unstable,
   nix-darwin,
   home-manager,
+  nur,
   agenix,
   llm-agents,
   mac-app-util,
