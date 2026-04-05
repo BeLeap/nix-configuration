@@ -17,4 +17,11 @@ _: {
     # others
     "kubernetes"
   ];
+  hm = [
+    ({config, ...}: {
+      home.sessionPath = [
+        "${config.home.homeDirectory}/.local/bin"
+      ];
+    })
+  ];
 }
