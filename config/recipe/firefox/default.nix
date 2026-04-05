@@ -46,6 +46,8 @@ _: {
               sidebery
               onepassword-password-manager
               wappalyzer
+              consent-o-matic
+              joplin-web-clipper
             ];
           };
         };
