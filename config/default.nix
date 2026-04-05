@@ -15,7 +15,7 @@
   importRecipe = p: (callPackage (./. + "/recipe/${p}") {});
   recursiveImport = p: let
     recipe = importRecipe p;
-    innerRecipe = map importRecipe (get recipe "recipes" []);
+    innerRecipe = map recursiveImport (get recipe "recipes" []);
   in
     [recipe] ++ innerRecipe;
 
