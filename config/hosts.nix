@@ -7,6 +7,7 @@
     distribution = "macos";
     gui = true;
     recipes = [
+      "default"
       "macos"
       "beleap-m1air"
       "personal"
@@ -21,6 +22,7 @@
     distribution = "macos";
     gui = true;
     recipes = [
+      "default"
       "macos"
       "beleap-macmini"
       "personal"
@@ -37,6 +39,7 @@
     distribution = "macos";
     gui = true;
     recipes = [
+      "default"
       "macos"
     ];
   }
@@ -48,6 +51,7 @@
     distribution = "nixos";
     gui = false;
     recipes = [
+      "default"
       "vm"
       "nixos/vm"
       "personal"
@@ -63,6 +67,7 @@
     distribution = "nixos";
     gui = false;
     recipes = [
+      "default"
       "vm"
       "nixos/vm"
     ];

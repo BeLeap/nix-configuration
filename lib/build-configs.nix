@@ -2,11 +2,10 @@
   lib,
   callPackage,
   metadatas,
-  baseRecipes,
 }:
 lib.fold
 (metadata: acc: let
-  recipes = baseRecipes ++ metadata.recipes;
+  recipes = metadata.recipes;
   system = callPackage ./mkSystem.nix {inherit metadata recipes;};
 in {
   nixosConfigurations = acc.nixosConfigurations // system.nixosConfigurations;

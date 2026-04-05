@@ -51,11 +51,10 @@
     callPackage = lib.callPackageWith (inputs // {inherit lib;});
     mkMetadata = import ./lib/metadata.nix {inherit lib;};
     metadatas = map mkMetadata (import ./config/hosts.nix);
-    baseRecipes = import ./config/recipes.nix;
     systems = lib.unique (map (metadata: metadata.platform) metadatas);
   in
     (import ./lib/build-configs.nix {
-      inherit lib callPackage metadatas baseRecipes;
+      inherit lib callPackage metadatas;
     })
     // {
       formatter = lib.genAttrs systems (system: (import nixpkgs {inherit system;}).alejandra);
