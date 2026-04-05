@@ -11,8 +11,12 @@ _: {
         profiles = {
           "beleap" = {
             settings = {
+              "browser.aboutConfig.showWarning" = false;
+
               "sidebar.verticalTabs" = true;
               "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
+
+              "app.update.auto" = false;
             };
             extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
               sidebery
