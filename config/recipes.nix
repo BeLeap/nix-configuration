@@ -15,5 +15,4 @@
 
   # others
   "kubernetes"
-  "firefox"
 ]

@@ -58,7 +58,6 @@
 
         dock.persistent-apps =
           [
-            {app = "${pkgs.firefox}/Applications/Firefox.app";}
             (
               if (metadata.kind != "airgap")
               then "/Applications/WezTerm.app"
@@ -67,6 +66,7 @@
             {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
           ]
           ++ (lib.optionals (metadata.kind == "personal") [
+            {app = "${pkgs.firefox}/Applications/Firefox.app";}
             {app = "${pkgs.discord}/Applications/Discord.app";}
             {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
             {app = "${pkgs.google-messages}/Applications/Messages.app";}
