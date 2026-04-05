@@ -8,6 +8,28 @@ _: {
           _1password-gui
         ];
 
+        policies = {
+          DontCheckDefaultBrowser = true;
+          DisableFirefoxStudies = true;
+          DisableTelemetry = true;
+          DisableFirefoxAccounts = false;
+          NoDefaultBookmarks = true;
+          OfferToSaveLogins = false;
+          OfferToSaveLoginsDefault = false;
+          PasswordManagerEnabled = true;
+          FirefoxHome = {
+            Search = true;
+            Pocket = false;
+            Snippets = false;
+            TopSites = false;
+            Highlights = false;
+          };
+          UserMessaging = {
+            ExtensionRecommendations = false;
+            SkipOnboarding = true;
+          };
+        };
+
         profiles = {
           "beleap" = {
             settings = {
