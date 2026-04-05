@@ -58,7 +58,7 @@
 
         dock.persistent-apps =
           [
-            {app = "/Applications/Safari.app";}
+            {app = "${pkgs.firefox}/Applications/Firefox.app";}
             (
               if (metadata.kind != "airgap")
               then "/Applications/WezTerm.app"
