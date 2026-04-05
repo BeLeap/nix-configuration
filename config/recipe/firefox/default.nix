@@ -13,6 +13,8 @@ _: {
             settings = {
               "browser.aboutConfig.showWarning" = false;
 
+              "browser.translations.automaticallyPopup" = false;
+
               "sidebar.verticalTabs" = true;
               "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
 
