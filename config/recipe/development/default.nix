@@ -3,31 +3,27 @@
   metadata,
   ...
 }: {
-  recipes =
-    [
-      "wezterm"
-      "zsh"
-      "lsd"
-      "starship"
-      "carapace"
-      "helix"
-      "zoxide"
-      "direnv"
-      "git"
-      "fzf"
-      "gh"
-      "bash"
-      "nushell"
-      "jujutsu"
-      "ssh"
-      "nh"
-      "podman"
-      "codex"
-      "nodejs"
-    ]
-    ++ (lib.optionals metadata.gui [
-      "firefox"
-    ]);
+  recipes = [
+    "wezterm"
+    "zsh"
+    "lsd"
+    "starship"
+    "carapace"
+    "helix"
+    "zoxide"
+    "direnv"
+    "git"
+    "fzf"
+    "gh"
+    "bash"
+    "nushell"
+    "jujutsu"
+    "ssh"
+    "nh"
+    "podman"
+    "codex"
+    "nodejs"
+  ];
   hm = [
     (
       {
