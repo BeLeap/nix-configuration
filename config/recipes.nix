@@ -15,6 +15,5 @@
 
   # others
   "kubernetes"
-  "1password"
   "firefox"
 ]
