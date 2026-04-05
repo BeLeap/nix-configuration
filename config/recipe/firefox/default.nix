@@ -8,6 +8,7 @@ _: {
           "beleap" = {
             extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
               sidebery
+              onepassword-password-manager
             ];
           };
         };
