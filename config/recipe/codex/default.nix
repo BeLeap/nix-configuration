@@ -33,13 +33,6 @@
                 url = "https://mcp.context7.com/mcp";
                 bearer_token_env_var = "CONTEXT7_API_KEY";
               };
-              playwright = {
-                command = "npx";
-                args = [
-                  "-y"
-                  "@playwright/mcp@latest"
-                ];
-              };
             };
 
             approval_policy = "on-request";
