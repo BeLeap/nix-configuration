@@ -59,6 +59,7 @@
           packages = with pkgs; [
             alejandra
             deadnix
+            statix
           ];
         };
       });
