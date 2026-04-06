@@ -102,7 +102,7 @@
     };
   };
   hm = [
-    ({pkgs, ...}: {
+    (_: {
       home.sessionPath = [
         "/opt/homebrew/bin"
       ];
