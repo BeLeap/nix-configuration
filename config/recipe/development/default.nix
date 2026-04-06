@@ -73,12 +73,7 @@
             ]
             ++ (lib.optionals (metadata.kind == "personal") [
               pkgs._1password-cli
-            ])
-            ++ (lib.optionals (metadata.kind == "work") (
-              with pkgs; [
-                unstable.jira-cli-go
-              ]
-            ));
+            ]);
 
           shellAliases = {
             e = "$EDITOR";
