@@ -2,7 +2,7 @@
   lib,
   metadata,
 }: (lib.optionalAttrs (metadata.distribution == "nixos") {
-  base = {pkgs, ...}: {
+  base = _: {
     security.polkit.enable = true;
 
     users.groups.beleap = {};
