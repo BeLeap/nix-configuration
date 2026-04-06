@@ -1,7 +1,6 @@
 {
   lib,
   metadata,
-  ...
 }: {
   recipes = [
     "wezterm"
@@ -26,12 +25,7 @@
   ];
   hm = [
     (
-      {
-        pkgs,
-        metadata,
-        lib,
-        ...
-      }: {
+      {pkgs, ...}: {
         home = {
           packages = with pkgs; [
             htop
