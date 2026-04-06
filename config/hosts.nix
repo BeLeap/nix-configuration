@@ -41,6 +41,7 @@
     recipes = [
       "default"
       "macos"
+      "work"
     ];
   }
   {

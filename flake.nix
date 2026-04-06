@@ -40,13 +40,7 @@
     direnv-overlay.url = "github:BeLeap/direnv-overlay";
   };
 
-  outputs = inputs @ {
-    self,
-    nix-darwin,
-    home-manager,
-    nixpkgs,
-    ...
-  }: let
+  outputs = inputs @ {nixpkgs, ...}: let
     inherit (nixpkgs) lib;
     callPackage = lib.callPackageWith (inputs // {inherit lib;});
     mkMetadata = import ./lib/metadata.nix {inherit lib;};
@@ -58,5 +52,16 @@
     })
     // {
       formatter = lib.genAttrs systems (system: (import nixpkgs {inherit system;}).alejandra);
+      devShells = lib.genAttrs systems (system: let
+        pkgs = import nixpkgs {inherit system;};
+      in {
+        default = pkgs.mkShell {
+          packages = with pkgs; [
+            alejandra
+            deadnix
+            statix
+          ];
+        };
+      });
     };
 }

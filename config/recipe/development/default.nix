@@ -1,7 +1,6 @@
 {
   lib,
   metadata,
-  ...
 }: {
   recipes = [
     "wezterm"
@@ -26,59 +25,45 @@
   ];
   hm = [
     (
-      {
-        pkgs,
-        metadata,
-        lib,
-        ...
-      }: {
+      {pkgs, ...}: {
         home = {
-          packages = with pkgs;
-            [
-              htop
-              wireshark
-              cascadia-code
-              nanum-gothic-coding
-              ipcalc
-              mtr
-              arping
-              mitmproxy
-              pchar
-              ncdu
-              yq-go
-              watchexec
-              beleap-utils
-              gnupg
-              oauth2c
-              curl
-              fzf-make
-              boda
-              ghc
-              yaml-language-server
-              empiriqa
-              gnumake
-              croc
-              dnsi
-              crane
-              coreutils-full
-              gtrash
-              dive
-              # pgcli
-              # mycli
-              ssm-session-manager-plugin
-              awscli2
-              just
-              vault-bin
-              ts
-            ]
-            ++ (lib.optionals (metadata.kind == "personal") [
-              pkgs._1password-cli
-            ])
-            ++ (lib.optionals (metadata.kind == "work") (
-              with pkgs; [
-                unstable.jira-cli-go
-              ]
-            ));
+          packages = with pkgs; [
+            htop
+            wireshark
+            cascadia-code
+            nanum-gothic-coding
+            ipcalc
+            mtr
+            arping
+            mitmproxy
+            pchar
+            ncdu
+            yq-go
+            watchexec
+            beleap-utils
+            gnupg
+            oauth2c
+            curl
+            fzf-make
+            boda
+            ghc
+            yaml-language-server
+            empiriqa
+            gnumake
+            croc
+            dnsi
+            crane
+            coreutils-full
+            gtrash
+            dive
+            # pgcli
+            # mycli
+            ssm-session-manager-plugin
+            awscli2
+            just
+            vault-bin
+            ts
+          ];
 
           shellAliases = {
             e = "$EDITOR";
