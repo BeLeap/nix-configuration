@@ -7,7 +7,7 @@ _: {
       inputs.nur.overlays.default
       inputs.llm-agents.overlays.default
       inputs.beleap-overlay.overlays.default
-      (final: prev: {
+      (_final: prev: {
         unstable = import inputs.nixpkgs-unstable {
           inherit (prev) config;
           inherit (prev.stdenv.hostPlatform) system;
