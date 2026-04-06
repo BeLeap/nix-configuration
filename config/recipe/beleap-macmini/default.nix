@@ -21,7 +21,7 @@ _: {
           enable = true;
           config = {
             Program = "/opt/homebrew/bin/mlx_lm.server";
-            ProgramArguments = ["--model" "mlx-community/Qwen3.5-9B-MLX-4bit"];
+            ProgramArguments = ["--model" "mlx-community/Qwen3.5-4B-MLX-4bit"];
             KeepAlive = true;
             RunAtLoad = true;
             StandardOutPath = "/tmp/mlx-lm.out.log";
