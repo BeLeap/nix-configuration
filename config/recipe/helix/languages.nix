@@ -59,18 +59,12 @@
     name = "kotlin";
     scope = "source.kotlin";
     injection-regex = "kotlin";
-    file-types = [
-      "kt"
-      "kts"
-    ];
-    roots = [
-      "build.gradle"
-      "build.gradle.kts"
-      "settings.gradle"
-      "settings.gradle.kts"
-      "pom.xml"
-    ];
-    auto-format = true;
+    auto-format = false;
+    language-servers = ["kotlin-lsp"];
+  }
+  {
+    name = "java";
+    auto-format = false;
     language-servers = ["kotlin-lsp"];
   }
   {
