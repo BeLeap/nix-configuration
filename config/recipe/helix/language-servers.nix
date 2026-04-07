@@ -9,14 +9,7 @@
     required-root-patterns = ["biome.json"];
   };
   kotlin-lsp = {
-    command = "${lib.getExe pkgs.kotlin-lsp}";
-    args = ["--stdio"];
-    timeout = 60;
-    required-root-pattern = [
-      "build.gradle"
-      "build.gradle.kts"
-      "pom.xml"
-    ];
+    command = "${lib.getExe pkgs.rusty-kotlin-lsp}";
   };
   typescript-language-server = with pkgs.nodePackages; {
     command = "${lib.getExe typescript-language-server}";
