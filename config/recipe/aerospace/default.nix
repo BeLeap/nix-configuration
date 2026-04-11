@@ -59,7 +59,7 @@ _: {
               {
                 check-further-callbacks = true;
                 "if" = {
-                  window-title-regex-substring = "Picture-in-Picture";
+                  window-title-regex-substring = "Picture-in-Picture|화면 속 화면";
                 };
                 run = ["layout floating"];
               }
