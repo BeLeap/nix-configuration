@@ -1,4 +1,4 @@
-PIP_WINDOW_ID=$(aerospace list-windows --all --format "%{window-title}%{tab}%{window-id}" | grep Picture-in-Picture | cut -f2)
+PIP_WINDOW_ID=$(aerospace list-windows --all --format "%{window-title}%{tab}%{window-id}" | grep "Picture-in-Picture|화면 속 화면" | cut -f2)
 
 if [[ -z $PIP_WINDOW_ID ]]; then
 	exit 0
