@@ -38,6 +38,7 @@ in {
           target = "onedrive";
         };
       };
+      xdg.configFile."joplin-desktop/plugins".source = ./desktop-plugins;
     })
   ];
 }
