@@ -5,7 +5,20 @@ _: {
         lib,
         pkgs,
         ...
-      }: {
+      }: let
+        pip-handler = pkgs.writeShellScript "aerospace-pip-handler" ''
+          PIP_WINDOW_ID=$(${lib.getExe pkgs.aerospace} list-windows --all --format "%{window-title}%{tab}%{window-id}" | grep -E "Picture-in-Picture|화면 속 화면" | cut -f2)
+
+          if [[ -z $PIP_WINDOW_ID ]]; then
+            exit 0
+          fi
+
+          ${lib.getExe pkgs.aerospace} move-node-to-workspace --window-id "$PIP_WINDOW_ID" "$AEROSPACE_FOCUSED_WORKSPACE"
+        '';
+        workspace-change-handler = pkgs.writeShellScript "aerospace-workspace-change-handler" ''
+          ${pip-handler} 1>/tmp/pip-aerospace.out.log 2>/tmp/pip-aerospace.err.log
+        '';
+      in {
         programs.aerospace = {
           enable = true;
 
@@ -22,8 +35,7 @@ _: {
             };
 
             exec-on-workspace-change = [
-              "${pkgs.beleap-utils}/bin/aerospace-workspace-change"
-              "${pkgs.beleap-utils}/bin:${pkgs.aerospace}/bin"
+              "${workspace-change-handler}"
             ];
 
             mode.main.binding =
