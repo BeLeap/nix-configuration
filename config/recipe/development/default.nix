@@ -44,6 +44,7 @@
             gnupg
             oauth2c
             curl
+            openssl
             fzf-make
             boda
             ghc
