@@ -1,7 +1,0 @@
-PIP_WINDOW_ID=$(aerospace list-windows --all --format "%{window-title}%{tab}%{window-id}" | grep -E "Picture-in-Picture|화면 속 화면" | cut -f2)
-
-if [[ -z $PIP_WINDOW_ID ]]; then
-	exit 0
-fi
-
-aerospace move-node-to-workspace --window-id $PIP_WINDOW_ID $AEROSPACE_FOCUSED_WORKSPACE
