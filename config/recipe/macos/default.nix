@@ -63,10 +63,10 @@
               then "/Applications/WezTerm.app"
               else {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
             )
+            {app = "${pkgs.firefox}/Applications/Firefox.app";}
             {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
           ]
           ++ (lib.optionals (metadata.kind == "personal") [
-            {app = "${pkgs.firefox}/Applications/Firefox.app";}
             {app = "${pkgs.discord}/Applications/Discord.app";}
             {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
             {app = "${pkgs.google-messages}/Applications/Messages.app";}
