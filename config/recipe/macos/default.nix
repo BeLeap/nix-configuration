@@ -92,6 +92,14 @@
           show-thumbnail = true;
         };
       };
+
+      activationScripts.setWallpaper.text = ''
+        /usr/bin/osascript <<EOF
+        tell application "System Events"
+          set picture of every desktop to "${../../../files/apple-colors-small-4k.png}"
+        end tell
+        EOF
+      '';
     };
 
     security.pam.services.sudo_local.touchIdAuth = true;
