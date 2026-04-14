@@ -4,10 +4,6 @@ _: {
       programs.firefox = {
         enable = true;
 
-        nativeMessagingHosts = with pkgs; [
-          _1password-gui
-        ];
-
         policies = {
           DontCheckDefaultBrowser = true;
           DisableFirefoxStudies = true;
