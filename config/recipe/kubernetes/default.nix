@@ -26,14 +26,14 @@ _: {
 
           settings = {
             k9s = {
-              skin = "catppuccin-frappe";
+              skin = "catppuccin-mocha";
               skipLatestRevCheck = true;
               maxConnRetry = 3;
             };
           };
 
           skins = {
-            catppuccin-frappe = ./catppuccin-frappe.yaml;
+            catppuccin-mocha = ./catppuccin-mocha.yaml;
           };
         };
 

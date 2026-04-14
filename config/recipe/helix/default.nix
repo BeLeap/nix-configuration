@@ -13,7 +13,7 @@ _: {
           defaultEditor = true;
 
           settings = {
-            theme = "catppuccin_frappe";
+            theme = "catppuccin_mocha";
 
             editor = import ./editor.nix;
           };

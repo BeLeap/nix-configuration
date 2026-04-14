@@ -14,7 +14,7 @@ config.window_frame = {
   font = wezterm.font("Cascadia Code NF"),
 };
 
-config.color_scheme = "Catppuccin Frappe";
+config.color_scheme = "Catppuccin Mocha";
 config.window_decorations = "RESIZE";
 config.window_close_confirmation = "NeverPrompt";
 
