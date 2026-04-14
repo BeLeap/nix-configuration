@@ -13,6 +13,7 @@ _: {
     "nixos"
 
     "development"
+    "firefox"
 
     # others
     "kubernetes"
