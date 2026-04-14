@@ -93,13 +93,6 @@
         };
       };
 
-      activationScripts.setWallpaper.text = ''
-        /usr/bin/osascript <<EOF
-        tell application "System Events"
-          set picture of every desktop to "${../../../files/apple-colors-small-4k.png}"
-        end tell
-        EOF
-      '';
     };
 
     security.pam.services.sudo_local.touchIdAuth = true;
@@ -114,6 +107,26 @@
       home.sessionPath = [
         "/opt/homebrew/bin"
       ];
+
+      launchd.agents.set-wallpaper = {
+        enable = true;
+        config = {
+          Label = "dev.beleap.set-wallpaper";
+          ProgramArguments = [
+            "/usr/bin/osascript"
+            "-e"
+            "tell application \"System Events\""
+            "-e"
+            "set picture of every desktop to POSIX file \"${../../../files/apple-colors-small-4k.png}\""
+            "-e"
+            "end tell"
+          ];
+          RunAtLoad = true;
+          StartInterval = 300;
+          StandardOutPath = "/tmp/set-wallpaper.out.log";
+          StandardErrorPath = "/tmp/set-wallpaper.err.log";
+        };
+      };
     })
   ];
 }
