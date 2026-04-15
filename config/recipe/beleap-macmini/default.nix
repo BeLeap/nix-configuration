@@ -23,7 +23,7 @@ _: {
             Program = "/opt/homebrew/bin/mlx_lm.server";
             ProgramArguments = [
               "--model"
-              "mlx-community/Qwen3.5-4B-MLX-4bit"
+              "mlx-community/gemma-4-e4b-it-8bit"
               "--prompt-cache-size"
               "2"
               "--prompt-cache-bytes"
