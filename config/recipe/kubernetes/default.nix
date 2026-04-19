@@ -12,6 +12,7 @@ _: {
             kubectl
             kubectl-node-shell
             kubectl-view-secret
+            kubectl-view-allocations
             kubectx
             kubectl-check
             kubernetes-helm
