@@ -29,11 +29,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1776057832,
-        "narHash": "sha256-Pk/B4Il29ZxzdPTcwid54Qj7jfapEvrCMeUwuryz3UA=",
+        "lastModified": 1776606095,
+        "narHash": "sha256-zax0tCvRsC8He84pQp8eTGc/Gqx/JK2lx1EIhqpB1qY=",
         "owner": "BeLeap",
         "repo": "nix-overlay",
-        "rev": "9e97271cd89a5829201baebc442144648e245e56",
+        "rev": "fae8947e01fea332deda7a1e44b2f31373935bfe",
         "type": "github"
       },
       "original": {
@@ -79,16 +79,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1776054466,
-        "narHash": "sha256-GRpKaP3fT37t/oanWPPE25LtWCOt1jr/Tfuai4+8R/U=",
+        "lastModified": 1776055253,
+        "narHash": "sha256-Trtv012WXbkiE+JRkI585joaz8PEzbn2PHqh8oylloA=",
         "owner": "BeLeap",
         "repo": "boda",
-        "rev": "f6458f49a14b2030404d4ab44ee2df0637e982b8",
+        "rev": "da1aa4a329f9614e6d4a08c866fe9aa30217e413",
         "type": "github"
       },
       "original": {
         "owner": "BeLeap",
-        "ref": "master",
+        "ref": "0.2616.0",
         "repo": "boda",
         "type": "github"
       }
@@ -395,15 +395,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1753587878,
-        "narHash": "sha256-Az0g1GTNWAD5R9GBzx8A38h5/Nwfgy82SMxK06svSyM=",
+        "lastModified": 1776060879,
+        "narHash": "sha256-Uy5mBnFfwkMuN3u19IiaGhd5L4Mvu9XD43+AVj87jFc=",
         "owner": "BeLeap",
         "repo": "kubectl-check",
-        "rev": "0fbe4e9c76198ad865235f471e2783a911902313",
+        "rev": "ae5058b008cdf785b98699a62694f6931ab77987",
         "type": "github"
       },
       "original": {
         "owner": "BeLeap",
+        "ref": "v0.2615.0",
         "repo": "kubectl-check",
         "type": "github"
       }
