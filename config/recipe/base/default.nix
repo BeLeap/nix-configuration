@@ -4,11 +4,12 @@
   ...
 }: {
   base = {pkgs, ...}: {
-    programs.zsh.enable = true;
-    environment.shells = [pkgs.zsh];
+    programs.bash.enable = true;
+    programs.fish.enable = true;
+    environment.shells = [pkgs.bash];
 
     users.users."${metadata.usernameLower}" = {
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
 
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqR0nOLKUM0sAeisBDdfgUhT0d/XzzArEi3I678XOND"
