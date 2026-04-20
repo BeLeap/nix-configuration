@@ -4,6 +4,7 @@
 }: {
   recipes = [
     "wezterm"
+    "fish"
     "zsh"
     "lsd"
     "starship"
@@ -15,7 +16,6 @@
     "fzf"
     "gh"
     "bash"
-    "nushell"
     "jujutsu"
     "ssh"
     "nh"
