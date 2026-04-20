@@ -1,0 +1,4 @@
+- Updated Firefox policy config to fully disable built-in password manager behavior.
+- Set `PasswordManagerEnabled = false` and kept login-save prompts disabled via `OfferToSaveLogins` policies.
+- Added profile prefs to disable saving, autofill, password generation, and breach alerts for Firefox-managed credentials.
+- Context: user uses 1Password and wants all Firefox password-manager prompts/features off.
