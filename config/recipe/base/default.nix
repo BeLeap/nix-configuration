@@ -6,7 +6,7 @@
   base = {pkgs, ...}: {
     programs.bash.enable = true;
     programs.fish.enable = true;
-    environment.shells = [pkgs.bash];
+    environment.shells = [pkgs.bash pkgs.fish];
 
     users.users."${metadata.usernameLower}" = {
       shell = pkgs.fish;
