@@ -6,7 +6,6 @@
   base = {pkgs, ...}: {
     programs = {
       bash.enable = true;
-      fish.enable = true;
 
       ssh = {
         knownHosts = {
@@ -15,11 +14,9 @@
       };
     };
 
-    environment.shells = [pkgs.bash pkgs.fish];
+    environment.shells = [pkgs.bash pkgs.unstable.fish];
 
     users.users."${metadata.usernameLower}" = {
-      shell = pkgs.fish;
-
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqR0nOLKUM0sAeisBDdfgUhT0d/XzzArEi3I678XOND"
       ];
