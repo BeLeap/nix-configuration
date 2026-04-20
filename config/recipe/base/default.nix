@@ -4,8 +4,17 @@
   ...
 }: {
   base = {pkgs, ...}: {
-    programs.bash.enable = true;
-    programs.fish.enable = true;
+    programs = {
+      bash.enable = true;
+      fish.enable = true;
+
+      ssh = {
+        knownHosts = {
+          "github.com".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+        };
+      };
+    };
+
     environment.shells = [pkgs.bash pkgs.fish];
 
     users.users."${metadata.usernameLower}" = {
@@ -14,12 +23,6 @@
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqR0nOLKUM0sAeisBDdfgUhT0d/XzzArEi3I678XOND"
       ];
-    };
-
-    programs.ssh = {
-      knownHosts = {
-        "github.com".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-      };
     };
 
     time.timeZone = "Asia/Seoul";
