@@ -12,7 +12,7 @@ _: {
           NoDefaultBookmarks = true;
           OfferToSaveLogins = false;
           OfferToSaveLoginsDefault = false;
-          PasswordManagerEnabled = true;
+          PasswordManagerEnabled = false;
           FirefoxHome = {
             Search = true;
             Pocket = false;
@@ -48,6 +48,11 @@ _: {
               "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
 
               "app.update.auto" = false;
+
+              "signon.rememberSignons" = false;
+              "signon.autofillForms" = false;
+              "signon.generation.enabled" = false;
+              "signon.management.page.breach-alerts.enabled" = false;
             };
             extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
               sidebery
