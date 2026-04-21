@@ -59,6 +59,5 @@ This section is optimized for code agents making safe, reviewable changes.
 
 ### Known Caveats
 
-- CI currently builds only macOS host outputs in `.github/workflows/build.yml`.
 - `config/default.nix` recipe import is one level deep (`recursiveImport` is not fully recursive).
 - Keep branch naming assumptions out of scripts unless required by target repo.
