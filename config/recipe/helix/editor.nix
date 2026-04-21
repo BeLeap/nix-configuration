@@ -40,6 +40,7 @@
   lsp = {
     display-messages = true;
     display-inlay-hints = true;
+    display-progress-messages = true;
   };
 
   whitespace.render = {
