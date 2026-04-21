@@ -4,6 +4,7 @@ _: {
       {
         metadata,
         pkgs,
+        lib,
         ...
       }: {
         programs.jujutsu = {
@@ -21,6 +22,14 @@ _: {
                 "--limit=10"
                 "--no-pager"
               ];
+
+              diff-formatter = "delta";
+              conflict-marker-style = "git";
+            };
+            merge-tools.delta = {
+              program = "${lib.getExe pkgs.delta}";
+              merge-args = ["-s" "$left" "$output" "--width=$width"];
+              diff-expected-exit-codes = [0 1];
             };
             aliases = {
               d = ["describe"];
