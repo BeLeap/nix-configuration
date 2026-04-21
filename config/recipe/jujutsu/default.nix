@@ -47,7 +47,7 @@ _: {
               wus = ["workspace" "update-stale"];
               b = ["bookmark"];
               ba = ["bookmark" "advance"];
-              sq = ["squash"];
+              sq = ["squash" "-i"];
             };
             templates = {
               draft_commit_description = ''
