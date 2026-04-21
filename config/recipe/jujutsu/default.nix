@@ -38,6 +38,7 @@ _: {
               wus = ["workspace" "update-stale"];
               b = ["bookmark"];
               ba = ["bookmark" "advance"];
+              sq = ["squash"];
             };
             templates = {
               draft_commit_description = ''
