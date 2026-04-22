@@ -19,6 +19,7 @@ config.window_decorations = "RESIZE";
 config.window_close_confirmation = "NeverPrompt";
 
 config.enable_tab_bar = false;
+config.keys = {};
 config.default_prog = { "@ZSH@", "-l", "-i", "-c", "@TMUX@" };
 
 return config;
