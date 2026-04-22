@@ -30,6 +30,7 @@ in {
           enableZshIntegration = true;
 
           extraConfig = builtins.readFile (pkgs.replaceVars ./config.lua {
+            ZSH = "${lib.getExe pkgs.zsh}";
             TMUX = "${lib.getExe pkgs.tmux}";
           });
         };
