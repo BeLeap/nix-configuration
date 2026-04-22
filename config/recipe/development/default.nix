@@ -4,6 +4,7 @@
 }: {
   recipes = [
     "wezterm"
+    "tmux"
     "fish"
     "zsh"
     "lsd"
