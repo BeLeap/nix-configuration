@@ -8,6 +8,7 @@ _: {
         sensibleOnTop = true;
         keyMode = "vi";
         terminal = "tmux-256color";
+        mouse = false;
         baseIndex = 1;
         escapeTime = 10;
         aggressiveResize = true;
