@@ -81,6 +81,7 @@
           sessionVariables = {
             EDITOR = "hx";
             MAKEFLAGS = "-j$(nproc)";
+            LC_ALL = "en_US.UTF-8";
           };
         };
       }
