@@ -7,7 +7,7 @@ _: {
         shortcut = "a";
         sensibleOnTop = true;
         keyMode = "vi";
-        terminal = "screen-256color";
+        terminal = "tmux-256color";
         baseIndex = 1;
         escapeTime = 10;
         aggressiveResize = true;
