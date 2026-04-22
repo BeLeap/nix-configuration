@@ -23,6 +23,8 @@ _: {
 
         extraConfig = ''
           set -g allow-passthrough all
+
+          bind r source-file ~/.config/tmux/tmux.conf
         '';
       };
     })
