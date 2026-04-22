@@ -7,6 +7,7 @@ _: {
         shortcut = "a";
         sensibleOnTop = true;
         keyMode = "vi";
+        terminal = "screen-256color";
 
         plugins = [
           {
