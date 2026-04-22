@@ -13,7 +13,11 @@ in {
   ];
   hm = [
     (
-      {pkgs, ...}: {
+      {
+        pkgs,
+        lib,
+        ...
+      }: {
         programs.wezterm = {
           enable = true;
 
@@ -25,7 +29,10 @@ in {
           enableBashIntegration = true;
           enableZshIntegration = true;
 
-          extraConfig = builtins.readFile ./config.lua;
+          extraConfig = builtins.readFile (pkgs.replaceVars ./config.lua {
+            ZSH = "${lib.getExe pkgs.zsh}";
+            TMUX = "${lib.getExe pkgs.tmux}";
+          });
         };
       }
     )
