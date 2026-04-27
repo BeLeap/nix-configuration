@@ -25,7 +25,7 @@
           enable = true;
           package = pkgs.llm-agents.codex;
           settings = {
-            model = "gpt-5.4";
+            model = "gpt-5.5";
             hide_agent_reasoning = false;
 
             mcp_servers = {
