@@ -31,7 +31,7 @@
           packages = with pkgs; [
             htop
             wireshark
-            cascadia-code
+            nerd-fonts.hack
             nanum-gothic-coding
             ipcalc
             mtr

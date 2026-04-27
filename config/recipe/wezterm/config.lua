@@ -6,12 +6,12 @@ local config = {};
 config.term = "xterm-256color";
 
 config.font = wezterm.font_with_fallback {
-  { family = "Cascadia Code NF" },
+  { family = "Hack Nerd Font" },
   { family = "NanumGothicCoding" },
 };
 config.font_size = 16.0;
 config.window_frame = {
-  font = wezterm.font("Cascadia Code NF"),
+  font = wezterm.font("Hack Nerd Font"),
 };
 
 config.color_scheme = "Catppuccin Mocha";

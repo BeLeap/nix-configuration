@@ -4,7 +4,7 @@ _: {
       programs.rofi = {
         enable = true;
 
-        font = "Cascadia Mono NF 14";
+        font = "Hack Nerd Font 14";
       };
     }
   ];
