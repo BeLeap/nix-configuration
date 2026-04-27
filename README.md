@@ -13,8 +13,8 @@ This section is optimized for code agents making safe, reviewable changes.
   - `darwinConfigurations.<host>.system`
   - `nixosConfigurations.<host>.*`
 - Host inventory: `config/hosts.nix`
-- Base recipes: `config/recipes.nix`
-- Recipe loader: `config/default.nix`
+- Default recipe set: `config/recipe/default/default.nix`
+- Recipe loader: `config/recipe-loader.nix`
 
 ### Important Paths
 
@@ -22,6 +22,7 @@ This section is optimized for code agents making safe, reviewable changes.
 - `config/recipe/hm/`: shared Home Manager wiring
 - `config/recipe/macos/`: host-specific macOS recipes
 - `config/recipe/nixos/`: host-specific NixOS recipes
+- `config/recipe/default/`: shared baseline recipe list
 - `lib/mkSystem.nix`: per-host system assembly
 - `lib/build-configs.nix`: folds host metadata into flake outputs
 - `bin/run-vm`: helper for VM builds
@@ -53,12 +54,11 @@ This section is optimized for code agents making safe, reviewable changes.
 
 1. Keep edits small and recipe-scoped where possible.
 2. If adding behavior, prefer a new file under `config/recipe/<name>/default.nix`.
-3. Wire new recipes through `config/recipes.nix` (global) or a host recipe list in `config/hosts.nix`.
+3. Wire shared recipes through `config/recipe/default/default.nix`, nested recipe lists, or a host recipe list in `config/hosts.nix`.
 4. Run format + static checks before proposing completion.
 5. Build at least one affected host output to catch evaluation/build regressions.
 
 ### Known Caveats
 
 - CI currently builds only macOS host outputs in `.github/workflows/build.yml`.
-- `config/default.nix` recipe import is one level deep (`recursiveImport` is not fully recursive).
 - Keep branch naming assumptions out of scripts unless required by target repo.
