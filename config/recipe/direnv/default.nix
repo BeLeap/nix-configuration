@@ -5,7 +5,7 @@
       {pkgs, ...}: {
         programs.direnv = {
           enable = true;
-          package = pkgs.unstable.direnv;
+          package = pkgs.direnv;
 
           enableZshIntegration = true;
           enableBashIntegration = true;
