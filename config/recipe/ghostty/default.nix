@@ -28,7 +28,7 @@
           window-padding-x = 8;
           window-padding-y = 4;
 
-          initial-command = "${lib.getExe pkgs.zsh} -l -i -c ${lib.getExe pkgs.tmux} -As scratchpad";
+          initial-command = "${lib.getExe pkgs.zsh} -l -i -c \"${lib.getExe pkgs.tmux} new-session -As scratchpad\"";
         };
       };
     })
