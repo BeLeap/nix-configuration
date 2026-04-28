@@ -23,6 +23,7 @@
           font-size = 16;
 
           notify-on-command-finish = "unfocused";
+          notify-on-command-finish-action = "no-bell,notify";
 
           initial-command = "${lib.getExe pkgs.zsh} -l -i -c ${lib.getExe pkgs.tmux}";
         };
