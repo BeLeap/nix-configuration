@@ -10,7 +10,7 @@ _: {
         terminal = "tmux-256color";
         mouse = false;
         baseIndex = 1;
-        escapeTime = 10;
+        escapeTime = 0;
         aggressiveResize = true;
 
         plugins = [
@@ -23,7 +23,12 @@ _: {
         ];
 
         extraConfig = ''
+          set -as terminal-features ",xterm-ghostty:RGB"
+          set -as terminal-features ",xterm-ghostty:extkeys"
+          set -as terminal-features ",xterm-ghostty:clipboard"
+
           set -g allow-passthrough all
+          set -g set-clipboard on
 
           bind  c  new-window      -c "#{pane_current_path}"
           bind  %  split-window -h -c "#{pane_current_path}"
