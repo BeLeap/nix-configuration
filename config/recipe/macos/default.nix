@@ -58,11 +58,7 @@
 
         dock.persistent-apps =
           [
-            (
-              if (metadata.kind != "airgap")
-              then "/Applications/WezTerm.app"
-              else {app = "${pkgs.ghostty-bin}/Applications/Ghostty.app";}
-            )
+            {app = "${pkgs.ghostty-bin}/Applications/Ghostty.app";}
             {app = "${pkgs.firefox}/Applications/Firefox.app";}
             {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
           ]

@@ -14,6 +14,9 @@
 
         settings = {
           theme = "Catppuccin Mocha";
+
+          font-family = "Hack Nerd Font Mono";
+          font-size = 16;
         };
       };
     })
