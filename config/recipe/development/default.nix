@@ -3,7 +3,7 @@
   metadata,
 }: {
   recipes = [
-    "wezterm"
+    "ghostty"
     "tmux"
     "fish"
     "zsh"
