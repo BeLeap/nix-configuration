@@ -22,6 +22,8 @@
           font-family = "Hack Nerd Font Mono";
           font-size = 16;
 
+          notify-on-command-finish = "unfocused";
+
           initial-command = "${lib.getExe pkgs.zsh} -l -i -c ${lib.getExe pkgs.tmux}";
         };
       };
