@@ -11,6 +11,10 @@
         enableBashIntegration = true;
         enableZshIntegration = true;
         enableFishIntegration = true;
+
+        settings = {
+          theme = "Catppuccin Mocha";
+        };
       };
     })
   ];
