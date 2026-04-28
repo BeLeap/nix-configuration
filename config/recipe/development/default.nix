@@ -65,7 +65,6 @@
             just
             vault-bin
             ts
-            python313Packages.markitdown
           ];
 
           shellAliases = {
