@@ -1,6 +1,10 @@
 {metadata}: {
   hm = [
-    ({pkgs, ...}: {
+    ({
+      pkgs,
+      lib,
+      ...
+    }: {
       programs.ghostty = {
         enable = true;
         package =
@@ -17,6 +21,8 @@
 
           font-family = "Hack Nerd Font Mono";
           font-size = 16;
+
+          initial-command = "${lib.getExe pkgs.zsh} -l -i -c ${lib.getExe pkgs.tmux}";
         };
       };
     })
