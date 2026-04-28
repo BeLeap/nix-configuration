@@ -177,11 +177,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1774843105,
-        "narHash": "sha256-hGQQWbL2qTEcxTKc5CAUDAS9xKeCPLuxLcURpgKm2E8=",
+        "lastModified": 1777343346,
+        "narHash": "sha256-T5UOTNLzxFcD56DG00hHRUiocfbSgY6nxTycygrqeRY=",
         "owner": "BeLeap",
         "repo": "direnv-overlay",
-        "rev": "472b9f42f34ad846acbe00e46f7730a6e79f95ea",
+        "rev": "d962b8aafe21d1fdb5d222943a9c4ccadc842253",
         "type": "github"
       },
       "original": {
