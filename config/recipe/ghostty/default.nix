@@ -22,6 +22,8 @@
           font-family = "Hack Nerd Font Mono";
           font-size = 16;
 
+          keybind = "clear";
+
           notify-on-command-finish = "unfocused";
           notify-on-command-finish-action = "no-bell,notify";
 
