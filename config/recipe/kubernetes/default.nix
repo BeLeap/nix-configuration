@@ -7,20 +7,17 @@ _: {
         metadata,
         ...
       }: {
-        home.packages = with pkgs;
-          [
-            kubectl
-            kubectl-node-shell
-            kubectl-view-secret
-            kubectl-view-allocations
-            kubectx
-            kubectl-check
-            kubernetes-helm
-            kind
-          ]
-          ++ (lib.optionals (!(metadata.os == "linux" && metadata.arch == "aarch64")) [
-            pkgs.kubectl-sniff
-          ]);
+        home.packages = with pkgs; [
+          kubectl
+          kubectl-node-shell
+          kubectl-view-secret
+          kubectl-view-allocations
+          kubectl-sniff
+          kubectx
+          kubectl-check
+          kubernetes-helm
+          kind
+        ];
 
         programs.k9s = {
           enable = true;
