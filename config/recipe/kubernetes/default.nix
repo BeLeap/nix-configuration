@@ -13,7 +13,6 @@ _: {
           kubectl-view-secret
           kubectl-view-allocations
           kubectl-sniff
-          kubectx
           kubectl-check
           kubernetes-helm
           kind
