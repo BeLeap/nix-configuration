@@ -15,7 +15,7 @@ in {
     };
   };
   darwinConfigurations = lib.optionalAttrs (metadata.distribution == "macos") {
-    "${metadata.name}" = inputs.nix-darwin.lib.darwinSystem {
+    "${metadata.name}" = inputs."nix-darwin".lib.darwinSystem {
       inherit specialArgs modules;
     };
   };
