@@ -80,7 +80,7 @@
 
           sessionVariables = {
             EDITOR = "hx";
-            MAKEFLAGS = "-j$(nproc)";
+            MAKEFLAGS = "-j$(${pkgs.coreutils-full}/bin/nproc)";
             LC_ALL = "en_US.UTF-8";
           };
         };
