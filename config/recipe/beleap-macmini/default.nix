@@ -25,8 +25,10 @@ _: {
             ProgramArguments = [
               "--model"
               "mlx-community/gemma-4-e4b-it-4bit"
-              "--max-kv-size"
-              "32768"
+              "--kv-bits"
+              "3.5"
+              "--kv-quant-scheme"
+              "turboquant"
             ];
             KeepAlive = true;
             RunAtLoad = true;
