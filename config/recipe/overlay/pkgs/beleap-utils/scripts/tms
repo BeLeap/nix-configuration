@@ -2,8 +2,12 @@
 
 name=$1
 
+if [[ -p /dev/stdin ]]; then
+  name=$(cat)
+fi
+
 if [[ -z "$name" ]]; then
-  name=$(tmux list-sessions | fzf | awk -F ':' '{print $1}')
+  name=$(tmsf)
 fi
 
 if tmux has-session -t "$name" 2>/dev/null; then
