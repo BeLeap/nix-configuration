@@ -15,24 +15,23 @@ _: {
     ({pkgs, ...}: {
       home.packages = with pkgs; [
         isync
+        unstable.python313Packages.mlx-vlm
       ];
       launchd.agents = {
-        mlx-lm = {
+        ml-self-hosted = {
           enable = true;
           config = {
-            Program = "/opt/homebrew/bin/mlx_lm.server";
+            Program = "${pkgs.unstable.python313Packages.mlx-vlm}/bin/mlx_vlm.server";
             ProgramArguments = [
               "--model"
-              "mlx-community/Qwen3.5-4B-MLX-4bit"
-              "--prompt-cache-size"
-              "2"
-              "--prompt-cache-bytes"
-              "2GB"
+              "mlx-community/gemma-4-e4b-it-4bit"
+              "--max-kv-size"
+              "32768"
             ];
             KeepAlive = true;
             RunAtLoad = true;
-            StandardOutPath = "/tmp/mlx-lm.out.log";
-            StandardErrorPath = "/tmp/mlx-lm.err.log";
+            StandardOutPath = "/tmp/ml-self-hosted.out.log";
+            StandardErrorPath = "/tmp/ml-self-hosted.err.log";
             EnvironmentVariables = {
               OLLAMA_NUM_PARALLEL = "1";
               OLLAMA_MAX_LOADED_MODELS = "1";
