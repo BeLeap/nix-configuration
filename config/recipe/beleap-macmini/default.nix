@@ -24,11 +24,7 @@ _: {
             Program = "${pkgs.unstable.python313Packages.mlx-vlm}/bin/mlx_vlm.server";
             ProgramArguments = [
               "--model"
-              "mlx-community/gemma-4-e4b-it-4bit"
-              "--kv-bits"
-              "3.5"
-              "--kv-quant-scheme"
-              "turboquant"
+              "mlx-community/gemma-4-e4b-it-mxfp4"
             ];
             KeepAlive = true;
             RunAtLoad = true;
