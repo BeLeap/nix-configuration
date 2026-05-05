@@ -2,6 +2,10 @@
 
 name=$1
 
+if [[ -z "$name" ]]; then
+  name=$(tmux list-sessions | fzf | awk -F ':' '{print $1}')
+fi
+
 if tmux has-session -t "$name" 2>/dev/null; then
   tmux switch-client -t "$name"
 else
