@@ -22,7 +22,9 @@
           font-family = "Hack Nerd Font Mono";
           font-size = 16;
 
-          keybind = "clear";
+          keybind = [
+            "cmd+t=ignore"
+          ];
 
           notify-on-command-finish = "unfocused";
           notify-on-command-finish-action = "no-bell,notify";
