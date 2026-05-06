@@ -2,16 +2,7 @@ inputs @ {
   lib,
   metadata,
   recipes,
-  nixpkgs,
-  nixpkgs-unstable,
-  nix-darwin,
-  home-manager,
-  nur,
-  agenix,
-  llm-agents,
-  mac-app-util,
-  beleap-overlay,
-  direnv-overlay,
+  ...
 }: let
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = {inherit inputs metadata;};
@@ -24,7 +15,7 @@ in {
     };
   };
   darwinConfigurations = lib.optionalAttrs (metadata.distribution == "macos") {
-    "${metadata.name}" = inputs.nix-darwin.lib.darwinSystem {
+    "${metadata.name}" = inputs."nix-darwin".lib.darwinSystem {
       inherit specialArgs modules;
     };
   };
