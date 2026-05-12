@@ -1,9 +1,16 @@
-_: {
-  base = _: {
-    programs._1password-gui = {
-      enable = true;
-    };
-  };
+{
+  metadata,
+  lib,
+}: {
+  base =
+    lib.optional (metadata.distribution != "macos") (_: {
+      programs._1password-gui = {
+        enable = true;
+      };
+    })
+    ++ lib.optional (metadata.distribution == "macos") (_: {
+      homebrew.casks = ["1password"];
+    });
   hm = [
     (
       {pkgs, ...}: {
