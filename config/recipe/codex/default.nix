@@ -10,12 +10,37 @@
         config,
         pkgs,
         ...
-      }: {
+      }: let
+        codext = pkgs.writeTextFile rec {
+          name = "codext";
+          text = ''
+            #! ${lib.getExe pkgs.python3}
+
+            import json
+            import os
+            import sys
+            from pathlib import Path
+
+
+            def main() -> None:
+                project = json.dumps(str(Path.cwd()))
+                config = f'projects={{{project}={{trust_level="trusted"}}}}'
+                os.execvp("codex", ["codex", "-c", config, *sys.argv[1:]])
+
+
+            if __name__ == "__main__":
+                main()
+          '';
+          executable = true;
+          destination = "/bin/${name}";
+        };
+      in {
         imports = [(import ../../../lib/agenix/hm.nix {inherit agenix metadata;})];
 
         home.packages = with pkgs; [
           # NOTE: codex prefer ripgrep
           ripgrep
+          codext
         ];
         home.file.".codex/rules/default.rules".source = ./rules/default.rules;
         age.secrets = {
