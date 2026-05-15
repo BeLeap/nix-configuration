@@ -28,7 +28,7 @@ _: {
             };
             merge-tools.delta = {
               program = "${lib.getExe pkgs.delta}";
-              merge-args = ["-s" "$left" "$output" "--width=$width"];
+              diff-args = ["-s" "$left" "$right" "--width=$width"];
               diff-expected-exit-codes = [0 1];
             };
             aliases = {
