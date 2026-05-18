@@ -5,8 +5,13 @@ _: {
         programs.lsd = {
           enable = true;
 
-          enableZshIntegration = true;
-          enableBashIntegration = true;
+          enableZshIntegration = false;
+          enableBashIntegration = false;
+          enableFishIntegration = false;
+        };
+        home.shellAliases = {
+          ll = "lsd -l";
+          lla = "lsd -la";
         };
       }
     )
