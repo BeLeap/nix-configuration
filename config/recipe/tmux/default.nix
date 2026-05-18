@@ -1,6 +1,10 @@
 _: {
   hm = [
-    ({pkgs, ...}: {
+    ({
+      lib,
+      pkgs,
+      ...
+    }: {
       programs.tmux = {
         enable = true;
 
@@ -23,6 +27,9 @@ _: {
         ];
 
         extraConfig = ''
+          set -g default-shell ${lib.getExe pkgs.bashInteractive}
+          set -g default-command "${lib.getExe pkgs.unstable.fish} -l || exec ${lib.getExe pkgs.bashInteractive} --noprofile --norc"
+
           set -as terminal-features ",xterm-ghostty:RGB"
           set -as terminal-features ",xterm-ghostty:extkeys"
           set -as terminal-features ",xterm-ghostty:clipboard"
