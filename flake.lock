@@ -29,11 +29,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1779070742,
-        "narHash": "sha256-yR6Qo0QuN06lYmblifB13qDw1F4Xqwezsczeczv8lBw=",
+        "lastModified": 1779087235,
+        "narHash": "sha256-viaYezxHdV+vqTql8N2Qz9p//bXiG+Ln93e9Sp66Mys=",
         "owner": "BeLeap",
         "repo": "nix-overlay",
-        "rev": "e44b8a55b595ae3810c6c49074a9afba2792ca12",
+        "rev": "afca9fc99a082a3f0a2aa079823fb642bddce31b",
         "type": "github"
       },
       "original": {
