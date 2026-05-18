@@ -10,6 +10,7 @@ _: {
           enableFishIntegration = false;
         };
         home.shellAliases = {
+          ls = "lsd";
           ll = "lsd -l";
           lla = "lsd -la";
         };
