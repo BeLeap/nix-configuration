@@ -1,8 +1,21 @@
 {
   lib,
   metadata,
-}: (lib.optionalAttrs (metadata.distribution == "nixos") {
-  base = _: {
+}: {
+  base = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      nftables
+      bcc
+      bind
+      bpftrace
+      ethtool
+      iproute2
+      lsof
+      procps
+      strace
+      tcpdump
+    ];
+
     security.polkit.enable = true;
 
     users.groups.beleap = {};
@@ -13,4 +26,12 @@
       extraGroups = ["wheel"];
     };
   };
-})
+  hm = [
+    (_: {
+      xdg.userDirs = {
+        enable = true;
+        createDirectories = true;
+      };
+    })
+  ];
+}

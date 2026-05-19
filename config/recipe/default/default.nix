@@ -10,8 +10,6 @@ _: {
     "nix"
     "agenix"
 
-    "nixos"
-
     "development"
     "firefox"
 
