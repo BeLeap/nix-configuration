@@ -17,4 +17,12 @@
       extraGroups = ["wheel"];
     };
   };
+  hm = [
+    (_: {
+      xdg.userDirs = {
+        enable = true;
+        createDirectories = true;
+      };
+    })
+  ];
 }
