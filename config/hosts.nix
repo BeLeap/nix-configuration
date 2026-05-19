@@ -53,6 +53,7 @@
     gui = false;
     recipes = [
       "default"
+      "nixos"
       "vm"
       "nixos/vm"
       "personal"
@@ -69,6 +70,7 @@
     gui = false;
     recipes = [
       "default"
+      "nixos"
       "vm"
       "nixos/vm"
     ];

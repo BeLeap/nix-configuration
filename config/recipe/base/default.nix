@@ -1,8 +1,4 @@
-{
-  lib,
-  metadata,
-  ...
-}: {
+{metadata, ...}: {
   base = {pkgs, ...}: {
     programs = {
       bash.enable = true;
@@ -24,23 +20,11 @@
 
     time.timeZone = "Asia/Seoul";
 
-    environment.systemPackages = with pkgs;
-      [
-        vim
-        curl
-        git
-      ]
-      ++ lib.optionals (metadata.distribution == "nixos") [
-        bcc
-        bind
-        bpftrace
-        ethtool
-        iproute2
-        lsof
-        procps
-        strace
-        tcpdump
-      ];
+    environment.systemPackages = with pkgs; [
+      vim
+      curl
+      git
+    ];
   };
   hm = [
     (

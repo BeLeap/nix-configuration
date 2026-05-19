@@ -5,6 +5,15 @@
   base = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       nftables
+      bcc
+      bind
+      bpftrace
+      ethtool
+      iproute2
+      lsof
+      procps
+      strace
+      tcpdump
     ];
 
     security.polkit.enable = true;
