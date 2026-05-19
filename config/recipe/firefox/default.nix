@@ -29,6 +29,7 @@ _: {
         profiles = {
           "beleap" = {
             search = {
+              force = true;
               default = "ddg";
               engines = {
                 ddg = {
