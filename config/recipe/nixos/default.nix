@@ -1,8 +1,12 @@
 {
   lib,
   metadata,
-}: (lib.optionalAttrs (metadata.distribution == "nixos") {
-  base = _: {
+}: {
+  base = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      nftables
+    ];
+
     security.polkit.enable = true;
 
     users.groups.beleap = {};
@@ -13,4 +17,4 @@
       extraGroups = ["wheel"];
     };
   };
-})
+}
