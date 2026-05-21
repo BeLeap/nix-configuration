@@ -13,7 +13,7 @@ _: {
           ls = "lsd";
           ll = "lsd -l";
           lla = "lsd -la";
-          lt = "lsd -t";
+          lt = "lsd -lt";
         };
       }
     )
