@@ -48,6 +48,7 @@ _: {
               b = ["bookmark"];
               ba = ["bookmark" "advance"];
               sq = ["squash" "-i"];
+              dfnav = ["diff" "--config=ui.diff-formatter=':git'" "--config=ui.pager='${lib.getExe pkgs.diffnav}'"];
             };
             templates = {
               draft_commit_description = ''
