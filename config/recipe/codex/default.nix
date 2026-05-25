@@ -11,6 +11,43 @@
         pkgs,
         ...
       }: let
+        focusCodexApproval = pkgs.writeShellApplication {
+          name = "focus-codex-approval";
+          runtimeInputs = [pkgs.tmux];
+          text = ''
+            set -euo pipefail
+
+            target="''${CODEX_TMUX_TARGET:-''${TMUX_PANE:-}}"
+
+            if [ -n "$target" ]; then
+              window_target="$(tmux display-message -p -t "$target" '#S:#I' 2>/dev/null || true)"
+              if [ -n "$window_target" ]; then
+                tmux switch-client -t "$window_target" 2>/dev/null || true
+                tmux select-window -t "$window_target" 2>/dev/null || true
+              fi
+              tmux select-pane -t "$target" 2>/dev/null || true
+            else
+              tmux select-window -t ":codex" 2>/dev/null || true
+            fi
+
+            if [ "$(uname -s)" = "Darwin" ]; then
+              case "''${TERM_PROGRAM:-}" in
+                Apple_Terminal)
+                  /usr/bin/osascript -e 'tell application "Terminal" to activate' >/dev/null 2>&1 || true
+                  ;;
+                iTerm.app | iTerm2)
+                  /usr/bin/osascript -e 'tell application "iTerm" to activate' >/dev/null 2>&1 || true
+                  ;;
+                WezTerm)
+                  /usr/bin/osascript -e 'tell application "WezTerm" to activate' >/dev/null 2>&1 || true
+                  ;;
+                Ghostty | ghostty | "")
+                  /usr/bin/osascript -e 'tell application "Ghostty" to activate' >/dev/null 2>&1 || true
+                  ;;
+              esac
+            fi
+          '';
+        };
         codext = pkgs.writeTextFile rec {
           name = "codext";
           text = ''
@@ -65,7 +102,28 @@
 
             runtime_metrics = true;
 
+            hooks = {
+              PermissionRequest = [
+                {
+                  matcher = ".*";
+                  hooks = [
+                    {
+                      type = "command";
+                      command = "${lib.getExe focusCodexApproval}";
+                      timeout = 5;
+                      statusMessage = "Focusing Codex approval";
+                    }
+                  ];
+                }
+              ];
+            };
+
             tui = {
+              notifications = [
+                "approval-requested"
+                "agent-turn-complete"
+              ];
+
               status_line = [
                 "model-with-reasoning"
                 "context-remaining"
