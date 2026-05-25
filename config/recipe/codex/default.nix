@@ -103,6 +103,10 @@
             runtime_metrics = true;
 
             hooks = {
+              state = {
+                "${config.home.homeDirectory}/.codex/config.toml:permission_request:0:0".trusted_hash = "sha256:95abd7dbcaec8f7430f749de9e20d9cd9c45fbba75eb268c53d037a3444d5b24";
+              };
+
               PermissionRequest = [
                 {
                   matcher = ".*";
