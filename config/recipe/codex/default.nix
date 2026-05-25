@@ -17,6 +17,14 @@
           text = ''
             set -euo pipefail
 
+            if [ "$(uname -s)" = "Darwin" ]; then
+              /usr/bin/osascript \
+                -e 'display notification "Approval requested. Focusing Codex in 5 seconds." with title "Codex"' \
+                >/dev/null 2>&1 || true
+            fi
+
+            sleep 5
+
             target="''${CODEX_TMUX_TARGET:-''${TMUX_PANE:-}}"
 
             if [ -n "$target" ]; then
@@ -104,7 +112,7 @@
 
             hooks = {
               state = {
-                "${config.home.homeDirectory}/.codex/config.toml:permission_request:0:0".trusted_hash = "sha256:95abd7dbcaec8f7430f749de9e20d9cd9c45fbba75eb268c53d037a3444d5b24";
+                "${config.home.homeDirectory}/.codex/config.toml:permission_request:0:0".trusted_hash = "sha256:b221147b013ade09adf1b98730c14270f8649adc1a14c7e0effb3ddf40dad094";
               };
 
               PermissionRequest = [
@@ -114,8 +122,8 @@
                     {
                       type = "command";
                       command = "${lib.getExe focusCodexApproval}";
-                      timeout = 5;
-                      statusMessage = "Focusing Codex approval";
+                      timeout = 10;
+                      statusMessage = "Focusing Codex approval in 5 seconds";
                     }
                   ];
                 }
