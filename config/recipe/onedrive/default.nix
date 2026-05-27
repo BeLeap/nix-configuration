@@ -23,6 +23,10 @@ _: {
             "10m"
             "--poll-interval"
             "30s"
+            "--vfs-cache-mode"
+            "full"
+            "--vfs-cache-max-size"
+            "100G"
           ];
           KeepAlive = true;
           RunAtLoad = true;
