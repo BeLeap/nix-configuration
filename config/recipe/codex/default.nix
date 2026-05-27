@@ -13,19 +13,41 @@
       }: let
         focusCodexApproval = pkgs.writeShellApplication {
           name = "focus-codex-approval";
-          runtimeInputs = [pkgs.tmux];
+          runtimeInputs =
+            [pkgs.tmux]
+            ++ lib.optionals pkgs.stdenv.isDarwin [pkgs.aerospace];
           text = ''
             set -euo pipefail
 
-            if [ "$(uname -s)" = "Darwin" ]; then
-              /usr/bin/osascript \
-                -e 'display notification "Approval requested. Focusing Codex in 5 seconds." with title "Codex"' \
-                >/dev/null 2>&1 || true
+            target="''${CODEX_TMUX_TARGET:-''${TMUX_PANE:-}}"
+
+            terminal_workspace_is_focused() {
+              [ "$(uname -s)" = "Darwin" ] || return 0
+              [ "$(aerospace list-workspaces --focused 2>/dev/null || true)" = "1" ]
+            }
+
+            target_is_active() {
+              [ -n "$target" ] || return 1
+              [ "$(tmux display-message -p -t "$target" '#{window_active}:#{pane_active}' 2>/dev/null || true)" = "1:1" ]
+            }
+
+            if target_is_active && terminal_workspace_is_focused; then
+              sleep_seconds=0
+            else
+              sleep_seconds=5
             fi
 
-            sleep 5
+            if [ "$(uname -s)" = "Darwin" ]; then
+              if [ "$sleep_seconds" -gt 0 ]; then
+                /usr/bin/osascript \
+                  -e 'display notification "Approval requested. Focusing Codex in 5 seconds." with title "Codex"' \
+                  >/dev/null 2>&1 || true
+              fi
+            fi
 
-            target="''${CODEX_TMUX_TARGET:-''${TMUX_PANE:-}}"
+            if [ "$sleep_seconds" -gt 0 ]; then
+              sleep "$sleep_seconds"
+            fi
 
             if [ -n "$target" ]; then
               window_target="$(tmux display-message -p -t "$target" '#S:#I' 2>/dev/null || true)"
@@ -39,20 +61,7 @@
             fi
 
             if [ "$(uname -s)" = "Darwin" ]; then
-              case "''${TERM_PROGRAM:-}" in
-                Apple_Terminal)
-                  /usr/bin/osascript -e 'tell application "Terminal" to activate' >/dev/null 2>&1 || true
-                  ;;
-                iTerm.app | iTerm2)
-                  /usr/bin/osascript -e 'tell application "iTerm" to activate' >/dev/null 2>&1 || true
-                  ;;
-                WezTerm)
-                  /usr/bin/osascript -e 'tell application "WezTerm" to activate' >/dev/null 2>&1 || true
-                  ;;
-                Ghostty | ghostty | "")
-                  /usr/bin/osascript -e 'tell application "Ghostty" to activate' >/dev/null 2>&1 || true
-                  ;;
-              esac
+              aerospace workspace 1 >/dev/null 2>&1 || true
             fi
           '';
         };
@@ -112,7 +121,7 @@
 
             hooks = {
               state = {
-                "${config.home.homeDirectory}/.codex/config.toml:permission_request:0:0".trusted_hash = "sha256:b221147b013ade09adf1b98730c14270f8649adc1a14c7e0effb3ddf40dad094";
+                "${config.home.homeDirectory}/.codex/config.toml:permission_request:0:0".trusted_hash = "sha256:9cce3fe8ad0b126b86b28202c0d7c9d5791e68a0ec516c954637342ecee050c4";
               };
 
               PermissionRequest = [
@@ -123,7 +132,7 @@
                       type = "command";
                       command = "${lib.getExe focusCodexApproval}";
                       timeout = 10;
-                      statusMessage = "Focusing Codex approval in 5 seconds";
+                      statusMessage = "Focusing Codex approval if needed";
                     }
                   ];
                 }

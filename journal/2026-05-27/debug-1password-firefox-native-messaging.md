@@ -1,0 +1,21 @@
+# Debug 1Password Firefox native messaging
+
+- Investigated why 1Password browser integration/native messaging was not working with Firefox on macOS.
+- Firefox is managed through Home Manager/Nix:
+  - Trampoline app: `~/Applications/Home Manager Trampolines/Firefox.app`
+  - Trampoline opens `/nix/store/kqkf89zahj36g0xv5hq642adqqwr553x-firefox-151.0.1/Applications/Firefox.app/`
+  - Bundle identifier: `org.nixos.firefox`
+- The 1Password native messaging manifest exists:
+  - `~/Library/Application Support/Mozilla/NativeMessagingHosts/com.1password.1password.json`
+  - It points to `/Applications/1Password.app/Contents/Library/LoginItems/1Password Browser Helper.app/Contents/MacOS/1Password-BrowserSupport`
+  - The target BrowserSupport binary is executable.
+- The manifest `allowed_extensions` includes the installed 1Password Firefox extension ID:
+  - `{d634138d-c276-4fc8-924b-40a0ea21d284}`
+- The active Firefox profile is `Profiles/beleap`, and `extensions.json` shows 1Password active with that same extension ID.
+- The Nix Firefox app is not signed:
+  - `codesign -dv /nix/store/kqkf89zahj36g0xv5hq642adqqwr553x-firefox-151.0.1/Applications/Firefox.app`
+  - Result: `code object is not signed at all`
+- 1Password's current support docs say the desktop app verifies the browser's code signature on macOS before accepting the browser extension connection. That makes the unsigned Nix Firefox app the likely root cause, not a missing native messaging host.
+- Practical fix options:
+  - Use a signed Firefox app in `/Applications`, for example Homebrew cask Firefox, for 1Password integration.
+  - Or investigate whether a locally signed/copy-in-Applications Firefox can satisfy 1Password, but 1Password's Mac docs specifically call for a browser signed by Apple in the Applications folder.
