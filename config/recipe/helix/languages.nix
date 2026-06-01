@@ -60,7 +60,7 @@
     scope = "source.kotlin";
     injection-regex = "kotlin";
     auto-format = false;
-    language-servers = ["kotlin-lsp"];
+    language-servers = ["kmp-lsp"];
   }
   {
     name = "java";

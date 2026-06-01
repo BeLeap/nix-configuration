@@ -8,8 +8,8 @@
     args = ["lsp-proxy"];
     required-root-patterns = ["biome.json"];
   };
-  kotlin-lsp = {
-    command = "${lib.getExe pkgs.rusty-kotlin-lsp}";
+  kmp-lsp = {
+    command = "${lib.getExe pkgs.kmp-lsp}";
   };
   typescript-language-server = with pkgs; {
     command = "${lib.getExe typescript-language-server}";
