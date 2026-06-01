@@ -121,7 +121,7 @@
 
             hooks = {
               state = {
-                "${config.home.homeDirectory}/.codex/config.toml:permission_request:0:0".trusted_hash = "sha256:9cce3fe8ad0b126b86b28202c0d7c9d5791e68a0ec516c954637342ecee050c4";
+                "${config.home.homeDirectory}/.codex/config.toml:permission_request:0:0".trusted_hash = "sha256:e97584cd8c170a6dc8dd63f53d103c4f3de3b4fe3af30a0555393396d85c8d45";
               };
 
               PermissionRequest = [
