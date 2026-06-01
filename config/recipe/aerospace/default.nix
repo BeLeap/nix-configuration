@@ -27,7 +27,7 @@ _: {
             keepAlive = true;
           };
 
-          userSettings = {
+          settings = {
             default-root-container-layout = "tiles";
 
             key-mapping = {
