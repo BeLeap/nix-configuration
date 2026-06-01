@@ -3,7 +3,7 @@
   callPackage,
   metadatas,
 }:
-lib.fold
+lib.foldr
 (metadata: acc: let
   system = callPackage ./mkSystem.nix {
     inherit metadata;
