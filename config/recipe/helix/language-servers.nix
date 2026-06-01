@@ -11,7 +11,7 @@
   kotlin-lsp = {
     command = "${lib.getExe pkgs.rusty-kotlin-lsp}";
   };
-  typescript-language-server = with pkgs.nodePackages; {
+  typescript-language-server = with pkgs; {
     command = "${lib.getExe typescript-language-server}";
     args = [
       "--stdio"
