@@ -31,5 +31,9 @@ tools to resolve library id and get library docs without me having to explicitly
 
 - Record work history and any information useful for the next task in
   `journal/<date>/<appropriate_title>.md`.
+- Journal entries are working notes for continuity. When preparing a commit,
+  decide whether to include `journal/` entries based on relevance: include them
+  when they help explain or support the change, but do not treat them as
+  automatically required just because they were written.
 - Note: a coding agent is actively recording entries in `journal/`, so treat it as
   an existing source of task history and operational context.
