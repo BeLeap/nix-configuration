@@ -16,6 +16,11 @@ _: {
           folders = {
             "${config.home.homeDirectory}/Sync" = {
               id = "sync";
+
+              devices = [
+                "beleap-m1air"
+                "beleap-s24"
+              ];
             };
           };
         };
