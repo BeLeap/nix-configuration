@@ -57,7 +57,6 @@ _: {
             };
             extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
               sidebery
-              onepassword-password-manager
               wappalyzer
               consent-o-matic
               joplin-web-clipper
