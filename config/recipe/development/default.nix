@@ -4,6 +4,7 @@
 }: {
   recipes = [
     "ghostty"
+    "alacritty"
     "tmux"
     "fish"
     "zsh"
