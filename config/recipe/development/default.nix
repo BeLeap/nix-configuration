@@ -3,7 +3,6 @@
   metadata,
 }: {
   recipes = [
-    "ghostty"
     "alacritty"
     "tmux"
     "fish"
