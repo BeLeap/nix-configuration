@@ -58,7 +58,7 @@
 
         dock.persistent-apps =
           [
-            {app = "${pkgs.ghostty-bin}/Applications/Ghostty.app";}
+            {app = "${pkgs.alacritty}/Applications/Alacritty.app";}
             {app = "${pkgs.firefox}/Applications/Firefox.app";}
             {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
           ]

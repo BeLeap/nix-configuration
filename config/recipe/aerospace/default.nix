@@ -97,6 +97,13 @@ _: {
               {
                 check-further-callbacks = false;
                 "if" = {
+                  app-id = "org.alacritty";
+                };
+                run = ["move-node-to-workspace 1"];
+              }
+              {
+                check-further-callbacks = false;
+                "if" = {
                   app-id = "com.apple.Safari";
                 };
                 run = ["move-node-to-workspace 2"];
