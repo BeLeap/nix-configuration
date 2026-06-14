@@ -11,6 +11,7 @@ _: {
 
           enableZshIntegration = true;
           enableBashIntegration = true;
+          enableFishIntegration = false;
           enableNushellIntegration = true;
 
           settings =
