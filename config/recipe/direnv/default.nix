@@ -1,6 +1,10 @@
-{direnv-overlay}: {
+{
+  direnv-overlay,
+  direnv-instant,
+}: {
   hm = [
     direnv-overlay.homeManagerModules.default
+    direnv-instant.homeModules.direnv-instant
     (
       {pkgs, ...}: {
         programs.direnv = {
@@ -16,9 +20,8 @@
             warn_timeout = "1m";
           };
         };
-        programs.direnv-overlay = {
-          enable = true;
-        };
+        programs.direnv-overlay.enable = true;
+        programs.direnv-instant.enable = true;
       }
     )
   ];
