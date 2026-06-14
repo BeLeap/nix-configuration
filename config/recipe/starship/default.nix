@@ -27,6 +27,13 @@ _: {
                 disabled = false;
               };
 
+              git_branch = {
+                disabled = true;
+              };
+              git_status = {
+                disabled = true;
+              };
+
               shlvl = {
                 disabled = false;
                 threshold = 2;
@@ -35,6 +42,14 @@ _: {
 
               os = {
                 disabled = false;
+              };
+
+              custom = {
+                jj = {
+                  when = "${lib.getExe pkgs.jj-starship} detect";
+                  shell = ["${lib.getExe pkgs.jj-starship}"];
+                  format = "[$output]";
+                };
               };
             };
         };

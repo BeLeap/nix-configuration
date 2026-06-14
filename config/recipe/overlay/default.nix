@@ -7,6 +7,7 @@ _: {
       inputs.nur.overlays.default
       inputs.llm-agents.overlays.default
       inputs.beleap-overlay.overlays.default
+      inputs.jj-starship.overlays.default
       (_final: prev: {
         unstable = import inputs.nixpkgs-unstable {
           inherit (prev) config;

@@ -39,6 +39,7 @@
     beleap-overlay.url = "github:BeLeap/nix-overlay";
     direnv-overlay.url = "github:BeLeap/direnv-overlay";
     direnv-instant.url = "github:Mic92/direnv-instant";
+    jj-starship.url = "github:dmmulroy/jj-starship/v0.7.1";
   };
 
   outputs = inputs @ {nixpkgs, ...}: let
