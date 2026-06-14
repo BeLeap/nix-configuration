@@ -28,7 +28,7 @@ _: {
                 "-l"
                 "-i"
                 "-c"
-                "${lib.getExe pkgs.tmux} new-session -As sp"
+                "exec ${lib.getExe pkgs.tmux} new-session -As sp"
               ];
             };
           };
