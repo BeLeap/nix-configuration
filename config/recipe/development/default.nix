@@ -8,6 +8,7 @@
     "fish"
     "zsh"
     "lsd"
+    "starship"
     "carapace"
     "helix"
     "zoxide"
