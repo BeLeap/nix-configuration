@@ -30,6 +30,9 @@ _: {
               git_branch = {
                 disabled = true;
               };
+              git_commit = {
+                disabled = true;
+              };
               git_status = {
                 disabled = true;
               };
@@ -46,9 +49,27 @@ _: {
 
               custom = {
                 jj = {
-                  when = "${lib.getExe pkgs.jj-starship} detect";
-                  shell = ["${lib.getExe pkgs.jj-starship}"];
-                  format = "[$output]";
+                  when = "jj --ignore-working-copy root";
+                  command = ''
+                    jj log --revisions @ --limit 1 --ignore-working-copy --no-graph --color always --template '
+                      separate(" ",
+                        bookmarks.map(|x| truncate_end(10, x.name(), "…")).join(" "),
+                        tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),
+                        surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
+                        if(conflict, "conflict"),
+                        if(divergent, "divergent"),
+                        if(hidden, "hidden"),
+                      )
+                    '
+                  '';
+                  format = "\\[[$output]($style)\\]";
+                };
+                jjstate = {
+                  when = "jj --ignore-working-copy root";
+                  command = ''
+                    jj log -r@ -n1 --ignore-working-copy --no-graph -T "" --stat | tail -n1 | ${lib.getExe pkgs.sd} "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ''${1}c ''${2}i ''${3}d' | ${lib.getExe pkgs.sd} " 0." ""
+                  '';
+                  format = "\\[[$output]($style)\\]";
                 };
               };
             };
