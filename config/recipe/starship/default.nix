@@ -52,10 +52,10 @@ _: {
                   shell = customShell;
                 };
                 jj_bookmark = {
-                  when = "jj --ignore-working-copy root >/dev/null 2>&1 && test \"$(jj log --ignore-working-copy -r @ --color never --no-graph -T 'bookmarks.len()')\" -gt 0";
+                  when = "jj --ignore-working-copy root >/dev/null 2>&1 && test -n \"$(jj log --ignore-working-copy -r 'heads(::@ & bookmarks())' --color never --no-graph -T 'bookmarks.map(|b| b.name()).join(\" \")')\"";
                   symbol = "jjb";
                   command = ''
-                    jj log --ignore-working-copy -r @ --color always --no-graph -T 'bookmarks.map(|b| b.name()).join(" ")'
+                    jj log --ignore-working-copy -r 'heads(::@ & bookmarks())' --color always --no-graph -T 'bookmarks.map(|b| b.name()).join(" ")'
                   '';
                   format = "\\[[$symbol $output]($style)\\]";
                   shell = customShell;
