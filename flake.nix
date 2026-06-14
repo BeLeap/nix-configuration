@@ -38,6 +38,7 @@
     mac-app-util.url = "github:hraban/mac-app-util";
     beleap-overlay.url = "github:BeLeap/nix-overlay";
     direnv-overlay.url = "github:BeLeap/direnv-overlay";
+    direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
   outputs = inputs @ {nixpkgs, ...}: let
