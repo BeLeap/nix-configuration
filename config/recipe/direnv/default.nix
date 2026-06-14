@@ -22,7 +22,12 @@
             };
           };
           direnv-overlay.enable = true;
-          direnv-instant.enable = true;
+          direnv-instant = {
+            enable = true;
+            settings = {
+              mux_delay = 1;
+            };
+          };
         };
       }
     )
