@@ -11,10 +11,6 @@ _: {
         programs.starship = {
           enable = true;
 
-          enableZshIntegration = true;
-          enableBashIntegration = true;
-          enableNushellIntegration = true;
-
           settings =
             lib.recursiveUpdate
             (

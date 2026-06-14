@@ -12,10 +12,9 @@
             enable = true;
             package = pkgs.direnv;
 
-            enableZshIntegration = true;
-            enableBashIntegration = true;
-
             silent = true;
+
+            mise.enable = true;
             config = {
               load_dotenv = true;
               warn_timeout = "1m";
