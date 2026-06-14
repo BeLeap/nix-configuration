@@ -38,7 +38,7 @@
     mac-app-util.url = "github:hraban/mac-app-util";
     beleap-overlay.url = "github:BeLeap/nix-overlay";
     direnv-overlay.url = "github:BeLeap/direnv-overlay";
-    direnv-instant.url = "github:Mic92/direnv-instant";
+    direnv-instant.url = "github:Mic92/direnv-instant/untagged-de17ad4b5aee16b95332";
     jj-starship.url = "github:dmmulroy/jj-starship/v0.7.1";
   };
 
