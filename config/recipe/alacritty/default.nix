@@ -18,6 +18,7 @@ _: {
             decorations = "None";
             padding = {
               x = 8;
+              y = 8;
             };
           };
           terminal = {
