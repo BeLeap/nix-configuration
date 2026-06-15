@@ -1,20 +1,16 @@
 {
   pkgs,
   metadata,
-  lib,
   ...
 }: {
   imports = [
-    ./common.nix
+    ../common.nix
   ];
 
   home = {
-    packages = with pkgs;
-      [
-        mas
-      ]
-      ++ (lib.optionals (metadata.kind == "personal") [])
-      ++ (lib.optionals (metadata.kind == "work") []);
+    packages = with pkgs; [
+      mas
+    ];
 
     homeDirectory = "/Users/${metadata.usernameLower}";
 

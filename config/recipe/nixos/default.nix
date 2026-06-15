@@ -1,7 +1,11 @@
-{
-  lib,
-  metadata,
-}: {
+{metadata}: {
+  recipes = [
+    "hm/nixos"
+    "nix/nixos"
+    "nh/nixos"
+    "ws-cleanup/nixos"
+  ];
+
   base = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       nftables

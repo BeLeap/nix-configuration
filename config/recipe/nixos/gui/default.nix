@@ -1,9 +1,12 @@
-{
-  lib,
-  metadata,
-}: {
+_: {
+  recipes = [
+    "hyprland"
+    "rofi"
+    "waybar"
+  ];
+
   base = [
-    (lib.optionalAttrs (metadata.distribution == "nixos") (
+    (
       {pkgs, ...}: {
         hardware.graphics.enable = true;
 
@@ -15,9 +18,9 @@
 
         services = {
           displayManager = {
-            enable = metadata.gui;
+            enable = true;
             sddm = {
-              enable = metadata.gui;
+              enable = true;
 
               wayland = {
                 enable = true;
@@ -27,7 +30,7 @@
         };
 
         i18n.inputMethod = {
-          enable = metadata.gui;
+          enable = true;
           type = "kime";
           kime = {
             extraConfig = ''
@@ -130,6 +133,6 @@
 
         environment.systemPackages = [pkgs.wl-clipboard];
       }
-    ))
+    )
   ];
 }

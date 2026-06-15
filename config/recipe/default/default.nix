@@ -3,7 +3,6 @@ _: {
     # base setup
     "overlay"
     "hm"
-    "macAppUtil"
 
     # good to share among all hosts
     "base"

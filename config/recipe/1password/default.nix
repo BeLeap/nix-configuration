@@ -1,16 +1,4 @@
-{
-  metadata,
-  lib,
-}: {
-  base =
-    lib.optional (metadata.distribution != "macos") (_: {
-      programs._1password-gui = {
-        enable = true;
-      };
-    })
-    ++ lib.optional (metadata.distribution == "macos") (_: {
-      homebrew.casks = ["1password"];
-    });
+_: {
   hm = [
     (
       {pkgs, ...}: {

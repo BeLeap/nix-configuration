@@ -1,73 +1,77 @@
 [
   {
     name = "beleap-m1air";
-    kind = "personal";
     os = "darwin";
     arch = "aarch64";
     distribution = "macos";
-    gui = true;
     recipes = [
       "default"
       "macos"
+      "macos/homebrew"
+      "macos/personal"
       "beleap-m1air"
       "personal"
       "onedrive"
+      "1password"
+      "1password/macos"
+      "kdeconnect-mac"
     ];
   }
   {
     name = "beleap-macmini";
-    kind = "personal";
     os = "darwin";
     arch = "aarch64";
     distribution = "macos";
-    gui = true;
     recipes = [
       "default"
       "macos"
+      "macos/homebrew"
+      "macos/personal"
       "beleap-macmini"
       "personal"
       "onedrive"
+      "1password"
+      "1password/macos"
+      "kdeconnect-mac"
     ];
   }
   {
     name = "csjang-m3pro";
-    kind = "work";
     username = "cs.jang";
     email = "cs.jang@toss.im";
     os = "darwin";
     arch = "aarch64";
     distribution = "macos";
-    gui = true;
     recipes = [
       "default"
       "macos"
+      "macos/homebrew"
+      "macos/work"
       "work"
     ];
   }
   {
     name = "vm-arm64-Darwin-personal";
-    kind = "personal";
     os = "linux";
     arch = "aarch64";
     distribution = "nixos";
-    gui = false;
     recipes = [
       "default"
       "nixos"
       "vm"
       "nixos/vm"
       "personal"
+      "1password"
+      "1password/nixos"
     ];
   }
   {
     name = "vm-arm64-Darwin-work";
-    kind = "work";
     username = "cs.jang";
     email = "cs.jang@toss.im";
     os = "linux";
     arch = "aarch64";
     distribution = "nixos";
-    gui = false;
     recipes = [
       "default"
       "nixos"

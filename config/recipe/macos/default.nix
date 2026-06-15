@@ -1,7 +1,14 @@
-{
-  lib,
-  metadata,
-}: {
+{metadata}: {
+  recipes = [
+    "hm/macos"
+    "macAppUtil"
+    "nix/macos"
+    "nh/macos"
+    "podman/macos"
+    "ws-cleanup/macos"
+    "aerospace"
+  ];
+
   base = {
     pkgs,
     inputs,
@@ -11,34 +18,6 @@
 
     # The platform the configuration will be used on.
     nixpkgs.hostPlatform = "aarch64-darwin";
-
-    homebrew = {
-      enable = metadata.kind != "airgap";
-
-      onActivation = {
-        cleanup = "zap";
-        extraFlags = ["--verbose"];
-      };
-
-      taps = [];
-      brews = ["mas"];
-      casks =
-        [
-          "meetingbar"
-          "karabiner-elements"
-          "wireshark-chmodbpf"
-          "gureumkim"
-        ]
-        ++ (lib.optionals (metadata.kind == "personal") [
-          "logseq"
-          "tailscale-app"
-        ]);
-      masApps =
-        {}
-        // (lib.optionalAttrs (metadata.kind == "personal") {
-          KakaoTalk = 869223134;
-        });
-    };
 
     system = {
       # Set Git commit hash for darwin-version.
@@ -56,21 +35,11 @@
       defaults = {
         dock.autohide = true;
 
-        dock.persistent-apps =
-          [
-            {app = "${pkgs.alacritty}/Applications/Alacritty.app";}
-            {app = "${pkgs.firefox}/Applications/Firefox.app";}
-            {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
-          ]
-          ++ (lib.optionals (metadata.kind == "personal") [
-            {app = "${pkgs.discord}/Applications/Discord.app";}
-            {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
-            {app = "${pkgs.google-messages}/Applications/Messages.app";}
-          ])
-          ++ (lib.optionals (metadata.kind == "work") [
-            {app = "/Applications/IntelliJ IDEA.app";}
-            {app = "/Applications/DataGrip.app";}
-          ]);
+        dock.persistent-apps = [
+          {app = "${pkgs.alacritty}/Applications/Alacritty.app";}
+          {app = "${pkgs.firefox}/Applications/Firefox.app";}
+          {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
+        ];
 
         finder = {
           AppleShowAllExtensions = true;
