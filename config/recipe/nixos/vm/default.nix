@@ -1,7 +1,4 @@
-{
-  lib,
-  metadata,
-}: (lib.optionalAttrs (metadata.distribution == "nixos" && lib.hasPrefix "vm-" metadata.name) {
+{metadata}: {
   base = {modulesPath, ...}: {
     imports = [
       "${modulesPath}/virtualisation/qemu-vm.nix"
@@ -29,4 +26,4 @@
 
     system.stateVersion = "25.05";
   };
-})
+}

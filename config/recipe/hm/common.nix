@@ -1,6 +1,5 @@
 {
   metadata,
-  pkgs,
   lib,
   config,
   ...
@@ -14,11 +13,6 @@
       LC_CTYPE = "en_US.UTF-8";
       LC_ALL = "en_US.UTF-8";
     };
-
-    # Discord packages is not supported on aarch64-linux
-    packages = lib.optionals (metadata.kind == "personal" && metadata.platform == "x86_64-linux") [
-      pkgs.discord
-    ];
 
     username = metadata.usernameLower;
 

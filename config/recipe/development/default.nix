@@ -1,7 +1,4 @@
-{
-  lib,
-  metadata,
-}: {
+_: {
   recipes = [
     "alacritty"
     "tmux"
@@ -19,7 +16,6 @@
     "bash"
     "jujutsu"
     "ssh"
-    "nh"
     "podman"
     "codex"
     "nodejs"
@@ -81,72 +77,6 @@
             EDITOR = "hx";
             MAKEFLAGS = "-j$(${pkgs.coreutils-full}/bin/nproc)";
             LC_ALL = "en_US.UTF-8";
-          };
-        };
-      }
-    )
-    (
-      {pkgs, ...}: let
-        wsCleanupDays = 30;
-        wsPath = "$HOME/ws";
-        wsCleanupScript = pkgs.writeShellScript "ws-cleanup" ''
-          set -euo pipefail
-
-          if [ ! -d "${wsPath}" ]; then
-            echo "[ws-cleanup] Skip: ${wsPath} does not exist."
-            exit 0
-          fi
-
-          echo "[ws-cleanup] Removing first-level directories in ${wsPath} not accessed in the last ${toString wsCleanupDays} days."
-          find "${wsPath}" \
-            -mindepth 1 \
-            -maxdepth 1 \
-            -type d \
-            -atime +${toString wsCleanupDays} \
-            -print \
-            -exec rm -rf -- {} +
-        '';
-      in {
-        systemd.user = lib.mkIf (metadata.os == "linux") {
-          services.ws-cleanup = {
-            Unit = {
-              Description = "Clean up stale first-level workspace directories";
-            };
-            Service = {
-              Type = "oneshot";
-              ExecStart = "${wsCleanupScript}";
-            };
-          };
-          timers.ws-cleanup = {
-            Unit = {
-              Description = "Run workspace cleanup regularly";
-            };
-            Timer = {
-              OnBootSec = "10m";
-              OnUnitActiveSec = "1d";
-              Persistent = true;
-            };
-            Install = {
-              WantedBy = ["timers.target"];
-            };
-          };
-        };
-
-        launchd.agents.ws-cleanup = lib.mkIf (metadata.os == "darwin") {
-          enable = true;
-          config = {
-            ProgramArguments = [
-              "${pkgs.bash}/bin/bash"
-              "${wsCleanupScript}"
-            ];
-            StartCalendarInterval = [
-              {
-                Hour = 4;
-                Minute = 0;
-              }
-            ];
-            StandardOutPath = "/tmp/ws-cleanup.out.log";
-            StandardErrorPath = "/tmp/ws-cleanup.err.log";
           };
         };
       }

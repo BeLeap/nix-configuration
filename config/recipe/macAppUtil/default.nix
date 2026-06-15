@@ -1,9 +1,5 @@
-{
-  lib,
-  metadata,
-  mac-app-util,
-}: {
-  base = lib.optionals (metadata.distribution == "macos") [
+{mac-app-util}: {
+  base = [
     mac-app-util.darwinModules.default
     {
       home-manager.sharedModules = [
