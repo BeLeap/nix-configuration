@@ -16,27 +16,12 @@ _: {
           kubectl-check
           kubernetes-helm
           kind
+          kdash
         ];
-
-        programs.k9s = {
-          enable = true;
-
-          settings = {
-            k9s = {
-              skin = "catppuccin-mocha";
-              skipLatestRevCheck = true;
-              maxConnRetry = 3;
-            };
-          };
-
-          skins = {
-            catppuccin-mocha = ./catppuccin-mocha.yaml;
-          };
-        };
 
         home.shellAliases = {
           k = "kubectl-check";
-          ku = "k9s";
+          ku = "kdash";
         };
       }
     )
