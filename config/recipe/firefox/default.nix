@@ -59,8 +59,6 @@ _: {
               sidebery
               wappalyzer
               consent-o-matic
-              joplin-web-clipper
-              keepassxc-browser
             ];
           };
         };
