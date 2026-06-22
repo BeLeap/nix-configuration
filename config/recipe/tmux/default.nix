@@ -18,12 +18,7 @@ _: {
         aggressiveResize = true;
 
         plugins = [
-          {
-            extraConfig = ''
-              set -g @catppuccin_flavor 'mocha'
-            '';
-            plugin = pkgs.tmuxPlugins.catppuccin;
-          }
+          pkgs.tmuxPlugins.nord
         ];
 
         extraConfig = ''

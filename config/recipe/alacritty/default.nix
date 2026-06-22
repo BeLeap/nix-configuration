@@ -8,7 +8,7 @@ _: {
       programs.alacritty = {
         enable = true;
 
-        theme = "catppuccin_mocha";
+        theme = "nord";
         settings = {
           font = {
             normal = {family = "Hack Nerd Font Mono";};

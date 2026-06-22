@@ -13,7 +13,7 @@ _: {
           defaultEditor = true;
 
           settings = {
-            theme = "catppuccin_mocha";
+            theme = "nord";
 
             editor = import ./editor.nix;
           };
