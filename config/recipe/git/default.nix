@@ -49,6 +49,7 @@ _: {
             ".claude"
             ".profileconfig.json"
             "journal/"
+            ".DS_Store"
           ];
         };
       }
