@@ -8,7 +8,7 @@ _: {
       programs.alacritty = {
         enable = true;
 
-        theme = "nord";
+        theme = "gruvbox_dark";
         settings = {
           font = {
             normal = {family = "Hack Nerd Font Mono";};

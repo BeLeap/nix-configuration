@@ -81,7 +81,7 @@
             "-e"
             "tell application \"System Events\""
             "-e"
-            "set picture of every desktop to POSIX file \"${../../../files/nord-wallpaper.jpg}\""
+            "set picture of every desktop to POSIX file \"${../../../files/gruvbox-wallpaper.jpg}\""
             "-e"
             "end tell"
           ];

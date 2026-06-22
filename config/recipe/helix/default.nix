@@ -13,7 +13,7 @@ _: {
           defaultEditor = true;
 
           settings = {
-            theme = "nord";
+            theme = "gruvbox";
 
             editor = import ./editor.nix;
           };
