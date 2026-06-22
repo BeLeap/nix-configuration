@@ -4,7 +4,7 @@ _: {
       programs.rofi = {
         enable = true;
 
-        font = "Hack Nerd Font 14";
+        font = "CaskaydiaCove Nerd Font 14";
       };
     }
   ];

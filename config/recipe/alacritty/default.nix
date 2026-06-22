@@ -11,7 +11,7 @@ _: {
         theme = "gruvbox_dark";
         settings = {
           font = {
-            normal = {family = "Hack Nerd Font Mono";};
+            normal = {family = "CaskaydiaCove Nerd Font Mono";};
             size = 16;
           };
           window = {
