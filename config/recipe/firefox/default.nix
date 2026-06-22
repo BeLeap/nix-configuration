@@ -59,6 +59,8 @@ _: {
               sidebery
               wappalyzer
               consent-o-matic
+              wayback-machine
+              pkgs.saml-tracer
             ];
           };
         };

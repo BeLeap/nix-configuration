@@ -1,0 +1,3 @@
+- Added SAML-tracer to the shared Firefox recipe in `config/recipe/firefox/default.nix`.
+- Moved the package definition to the personal `nix-overlay` repo and consume it here as `pkgs.saml-tracer`.
+- Mozilla Add-ons metadata used: version `1.9.2`, addon ID `{d3e01ff2-9a3a-4007-8f6e-7acd9a5de263}`, file `4507778`, SHA-256 `7cd15d006a6acbc9d9a43b99cb95ed80229b45b6055adc7a96d122e31f0cd5d9`.
