@@ -15,6 +15,7 @@ _: {
             size = 16;
           };
           window = {
+            opacity = 0.8;
             decorations = "None";
             padding = {
               x = 8;
