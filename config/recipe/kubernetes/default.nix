@@ -16,12 +16,12 @@ _: {
           kubectl-check
           kubernetes-helm
           kind
-          kdash
+          k9s
         ];
 
         home.shellAliases = {
           k = "kubectl-check";
-          ku = "kdash";
+          ku = "k9s";
         };
       }
     )
