@@ -30,6 +30,7 @@ tools to resolve library id and get library docs without me having to explicitly
 # Journal
 
 - Record work history and any information useful for the next task in
-  `journal/<date>/<appropriate_title>.md`.
-- Note: a coding agent is actively recording entries in `journal/`, so treat it as
+  `.journal/<date>/<appropriate_title>.md`.
+- Do not force add journal to vcs.
+- Note: a coding agent is actively recording entries in `.journal/`, so treat it as
   an existing source of task history and operational context.
