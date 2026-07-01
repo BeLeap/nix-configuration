@@ -9,6 +9,7 @@ _: {
       }: {
         home.packages = with pkgs; [
           kubectl
+          kubelogin-oidc
           kubectl-node-shell
           kubectl-view-secret
           kubectl-view-allocations
