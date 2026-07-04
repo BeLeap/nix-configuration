@@ -23,6 +23,7 @@ _: {
               devices = [
                 "beleap-m1air"
                 "beleap-s24"
+                "beleap-ipad"
               ];
             };
           };
