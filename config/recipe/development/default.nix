@@ -61,6 +61,8 @@ _: {
             just
             vault-bin
             ts
+            gettext
+            minio-client
           ];
 
           shellAliases = {
