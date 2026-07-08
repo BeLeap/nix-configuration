@@ -10,6 +10,7 @@ config.font = wezterm.font 'CaskaydiaCove Nerd Font Mono'
 config.font_size = 16
 config.window_background_opacity = 0.8
 config.window_decorations = 'RESIZE'
+config.notification_handling = 'AlwaysShow'
 config.window_padding = {
   left = 8,
   right = 8,
