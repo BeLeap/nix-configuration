@@ -1,6 +1,6 @@
 _: {
   recipes = [
-    "alacritty"
+    "ghostty"
     "tmux"
     "zsh"
     "lsd"
