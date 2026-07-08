@@ -7,9 +7,22 @@
     (
       {
         config,
-        lib,
+        pkgs,
         ...
-      }: {
+      }: let
+        context7Mcp = pkgs.writeShellScript "context7-mcp-authenticated" ''
+          set -eu
+
+          api_key_file=${config.age.secrets."context7-api-key".path}
+          if [ ! -s "$api_key_file" ]; then
+            echo "context7-mcp: missing Context7 API key at $api_key_file" >&2
+            exit 1
+          fi
+
+          api_key="$(${pkgs.coreutils}/bin/cat "$api_key_file")"
+          exec ${pkgs.lib.getExe pkgs.context7-mcp} --api-key "$api_key"
+        '';
+      in {
         imports = [(import ../../../lib/agenix/hm.nix {inherit agenix metadata;})];
 
         age.secrets = {
@@ -21,12 +34,6 @@
         home.shellAliases = {
           oc = "opencode";
         };
-
-        programs.zsh.initContent = lib.mkAfter ''
-          if [ -f ${config.age.secrets."context7-api-key".path} ]; then
-            export CONTEXT7_API_KEY="$(cat ${config.age.secrets."context7-api-key".path})"
-          fi
-        '';
 
         programs.opencode = {
           enable = true;
@@ -40,12 +47,11 @@
 
             mcp = {
               context7 = {
-                type = "remote";
-                url = "https://mcp.context7.com/mcp";
+                type = "local";
+                command = [
+                  "${context7Mcp}"
+                ];
                 enabled = true;
-                headers = {
-                  Authorization = "Bearer \${CONTEXT7_API_KEY}";
-                };
               };
             };
 
