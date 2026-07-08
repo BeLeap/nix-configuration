@@ -15,7 +15,7 @@ _: {
         package = ghosttyPackage;
 
         settings = {
-          theme = "GruvboxDark";
+          theme = "Gruvbox Dark";
           font-family = "CaskaydiaCove Nerd Font Mono";
           font-size = 16;
           background-opacity = 0.8;
