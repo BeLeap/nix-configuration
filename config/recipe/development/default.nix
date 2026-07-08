@@ -2,7 +2,6 @@ _: {
   recipes = [
     "alacritty"
     "tmux"
-    "fish"
     "zsh"
     "lsd"
     "starship"

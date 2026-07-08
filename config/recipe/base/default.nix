@@ -10,7 +10,7 @@
       };
     };
 
-    environment.shells = [pkgs.bash pkgs.unstable.fish];
+    environment.shells = [pkgs.bash pkgs.zsh];
 
     users.users."${metadata.usernameLower}" = {
       openssh.authorizedKeys.keys = [

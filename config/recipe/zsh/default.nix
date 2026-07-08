@@ -1,4 +1,10 @@
-_: {
+{metadata, ...}: {
+  base = {pkgs, ...}: {
+    programs.zsh.enable = true;
+
+    users.users."${metadata.usernameLower}".shell = pkgs.zsh;
+  };
+
   hm = [
     (
       _: {
