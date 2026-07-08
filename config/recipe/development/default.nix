@@ -17,8 +17,8 @@ _: {
     "jujutsu"
     "ssh"
     "podman"
-    "codex"
     "nodejs"
+    "opencode"
   ];
   hm = [
     (
