@@ -83,6 +83,11 @@
 
           tui = {
             theme = "gruvbox";
+            attention = {
+              enabled = true;
+              notifications = true;
+              sound = true;
+            };
           };
         };
       }
