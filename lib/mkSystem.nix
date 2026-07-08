@@ -14,6 +14,7 @@ inputs @ {
   direnv-overlay,
   direnv-instant,
   jj-starship,
+  try,
 }: let
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = {inherit inputs metadata;};

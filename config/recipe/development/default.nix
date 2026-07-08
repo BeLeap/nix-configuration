@@ -18,6 +18,7 @@ _: {
     "podman"
     "nodejs"
     "opencode"
+    "try"
   ];
   hm = [
     (
