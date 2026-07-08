@@ -19,6 +19,7 @@ _: {
           font-family = "CaskaydiaCove Nerd Font Mono";
           font-size = 16;
           background-opacity = 0.8;
+          window-padding-x = 8;
           window-decoration = false;
           command = "${lib.getExe pkgs.zsh} -l -i -c 'exec ${lib.getExe pkgs.tmux} new-session -As sp'";
         };
