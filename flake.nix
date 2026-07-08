@@ -40,10 +40,7 @@
     direnv-overlay.url = "github:BeLeap/direnv-overlay";
     direnv-instant.url = "github:Mic92/direnv-instant/untagged-de17ad4b5aee16b95332";
     jj-starship.url = "github:dmmulroy/jj-starship/v0.7.1";
-    try = {
-      url = "github:tobi/try";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    try.url = "github:tobi/try/v1.9.0";
   };
 
   outputs = inputs @ {nixpkgs, ...}: let

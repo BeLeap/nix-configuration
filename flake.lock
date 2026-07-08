@@ -651,6 +651,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_12": {
+      "locked": {
+        "lastModified": 1783279667,
+        "narHash": "sha256-/NAkDSsve+GNM0Bt6tleJdCGfsTlK89nPjkVOzZMo0s=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f205b5574fd0cb7da5b702a2da51507b7f4fdd1b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1780203844,
@@ -988,20 +1004,19 @@
     "try": {
       "inputs": {
         "flake-parts": "flake-parts_5",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_12"
       },
       "locked": {
-        "lastModified": 1773156643,
-        "narHash": "sha256-yDPQAI/3M1AFsNxBklM5lq8uQwHPr6ryZJBgC2aXGfQ=",
+        "lastModified": 1772905789,
+        "narHash": "sha256-rzcCouTGp0MCOnnxXnxRN8QTaOtNd/FGJsNCsr8xmWw=",
         "owner": "tobi",
         "repo": "try",
-        "rev": "08ca3e7abc5e0015c9af38d9a2ff65d4fc3c3950",
+        "rev": "caba357ffef88f37b14ed3f21c8b06c664a0ca44",
         "type": "github"
       },
       "original": {
         "owner": "tobi",
+        "ref": "v1.9.0",
         "repo": "try",
         "type": "github"
       }
