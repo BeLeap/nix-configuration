@@ -18,6 +18,10 @@
 
         home.file.".config/opencode/AGENTS.md".source = ../../../files/AGENTS.md;
 
+        home.shellAliases = {
+          oc = "opencode";
+        };
+
         programs.zsh.initContent = lib.mkAfter ''
           if [ -f ${config.age.secrets."context7-api-key".path} ]; then
             export CONTEXT7_API_KEY="$(cat ${config.age.secrets."context7-api-key".path})"
@@ -50,8 +54,22 @@
               glob = "allow";
               grep = "allow";
               list = "allow";
-              edit = "ask";
-              bash = "ask";
+              edit = "allow";
+              bash = {
+                "*" = "ask";
+                "jj diff*" = "allow";
+                "jj evolog*" = "allow";
+                "jj file list*" = "allow";
+                "jj git remote list*" = "allow";
+                "jj log*" = "allow";
+                "jj operation log*" = "allow";
+                "jj op log*" = "allow";
+                "jj obslog*" = "allow";
+                "jj root*" = "allow";
+                "jj show*" = "allow";
+                "jj status*" = "allow";
+                "jj workspace list*" = "allow";
+              };
               external_directory = "ask";
             };
           };
