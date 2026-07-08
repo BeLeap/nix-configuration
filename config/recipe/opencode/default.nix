@@ -41,6 +41,7 @@
           settings = {
             "$schema" = "https://opencode.ai/config.json";
             model = "openai/gpt-5.5";
+            lsp = true;
             instructions = [
               "${config.home.homeDirectory}/.config/opencode/AGENTS.md"
             ];
