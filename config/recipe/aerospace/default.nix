@@ -90,7 +90,7 @@ _: {
               {
                 check-further-callbacks = false;
                 "if" = {
-                  app-id = "com.mitchellh.ghostty";
+                  app-id = "com.github.wez.wezterm";
                 };
                 run = ["move-node-to-workspace 1"];
               }

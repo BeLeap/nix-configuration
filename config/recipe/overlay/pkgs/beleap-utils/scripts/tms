@@ -1,18 +1,3 @@
 #!/usr/bin/env /bin/bash
 
-name=$1
-
-if [[ -p /dev/stdin ]]; then
-  name=$(cat)
-fi
-
-if [[ -z "$name" ]]; then
-  name=$(tmsf)
-fi
-
-if tmux has-session -t "$name" 2>/dev/null; then
-  tmux switch-client -t "$name"
-else
-  tmux new-session -d -s "$name"
-  tmux switch-client -t "$name"
-fi
+exec wzs "$@"

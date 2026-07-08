@@ -1,7 +1,6 @@
 _: {
   recipes = [
-    "ghostty"
-    "tmux"
+    "wezterm"
     "zsh"
     "lsd"
     "starship"

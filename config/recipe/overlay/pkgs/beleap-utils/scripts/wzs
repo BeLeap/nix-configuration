@@ -1,0 +1,19 @@
+#!/usr/bin/env /bin/bash
+
+set -euo pipefail
+
+name=${1:-}
+
+if [[ -p /dev/stdin ]]; then
+  name=$(cat)
+fi
+
+if [[ -z "$name" ]]; then
+  name=$(wzsf)
+fi
+
+if [[ -z "$name" ]]; then
+  exit 0
+fi
+
+exec wezterm start --workspace "$name"

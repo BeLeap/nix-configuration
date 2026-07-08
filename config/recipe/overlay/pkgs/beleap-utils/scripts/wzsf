@@ -1,0 +1,14 @@
+#!/usr/bin/env /bin/bash
+
+set -euo pipefail
+
+if command -v jq >/dev/null 2>&1; then
+  wezterm cli list --format json |
+    jq -r '.[].workspace' |
+    awk '!seen[$0]++' |
+    fzf
+else
+  wezterm cli list |
+    awk 'NR > 1 && !seen[$4]++ { print $4 }' |
+    fzf
+fi
