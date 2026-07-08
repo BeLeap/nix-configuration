@@ -1,6 +1,5 @@
 {
   metadata,
-  lib,
   config,
   ...
 }: {
@@ -16,12 +15,8 @@
 
     username = metadata.usernameLower;
 
-    file =
-      {
-        "dl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";
-      }
-      // lib.genAttrs [".claude/CLAUDE.md" ".codex/AGENTS.md"] (_: {
-        source = ../../../files/AGENTS.md;
-      });
+    file = {
+      "dl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";
+    };
   };
 }
