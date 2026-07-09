@@ -1,12 +1,16 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = wezterm.config_builder()
+local terminal_font = wezterm.font 'CaskaydiaCove Nerd Font Mono'
 
 config.default_prog = { '@zsh@', '-l' }
 config.default_workspace = 'sp'
 
 config.color_scheme = 'Gruvbox dark, medium (base16)'
-config.font = wezterm.font 'CaskaydiaCove Nerd Font Mono'
+config.font = terminal_font
+config.window_frame = {
+  font = terminal_font,
+}
 config.font_size = 16
 config.window_background_opacity = 0.8
 config.window_decorations = 'RESIZE'
