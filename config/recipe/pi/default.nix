@@ -9,7 +9,7 @@ _: {
             ".pi/agent/AGENTS.md".source = ../../../files/AGENTS.md;
 
             ".pi/agent/settings.json".text = builtins.toJSON {
-              defaultProvider = "openai";
+              defaultProvider = "openai-codex";
               defaultModel = "gpt-5.5";
               theme = "gruvbox";
             };
