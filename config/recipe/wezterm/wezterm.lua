@@ -12,7 +12,6 @@ config.window_frame = {
   font = terminal_font,
 }
 config.font_size = 16
-config.window_background_opacity = 0.8
 config.window_decorations = 'RESIZE'
 config.notification_handling = 'AlwaysShow'
 config.window_padding = {
