@@ -1,13 +1,27 @@
 _: {
   hm = [
-    ({pkgs, ...}: {
-      home = {
-        packages = [pkgs.llm-agents.pi];
+    (
+      {pkgs, ...}: {
+        home = {
+          packages = [pkgs.llm-agents.pi];
 
-        shellAliases = {
-          p = "pi";
+          file = {
+            ".pi/agent/AGENTS.md".source = ../../../files/AGENTS.md;
+
+            ".pi/agent/settings.json".text = builtins.toJSON {
+              defaultProvider = "openai";
+              defaultModel = "gpt-5.5";
+              theme = "gruvbox";
+            };
+
+            ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
+          };
+
+          shellAliases = {
+            p = "pi";
+          };
         };
-      };
-    })
+      }
+    )
   ];
 }
