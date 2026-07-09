@@ -16,10 +16,6 @@ _: {
 
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
           };
-
-          shellAliases = {
-            p = "pi";
-          };
         };
       }
     )
