@@ -26,8 +26,10 @@ _: {
         installPhase = ''
           runHook preInstall
           mkdir -p $out/Applications
+          mkdir -p $out/bin
           # DMG 안의 모든 .app을 복사 (하나만 있으면 하나만 복사됨)
           cp -R WezTerm-macos-20240203-110809-5046fc22/WezTerm.app $out/Applications/
+          ln -s $out/Applications/WezTerm.app/Contents/MacOS/wezterm $out/bin/wezterm
           runHook postInstall
         '';
 
