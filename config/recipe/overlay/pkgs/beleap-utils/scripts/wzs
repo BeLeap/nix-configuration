@@ -16,4 +16,14 @@ if [[ -z "$name" ]]; then
   exit 0
 fi
 
-exec wezterm start --workspace "$name"
+workspace_exists=$(
+  wezterm cli list --format json |
+    jq -r --arg workspace "$name" 'any(.workspace == $workspace)'
+)
+
+if [[ "$workspace_exists" != "true" ]]; then
+  wezterm cli spawn --new-window --workspace "$name" >/dev/null
+fi
+
+encoded_name=$(printf '%s' "$name" | base64 | tr -d '\n')
+printf '\033]1337;SetUserVar=WEZTERM_WORKSPACE=%s\007' "$encoded_name"

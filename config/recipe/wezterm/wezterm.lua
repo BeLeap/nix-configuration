@@ -22,6 +22,18 @@ config.window_padding = {
 }
 
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+
+wezterm.on('user-var-changed', function(window, pane, name, value)
+  if name ~= 'WEZTERM_WORKSPACE' or value == '' then
+    return
+  end
+
+  local ok, err = pcall(wezterm.mux.set_active_workspace, value)
+  if not ok then
+    wezterm.log_error('failed to switch workspace via wzs: ' .. tostring(err))
+  end
+end)
+
 config.keys = {
   { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey { key = 'a', mods = 'CTRL' } },
   { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },

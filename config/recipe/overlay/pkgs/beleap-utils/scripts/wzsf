@@ -2,13 +2,22 @@
 
 set -euo pipefail
 
-if command -v jq >/dev/null 2>&1; then
+workspaces=$(
   wezterm cli list --format json |
     jq -r '.[].workspace' |
-    awk '!seen[$0]++' |
-    fzf
-else
-  wezterm cli list |
-    awk 'NR > 1 && !seen[$4]++ { print $4 }' |
-    fzf
-fi
+    awk '!seen[$0]++'
+)
+
+count=$(printf '%s\n' "$workspaces" | awk 'NF { count++ } END { print count + 0 }')
+
+case "$count" in
+  0)
+    exit 0
+    ;;
+  1)
+    printf '%s\n' "$workspaces"
+    ;;
+  *)
+    printf '%s\n' "$workspaces" | fzf
+    ;;
+esac
