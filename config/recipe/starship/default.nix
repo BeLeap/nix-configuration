@@ -51,6 +51,10 @@ _: {
 
               os = {
                 disabled = false;
+                symbols = {
+                  Macos = "🍎";
+                  NixOS = "❄️";
+                };
               };
 
               custom = {
