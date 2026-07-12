@@ -43,6 +43,7 @@
                 "gpt-5.5"
                 "gpt-5.4"
                 "gpt-5.3-codex-spark"
+                "openrouter/z-ai/glm-5.2"
               ];
               packages = [
                 "npm:@upstash/context7-pi@0.1.1"
