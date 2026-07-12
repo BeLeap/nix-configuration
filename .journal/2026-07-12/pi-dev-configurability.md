@@ -10,3 +10,4 @@ Verification: Alejandra check passed, focused eval shows `~/.pi/agent/settings.j
 
 Configured Pi model defaults: `defaultProvider = "openai-codex"`, `defaultModel = "gpt-5.6-sol"`, and `enabledModels` contains OpenAI Codex models plus `openrouter/z-ai/glm-5.2` as the OpenRouter fallback/cycle option for when OpenAI Codex is rate limited. Pi settings support model cycling via Ctrl+P; no built-in automatic rate-limit fallback setting was found in the docs. Verified generated settings and rebuilt `beleap-m1air` successfully.
 
+Pi only ships built-in TUI themes `dark` and `light`; `gruvbox` is not predefined for the TUI. Added `config/recipe/pi/gruvbox.json` as a standalone custom theme file for readability and wired it to `~/.pi/agent/themes/gruvbox.json` with `theme = "gruvbox"`. Verified Alejandra formatting, Home Manager source eval, generated settings, and `beleap-m1air` build.
