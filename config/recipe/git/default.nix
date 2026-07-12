@@ -39,17 +39,12 @@ _: {
           };
 
           ignores = [
-            "root.mark"
-            ".tool-versions"
             ".envrc"
-            ".helix"
-            "CLAUDE.md"
-            "shell.nix"
-            "*.TEMP.*"
-            ".claude"
-            ".profileconfig.json"
-            "journal/"
             ".DS_Store"
+            "shell.nix"
+            ".helix"
+            "*.LOCAL.*"
+            ".journal/"
           ];
         };
       }
