@@ -16,6 +16,7 @@
           nativeBuildInputs = [pkgs.makeWrapper];
           postBuild = ''
             wrapProgram $out/bin/pi \
+              --set PI_SKIP_VERSION_CHECK 1 \
               --run 'export CONTEXT7_API_KEY="$(${pkgs.coreutils}/bin/cat ${config.age.secrets."context7-api-key".path})"'
           '';
         };
@@ -36,6 +37,9 @@
             ".pi/agent/settings.json".text = builtins.toJSON {
               defaultProvider = "openai-codex";
               defaultModel = "gpt-5.6-sol";
+              defaultThinkingLevel = "medium";
+              defaultProjectTrust = "ask";
+              enableInstallTelemetry = false;
               theme = "gruvbox";
               enabledModels = [
                 "gpt-5.6-sol"
