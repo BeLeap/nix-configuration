@@ -9,3 +9,4 @@ Configured Context7 for Pi using the official Pi package `npm:@upstash/context7-
 Verification: Alejandra check passed, focused eval shows `~/.pi/agent/settings.json` contains the pinned Context7 package, focused eval shows the installed wrapper package name is `pi`, and `nix build '.#darwinConfigurations.beleap-m1air.system' --accept-flake-config --no-link` passed.
 
 Configured Pi model defaults: `defaultProvider = "openai-codex"`, `defaultModel = "gpt-5.6-sol"`, and `enabledModels` contains OpenAI Codex models plus `openrouter/z-ai/glm-5.2` as the OpenRouter fallback/cycle option for when OpenAI Codex is rate limited. Pi settings support model cycling via Ctrl+P; no built-in automatic rate-limit fallback setting was found in the docs. Verified generated settings and rebuilt `beleap-m1air` successfully.
+

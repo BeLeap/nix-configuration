@@ -36,6 +36,7 @@
             ".pi/agent/settings.json".text = builtins.toJSON {
               defaultProvider = "openai-codex";
               defaultModel = "gpt-5.6-sol";
+              theme = "gruvbox";
               enabledModels = [
                 "gpt-5.6-sol"
                 "gpt-5.6-terra"
@@ -49,6 +50,7 @@
                 "npm:@upstash/context7-pi@0.1.1"
               ];
             };
+            ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
           };
         };
       }
