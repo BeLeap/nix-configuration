@@ -41,6 +41,14 @@ _: {
                 format = "\\[[$shlvl]($style)\\]";
               };
 
+              shell = {
+                disabled = false;
+                # bash_indicator = "";
+                # zsh_indicator = "";
+                # unknown_indicator = "";
+                format = "\\[[$indicator]($style)\\]";
+              };
+
               os = {
                 disabled = false;
               };
