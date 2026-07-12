@@ -58,6 +58,7 @@
                 "npm:pi-web-access@0.13.0"
               ];
             };
+            ".pi/agent/sandbox.json".source = ./sandbox.json;
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
           };
         };
