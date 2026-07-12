@@ -24,7 +24,7 @@
         imports = [(import ../../../lib/agenix/hm.nix {inherit agenix metadata;})];
 
         age.secrets = {
-          context7-api-key.file = ../opencode/secrets/context7-api-key.age;
+          context7-api-key.file = ./secrets/context7-api-key.age;
         };
 
         home = {
