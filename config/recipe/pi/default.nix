@@ -51,6 +51,7 @@
                 "npm:pi-mcp-adapter@2.11.0"
                 "npm:pi-notify@1.4.0"
                 "npm:pi-landstrip@0.16.29"
+                "npm:pi-web-access@0.13.0"
               ];
             };
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
