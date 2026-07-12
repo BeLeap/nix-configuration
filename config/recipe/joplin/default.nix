@@ -2,14 +2,11 @@
   metadata,
   agenix,
   ...
-}: let
-  installStoreDirScript = import ../../../lib/hm/install-store-dir-script.nix;
-in {
+}: {
   hm = [
     ({
       config,
       pkgs,
-      lib,
       ...
     }: {
       imports = [
@@ -25,12 +22,7 @@ in {
       home.packages = with pkgs; [
         joplin-terminal
       ];
-      home.activation.copyFiles = lib.hm.dag.entryAfter ["writeBoundary"] (
-        installStoreDirScript {
-          source = ./skills/joplin-cli;
-          targetRelativePath = ".agents/skills/joplin-cli";
-        }
-      );
+      home.file.".agents/skills/joplin-cli".source = ./skills/joplin-cli;
 
       programs.joplin-desktop = {
         enable = true;

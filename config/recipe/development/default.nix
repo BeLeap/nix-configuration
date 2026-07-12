@@ -16,7 +16,6 @@ _: {
     "ssh"
     "podman"
     "nodejs"
-    "opencode"
     "pi"
     "try"
   ];
