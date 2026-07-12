@@ -43,9 +43,9 @@ _: {
 
               shell = {
                 disabled = false;
-                # bash_indicator = "";
-                # zsh_indicator = "";
-                # unknown_indicator = "";
+                bash_indicator = "";
+                zsh_indicator = "󱨂";
+                unknown_indicator = "";
                 format = "\\[[$indicator]($style)\\]";
               };
 
