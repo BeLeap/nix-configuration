@@ -40,6 +40,14 @@
 
             bindkey -v
 
+            # Interactive programs such as pi leave their OSC title behind.
+            # Restore the shell title whenever the prompt returns.
+            autoload -Uz add-zsh-hook
+            set-shell-terminal-title() {
+              printf '\e]0;%s\a' "''${PWD:t}"
+            }
+            add-zsh-hook precmd set-shell-terminal-title
+
             fcd() {
               local file
               local dir
