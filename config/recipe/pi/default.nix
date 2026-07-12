@@ -49,6 +49,7 @@
               packages = [
                 "npm:@upstash/context7-pi@0.1.1"
                 "npm:pi-mcp-adapter@2.11.0"
+                "npm:pi-notify@1.4.0"
               ];
             };
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
