@@ -4,7 +4,6 @@ _: {
     "zsh"
     "lsd"
     "starship"
-    "carapace"
     "helix"
     "zoxide"
     "direnv"
