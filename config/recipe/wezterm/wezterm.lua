@@ -6,6 +6,8 @@ local terminal_font = wezterm.font 'CaskaydiaCove Nerd Font Mono'
 config.default_prog = { '@zsh@', '-l' }
 config.default_workspace = 'sp'
 
+config.front_end = 'WebGpu'
+
 config.color_scheme = 'Gruvbox dark, medium (base16)'
 config.font = terminal_font
 config.window_frame = {
