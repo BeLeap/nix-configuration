@@ -26,11 +26,11 @@ function notificationTitle(level: NotifyLevel | undefined): string {
   }
 }
 
-function oscNotifications(message: string, level: NotifyLevel | undefined): string {
+function osc777Notification(message: string, level: NotifyLevel | undefined): string {
   const body = sanitizeOscField(message);
   const title = sanitizeOscField(notificationTitle(level));
 
-  return `${OSC}9;${body}${BEL}${OSC}777;notify;${title};${body}${BEL}`;
+  return `${OSC}777;notify;${title};${body}${BEL}`;
 }
 
 function patchNotify(ctx: ExtensionContext): void {
@@ -44,7 +44,7 @@ function patchNotify(ctx: ExtensionContext): void {
 
   ui.notify = (message: string, level?: NotifyLevel) => {
     originalNotify(message, level);
-    process.stdout.write(oscNotifications(message, level));
+    process.stdout.write(osc777Notification(message, level));
   };
   ui[PATCHED_NOTIFY] = true;
 }
@@ -55,7 +55,7 @@ export default function (pi: ExtensionAPI) {
   });
 
   pi.registerCommand("notify-osc-test", {
-    description: "Send a test notification through ctx.ui.notify and OSC 9/777.",
+    description: "Send a test notification through ctx.ui.notify and OSC 777.",
     handler: async (args, ctx) => {
       patchNotify(ctx);
       ctx.ui.notify(args.trim() || "Pi OSC notifications are enabled.", "info");
