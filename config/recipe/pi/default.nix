@@ -59,6 +59,7 @@
               ];
             };
             ".pi/agent/sandbox.json".source = ./sandbox.json;
+            ".pi/agent/extensions/notify-osc.ts".source = ./notify-osc.ts;
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
           };
         };
