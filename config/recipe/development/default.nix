@@ -34,6 +34,7 @@ _: {
             pchar
             ncdu
             yq-go
+            jq
             watchexec
             beleap-utils
             gnupg
