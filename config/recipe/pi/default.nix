@@ -20,6 +20,12 @@
               --run 'export CONTEXT7_API_KEY="$(${pkgs.coreutils}/bin/cat ${config.age.secrets."context7-api-key".path})"'
           '';
         };
+        torShellExtension = pkgs.replaceVars ./tor-shell.ts {
+          bash = "${pkgs.bash}/bin/bash";
+          env = "${pkgs.coreutils}/bin/env";
+          tor = "${pkgs.tor}/bin/tor";
+          torsocks = "${pkgs.torsocks}/bin/torsocks";
+        };
       in {
         imports = [(import ../../../lib/agenix/hm.nix {inherit agenix metadata;})];
 
@@ -60,6 +66,7 @@
             };
             ".pi/agent/sandbox.json".source = ./sandbox.json;
             ".pi/agent/extensions/notify-osc.ts".source = ./notify-osc.ts;
+            ".pi/agent/extensions/tor-shell.ts".source = torShellExtension;
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
           };
         };
