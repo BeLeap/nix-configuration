@@ -53,8 +53,8 @@ _: {
             coreutils-full
             gtrash
             dive
-            # pgcli
-            # mycli
+            pgcli
+            mycli
             ssm-session-manager-plugin
             awscli2
             just
