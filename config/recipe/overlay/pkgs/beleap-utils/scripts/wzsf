@@ -8,6 +8,15 @@ workspaces=$(
     awk '!seen[$0]++'
 )
 
+if [[ -p /dev/stdin ]]; then
+  workspaces=$(
+    {
+      printf '%s\n' "$workspaces"
+      cat
+    } | awk 'NF && !seen[$0]++'
+  )
+fi
+
 count=$(printf '%s\n' "$workspaces" | awk 'NF { count++ } END { print count + 0 }')
 
 case "$count" in

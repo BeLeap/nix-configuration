@@ -9,7 +9,12 @@ if [[ -p /dev/stdin ]]; then
 fi
 
 if [[ -z "$name" ]]; then
-  name=$(wzsf)
+  new_session_option='Create new session'
+  name=$(printf '%s\n' "$new_session_option" | wzsf)
+
+  if [[ "$name" == "$new_session_option" ]]; then
+    IFS= read -r -p 'Session name: ' name
+  fi
 fi
 
 if [[ -z "$name" ]]; then
