@@ -29,8 +29,15 @@ tools to resolve library id and get library docs without me having to explicitly
 
 # Journal
 
-- Record work history and any information useful for the next task in
-  `.journal/<date>/<appropriate_title>.md`.
-- Do not force add journal to vcs.
+- Record non-trivial work in `.journal/<date>/<appropriate_title>.md`.
+- Include, when applicable:
+  - outcome and significant changes;
+  - validation performed, including failures or blocked checks;
+  - unexpected findings, recurring patterns, or reusable lessons;
+  - unresolved limitations and recommended follow-up work.
+- Do not invent retrospective findings merely to fill every category; omit sections
+  that have nothing useful to record.
+- Before related work, search relevant journal entries for prior context and lessons.
+- Do not force add journal entries to version control.
 - Note: a coding agent is actively recording entries in `.journal/`, so treat it as
   an existing source of task history and operational context.
