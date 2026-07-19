@@ -1,14 +1,14 @@
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 
 const PATCHED_NOTIFY = Symbol.for("beleap.notify-osc.patched");
-const PATCHED_CUSTOM = Symbol.for("beleap.notify-osc.custom-render-patched.v2");
+const PATCHED_SELECT = Symbol.for("beleap.notify-osc.select-patched");
 const OSC = "\x1b]";
 const BEL = "\x07";
 
 type NotifyLevel = "info" | "warning" | "error";
 type PatchableUi = ExtensionContext["ui"] & {
   [PATCHED_NOTIFY]?: boolean;
-  [PATCHED_CUSTOM]?: boolean;
+  [PATCHED_SELECT]?: boolean;
 };
 
 function sanitizeOscField(value: string): string {
@@ -33,19 +33,6 @@ function osc777Notification(message: string, level: NotifyLevel | undefined): st
   return `${OSC}777;notify;${title};${body}${BEL}`;
 }
 
-function stripAnsi(value: string): string {
-  return value.replace(/\x1b\[[0-?]*[ -/]*[@-~]/g, "");
-}
-
-function customUiNotificationMessage(lines: string[]): string {
-  const firstLine = stripAnsi(lines[0] ?? "")
-    .replace(/^[\s\u2500-\u257f+|=\-]+/u, "")
-    .replace(/[\s\u2500-\u257f+|=\-]+$/u, "")
-    .trim();
-
-  return firstLine || "Unknown request.";
-}
-
 function patchUi(ctx: ExtensionContext): void {
   const ui = ctx.ui as PatchableUi;
 
@@ -59,32 +46,15 @@ function patchUi(ctx: ExtensionContext): void {
     ui[PATCHED_NOTIFY] = true;
   }
 
-  if (!ui[PATCHED_CUSTOM]) {
-    const originalCustom = ui.custom.bind(ui);
+  if (!ui[PATCHED_SELECT]) {
+    const originalSelect = ui.select.bind(ui);
 
-    ui.custom = ((...args: Parameters<ExtensionContext["ui"]["custom"]>) => {
-      const [factory, options] = args;
-      const wrappedFactory: typeof factory = async (...factoryArgs) => {
-        const component = await factory(...factoryArgs);
-        const originalRender = component.render.bind(component);
-        let notified = false;
-
-        component.render = (width: number) => {
-          const lines = originalRender(width);
-          const message = notified ? undefined : customUiNotificationMessage(lines);
-          if (message) {
-            notified = true;
-            process.stdout.write(osc777Notification(message, "warning"));
-          }
-          return lines;
-        };
-
-        return component;
-      };
-
-      return originalCustom(wrappedFactory, options);
-    }) as ExtensionContext["ui"]["custom"];
-    ui[PATCHED_CUSTOM] = true;
+    ui.select = ((...args: Parameters<ExtensionContext["ui"]["select"]>) => {
+      const [title] = args;
+      process.stdout.write(osc777Notification(title, "warning"));
+      return originalSelect(...args);
+    }) as ExtensionContext["ui"]["select"];
+    ui[PATCHED_SELECT] = true;
   }
 }
 
@@ -98,6 +68,14 @@ export default function (pi: ExtensionAPI) {
     handler: async (args, ctx) => {
       patchUi(ctx);
       ctx.ui.notify(args.trim() || "Pi OSC notifications are enabled.", "info");
+    },
+  });
+
+  pi.registerCommand("notify-osc-select-test", {
+    description: "Test OSC notification forwarding for ctx.ui.select.",
+    handler: async (_args, ctx) => {
+      patchUi(ctx);
+      await ctx.ui.select("OSC select UI test", ["Close"]);
     },
   });
 }
