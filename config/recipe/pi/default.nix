@@ -57,7 +57,6 @@
                 "gpt-5.6-luna"
                 "gpt-5.5"
                 "gpt-5.4"
-                "gpt-5.4-mini"
                 "gpt-5.3-codex-spark"
                 "openrouter/z-ai/glm-5.2"
               ];
@@ -67,7 +66,6 @@
                 "npm:pi-notify@1.4.0"
                 "npm:pi-landstrip@0.17.7"
                 "npm:pi-web-access@0.13.0"
-                "npm:tokenomy-pi@0.1.23-beta"
               ];
             };
             ".pi/agent/sandbox.json".source = ./sandbox.json;

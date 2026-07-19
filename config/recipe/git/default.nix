@@ -45,8 +45,6 @@ _: {
             ".helix"
             "*.LOCAL.*"
             ".journal/"
-            ".pi/tokenomy-cache/"
-            ".pi/tokenomy-stats.json"
           ];
         };
       }
