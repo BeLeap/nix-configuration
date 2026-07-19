@@ -60,7 +60,7 @@
                 "npm:@upstash/context7-pi@0.1.1"
                 "npm:pi-mcp-adapter@2.11.0"
                 "npm:pi-notify@1.4.0"
-                "npm:pi-landstrip@0.16.26"
+                "npm:pi-landstrip@0.17.7"
                 "npm:pi-web-access@0.13.0"
               ];
             };
