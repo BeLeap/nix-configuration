@@ -1,0 +1,19 @@
+{
+  "project": "nix-configuration",
+  "updatedAt": "2026-07-19T15:53:31.230Z",
+  "promptsSeen": 2,
+  "intentCounts": {
+    "answer": 2
+  },
+  "lastIntent": "answer",
+  "lastTier": "simple",
+  "lastModel": "openai-codex/gpt-5.4-mini",
+  "lastSignals": [
+    "short-prompt",
+    "very-short-prompt",
+    "shape:question",
+    "actions:0",
+    "intent:answer",
+    "risk:low"
+  ]
+}

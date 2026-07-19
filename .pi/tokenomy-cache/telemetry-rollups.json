@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-19T15:53:31.230Z",
+  "lifetime": {
+    "prompts": 2,
+    "estimatedTokensSaved": 450,
+    "baselineCostUnits": 750,
+    "actualCostUnits": 300,
+    "classifierTokens": 0,
+    "memoryEstimatedTokensSaved": 0,
+    "compressionTokensSaved": 0,
+    "compressionGuardRejections": 0,
+    "memoryInjections": 0,
+    "adaptiveFallbacks": 0,
+    "classifierCacheHits": 0,
+    "multiStepPrompts": 0,
+    "tiers": {
+      "simple": 2
+    },
+    "sources": {
+      "fallback": 2
+    },
+    "intents": {
+      "answer": 2
+    },
+    "risks": {
+      "low": 2
+    },
+    "promptShapes": {
+      "action": 1,
+      "question": 1
+    },
+    "actionCounts": {
+      "0": 2
+    },
+    "models": {
+      "openai-codex/gpt-5.4-mini": 2
+    }
+  },
+  "daily": {
+    "2026-07-19": {
+      "prompts": 2,
+      "estimatedTokensSaved": 450,
+      "baselineCostUnits": 750,
+      "actualCostUnits": 300,
+      "classifierTokens": 0,
+      "memoryEstimatedTokensSaved": 0,
+      "compressionTokensSaved": 0,
+      "compressionGuardRejections": 0,
+      "memoryInjections": 0,
+      "adaptiveFallbacks": 0,
+      "classifierCacheHits": 0,
+      "multiStepPrompts": 0,
+      "tiers": {
+        "simple": 2
+      },
+      "sources": {
+        "fallback": 2
+      },
+      "intents": {
+        "answer": 2
+      },
+      "risks": {
+        "low": 2
+      },
+      "promptShapes": {
+        "action": 1,
+        "question": 1
+      },
+      "actionCounts": {
+        "0": 2
+      },
+      "models": {
+        "openai-codex/gpt-5.4-mini": 2
+      }
+    }
+  },
+  "monthly": {
+    "2026-07": {
+      "prompts": 2,
+      "estimatedTokensSaved": 450,
+      "baselineCostUnits": 750,
+      "actualCostUnits": 300,
+      "classifierTokens": 0,
+      "memoryEstimatedTokensSaved": 0,
+      "compressionTokensSaved": 0,
+      "compressionGuardRejections": 0,
+      "memoryInjections": 0,
+      "adaptiveFallbacks": 0,
+      "classifierCacheHits": 0,
+      "multiStepPrompts": 0,
+      "tiers": {
+        "simple": 2
+      },
+      "sources": {
+        "fallback": 2
+      },
+      "intents": {
+        "answer": 2
+      },
+      "risks": {
+        "low": 2
+      },
+      "promptShapes": {
+        "action": 1,
+        "question": 1
+      },
+      "actionCounts": {
+        "0": 2
+      },
+      "models": {
+        "openai-codex/gpt-5.4-mini": 2
+      }
+    }
+  }
+}
