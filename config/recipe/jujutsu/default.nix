@@ -7,6 +7,8 @@ _: {
         lib,
         ...
       }: {
+        home.file.".agents/skills/jj-vcs".source = ./skills/jj-vcs;
+
         programs.jujutsu = {
           enable = true;
           package = pkgs.unstable.jujutsu;

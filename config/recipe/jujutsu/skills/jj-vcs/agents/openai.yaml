@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jujutsu VCS"
+  short_description: "Use jj safely for version-control workflows"
+  default_prompt: "Use $jj-vcs to inspect this repository and perform the requested version-control work with native Jujutsu commands."
