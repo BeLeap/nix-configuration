@@ -15,22 +15,10 @@ function sanitizeOscField(value: string): string {
   return value.replace(/[\x00-\x1f\x7f;]/g, " ").trim();
 }
 
-function notificationTitle(level: NotifyLevel | undefined): string {
-  switch (level) {
-    case "warning":
-      return "Pi warning";
-    case "error":
-      return "Pi error";
-    default:
-      return "Pi";
-  }
-}
-
-function osc777Notification(message: string, level: NotifyLevel | undefined): string {
+function osc777Notification(message: string): string {
   const body = sanitizeOscField(message);
-  const title = sanitizeOscField(notificationTitle(level));
 
-  return `${OSC}777;notify;${title};${body}${BEL}`;
+  return `${OSC}777;notify;Pi;${body}${BEL}`;
 }
 
 function patchUi(ctx: ExtensionContext): void {
@@ -41,7 +29,7 @@ function patchUi(ctx: ExtensionContext): void {
 
     ui.notify = (message: string, level?: NotifyLevel) => {
       originalNotify(message, level);
-      process.stdout.write(osc777Notification(message, level));
+      process.stdout.write(osc777Notification(message));
     };
     ui[PATCHED_NOTIFY] = true;
   }
@@ -51,7 +39,7 @@ function patchUi(ctx: ExtensionContext): void {
 
     ui.select = ((...args: Parameters<ExtensionContext["ui"]["select"]>) => {
       const [title] = args;
-      process.stdout.write(osc777Notification(title, "warning"));
+      process.stdout.write(osc777Notification(title));
       return originalSelect(...args);
     }) as ExtensionContext["ui"]["select"];
     ui[PATCHED_SELECT] = true;
