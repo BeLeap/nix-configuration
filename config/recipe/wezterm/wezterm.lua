@@ -26,7 +26,7 @@ config.window_padding = {
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 wezterm.on('user-var-changed', function(window, pane, name, value)
-  if name ~= 'WEZTERM_WORKSPACE' or value == '' then
+  if name ~= 'DO_FOCUS_WEZTERM_WORKSPACE' or value == '' then
     return
   end
 
