@@ -66,7 +66,7 @@
                 "npm:@upstash/context7-pi@0.1.1"
                 "npm:pi-mcp-adapter@2.11.0"
                 "npm:pi-notify@1.4.0"
-                "npm:pi-sandbox@0.6.1"
+                "npm:pi-sandbox@0.5.0"
                 "npm:pi-web-access@0.13.0"
               ];
             };

@@ -1,6 +1,6 @@
 # Replace pi-landstrip with pi-sandbox
 
-- Replaced the pinned `pi-landstrip` Pi package with `pi-sandbox` 0.6.1 from
+- Replaced the pinned `pi-landstrip` Pi package with `pi-sandbox` 0.5.0 from
   `carderne/pi-sandbox`.
 - Added Nix's `ripgrep` package only to the wrapped Pi process's `PATH` because
   `pi-sandbox` checks for the `rg` executable when initializing its sandbox
