@@ -5,7 +5,6 @@ _: {
         inherit (inputs) kubectl-check boda;
       })
       inputs.nur.overlays.default
-      inputs.llm-agents.overlays.default
       inputs.beleap-overlay.overlays.default
       inputs.jj-starship.overlays.default
       (_final: prev: {

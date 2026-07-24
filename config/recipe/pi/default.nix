@@ -1,5 +1,6 @@
 {
   agenix,
+  llm-agents,
   metadata,
   ...
 }: {
@@ -18,7 +19,7 @@
         };
         pi = pkgs.symlinkJoin {
           name = "pi";
-          paths = [pkgs.llm-agents.pi];
+          paths = [llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi];
           nativeBuildInputs = [pkgs.makeWrapper];
           postBuild = ''
             wrapProgram $out/bin/pi \
