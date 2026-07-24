@@ -2,6 +2,7 @@ import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-a
 
 const PATCHED_NOTIFY = Symbol.for("beleap.notify-osc.patched");
 const PATCHED_SELECT = Symbol.for("beleap.notify-osc.select-patched");
+const PATCHED_CUSTOM = Symbol.for("beleap.notify-osc.custom-render-patched.v3");
 const OSC = "\x1b]";
 const BEL = "\x07";
 
@@ -9,6 +10,7 @@ type NotifyLevel = "info" | "warning" | "error";
 type PatchableUi = ExtensionContext["ui"] & {
   [PATCHED_NOTIFY]?: boolean;
   [PATCHED_SELECT]?: boolean;
+  [PATCHED_CUSTOM]?: boolean;
 };
 
 function sanitizeOscField(value: string): string {
@@ -19,6 +21,19 @@ function osc777Notification(message: string): string {
   const body = sanitizeOscField(message);
 
   return `${OSC}777;notify;Pi;${body}${BEL}`;
+}
+
+function stripAnsi(value: string): string {
+  return value.replace(/\x1b\[[0-?]*[ -/]*[@-~]/g, "");
+}
+
+function customUiNotificationMessage(lines: string[]): string {
+  const firstLine = stripAnsi(lines[0] ?? "")
+    .replace(/^[\s\u2500-\u257f+|=\-]+/u, "")
+    .replace(/[\s\u2500-\u257f+|=\-]+$/u, "")
+    .trim();
+
+  return firstLine || "Unknown request.";
 }
 
 function patchUi(ctx: ExtensionContext): void {
@@ -43,6 +58,33 @@ function patchUi(ctx: ExtensionContext): void {
       return originalSelect(...args);
     }) as ExtensionContext["ui"]["select"];
     ui[PATCHED_SELECT] = true;
+  }
+
+  if (!ui[PATCHED_CUSTOM]) {
+    const originalCustom = ui.custom.bind(ui);
+
+    ui.custom = ((...args: Parameters<ExtensionContext["ui"]["custom"]>) => {
+      const [factory, options] = args;
+      const wrappedFactory: typeof factory = async (...factoryArgs) => {
+        const component = await factory(...factoryArgs);
+        const originalRender = component.render.bind(component);
+        let notified = false;
+
+        component.render = (width: number) => {
+          const lines = originalRender(width);
+          if (!notified) {
+            notified = true;
+            process.stdout.write(osc777Notification(customUiNotificationMessage(lines)));
+          }
+          return lines;
+        };
+
+        return component;
+      };
+
+      return originalCustom(wrappedFactory, options);
+    }) as ExtensionContext["ui"]["custom"];
+    ui[PATCHED_CUSTOM] = true;
   }
 }
 
