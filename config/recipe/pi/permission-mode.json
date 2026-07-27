@@ -38,6 +38,11 @@
         "askOnBlockedHost": true
       },
       "permission": {
+        "tool": {
+          "*": "ask",
+          "resolve-library-id": "allow",
+          "query-docs": "allow"
+        },
         "path": {
           "*": "allow",
           ".env": "deny",
@@ -81,6 +86,11 @@
         "askOnBlockedHost": true
       },
       "permission": {
+        "tool": {
+          "*": "ask",
+          "resolve-library-id": "allow",
+          "query-docs": "allow"
+        },
         "path": {
           "*": "allow",
           ".env": "deny",
@@ -124,6 +134,11 @@
         "askOnBlockedHost": true
       },
       "permission": {
+        "tool": {
+          "*": "allow",
+          "resolve-library-id": "allow",
+          "query-docs": "allow"
+        },
         "path": {
           "*": "allow",
           ".env": "deny",
