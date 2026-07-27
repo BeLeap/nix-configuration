@@ -1,0 +1,141 @@
+{
+  "$schema": "https://raw.githubusercontent.com/wynainfo/pi-permission-modes/v2.2.0/schemas/permission-mode.schema.json",
+  "defaultMode": "build",
+  "cycleOrder": [
+    "default",
+    "plan",
+    "build",
+    "yolo"
+  ],
+  "modes": {
+    "default": {
+      "sandbox": {
+        "enabled": true,
+        "writable": true,
+        "allowWrite": [
+          ".",
+          "/tmp",
+          "~/.config/jj"
+        ],
+        "denyRead": [
+          "~/.ssh",
+          "~/.aws",
+          "~/.gnupg",
+          "~/.pi/agent",
+          ".env",
+          ".env.*",
+          "**/.env",
+          "**/.env.*",
+          ".envrc*",
+          "**/.envrc*",
+          ".direnv/**",
+          "**/.direnv/**"
+        ],
+        "network": {
+          "allowedDomains": [],
+          "deniedDomains": []
+        },
+        "askOnBlockedHost": true
+      },
+      "permission": {
+        "path": {
+          "*": "allow",
+          ".env": "deny",
+          ".env.*": "deny",
+          "**/.env": "deny",
+          "**/.env.*": "deny",
+          ".envrc*": "deny",
+          "**/.envrc*": "deny",
+          ".direnv/**": "deny",
+          "**/.direnv/**": "deny"
+        }
+      }
+    },
+    "plan": {
+      "sandbox": {
+        "enabled": true,
+        "writable": false,
+        "allowWrite": [
+          ".",
+          "/tmp",
+          "~/.config/jj"
+        ],
+        "denyRead": [
+          "~/.ssh",
+          "~/.aws",
+          "~/.gnupg",
+          "~/.pi/agent",
+          ".env",
+          ".env.*",
+          "**/.env",
+          "**/.env.*",
+          ".envrc*",
+          "**/.envrc*",
+          ".direnv/**",
+          "**/.direnv/**"
+        ],
+        "network": {
+          "allowedDomains": [],
+          "deniedDomains": []
+        },
+        "askOnBlockedHost": true
+      },
+      "permission": {
+        "path": {
+          "*": "allow",
+          ".env": "deny",
+          ".env.*": "deny",
+          "**/.env": "deny",
+          "**/.env.*": "deny",
+          ".envrc*": "deny",
+          "**/.envrc*": "deny",
+          ".direnv/**": "deny",
+          "**/.direnv/**": "deny"
+        }
+      }
+    },
+    "build": {
+      "sandbox": {
+        "enabled": true,
+        "writable": true,
+        "allowWrite": [
+          ".",
+          "/tmp",
+          "~/.config/jj"
+        ],
+        "denyRead": [
+          "~/.ssh",
+          "~/.aws",
+          "~/.gnupg",
+          "~/.pi/agent",
+          ".env",
+          ".env.*",
+          "**/.env",
+          "**/.env.*",
+          ".envrc*",
+          "**/.envrc*",
+          ".direnv/**",
+          "**/.direnv/**"
+        ],
+        "network": {
+          "allowedDomains": [],
+          "deniedDomains": []
+        },
+        "askOnBlockedHost": true
+      },
+      "permission": {
+        "path": {
+          "*": "allow",
+          ".env": "deny",
+          ".env.*": "deny",
+          "**/.env": "deny",
+          "**/.env.*": "deny",
+          ".envrc*": "deny",
+          "**/.envrc*": "deny",
+          ".direnv/**": "deny",
+          "**/.direnv/**": "deny"
+        }
+      }
+    }
+  }
+}
