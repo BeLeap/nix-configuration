@@ -15,13 +15,13 @@ _: {
     ({pkgs, ...}: {
       home.packages = with pkgs; [
         isync
-        unstable.python313Packages.mlx-vlm
+        python313Packages.mlx-vlm
       ];
       launchd.agents = {
         ml-self-hosted = {
           enable = true;
           config = {
-            Program = "${pkgs.unstable.python313Packages.mlx-vlm}/bin/mlx_vlm.server";
+            Program = "${pkgs.python313Packages.mlx-vlm}/bin/mlx_vlm.server";
             ProgramArguments = [
               "--model"
               "mlx-community/gemma-4-e4b-it-mxfp4"
