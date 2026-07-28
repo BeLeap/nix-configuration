@@ -43,6 +43,10 @@
           "resolve-library-id": "allow",
           "query-docs": "allow"
         },
+        "skill": {
+          "*": "ask",
+          "context7-docs": "allow"
+        },
         "path": {
           "*": "allow",
           ".env": "deny",
@@ -91,6 +95,10 @@
           "resolve-library-id": "allow",
           "query-docs": "allow"
         },
+        "skill": {
+          "*": "ask",
+          "context7-docs": "allow"
+        },
         "path": {
           "*": "allow",
           ".env": "deny",
@@ -138,6 +146,10 @@
           "*": "allow",
           "resolve-library-id": "allow",
           "query-docs": "allow"
+        },
+        "skill": {
+          "*": "allow",
+          "context7-docs": "allow"
         },
         "path": {
           "*": "allow",
