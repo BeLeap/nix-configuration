@@ -30,6 +30,9 @@ tools to resolve library id and get library docs without me having to explicitly
 # Journal
 
 - Record non-trivial work in `.journal/<date>/<appropriate_title>.md`.
+- Treat journal entries as append-only: append new information to an existing entry
+  instead of rewriting or deleting its prior contents. Record corrections as new
+  notes so the original history remains visible.
 - Include, when applicable:
   - outcome and significant changes;
   - validation performed, including failures or blocked checks;
