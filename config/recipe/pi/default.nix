@@ -48,8 +48,8 @@
             ".pi/agent/AGENTS.md".source = ../../../files/AGENTS.md;
             ".pi/agent/settings.json".text = builtins.toJSON {
               defaultProvider = "openai-codex";
-              defaultModel = "gpt-5.6-sol";
-              defaultThinkingLevel = "medium";
+              defaultModel = "gpt-5.6-luna";
+              defaultThinkingLevel = "max";
               defaultProjectTrust = "ask";
               enableInstallTelemetry = false;
               theme = "gruvbox";
