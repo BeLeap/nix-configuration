@@ -75,7 +75,7 @@
                 "https://github.com/tmustier/pi-queue-steer"
               ];
             };
-            ".pi/agent/permission-mode/permission-mode.json".source = ./permission-mode.json;
+            ".pi/agent/permission-mode/permission-mode.json".text = builtins.toJSON (import ./permission-mode.nix);
             ".pi/agent/extensions/notify-osc.ts".source = ./notify-osc.ts;
             ".pi/agent/extensions/tor-status.ts".source = ./tor-status.ts;
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
