@@ -71,6 +71,7 @@
                 "npm:pi-notify@1.4.0"
                 "npm:pi-permission-modes@2.2.0"
                 "npm:pi-web-access@0.13.0"
+                "npm:context-mode"
               ];
             };
             ".pi/agent/permission-mode/permission-mode.json".source = ./permission-mode.json;
