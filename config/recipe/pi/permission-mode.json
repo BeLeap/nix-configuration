@@ -40,6 +40,11 @@
         "askOnBlockedHost": true
       },
       "permission": {
+        "external_directory": {
+          "*": "ask",
+          "~/.agent/skills": "allow",
+          "~/.agent/skills/**": "allow"
+        },
         "tool": {
           "*": "ask",
           "resolve-library-id": "allow",
@@ -92,6 +97,11 @@
         "askOnBlockedHost": true
       },
       "permission": {
+        "external_directory": {
+          "*": "ask",
+          "~/.agent/skills": "allow",
+          "~/.agent/skills/**": "allow"
+        },
         "tool": {
           "*": "ask",
           "resolve-library-id": "allow",
@@ -144,6 +154,11 @@
         "askOnBlockedHost": true
       },
       "permission": {
+        "external_directory": {
+          "*": "ask",
+          "~/.agent/skills": "allow",
+          "~/.agent/skills/**": "allow"
+        },
         "tool": {
           "*": "allow",
           "resolve-library-id": "allow",
