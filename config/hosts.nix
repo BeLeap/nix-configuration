@@ -77,6 +77,7 @@
       "nixos"
       "vm"
       "nixos/vm"
+      "work"
     ];
   }
 ]
