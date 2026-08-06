@@ -62,6 +62,7 @@ _: {
             ts
             gettext
             minio-client
+            ulid
           ];
 
           shellAliases = {
