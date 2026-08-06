@@ -72,6 +72,7 @@
                 "npm:pi-permission-modes@2.2.0"
                 "npm:pi-web-access@0.13.0"
                 "npm:context-mode"
+                "https://github.com/tmustier/pi-queue-steer"
               ];
             };
             ".pi/agent/permission-mode/permission-mode.json".source = ./permission-mode.json;
