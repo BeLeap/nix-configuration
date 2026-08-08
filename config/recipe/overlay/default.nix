@@ -8,19 +8,11 @@ _: {
       inputs.beleap-overlay.overlays.default
       inputs.jj-starship.overlays.default
       (_final: prev: {
-        unstable = import inputs.nixpkgs-unstable {
-          inherit (prev) config;
-          inherit (prev.stdenv.hostPlatform) system;
-          overlays = [
-            (uf: up: {
-              python313 = up.python313.override {
-                packageOverrides = pyf: pyp: {
-                  accelerate = pyp.accelerate.overridePythonAttrs (_: {doCheck = false;});
-                  peft = pyp.peft.overridePythonAttrs (_: {doCheck = false;});
-                };
-              };
-            })
-          ];
+        python313 = prev.python313.override {
+          packageOverrides = pyf: pyp: {
+            accelerate = pyp.accelerate.overridePythonAttrs (_: {doCheck = false;});
+            peft = pyp.peft.overridePythonAttrs (_: {doCheck = false;});
+          };
         };
       })
     ];
