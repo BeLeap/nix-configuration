@@ -14,7 +14,10 @@ _: {
             peft = pyp.peft.overridePythonAttrs (_: {doCheck = false;});
           };
         };
-        unstable = import inputs.nixpkgs-unstable;
+        unstable = import inputs.nixpkgs-unstable {
+          inherit (prev) config;
+          inherit (prev.stdenv.hostPlatform) system;
+        };
       })
     ];
   };
