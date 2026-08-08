@@ -73,6 +73,7 @@
                 "npm:pi-web-access@0.13.0"
                 "npm:context-mode"
                 "https://github.com/tmustier/pi-queue-steer"
+                "npm:pi-title-renamer"
               ];
             };
             ".pi/agent/permission-mode/permission-mode.json".text = builtins.toJSON (import ./permission-mode.nix);
