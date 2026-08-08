@@ -59,10 +59,7 @@ let
   };
   makeSandbox = writable: network: {
     enabled = true;
-    inherit writable;
-    allowWrite = allowWrite;
-    denyRead = denyRead;
-    inherit network;
+    inherit writable allowWrite denyRead network;
     askOnBlockedHost = true;
   };
   filteredNetwork = {
