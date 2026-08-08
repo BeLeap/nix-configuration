@@ -14,6 +14,7 @@ _: {
             peft = pyp.peft.overridePythonAttrs (_: {doCheck = false;});
           };
         };
+        unstable = import inputs.nixpkgs-unstable;
       })
     ];
   };
