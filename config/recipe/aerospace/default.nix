@@ -113,7 +113,7 @@ _: {
                 "if" = {
                   app-id = "com.google.Chrome";
                 };
-                run = ["move-node-to-workspace 2"];
+                run = ["move-node-to-workspace 3"];
               }
               {
                 check-further-callbacks = false;
