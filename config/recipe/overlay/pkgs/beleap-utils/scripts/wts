@@ -1,0 +1,39 @@
+#!/usr/bin/env /bin/bash
+
+set -euo pipefail
+
+if [[ $# -gt 1 ]]; then
+  printf 'Usage: %s [NAME]\n' "${0##*/}" >&2
+  exit 2
+fi
+
+name=${1:-}
+try_args=()
+
+if [[ -n "$name" ]]; then
+  try_args=("$name")
+fi
+
+if ! try_commands=$(try exec --path "$HOME/ws" "${try_args[@]}"); then
+  printf 'wts: try workspace selection failed\n' >&2
+  exit 1
+fi
+
+eval "$try_commands"
+workspace_dir=$PWD
+workspace_name=${workspace_dir##*/}
+
+workspace_exists=$(
+  wezterm cli list --format json |
+    jq -r --arg workspace "$workspace_name" 'any(.workspace == $workspace)'
+)
+
+if [[ "$workspace_exists" != "true" ]]; then
+  wezterm cli spawn \
+    --new-window \
+    --workspace "$workspace_name" \
+    --cwd "$workspace_dir" >/dev/null
+fi
+
+encoded_name=$(printf '%s' "$workspace_name" | base64 | tr -d '\n')
+printf '\033]1337;SetUserVar=DO_FOCUS_WEZTERM_WORKSPACE=%s\007' "$encoded_name"

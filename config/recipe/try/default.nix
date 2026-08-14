@@ -1,13 +1,18 @@
 {try}: {
   hm = [
     try.homeModules.default
-    ({pkgs, ...}: {
-      home.packages = [pkgs.ruby_3_3];
+    ({pkgs, ...}: let
+      tryPackage = try.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+        ruby = pkgs.ruby_3_3;
+      };
+    in {
+      home.packages = [
+        pkgs.ruby_3_3
+        tryPackage
+      ];
       programs.try = {
         enable = true;
-        package = try.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-          ruby = pkgs.ruby_3_3;
-        };
+        package = tryPackage;
         path = "~/ws";
       };
     })
