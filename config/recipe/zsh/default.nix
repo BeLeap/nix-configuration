@@ -62,6 +62,39 @@
               "$editor" "$file"
             }
 
+            jws() {
+              local panes workspace_name workspace_dir
+
+              if [[ -z "''${WEZTERM_PANE:-}" ]]; then
+                echo "jws: not running inside a WezTerm pane" >&2
+                return 1
+              fi
+
+              if ! panes=$(wezterm cli list --format json); then
+                echo "jws: failed to list WezTerm panes" >&2
+                return 1
+              fi
+
+              if ! workspace_name=$(printf '%s\n' "$panes" | jq -r --arg pane "$WEZTERM_PANE" \
+                'first(.[] | select((.pane_id | tostring) == $pane) | .workspace) // empty'); then
+                echo "jws: failed to determine the current workspace" >&2
+                return 1
+              fi
+
+              if [[ -z "$workspace_name" ]]; then
+                echo "jws: current workspace was not found for pane $WEZTERM_PANE" >&2
+                return 1
+              fi
+
+              workspace_dir="$HOME/ws/$workspace_name"
+              if [[ ! -d "$workspace_dir" ]]; then
+                echo "jws: workspace directory does not exist: $workspace_dir" >&2
+                return 1
+              fi
+
+              cd -- "$workspace_dir"
+            }
+
             jjws() {
               local name bookmark repo_root repo_name workspace_base workspace_dir
               name="$1"
