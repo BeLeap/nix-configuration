@@ -8,6 +8,7 @@
         package = try.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
           ruby = pkgs.ruby_3_3;
         };
+        path = "~/ws";
       };
     })
   ];
