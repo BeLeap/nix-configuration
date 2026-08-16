@@ -5,9 +5,6 @@ _: {
         "mlx-lm"
         "googleworkspace-cli"
       ];
-      casks = [
-        "gcloud-cli"
-      ];
     };
   };
 
