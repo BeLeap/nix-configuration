@@ -2,7 +2,6 @@ _: {
   base = {pkgs, ...}: {
     homebrew = {
       casks = [
-        "logseq"
         "tailscale-app"
       ];
       masApps = {
