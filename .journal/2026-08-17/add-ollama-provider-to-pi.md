@@ -10,3 +10,17 @@ Validation:
 - Parsed both modified Nix recipes with `nix-instantiate --parse`.
 - Evaluated generated `models.json` as valid JSON and confirmed the provider URL/model metadata.
 - Evaluated both affected Darwin systems: `beleap-m1air` and `beleap-macmini`.
+
+Follow-up:
+
+- Ollama defaults Qwen3.5 to thinking, which consumed the configured output budget before emitting an answer through Pi and produced `The response was truncated before completion.`.
+- Added `samplingParams.reasoning_effort = "none"` to the Pi model definition. Direct API testing completed successfully with this setting.
+
+Additional finding:
+
+- Pi's repository/tool prompt used 4,375 input tokens while requesting up to 4,096 output tokens against an 8K context, and Ollama returned `finish_reason = length` after one output token.
+- Increased the Ollama and Pi model context settings to 16K while retaining a 4K output limit.
+
+Correction:
+
+- Kept the server and Pi context at 8K to reduce memory use, and lowered Pi's maximum output to 3,072 tokens so the 4,375-token Pi prompt fits without exhausting the context.

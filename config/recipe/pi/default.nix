@@ -95,7 +95,7 @@
                       reasoning = false;
                       input = ["text" "image"];
                       contextWindow = 8192;
-                      maxTokens = 4096;
+                      maxTokens = 3072;
                       samplingParams = {
                         reasoning_effort = "none";
                       };
