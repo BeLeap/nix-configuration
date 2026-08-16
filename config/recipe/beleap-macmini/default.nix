@@ -23,7 +23,7 @@ _: {
           StandardOutPath = "/tmp/ollama.out.log";
           StandardErrorPath = "/tmp/ollama.err.log";
           EnvironmentVariables = {
-            OLLAMA_HOST = "127.0.0.1:11434";
+            OLLAMA_HOST = "0.0.0.0:11434";
             OLLAMA_CONTEXT_LENGTH = "8192";
             OLLAMA_NUM_PARALLEL = "1";
             OLLAMA_MAX_LOADED_MODELS = "1";

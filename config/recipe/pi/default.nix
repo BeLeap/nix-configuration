@@ -61,6 +61,7 @@
                 "gpt-5.4"
                 "gpt-5.3-codex-spark"
                 "openrouter/z-ai/glm-5.2"
+                "ollama/qwen3.5:9b"
               ];
               packages = [
                 "https://github.com/ayghri/i-have-adhd"
@@ -75,6 +76,36 @@
                 "https://github.com/tmustier/pi-queue-steer"
                 "npm:pi-title-renamer"
               ];
+            };
+            ".pi/agent/models.json".text = builtins.toJSON {
+              providers = {
+                ollama = {
+                  baseUrl = "http://beleap-macmini:11434/v1";
+                  api = "openai-completions";
+                  apiKey = "ollama";
+                  compat = {
+                    supportsDeveloperRole = false;
+                    supportsReasoningEffort = false;
+                    maxTokensField = "max_tokens";
+                  };
+                  models = [
+                    {
+                      id = "qwen3.5:9b";
+                      name = "Qwen3.5 9B (beleap-macmini)";
+                      reasoning = false;
+                      input = ["text" "image"];
+                      contextWindow = 8192;
+                      maxTokens = 4096;
+                      cost = {
+                        input = 0;
+                        output = 0;
+                        cacheRead = 0;
+                        cacheWrite = 0;
+                      };
+                    }
+                  ];
+                };
+              };
             };
             ".pi/agent/permission-mode/permission-mode.json".text = builtins.toJSON (import ./permission-mode.nix);
             ".pi/agent/extensions/notify-osc.ts".source = ./notify-osc.ts;
