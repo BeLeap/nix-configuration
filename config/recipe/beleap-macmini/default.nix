@@ -68,6 +68,7 @@ _: {
 
         [runtime]
         kind = "native"
+        reasoning_enabled = false
 
         [gateway]
         host = "127.0.0.1"
