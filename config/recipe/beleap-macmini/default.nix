@@ -24,7 +24,7 @@ _: {
           StandardErrorPath = "/tmp/ollama.err.log";
           EnvironmentVariables = {
             OLLAMA_HOST = "0.0.0.0:11434";
-            OLLAMA_CONTEXT_LENGTH = "8192";
+            OLLAMA_CONTEXT_LENGTH = "32768";
             OLLAMA_NUM_PARALLEL = "1";
             OLLAMA_MAX_LOADED_MODELS = "1";
             OLLAMA_NO_CLOUD = "1";

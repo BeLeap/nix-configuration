@@ -61,7 +61,7 @@
                 "gpt-5.4"
                 "gpt-5.3-codex-spark"
                 "openrouter/z-ai/glm-5.2"
-                "ollama/qwen3.5:9b"
+                "ollama/qwen3.5:4b"
               ];
               packages = [
                 "https://github.com/ayghri/i-have-adhd"
@@ -90,12 +90,12 @@
                   };
                   models = [
                     {
-                      id = "qwen3.5:9b";
-                      name = "Qwen3.5 9B (beleap-macmini)";
+                      id = "qwen3.5:4b";
+                      name = "Qwen3.5 4B (beleap-macmini)";
                       reasoning = false;
                       input = ["text" "image"];
-                      contextWindow = 8192;
-                      maxTokens = 3072;
+                      contextWindow = 32768;
+                      maxTokens = 4096;
                       samplingParams = {
                         reasoning_effort = "none";
                       };

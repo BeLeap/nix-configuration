@@ -24,3 +24,8 @@ Additional finding:
 Correction:
 
 - Kept the server and Pi context at 8K to reduce memory use, and lowered Pi's maximum output to 3,072 tokens so the 4,375-token Pi prompt fits without exhausting the context.
+
+Model adjustment:
+
+- Switched the Pi provider to `qwen3.5:4b` and increased the server/Pi context to 32K, retaining a 4K output limit.
+- The Mac mini needs the new model pulled explicitly after applying the configuration: `ollama pull qwen3.5:4b`.
