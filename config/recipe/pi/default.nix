@@ -72,7 +72,6 @@
                 "npm:pi-notify"
                 "npm:pi-permission-modes"
                 "npm:pi-web-access"
-                "npm:context-mode"
                 "https://github.com/tmustier/pi-queue-steer"
                 "npm:pi-title-renamer"
               ];
