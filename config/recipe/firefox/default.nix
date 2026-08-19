@@ -30,12 +30,12 @@ _: {
           "beleap" = {
             search = {
               force = true;
-              default = "ddg";
+              default = "startpage";
               engines = {
-                ddg = {
-                  name = "DuckDuckGo";
-                  urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
-                  icon = "https://duckduckgo.com/favicon.ico";
+                startpage = {
+                  name = "Startpage";
+                  urls = [{template = "https://www.startpage.com/sp/search?query={searchTerms}";}];
+                  icon = "https://www.startpage.com/favicon.ico";
                   updateInterval = 24 * 60 * 60 * 1000;
                 };
               };
