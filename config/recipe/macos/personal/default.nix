@@ -10,7 +10,7 @@ _: {
     };
 
     system.defaults.dock.persistent-apps = [
-      {app = "${pkgs.discord}/Applications/Discord.app";}
+      {app = "${pkgs.unstable.discord}/Applications/Discord.app";}
       {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
       {app = "${pkgs.google-messages}/Applications/Messages.app";}
     ];
