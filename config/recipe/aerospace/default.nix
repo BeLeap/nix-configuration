@@ -40,6 +40,7 @@ _: {
 
             mode.main.binding =
               {
+                alt-0 = "workspace 10";
                 alt-h = "focus left";
                 alt-j = "focus down";
                 alt-k = "focus up";
@@ -128,6 +129,20 @@ _: {
                   app-id = "notion.id";
                 };
                 run = ["move-node-to-workspace 3"];
+              }
+              {
+                check-further-callbacks = false;
+                "if" = {
+                  app-id = "com.tinyspeck.slackmacgap";
+                };
+                run = ["move-node-to-workspace 10"];
+              }
+              {
+                check-further-callbacks = false;
+                "if" = {
+                  app-id = "com.hnc.Discord";
+                };
+                run = ["move-node-to-workspace 10"];
               }
               {
                 check-further-callbacks = false;
