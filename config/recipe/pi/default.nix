@@ -74,6 +74,7 @@
                 "npm:pi-web-access"
                 "https://github.com/tmustier/pi-queue-steer"
                 "npm:pi-title-renamer"
+                "npm:@hk_net/pi-thinking-command"
               ];
             };
             ".pi/agent/models.json".text = builtins.toJSON {
