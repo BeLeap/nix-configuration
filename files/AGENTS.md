@@ -21,6 +21,7 @@ tools to resolve library id and get library docs without me having to explicitly
 
 # Architecture
 
+- Always consider structural enhancement first.
 - Follow a tidy-first approach in code and system design decisions.
 - Leave code cleaner than you found it while preserving behavior.
 - Prefer cohesive, well-factored designs with clear boundaries and minimal complexity.
