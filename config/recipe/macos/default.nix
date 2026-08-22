@@ -42,6 +42,11 @@
           {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
         ];
 
+        NSGlobalDomain = {
+          AppleShowAllFiles = true;
+          NSAutomaticQuoteSubstitutionEnabled = false;
+        };
+
         finder = {
           AppleShowAllExtensions = true;
           AppleShowAllFiles = true;
@@ -54,7 +59,8 @@
         };
 
         screencapture = {
-          target = "clipboard";
+          include-date = true;
+          target = "file";
           show-thumbnail = true;
         };
       };
