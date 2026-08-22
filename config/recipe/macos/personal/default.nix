@@ -1,4 +1,8 @@
 _: {
+  recipes = [
+    "discord"
+  ];
+
   base = {pkgs, ...}: {
     homebrew = {
       casks = [
@@ -10,7 +14,6 @@ _: {
     };
 
     system.defaults.dock.persistent-apps = [
-      {app = "${pkgs.unstable.discord}/Applications/Discord.app";}
       {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
       {app = "${pkgs.google-messages}/Applications/Messages.app";}
     ];
