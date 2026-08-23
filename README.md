@@ -31,11 +31,15 @@ This section is optimized for code agents making safe, reviewable changes.
 ### Recipe Graph Contract
 
 Recipe entrypoints return an attribute set containing only the optional fields
-`includes`, `systemModules`, and `homeModules`. `includes` is a list of recipe
-names; the two module fields are lists of function-valued modules. The resolver
-expands roots in compatibility order: a recipe precedes its includes,
-include order is preserved, and the first occurrence wins. Module precedence
-must use explicit Nix module priorities rather than relying on graph order.
+`includes`, `system`, `home`, `nixos`, and `darwin`. `includes` is a list of
+recipe names; `system` and `home` are common lists of function-valued modules.
+`nixos` and `darwin` contain optional `system` and `home` lists for platform-
+specific contributions. The resolver expands roots in compatibility order: a
+recipe precedes its includes, include order is preserved, and the first
+occurrence wins. Assembly selects the explicit backend and applies each
+recipe's common modules before its selected backend modules. Module
+precedence must use explicit Nix module priorities rather than relying on graph
+order.
 
 ### Common Commands
 

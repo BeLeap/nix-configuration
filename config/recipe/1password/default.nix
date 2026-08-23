@@ -1,5 +1,5 @@
 _: {
-  homeModules = [
+  home = [
     (
       {pkgs, ...}: {
         home.packages = with pkgs; [

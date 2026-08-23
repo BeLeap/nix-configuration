@@ -70,7 +70,7 @@ Platform-specific Home Manager differences use `nixos.home` and `darwin.home` in
 
 - Encode common behavior once in `system` or `home`.
 - Encode only actual differences in `nixos` and `darwin` fragments.
-- Keep recipe selection explicit; do not branch on `host.os` inside modules or infer different recipe names from metadata.
+- Keep recipe selection explicit; do not branch on `host.backend` inside modules or infer different recipe names from metadata.
 - Use `darwin`, not `macos`, for the nix-darwin field and document any user-facing recipe names retained temporarily during migration.
 - Do not retain separate shared and platform recipe paths when they have one capability identity and the field model expresses their differences directly.
 - Keep separate recipes when features are independently selectable, not merely because their modules target different platforms.

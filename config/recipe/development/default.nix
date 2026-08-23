@@ -18,7 +18,7 @@ _: {
     "pi"
     "try"
   ];
-  homeModules = [
+  home = [
     (
       {pkgs, ...}: {
         home = {

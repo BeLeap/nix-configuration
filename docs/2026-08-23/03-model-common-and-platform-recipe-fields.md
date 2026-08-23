@@ -71,7 +71,7 @@ recipe.darwin.home
 
 Ordering is per recipe, not “all common modules followed by all platform modules.” Preserve the recipe graph’s stable preorder and append each recipe’s selected platform contribution immediately after its common contribution.
 
-The assembly backend must receive its platform explicitly from `mkSystem`. Do not infer platform from arbitrary host metadata and do not use platform to select different recipes automatically. Hosts still select recipe roots explicitly; assembly only chooses which fields of those already-selected recipes apply.
+The assembly must receive its backend selector explicitly from `mkSystem`. Do not infer the selector from arbitrary host metadata and do not use it to select different recipes automatically. Hosts still select recipe roots explicitly; assembly only chooses which fields of those already-selected recipes apply.
 
 ## Examples
 

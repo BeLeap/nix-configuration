@@ -2,9 +2,11 @@
   roots,
   resolve,
 }: let
-  allowedFields = ["includes" "systemModules" "homeModules"];
-  declarationShape = "{ includes = [ ... ]; systemModules = [ ... ]; homeModules = [ ... ]; }";
+  allowedFields = ["includes" "system" "home" "nixos" "darwin"];
+  fragmentFields = ["system" "home"];
+  declarationShape = "{ includes = [ ... ]; system = [ ... ]; home = [ ... ]; nixos = { system = [ ... ]; home = [ ... ]; }; darwin = { system = [ ... ]; home = [ ... ]; }; }";
   moduleTypes = ["lambda"];
+  backends = ["nixos" "darwin"];
 
   firstInvalid = predicate: index: values:
     if values == []
@@ -20,7 +22,7 @@
 
   validateList = recipeName: field: expected: predicate: value:
     if builtins.typeOf value != "list"
-    then throw "Recipe '${recipeName}' field '${field}' expected ${expected}; actual type '${builtins.typeOf value}'."
+    then throw "Recipe '${recipeName}' field '${field}' expected a list of ${expected}; actual type '${builtins.typeOf value}'."
     else let
       invalid = firstInvalid predicate 0 value;
     in
@@ -29,10 +31,38 @@
       else throw "Recipe '${recipeName}' field '${field}[${toString invalid.index}]' expected ${expected}; actual type '${builtins.typeOf invalid.value}'.";
 
   validateIncludes = recipeName: field: value:
-    validateList recipeName field "a recipe-name string" (item: builtins.typeOf item == "string") value;
+    validateList recipeName field "recipe-name strings" (item: builtins.typeOf item == "string") value;
 
   validateModules = recipeName: field: value:
-    validateList recipeName field "a function module" (item: builtins.elem (builtins.typeOf item) moduleTypes) value;
+    validateList recipeName field "function modules" (item: builtins.elem (builtins.typeOf item) moduleTypes) value;
+
+  normalizeFragment = recipeName: field: fragment:
+    if builtins.typeOf fragment != "set"
+    then throw "Recipe '${recipeName}' field '${field}' expected an attribute set containing only 'system' and 'home' lists; actual type '${builtins.typeOf fragment}'."
+    else let
+      unknownFields = builtins.filter (nestedField: !(builtins.elem nestedField fragmentFields)) (builtins.attrNames fragment);
+      unknownField =
+        if unknownFields == []
+        then null
+        else builtins.head unknownFields;
+      unknownFieldCheck =
+        if unknownField == null
+        then null
+        else throw "Recipe '${recipeName}' field '${field}.${unknownField}' is unknown; expected one of ${lib.concatStringsSep ", " fragmentFields}; actual type '${builtins.typeOf (builtins.getAttr unknownField fragment)}'.";
+      getField = nestedField:
+        validateModules recipeName "${field}.${nestedField}" (
+          if builtins.hasAttr nestedField fragment
+          then builtins.getAttr nestedField fragment
+          else []
+        );
+      system = getField "system";
+      home = getField "home";
+    in
+      builtins.seq unknownFieldCheck
+      (builtins.seq system
+        (builtins.seq home {
+          inherit system home;
+        }));
 
   normalizeDeclaration = recipeName: declaration:
     if builtins.typeOf declaration != "set"
@@ -47,22 +77,34 @@
         if unknownField == null
         then null
         else throw "Recipe '${recipeName}' field '${unknownField}' is unknown; expected one of ${lib.concatStringsSep ", " allowedFields}; actual type '${builtins.typeOf (builtins.getAttr unknownField declaration)}'.";
-      getField = field: default: validator:
+      getList = field: validator:
         validator recipeName field (
           if builtins.hasAttr field declaration
           then builtins.getAttr field declaration
-          else default
+          else []
         );
-      includes = getField "includes" [] validateIncludes;
-      systemModules = getField "systemModules" [] validateModules;
-      homeModules = getField "homeModules" [] validateModules;
+      includes = getList "includes" validateIncludes;
+      system = getList "system" validateModules;
+      home = getList "home" validateModules;
+      nixos = normalizeFragment recipeName "nixos" (
+        if builtins.hasAttr "nixos" declaration
+        then declaration.nixos
+        else {}
+      );
+      darwin = normalizeFragment recipeName "darwin" (
+        if builtins.hasAttr "darwin" declaration
+        then declaration.darwin
+        else {}
+      );
     in
       builtins.seq unknownFieldCheck
       (builtins.seq includes
-        (builtins.seq systemModules
-          (builtins.seq homeModules {
-            inherit includes systemModules homeModules;
-          })));
+        (builtins.seq system
+          (builtins.seq home
+            (builtins.seq nixos
+              (builtins.seq darwin {
+                inherit includes system home nixos darwin;
+              })))));
 
   validateRoots =
     if builtins.typeOf roots != "list"
@@ -119,14 +161,16 @@
 
   validatedRoots = validateRoots;
   traversal =
-    builtins.foldl' (
+    builtins.foldl'
+    (
       accumulated: root: let
         branch = visit [] accumulated.visited root;
       in {
         inherit (branch) visited;
         recipes = accumulated.recipes ++ branch.recipes;
       }
-    ) {
+    )
+    {
       visited = [];
       recipes = [];
     }
@@ -135,9 +179,29 @@
   orderedRecipes = traversal.recipes;
   recipeNames = map (recipe: recipe.name) orderedRecipes;
   declarations = map (recipe: recipe.declaration) orderedRecipes;
-  systemModules = builtins.concatLists (map (recipe: recipe.declaration.systemModules) orderedRecipes);
-  homeModules = builtins.concatLists (map (recipe: recipe.declaration.homeModules) orderedRecipes);
+
+  validateBackend = backend:
+    if builtins.typeOf backend != "string"
+    then throw "Recipe graph backend expected one of ${lib.concatStringsSep ", " backends}; actual type '${builtins.typeOf backend}'."
+    else if !(builtins.elem backend backends)
+    then throw "Recipe graph backend expected one of ${lib.concatStringsSep ", " backends}; actual value '${backend}'."
+    else backend;
+
+  modulesForBackend = backend: let
+    selectedBackend = validateBackend backend;
+    select = recipe: let
+      inherit (recipe) declaration;
+      fragment = builtins.getAttr selectedBackend declaration;
+    in {
+      system = declaration.system ++ fragment.system;
+      home = declaration.home ++ fragment.home;
+    };
+    contributions = map select orderedRecipes;
+  in {
+    system = builtins.concatLists (map (contribution: contribution.system) contributions);
+    home = builtins.concatLists (map (contribution: contribution.home) contributions);
+  };
 in
   builtins.seq validatedRoots {
-    inherit recipeNames declarations systemModules homeModules;
+    inherit recipeNames declarations modulesForBackend;
   }

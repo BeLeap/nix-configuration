@@ -4,7 +4,7 @@ _: {
     "syncthing"
     "keepassxc"
   ];
-  homeModules = [
+  home = [
     ({pkgs, ...}: {
       programs.firefox.profiles."beleap".extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         joplin-web-clipper

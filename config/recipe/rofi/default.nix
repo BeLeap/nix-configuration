@@ -1,11 +1,13 @@
 _: {
-  homeModules = [
-    (_: {
-      programs.rofi = {
-        enable = true;
+  nixos = {
+    home = [
+      (_: {
+        programs.rofi = {
+          enable = true;
 
-        font = "CaskaydiaCove Nerd Font 14";
-      };
-    })
-  ];
+          font = "CaskaydiaCove Nerd Font 14";
+        };
+      })
+    ];
+  };
 }

@@ -1,5 +1,5 @@
 {host, ...}: {
-  systemModules = [
+  system = [
     ({pkgs, ...}: {
       programs.zsh.enable = true;
 
@@ -7,7 +7,7 @@
     })
   ];
 
-  homeModules = [
+  home = [
     (
       _: {
         programs.zsh = {

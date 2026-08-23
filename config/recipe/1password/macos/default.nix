@@ -1,7 +1,9 @@
 _: {
-  systemModules = [
-    (_: {
-      homebrew.casks = ["1password"];
-    })
-  ];
+  darwin = {
+    system = [
+      (_: {
+        homebrew.casks = ["1password"];
+      })
+    ];
+  };
 }

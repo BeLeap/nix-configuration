@@ -1,5 +1,5 @@
 _: {
-  systemModules = [
+  system = [
     (_: {
       nix = {
         optimise.automatic = true;

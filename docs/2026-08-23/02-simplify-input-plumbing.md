@@ -53,7 +53,7 @@ home-manager.extraSpecialArgs = {inherit inputs host;};
 
 - Recipe declarations that need an external flake input must reference it explicitly as `inputs.<name>`.
 - Ordinary Nix modules should prefer `pkgs`, `lib`, and `config` over reaching into `inputs`.
-- Keep `host` for assembly facts: host name, platform, distribution, username, and email.
+- Keep `host` for assembly facts: host name, platform, backend, username, and email.
 - Feature configuration belongs in typed module options, not additional fields added to `host`.
 - Values required to calculate `imports` may use `specialArgs`; ordinary configurable values should use module options.
 

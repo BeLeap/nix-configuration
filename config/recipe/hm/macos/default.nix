@@ -1,13 +1,14 @@
 {inputs, ...}: {
-  systemModules = [
-    (_: {
-      imports = [inputs.home-manager.darwinModules.home-manager];
-    })
-  ];
-
-  homeModules = [
-    (_: {
-      imports = [./module.nix];
-    })
-  ];
+  darwin = {
+    system = [
+      (_: {
+        imports = [inputs.home-manager.darwinModules.home-manager];
+      })
+    ];
+    home = [
+      (_: {
+        imports = [./module.nix];
+      })
+    ];
+  };
 }

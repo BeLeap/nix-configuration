@@ -1,20 +1,22 @@
 _: {
-  homeModules = [
-    (_: {
-      programs.waybar = {
-        enable = true;
-
-        systemd = {
+  nixos = {
+    home = [
+      (_: {
+        programs.waybar = {
           enable = true;
-          target = "hyprland-session.target";
-        };
 
-        settings = {
-          mainBar = {
-            modules-left = ["hyprland/workspaces"];
+          systemd = {
+            enable = true;
+            target = "hyprland-session.target";
+          };
+
+          settings = {
+            mainBar = {
+              modules-left = ["hyprland/workspaces"];
+            };
           };
         };
-      };
-    })
-  ];
+      })
+    ];
+  };
 }

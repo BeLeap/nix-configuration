@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  homeModules = [
+  home = [
     inputs.direnv-overlay.homeManagerModules.default
     (_: {
       imports = [inputs.direnv-instant.homeModules.direnv-instant];

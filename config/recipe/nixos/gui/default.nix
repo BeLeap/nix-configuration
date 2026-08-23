@@ -5,134 +5,136 @@ _: {
     "waybar"
   ];
 
-  systemModules = [
-    (
-      {pkgs, ...}: {
-        hardware.graphics.enable = true;
+  nixos = {
+    system = [
+      (
+        {pkgs, ...}: {
+          hardware.graphics.enable = true;
 
-        programs.hyprland = {
-          enable = true;
-          withUWSM = true;
-          xwayland.enable = true;
-        };
-
-        services = {
-          displayManager = {
+          programs.hyprland = {
             enable = true;
-            sddm = {
-              enable = true;
+            withUWSM = true;
+            xwayland.enable = true;
+          };
 
-              wayland = {
+          services = {
+            displayManager = {
+              enable = true;
+              sddm = {
                 enable = true;
+
+                wayland = {
+                  enable = true;
+                };
               };
             };
           };
-        };
 
-        i18n.inputMethod = {
-          enable = true;
-          type = "kime";
-          kime = {
-            extraConfig = ''
-              log:
-                global_level: DEBUG
-              engine:
-                translation_layer: null
-                default_category: Latin
-                global_category_state: false
-                global_hotkeys:
-                  M-C-Backslash:
-                    behavior: !Mode Math
-                    result: ConsumeIfProcessed
-                  Super-Space:
-                    behavior: !Toggle
-                    - Hangul
-                    - Latin
-                    result: Consume
-                  M-C-E:
-                    behavior: !Mode Emoji
-                    result: ConsumeIfProcessed
-                  Esc:
-                    behavior: !Switch Latin
-                    result: Bypass
-                  Muhenkan:
-                    behavior: !Toggle
-                    - Hangul
-                    - Latin
-                    result: Consume
-                  AltR:
-                    behavior: !Toggle
-                    - Hangul
-                    - Latin
-                    result: Consume
-                  Hangul:
-                    behavior: !Toggle
-                    - Hangul
-                    - Latin
-                    result: Consume
-                category_hotkeys:
-                  Hangul:
-                    ControlR:
-                      behavior: !Mode Hanja
+          i18n.inputMethod = {
+            enable = true;
+            type = "kime";
+            kime = {
+              extraConfig = ''
+                log:
+                  global_level: DEBUG
+                engine:
+                  translation_layer: null
+                  default_category: Latin
+                  global_category_state: false
+                  global_hotkeys:
+                    M-C-Backslash:
+                      behavior: !Mode Math
+                      result: ConsumeIfProcessed
+                    Super-Space:
+                      behavior: !Toggle
+                      - Hangul
+                      - Latin
                       result: Consume
-                    HangulHanja:
-                      behavior: !Mode Hanja
+                    M-C-E:
+                      behavior: !Mode Emoji
+                      result: ConsumeIfProcessed
+                    Esc:
+                      behavior: !Switch Latin
+                      result: Bypass
+                    Muhenkan:
+                      behavior: !Toggle
+                      - Hangul
+                      - Latin
                       result: Consume
-                    F9:
-                      behavior: !Mode Hanja
-                      result: ConsumeIfProcessed
-                mode_hotkeys:
-                  Math:
-                    Enter:
-                      behavior: Commit
-                      result: ConsumeIfProcessed
-                    Tab:
-                      behavior: Commit
-                      result: ConsumeIfProcessed
-                  Hanja:
-                    Enter:
-                      behavior: Commit
-                      result: ConsumeIfProcessed
-                    Tab:
-                      behavior: Commit
-                      result: ConsumeIfProcessed
-                  Emoji:
-                    Enter:
-                      behavior: Commit
-                      result: ConsumeIfProcessed
-                    Tab:
-                      behavior: Commit
-                      result: ConsumeIfProcessed
-                candidate_font: Noto Sans CJK KR
-                xim_preedit_font:
-                - Noto Sans CJK KR
-                - 15.0
-                latin:
-                  layout: Colemak
-                  preferred_direct: true
-                hangul:
-                  layout: sebeolsik-3-90
-                  word_commit: false
-                  preedit_johab: Needed
-                  addons:
-                    all:
-                    - ComposeChoseongSsang
-                    dubeolsik:
-                    - TreatJongseongAsChoseong
-                    sebeolsik-3-90:
-                    - FlexibleComposeOrder
-                    - ComposeChoseongSsang
-                    - ComposeJongseongSsang
-            '';
+                    AltR:
+                      behavior: !Toggle
+                      - Hangul
+                      - Latin
+                      result: Consume
+                    Hangul:
+                      behavior: !Toggle
+                      - Hangul
+                      - Latin
+                      result: Consume
+                  category_hotkeys:
+                    Hangul:
+                      ControlR:
+                        behavior: !Mode Hanja
+                        result: Consume
+                      HangulHanja:
+                        behavior: !Mode Hanja
+                        result: Consume
+                      F9:
+                        behavior: !Mode Hanja
+                        result: ConsumeIfProcessed
+                  mode_hotkeys:
+                    Math:
+                      Enter:
+                        behavior: Commit
+                        result: ConsumeIfProcessed
+                      Tab:
+                        behavior: Commit
+                        result: ConsumeIfProcessed
+                    Hanja:
+                      Enter:
+                        behavior: Commit
+                        result: ConsumeIfProcessed
+                      Tab:
+                        behavior: Commit
+                        result: ConsumeIfProcessed
+                    Emoji:
+                      Enter:
+                        behavior: Commit
+                        result: ConsumeIfProcessed
+                      Tab:
+                        behavior: Commit
+                        result: ConsumeIfProcessed
+                  candidate_font: Noto Sans CJK KR
+                  xim_preedit_font:
+                  - Noto Sans CJK KR
+                  - 15.0
+                  latin:
+                    layout: Colemak
+                    preferred_direct: true
+                  hangul:
+                    layout: sebeolsik-3-90
+                    word_commit: false
+                    preedit_johab: Needed
+                    addons:
+                      all:
+                      - ComposeChoseongSsang
+                      dubeolsik:
+                      - TreatJongseongAsChoseong
+                      sebeolsik-3-90:
+                      - FlexibleComposeOrder
+                      - ComposeChoseongSsang
+                      - ComposeJongseongSsang
+              '';
+            };
           };
-        };
 
-        environment.sessionVariables = {
-          NIXOS_OZONE_WL = "1";
-        };
+          environment.sessionVariables = {
+            NIXOS_OZONE_WL = "1";
+          };
 
-        environment.systemPackages = [pkgs.wl-clipboard];
-      }
-    )
-  ];
+          environment.systemPackages = [pkgs.wl-clipboard];
+        }
+      )
+    ];
+  };
 }

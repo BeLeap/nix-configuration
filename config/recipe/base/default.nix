@@ -1,5 +1,5 @@
 {host, ...}: {
-  systemModules = [
+  system = [
     ({pkgs, ...}: {
       programs = {
         bash.enable = true;
@@ -28,7 +28,7 @@
       ];
     })
   ];
-  homeModules = [
+  home = [
     (
       {pkgs, ...}: {
         home.packages = with pkgs; [

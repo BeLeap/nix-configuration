@@ -1,5 +1,5 @@
 _: {
-  homeModules = [
+  home = [
     (
       _: {
         programs.zoxide = {

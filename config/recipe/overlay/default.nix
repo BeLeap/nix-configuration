@@ -1,5 +1,5 @@
 _: {
-  systemModules = [
+  system = [
     ({inputs, ...}: {
       nixpkgs.overlays = [
         (import ./pkgs/overlay.nix {

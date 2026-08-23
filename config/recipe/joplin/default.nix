@@ -3,7 +3,7 @@
   host,
   ...
 }: {
-  homeModules = [
+  home = [
     ({
       config,
       pkgs,

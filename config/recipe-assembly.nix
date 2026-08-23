@@ -1,6 +1,7 @@
 {
   inputs,
   host,
+  backend,
 }: let
   lib = inputs.nixpkgs.lib;
   callRecipe = entrypoint: let
@@ -23,6 +24,7 @@
     roots = host.recipes;
     resolve = resolveRecipe;
   };
+  modules = graph.modulesForBackend backend;
 
   # Compatibility ordering is preorder depth-first traversal: roots retain
   # host order, each recipe precedes its includes, includes retain declaration
@@ -30,9 +32,9 @@
   # Nix module priorities rather than relying on this graph order.
   homeManagerModule = {
     home-manager.users."${host.usernameLower}" = {
-      imports = graph.homeModules;
+      imports = modules.home;
     };
   };
 in
-  graph.systemModules
-  ++ lib.optional (graph.homeModules != []) homeManagerModule
+  modules.system
+  ++ lib.optional (modules.home != []) homeManagerModule

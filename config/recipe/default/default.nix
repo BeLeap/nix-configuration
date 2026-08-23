@@ -15,7 +15,7 @@ _: {
     # others
     "kubernetes"
   ];
-  homeModules = [
+  home = [
     ({config, ...}: {
       home.sessionPath = [
         "${config.home.homeDirectory}/.local/bin"

@@ -1,5 +1,5 @@
 _: {
-  systemModules = [
+  system = [
     ({
       inputs,
       host,

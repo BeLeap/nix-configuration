@@ -1,9 +1,8 @@
 [
   {
     name = "beleap-m1air";
-    os = "darwin";
     arch = "aarch64";
-    distribution = "macos";
+    backend = "darwin";
     recipes = [
       "default"
       "macos"
@@ -19,9 +18,8 @@
   }
   {
     name = "beleap-macmini";
-    os = "darwin";
     arch = "aarch64";
-    distribution = "macos";
+    backend = "darwin";
     recipes = [
       "default"
       "macos"
@@ -39,9 +37,8 @@
     name = "csjang-m3pro";
     username = "cs.jang";
     email = "cs.jang@toss.im";
-    os = "darwin";
     arch = "aarch64";
-    distribution = "macos";
+    backend = "darwin";
     recipes = [
       "default"
       "macos"
@@ -52,9 +49,8 @@
   }
   {
     name = "vm-arm64-Darwin-personal";
-    os = "linux";
     arch = "aarch64";
-    distribution = "nixos";
+    backend = "nixos";
     recipes = [
       "default"
       "nixos"
@@ -69,9 +65,8 @@
     name = "vm-arm64-Darwin-work";
     username = "cs.jang";
     email = "cs.jang@toss.im";
-    os = "linux";
     arch = "aarch64";
-    distribution = "nixos";
+    backend = "nixos";
     recipes = [
       "default"
       "nixos"

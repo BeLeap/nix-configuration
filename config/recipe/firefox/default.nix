@@ -1,5 +1,5 @@
 _: {
-  homeModules = [
+  home = [
     ({pkgs, ...}: {
       programs.firefox = {
         enable = true;

@@ -1,13 +1,14 @@
 {inputs, ...}: {
-  systemModules = [
-    (_: {
-      imports = [inputs.home-manager.nixosModules.home-manager];
-    })
-  ];
-
-  homeModules = [
-    (_: {
-      imports = [./module.nix];
-    })
-  ];
+  nixos = {
+    system = [
+      (_: {
+        imports = [inputs.home-manager.nixosModules.home-manager];
+      })
+    ];
+    home = [
+      (_: {
+        imports = [./module.nix];
+      })
+    ];
+  };
 }

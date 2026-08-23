@@ -3,7 +3,7 @@
   host,
   ...
 }: {
-  systemModules = [
+  system = [
     (_: {
       imports = [inputs.agenix.nixosModules.default];
     })
@@ -11,7 +11,7 @@
       environment.systemPackages = [inputs.agenix.packages.${host.platform}.default];
     })
   ];
-  homeModules = [
+  home = [
     (import ../../../lib/agenix/hm.nix {inherit inputs host;})
   ];
 }
