@@ -30,3 +30,16 @@ Consolidating platform-specific recipe entrypoints such as `hm/macos` and `hm/ni
 - `host.platform` remains the full Nix system identifier such as `aarch64-darwin` or `aarch64-linux`.
 - Assembly and graph dispatch use `backend`/`modulesForBackend` so the selector is not confused with the full Nix platform string.
 - The host-field rename and backend terminology were validated with the same formatter, static, graph, flake, and five-host evaluation checks.
+
+## Platform recipe consolidation
+
+- Merged the paired platform implementations into `1password`, `hm`, `nix`, `podman`, `nh`, `ws-cleanup`, and `vm`.
+- Inlined the former Home Manager platform module files into `config/recipe/hm/default.nix`.
+- Removed obsolete platform entrypoints and updated the macOS/NixOS composition recipes and host roots.
+- Kept standalone capabilities and independent composition recipes such as `nixos/gui`, `macAppUtil`, and `macos/personal` unchanged.
+
+Validation after consolidation:
+
+- Nix parsing, Alejandra, Statix, focused graph tests, `nix flake check --no-build --all-systems --show-trace`, and all five host derivation evaluations passed.
+- Deadnix still reports only the pre-existing unused `pyf` argument in `config/recipe/overlay/default.nix`.
+- No obsolete paired recipe names remain in `config` declarations or host roots.
