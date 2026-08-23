@@ -67,6 +67,7 @@ Document this as compatibility behavior. Module precedence should ultimately use
 
 Provide explicit failures for:
 
+- invalid recipe names before constructing a path, including empty names, absolute paths, empty segments, and `.` or `..` segments;
 - unknown root or included recipe;
 - missing recipe entrypoint;
 - dependency cycle, including the full path such as `a -> b -> c -> a`;
@@ -90,7 +91,7 @@ or `home-manager.sharedModules = homeModules` when the modules genuinely apply t
 
 ## Migration steps
 
-1. Add pure graph tests for current ordering, shared-dependency deduplication, unknown names, malformed fields, and cycles.
+1. Add pure graph tests for current ordering, shared-dependency deduplication, invalid and unknown names, malformed fields, and cycles.
 2. Implement the strict resolver while retaining the current host recipe roots.
 3. Mechanically rename `recipes` to `includes`, `base` to `systemModules`, and `hm` to `homeModules`.
 4. Wrap every single system module in a list; remove reliance on `lib.flatten`.
@@ -101,6 +102,7 @@ Keep the declaration migration separate from unrelated recipe behavior changes.
 ## Acceptance criteria
 
 - Every recipe declaration follows the exact three-field contract.
+- Invalid names fail before filesystem path construction.
 - Unknown fields and invalid field types fail with actionable messages.
 - A synthetic cycle reports its complete dependency path.
 - A diamond dependency appears once in stable first-occurrence order.
@@ -110,7 +112,7 @@ Keep the declaration migration separate from unrelated recipe behavior changes.
 
 ## Validation
 
-Run the global checks from [README.md](README.md), plus the focused resolver tests. Capture a before/after expansion list for every host and compare names and order.
+Run the global checks from [README.md](README.md), plus the focused resolver tests. Include empty, absolute, repeated-separator, `.`-segment, and `..`-segment recipe names. Capture a before/after expansion list for every host and compare names and order.
 
 Useful inspection:
 

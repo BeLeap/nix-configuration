@@ -1,12 +1,14 @@
-# Enhancement 5: Split broad profiles and extract host services
+# Enhancement 5: Split broad recipes and extract host services
 
 ## Goal
 
-Make baseline profiles communicate intent and keep concrete host files small. Separate reusable Ollama and ZeroClaw service implementations from the Mac mini’s host-specific settings.
+Make baseline recipes communicate intent and keep concrete host recipes small. Separate reusable Ollama and ZeroClaw service implementations from the Mac mini’s host-specific settings.
 
-Estimated implementation time: **4–7 hours**, split into profile and service-extraction revisions.
+Estimated implementation time: **4–7 hours**, split into recipe-composition and service-extraction revisions.
 
-## Part A: Split the broad default profile
+All declarations in this enhancement remain ordinary recipes. Terms such as “baseline,” “role,” and “capability” describe intended use, not separate types or directory layers.
+
+## Part A: Split the broad default recipe
 
 ### Current problem
 
@@ -15,15 +17,15 @@ The current `default` recipe includes infrastructure and workstation policy toge
 - overlay and Home Manager integration;
 - base system configuration;
 - Nix and agenix;
-- the full development profile;
+- the full development recipe;
 - Firefox;
 - Kubernetes tooling.
 
 As a result, every host receives a broad development/desktop baseline, including headless VM and work configurations. The name `default` does not explain that policy.
 
-### Target profiles
+### Target recipes
 
-Create explicit profiles with one reason to change:
+Create explicit composition recipes with one reason to change:
 
 ```text
 core          # assembly foundation, user baseline, Nix, secrets support
@@ -32,23 +34,24 @@ desktop       # graphical shared applications such as Firefox
 kubernetes    # Kubernetes-specific tools
 ```
 
-Platform foundations may be concrete profiles such as `core/darwin` and `core/nixos` if Home Manager and Nix platform modules differ.
+A `core` recipe may keep common behavior in `system` and `home`, with actual platform differences in its `nixos` and `darwin` fragments. Do not create separate platform recipe names solely because their module implementations differ.
 
 ### Behavior-preserving migration
 
 The first revision must preserve behavior:
 
-1. create the new profiles;
-2. make every host select the profiles corresponding to its existing `default` expansion;
+1. create the new recipes;
+2. make every host select the recipes corresponding to its existing `default` expansion;
 3. remove `default` only after before/after expansion comparison passes.
 
 Removing Firefox, Kubernetes, qBittorrent, or development tools from a host is a policy change. Make those removals in later atomic revisions with explicit host intent and validation.
 
-### Profile acceptance criteria
+### Recipe-split acceptance criteria
 
-- No profile named `default` hides workstation policy.
+- No recipe named `default` hides workstation policy.
 - `core` contains only configuration required by nearly every host.
-- Development, desktop, and Kubernetes selections are visible in host or role profiles.
+- Development, desktop, and Kubernetes selections are visible in host roots or broader role-oriented recipes.
+- The new composition recipes have no special loader behavior or directory namespace.
 - The initial split does not change effective packages or services.
 - Later policy reductions are isolated and documented.
 
@@ -67,18 +70,19 @@ Removing Firefox, Kubernetes, qBittorrent, or development tools from a host is a
 
 This mixes reusable service behavior with one machine’s choices and makes service changes appear host-specific.
 
-### Target modules
+### Target recipes
 
-Create separate feature modules, for example:
+Create separate recipes, for example:
 
 ```text
-modules/system/darwin/ollama-homebrew.nix
-modules/home/darwin/ollama.nix
-modules/home/darwin/zeroclaw.nix
-profiles/capabilities/local-ai-darwin.nix
+config/recipe/ollama/default.nix
+config/recipe/zeroclaw/default.nix
+config/recipe/local-ai/default.nix
 ```
 
-Do not combine Ollama and ZeroClaw implementations into one module. A profile may compose them, but each service needs an independent option namespace and lifecycle.
+The Ollama recipe may contribute its Homebrew system module through `darwin.system` and its Home Manager LaunchAgent through `darwin.home`. The ZeroClaw recipe contributes through `darwin.home`. `local-ai` may include both recipes when selecting the pair is useful.
+
+Do not combine Ollama and ZeroClaw implementations into one recipe. Each service needs an independent option namespace and lifecycle, while a broader ordinary recipe may compose them.
 
 Suggested option boundaries:
 
@@ -113,14 +117,14 @@ Use typed `lib.mkOption` declarations with descriptions and safe defaults. Add a
 - Preserve current LaunchAgent restart and environment behavior.
 - Do not silently fall back to another provider or model.
 
-The Mac mini host file should end with only host choices: package/profile selection and option values.
+The Mac mini recipe should end with only host choices: recipe selection and option values.
 
 ### Service acceptance criteria
 
-- Ollama and ZeroClaw implementations live outside the Mac mini host file.
-- Each service can be enabled and configured independently.
+- Ollama and ZeroClaw implementations live in separate reusable recipes outside the Mac mini recipe.
+- Each service recipe can be selected and configured independently.
 - Options are typed and invalid combinations produce actionable assertions.
-- The host file contains no generated TOML body or daemon shell implementation.
+- The host recipe contains no generated TOML body or daemon shell implementation.
 - Generated ZeroClaw configuration retains private permissions and token handling.
 - No activation-time model download is introduced.
 - The Mac mini configuration evaluates successfully.
@@ -136,11 +140,11 @@ Run the global checks from [README.md](README.md). Before extraction, capture re
 - generated ZeroClaw TOML excluding store-path-only differences;
 - token-file and state-directory paths.
 
-Also evaluate the two other Darwin hosts to prove the new service modules do not activate globally.
+Also evaluate the two other Darwin hosts to prove the new service recipes do not activate globally.
 
 ## Non-goals
 
 - Do not change the selected Ollama model during extraction.
 - Do not redesign secret storage in the same revision.
 - Do not move logs or alter network binding as an incidental cleanup.
-- Do not remove packages from hosts during the behavior-preserving profile split.
+- Do not remove packages from hosts during the behavior-preserving recipe split.
