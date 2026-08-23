@@ -57,6 +57,20 @@ let
     inherit tool skill;
     path = pathPermission;
   };
+  yoloPermission = {
+    external_directory = "allow";
+    path = {"*" = "allow";};
+    read = "allow";
+    write = "allow";
+    edit = "allow";
+    grep = "allow";
+    find = "allow";
+    ls = "allow";
+    bash = {"*" = "allow";};
+    web_search = "allow";
+    tool = "allow";
+    skill = "allow";
+  };
   makeSandbox = writable: network: {
     enabled = true;
     inherit writable allowWrite denyRead network;
@@ -91,6 +105,14 @@ in {
     build = {
       sandbox = makeSandbox true filteredNetwork;
       permission = makePermission allowToolPermission allowSkillPermission;
+    };
+    yolo = {
+      sandbox = {
+        enabled = false;
+        writable = true;
+      };
+      bypassProtectedPaths = true;
+      permission = yoloPermission;
     };
   };
 }
