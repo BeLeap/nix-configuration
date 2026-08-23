@@ -1,11 +1,11 @@
 {host, ...}: {
   includes = [
-    "hm/macos"
+    "hm"
     "macAppUtil"
-    "nix/macos"
-    "nh/macos"
-    "podman/macos"
-    "ws-cleanup/macos"
+    "nix"
+    "nh"
+    "podman"
+    "ws-cleanup"
     "aerospace"
   ];
 

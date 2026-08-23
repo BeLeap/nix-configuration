@@ -12,7 +12,6 @@
       "personal"
       "onedrive"
       "1password"
-      "1password/macos"
       "kdeconnect-mac"
     ];
   }
@@ -29,7 +28,6 @@
       "personal"
       "onedrive"
       "1password"
-      "1password/macos"
       "kdeconnect-mac"
     ];
   }
@@ -55,10 +53,8 @@
       "default"
       "nixos"
       "vm"
-      "nixos/vm"
       "personal"
       "1password"
-      "1password/nixos"
     ];
   }
   {
@@ -71,7 +67,6 @@
       "default"
       "nixos"
       "vm"
-      "nixos/vm"
       "work"
     ];
   }

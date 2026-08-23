@@ -1,9 +1,9 @@
 {host, ...}: {
   includes = [
-    "hm/nixos"
-    "nix/nixos"
-    "nh/nixos"
-    "ws-cleanup/nixos"
+    "hm"
+    "nix"
+    "nh"
+    "ws-cleanup"
   ];
 
   nixos = {
