@@ -1,16 +1,15 @@
 # Recipe architecture enhancement handoff
 
-This directory turns the 2026-08-23 recipe architecture review into five coding-agent handoffs. The goal is to preserve explicit host composition and cross-layer recipes while replacing permissive custom machinery with strict declarations and clear responsibility boundaries.
+This directory turns the 2026-08-23 recipe architecture review into four remaining coding-agent handoffs. The goal is to preserve explicit host composition and cross-layer recipes while replacing permissive custom machinery with strict declarations and clear responsibility boundaries.
 
 ## Recommended execution order
 
 1. [Harden the recipe loader](01-harden-recipe-loader.md)
 2. [Simplify input and host plumbing](02-simplify-input-plumbing.md)
 3. [Model common and platform-specific recipe fields](03-model-common-and-platform-recipe-fields.md)
-4. [Make platform capabilities complete](04-complete-platform-capabilities.md)
-5. [Split broad recipes and extract Mac mini services](05-split-broad-recipes-and-host-services.md)
+4. [Split broad recipes and extract Mac mini services](04-split-broad-recipes-and-host-services.md)
 
-Complete and validate one document before starting the next. Each document may require several atomic Jujutsu changes; do not combine all five enhancements into one revision.
+Complete and validate one document before starting the next. Each document may require several atomic Jujutsu changes; do not combine the remaining handoffs into one revision.
 
 ## Global invariants
 

@@ -43,3 +43,15 @@ Validation after consolidation:
 - Nix parsing, Alejandra, Statix, focused graph tests, `nix flake check --no-build --all-systems --show-trace`, and all five host derivation evaluations passed.
 - Deadnix still reports only the pre-existing unused `pyf` argument in `config/recipe/overlay/default.nix`.
 - No obsolete paired recipe names remain in `config` declarations or host roots.
+
+## Follow-up review: Enhancement 4 handoff status
+
+- Reviewed `docs/2026-08-23/04-complete-platform-capabilities.md` against the current recipe tree and Jujutsu history.
+- The capability-consolidation implementation is complete in `wznpypynyrvn` (`Consolidate platform recipe branches`): the audited capabilities now have unified recipe entrypoints, and obsolete platform entrypoints are absent from `config/recipe`.
+- The handoff is still listed as a pending execution step in `docs/2026-08-23/README.md`; it is now useful only as a historical design/acceptance record, not as an active task.
+- Validation: clean Jujutsu working copy and focused obsolete-entrypoint search; old names remain only in documentation and journal history.
+
+## Follow-up: drop completed handoff
+
+- Deleted `docs/2026-08-23/04-complete-platform-capabilities.md`.
+- Removed its README entry and updated the remaining handoff count/order; the historical journal references remain intentionally append-only.
