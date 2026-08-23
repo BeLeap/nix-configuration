@@ -49,3 +49,7 @@ Validation:
 - `markdownlint` was unavailable, so no markdownlint check was run.
 - Reviewed the focused Jujutsu summary and docs-only diff stat: six files, 726 added lines.
 - Existing concurrent Discord and macOS personal recipe changes were left untouched.
+
+## Path correction
+
+The handoff directory was later moved from `docs/2026-09-23/` to `docs/2026-08-23/`. The original September path was a date typo; the handoff work belongs with the 2026-08-23 architecture review.
