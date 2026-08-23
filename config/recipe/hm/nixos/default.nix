@@ -1,7 +1,7 @@
-{home-manager, ...}: {
+{inputs, ...}: {
   systemModules = [
     (_: {
-      imports = [home-manager.nixosModules.home-manager];
+      imports = [inputs.home-manager.nixosModules.home-manager];
     })
   ];
 

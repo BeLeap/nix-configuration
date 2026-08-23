@@ -1,7 +1,7 @@
-{home-manager, ...}: {
+{inputs, ...}: {
   systemModules = [
     (_: {
-      imports = [home-manager.darwinModules.home-manager];
+      imports = [inputs.home-manager.darwinModules.home-manager];
     })
   ];
 

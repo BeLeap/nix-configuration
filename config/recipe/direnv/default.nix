@@ -1,11 +1,8 @@
-{
-  direnv-overlay,
-  direnv-instant,
-}: {
+{inputs, ...}: {
   homeModules = [
-    direnv-overlay.homeManagerModules.default
+    inputs.direnv-overlay.homeManagerModules.default
     (_: {
-      imports = [direnv-instant.homeModules.direnv-instant];
+      imports = [inputs.direnv-instant.homeModules.direnv-instant];
     })
     (
       {pkgs, ...}: {

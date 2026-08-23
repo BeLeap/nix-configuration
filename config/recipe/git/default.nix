@@ -1,7 +1,7 @@
 _: {
   homeModules = [
     (
-      {metadata, ...}: {
+      {host, ...}: {
         home.shellAliases = {
           ga = "git add";
           gc = "git commit -v";
@@ -20,8 +20,8 @@ _: {
 
           settings = {
             user = {
-              name = metadata.username;
-              inherit (metadata) email;
+              name = host.username;
+              inherit (host) email;
             };
 
             alias = {

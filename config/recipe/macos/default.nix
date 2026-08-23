@@ -1,4 +1,4 @@
-{metadata}: {
+{host, ...}: {
   includes = [
     "hm/macos"
     "macAppUtil"
@@ -56,7 +56,7 @@
 
             ShowStatusBar = true;
             ShowPathbar = true;
-            NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
+            NewWindowTargetPath = "file:///Users/${host.usernameLower}";
           };
 
           screencapture = {
@@ -69,9 +69,9 @@
 
       security.pam.services.sudo_local.touchIdAuth = true;
 
-      system.primaryUser = metadata.usernameLower;
-      users.users."${metadata.usernameLower}" = {
-        home = "/Users/${metadata.usernameLower}";
+      system.primaryUser = host.usernameLower;
+      users.users."${host.usernameLower}" = {
+        home = "/Users/${host.usernameLower}";
       };
     })
   ];

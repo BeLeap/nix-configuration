@@ -1,4 +1,4 @@
-{metadata}: {
+{host, ...}: {
   systemModules = [
     ({modulesPath, ...}: {
       imports = [
@@ -10,7 +10,7 @@
 
       # Use the DNS servers provided by DHCP instead of pinning public resolvers.
 
-      services.getty.autologinUser = metadata.usernameLower;
+      services.getty.autologinUser = host.usernameLower;
       security.sudo.wheelNeedsPassword = false;
 
       virtualisation = {

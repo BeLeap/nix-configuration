@@ -1,33 +1,18 @@
-inputs @ {
+{
+  inputs,
   lib,
-  metadata,
-  recipes,
-  nixpkgs,
-  nixpkgs-unstable,
-  nix-darwin,
-  home-manager,
-  nur,
-  agenix,
-  llm-agents,
-  mac-app-util,
-  beleap-overlay,
-  direnv-overlay,
-  direnv-instant,
-  jj-starship,
-  try,
-}: let
-  # TODO: we could remove metadata from specialArgs after migration to configs finishes
-  specialArgs = {inherit inputs metadata;};
-  modules = import ../config/recipe-assembly.nix {inherit inputs recipes;};
+}: {host}: let
+  specialArgs = {inherit inputs host;};
+  modules = import ../config/recipe-assembly.nix {inherit inputs host;};
 in {
-  nixosConfigurations = lib.optionalAttrs (metadata.distribution == "nixos") {
-    "${metadata.name}" = inputs.nixpkgs.lib.nixosSystem {
+  nixosConfigurations = lib.optionalAttrs (host.distribution == "nixos") {
+    "${host.name}" = inputs.nixpkgs.lib.nixosSystem {
       inherit specialArgs modules;
-      system = metadata.platform;
+      system = host.platform;
     };
   };
-  darwinConfigurations = lib.optionalAttrs (metadata.distribution == "macos") {
-    "${metadata.name}" = inputs.nix-darwin.lib.darwinSystem {
+  darwinConfigurations = lib.optionalAttrs (host.distribution == "macos") {
+    "${host.name}" = inputs.nix-darwin.lib.darwinSystem {
       inherit specialArgs modules;
     };
   };

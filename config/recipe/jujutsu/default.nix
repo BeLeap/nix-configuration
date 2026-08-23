@@ -2,7 +2,7 @@ _: {
   homeModules = [
     (
       {
-        metadata,
+        host,
         pkgs,
         lib,
         ...
@@ -15,8 +15,8 @@ _: {
 
           settings = {
             user = {
-              inherit (metadata) email;
-              name = metadata.username;
+              inherit (host) email;
+              name = host.username;
             };
             ui = {
               default-command = [

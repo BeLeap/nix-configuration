@@ -1,16 +1,17 @@
 {
-  metadata,
-  agenix,
+  inputs,
+  host,
+  ...
 }: {
   systemModules = [
     (_: {
-      imports = [agenix.nixosModules.default];
+      imports = [inputs.agenix.nixosModules.default];
     })
     (_: {
-      environment.systemPackages = [agenix.packages.${metadata.platform}.default];
+      environment.systemPackages = [inputs.agenix.packages.${host.platform}.default];
     })
   ];
   homeModules = [
-    (import ../../../lib/agenix/hm.nix {inherit agenix metadata;})
+    (import ../../../lib/agenix/hm.nix {inherit inputs host;})
   ];
 }

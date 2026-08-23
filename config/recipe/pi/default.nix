@@ -1,7 +1,6 @@
 {
-  agenix,
-  llm-agents,
-  metadata,
+  inputs,
+  host,
   ...
 }: {
   homeModules = [
@@ -19,7 +18,7 @@
         };
         pi = pkgs.symlinkJoin {
           name = "pi";
-          paths = [llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi];
+          paths = [inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi];
           nativeBuildInputs = [pkgs.makeWrapper];
           postBuild = ''
             wrapProgram $out/bin/pi \
@@ -32,7 +31,7 @@
           exec ${pkgs.nodejs}/bin/node ${torpiLauncherSource} ${pi}/bin/pi "$@"
         '';
       in {
-        imports = [(import ../../../lib/agenix/hm.nix {inherit agenix metadata;})];
+        imports = [(import ../../../lib/agenix/hm.nix {inherit inputs host;})];
 
         age.secrets = {
           context7-api-key.file = ./secrets/context7-api-key.age;

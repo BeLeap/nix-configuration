@@ -1,5 +1,5 @@
 {
-  metadata,
+  host,
   config,
   ...
 }: {
@@ -13,7 +13,7 @@
       LC_ALL = "en_US.UTF-8";
     };
 
-    username = metadata.usernameLower;
+    username = host.usernameLower;
 
     file = {
       "dl".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Downloads";

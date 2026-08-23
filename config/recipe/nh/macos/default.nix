@@ -1,10 +1,10 @@
 _: {
   homeModules = [
     (
-      {metadata, ...}: {
+      {host, ...}: {
         programs.nh = {
           enable = true;
-          flake = "/Users/${metadata.usernameLower}/nix-configuration#darwinConfigurations.${metadata.name}";
+          flake = "/Users/${host.usernameLower}/nix-configuration#darwinConfigurations.${host.name}";
 
           clean = {
             enable = true;

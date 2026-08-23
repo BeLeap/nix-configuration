@@ -1,14 +1,15 @@
-{
-  metadata,
-  home-manager,
-}: {
+_: {
   systemModules = [
-    (_: {
+    ({
+      inputs,
+      host,
+      ...
+    }: {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
         backupFileExtension = "bak";
-        extraSpecialArgs = {inherit metadata;};
+        extraSpecialArgs = {inherit inputs host;};
       };
     })
   ];

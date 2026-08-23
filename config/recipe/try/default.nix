@@ -1,8 +1,8 @@
-{try}: {
+{inputs, ...}: {
   homeModules = [
-    try.homeModules.default
+    inputs.try.homeModules.default
     ({pkgs, ...}: let
-      tryPackage = try.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+      tryPackage = inputs.try.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
         ruby = pkgs.ruby_3_3;
       };
     in {

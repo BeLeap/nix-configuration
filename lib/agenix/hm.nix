@@ -1,12 +1,12 @@
 {
-  agenix,
-  metadata,
+  inputs,
+  host,
   ...
 }: {config, ...}: {
-  imports = [agenix.homeManagerModules.default];
+  imports = [inputs.agenix.homeManagerModules.default];
   age.identityPaths = let
     common = import ./common.nix {homeDirectory = config.home.homeDirectory;};
   in
     common.ageIdentityPaths;
-  home.packages = [agenix.packages.${metadata.platform}.default];
+  home.packages = [inputs.agenix.packages.${host.platform}.default];
 }

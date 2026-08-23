@@ -44,15 +44,15 @@
   };
 
   outputs = inputs @ {nixpkgs, ...}: let
-    inherit (nixpkgs) lib;
-    callPackage = lib.callPackageWith (inputs // {inherit lib;});
-    mkMetadata = import ./lib/metadata.nix {inherit lib;};
-    metadatas = map mkMetadata (import ./config/hosts.nix);
-    systems = lib.unique (map (metadata: metadata.platform) metadatas);
+    lib = inputs.nixpkgs.lib;
+    mkHost = import ./lib/metadata.nix {inherit lib;};
+    hosts = map mkHost (import ./config/hosts.nix);
+    systems = lib.unique (map (host: host.platform) hosts);
   in
     (import ./lib/build-configs.nix {
-      inherit lib callPackage metadatas;
+      inherit inputs lib;
     })
+    hosts
     // {
       formatter = lib.genAttrs systems (system: (import nixpkgs {inherit system;}).alejandra);
       devShells = lib.genAttrs systems (system: let

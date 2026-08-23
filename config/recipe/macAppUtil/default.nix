@@ -1,9 +1,9 @@
-{mac-app-util}: {
+{inputs, ...}: {
   systemModules = [
-    mac-app-util.darwinModules.default
+    inputs.mac-app-util.darwinModules.default
     (_: {
       home-manager.sharedModules = [
-        mac-app-util.homeManagerModules.default
+        inputs.mac-app-util.homeManagerModules.default
       ];
     })
   ];

@@ -1,10 +1,10 @@
 _: {
   homeModules = [
     (
-      {metadata, ...}: {
+      {host, ...}: {
         programs.nh = {
           enable = true;
-          flake = "/home/${metadata.usernameLower}/nix-configuration#nixosConfigurations.${metadata.name}";
+          flake = "/home/${host.usernameLower}/nix-configuration#nixosConfigurations.${host.name}";
 
           clean = {
             enable = true;

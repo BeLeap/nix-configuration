@@ -1,12 +1,7 @@
 _: {
   homeModules = [
     (
-      {
-        pkgs,
-        lib,
-        metadata,
-        ...
-      }: {
+      {pkgs, ...}: {
         home.packages = with pkgs; [
           kubectl
           kubelogin-oidc

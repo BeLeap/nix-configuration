@@ -1,6 +1,6 @@
 {
-  metadata,
-  agenix,
+  inputs,
+  host,
   ...
 }: {
   homeModules = [
@@ -10,7 +10,7 @@
       ...
     }: {
       imports = [
-        (import ../../../lib/agenix/hm.nix {inherit agenix metadata;})
+        (import ../../../lib/agenix/hm.nix {inherit inputs host;})
       ];
       age.secrets = {
         joplin-settings = {

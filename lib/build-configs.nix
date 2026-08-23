@@ -1,20 +1,18 @@
 {
+  inputs,
   lib,
-  callPackage,
-  metadatas,
-}:
-lib.foldr
-(metadata: acc: let
-  system = callPackage ./mkSystem.nix {
-    inherit metadata;
-    inherit (metadata) recipes;
-  };
-in {
-  nixosConfigurations = acc.nixosConfigurations // system.nixosConfigurations;
-  darwinConfigurations = acc.darwinConfigurations // system.darwinConfigurations;
-})
-{
-  nixosConfigurations = {};
-  darwinConfigurations = {};
-}
-metadatas
+}: hosts: let
+  mkSystem = import ./mkSystem.nix {inherit inputs lib;};
+in
+  lib.foldr
+  (host: acc: let
+    system = mkSystem {inherit host;};
+  in {
+    nixosConfigurations = acc.nixosConfigurations // system.nixosConfigurations;
+    darwinConfigurations = acc.darwinConfigurations // system.darwinConfigurations;
+  })
+  {
+    nixosConfigurations = {};
+    darwinConfigurations = {};
+  }
+  hosts

@@ -1,4 +1,4 @@
-{metadata}: {
+{host, ...}: {
   includes = [
     "hm/nixos"
     "nix/nixos"
@@ -24,9 +24,9 @@
       security.polkit.enable = true;
 
       users.groups.beleap = {};
-      users.users."${metadata.usernameLower}" = {
+      users.users."${host.usernameLower}" = {
         isNormalUser = true;
-        home = "/home/${metadata.usernameLower}";
+        home = "/home/${host.usernameLower}";
         group = "beleap";
         extraGroups = ["wheel"];
       };

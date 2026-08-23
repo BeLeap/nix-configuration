@@ -25,7 +25,7 @@ This section is optimized for code agents making safe, reviewable changes.
 - `config/recipe/default/`: shared baseline recipe list
 - `lib/mkSystem.nix`: per-host system assembly
 - `lib/recipe-graph.nix`: pure recipe graph resolver
-- `lib/build-configs.nix`: folds host metadata into flake outputs
+- `lib/build-configs.nix`: folds normalized host specifications into flake outputs
 - `bin/run-vm`: helper for VM builds
 
 ### Recipe Graph Contract

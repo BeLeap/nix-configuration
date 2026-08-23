@@ -1,9 +1,9 @@
-{metadata, ...}: {
+{host, ...}: {
   systemModules = [
     ({pkgs, ...}: {
       programs.zsh.enable = true;
 
-      users.users."${metadata.usernameLower}".shell = pkgs.zsh;
+      users.users."${host.usernameLower}".shell = pkgs.zsh;
     })
   ];
 

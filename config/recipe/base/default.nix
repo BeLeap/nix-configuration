@@ -1,4 +1,4 @@
-{metadata, ...}: {
+{host, ...}: {
   systemModules = [
     ({pkgs, ...}: {
       programs = {
@@ -13,7 +13,7 @@
 
       environment.shells = [pkgs.bash pkgs.zsh];
 
-      users.users."${metadata.usernameLower}" = {
+      users.users."${host.usernameLower}" = {
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqR0nOLKUM0sAeisBDdfgUhT0d/XzzArEi3I678XOND"
         ];

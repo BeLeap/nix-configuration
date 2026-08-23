@@ -1,6 +1,6 @@
 {
   pkgs,
-  metadata,
+  host,
   ...
 }: {
   imports = [
@@ -12,7 +12,7 @@
       mas
     ];
 
-    homeDirectory = "/Users/${metadata.usernameLower}";
+    homeDirectory = "/Users/${host.usernameLower}";
 
     file.".config/nixpkgs/config.nix".text = ''
       {
