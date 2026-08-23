@@ -26,7 +26,7 @@ _: {
           };
         in {
           python313 = prev.python313.override {
-            packageOverrides = pyf: pyp: {
+            packageOverrides = _: pyp: {
               accelerate = pyp.accelerate.overridePythonAttrs (_: {doCheck = false;});
               peft = pyp.peft.overridePythonAttrs (_: {doCheck = false;});
             };

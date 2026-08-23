@@ -17,7 +17,7 @@ jobs:
       - name: alejandra format check
         run: nix run nixpkgs#alejandra -- --check .
       - name: deadnix
-        run: nix run nixpkgs#deadnix -- .
+        run: nix run nixpkgs#deadnix -- --fail .
       - name: statix
         run: nix run nixpkgs#statix -- check .
 
