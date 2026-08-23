@@ -1,5 +1,7 @@
 _: {
-  base = _: {
-    homebrew.casks = ["1password"];
-  };
+  systemModules = [
+    (_: {
+      homebrew.casks = ["1password"];
+    })
+  ];
 }

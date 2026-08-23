@@ -1,11 +1,11 @@
 _: {
-  recipes = [
+  includes = [
     "hyprland"
     "rofi"
     "waybar"
   ];
 
-  base = [
+  systemModules = [
     (
       {pkgs, ...}: {
         hardware.graphics.enable = true;

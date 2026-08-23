@@ -1,5 +1,5 @@
 _: {
-  recipes = [
+  includes = [
     # base setup
     "overlay"
     "hm"
@@ -15,7 +15,7 @@ _: {
     # others
     "kubernetes"
   ];
-  hm = [
+  homeModules = [
     ({config, ...}: {
       home.sessionPath = [
         "${config.home.homeDirectory}/.local/bin"

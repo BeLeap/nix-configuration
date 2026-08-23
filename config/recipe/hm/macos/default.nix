@@ -1,9 +1,13 @@
 {home-manager, ...}: {
-  base = [
-    home-manager.darwinModules.home-manager
+  systemModules = [
+    (_: {
+      imports = [home-manager.darwinModules.home-manager];
+    })
   ];
 
-  hm = [
-    ./module.nix
+  homeModules = [
+    (_: {
+      imports = [./module.nix];
+    })
   ];
 }

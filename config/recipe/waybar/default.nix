@@ -1,6 +1,6 @@
 _: {
-  hm = [
-    {
+  homeModules = [
+    (_: {
       programs.waybar = {
         enable = true;
 
@@ -15,6 +15,6 @@ _: {
           };
         };
       };
-    }
+    })
   ];
 }

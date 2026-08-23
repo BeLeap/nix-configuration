@@ -1,29 +1,31 @@
 {metadata}: {
-  base = {modulesPath, ...}: {
-    imports = [
-      "${modulesPath}/virtualisation/qemu-vm.nix"
-    ];
+  systemModules = [
+    ({modulesPath, ...}: {
+      imports = [
+        "${modulesPath}/virtualisation/qemu-vm.nix"
+      ];
 
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
 
-    # Use the DNS servers provided by DHCP instead of pinning public resolvers.
+      # Use the DNS servers provided by DHCP instead of pinning public resolvers.
 
-    services.getty.autologinUser = metadata.usernameLower;
-    security.sudo.wheelNeedsPassword = false;
+      services.getty.autologinUser = metadata.usernameLower;
+      security.sudo.wheelNeedsPassword = false;
 
-    virtualisation = {
-      graphics = false;
-      memorySize = 4096;
-      cores = 4;
-      diskSize = 128 * 1024;
-      writableStoreUseTmpfs = false;
-      useHostCerts = true;
-      qemu.guestAgent.enable = true;
-    };
+      virtualisation = {
+        graphics = false;
+        memorySize = 4096;
+        cores = 4;
+        diskSize = 128 * 1024;
+        writableStoreUseTmpfs = false;
+        useHostCerts = true;
+        qemu.guestAgent.enable = true;
+      };
 
-    environment.systemPackages = [];
+      environment.systemPackages = [];
 
-    system.stateVersion = "25.05";
-  };
+      system.stateVersion = "25.05";
+    })
+  ];
 }

@@ -1,14 +1,16 @@
 _: {
-  base = _: {
-    homebrew = {
-      brews = [
-        "googleworkspace-cli"
-        "ollama"
-      ];
-    };
-  };
+  systemModules = [
+    (_: {
+      homebrew = {
+        brews = [
+          "googleworkspace-cli"
+          "ollama"
+        ];
+      };
+    })
+  ];
 
-  hm = [
+  homeModules = [
     ({
       config,
       lib,

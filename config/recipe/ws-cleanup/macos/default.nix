@@ -1,5 +1,5 @@
 _: {
-  hm = [
+  homeModules = [
     (
       {pkgs, ...}: let
         wsCleanupScript = import ../script.nix {inherit pkgs;};

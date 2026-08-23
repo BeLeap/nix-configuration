@@ -1,5 +1,5 @@
 _: {
-  hm = [
+  homeModules = [
     (
       _: {
         programs.ssh = {

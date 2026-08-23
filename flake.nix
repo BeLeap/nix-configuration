@@ -66,5 +66,12 @@
           ];
         };
       });
+
+      checks = lib.genAttrs systems (system: let
+        pkgs = import nixpkgs {inherit system;};
+        recipeGraphTests = import ./tests/recipe-graph.nix {inherit lib;};
+      in {
+        recipe-graph = assert builtins.deepSeq recipeGraphTests true; pkgs.runCommand "recipe-graph-tests" {} "touch $out";
+      });
     };
 }

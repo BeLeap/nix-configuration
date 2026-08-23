@@ -2,9 +2,11 @@
   direnv-overlay,
   direnv-instant,
 }: {
-  hm = [
+  homeModules = [
     direnv-overlay.homeManagerModules.default
-    direnv-instant.homeModules.direnv-instant
+    (_: {
+      imports = [direnv-instant.homeModules.direnv-instant];
+    })
     (
       {pkgs, ...}: {
         programs = {

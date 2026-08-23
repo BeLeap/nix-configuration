@@ -1,32 +1,34 @@
 {metadata, ...}: {
-  base = {pkgs, ...}: {
-    programs = {
-      bash.enable = true;
+  systemModules = [
+    ({pkgs, ...}: {
+      programs = {
+        bash.enable = true;
 
-      ssh = {
-        knownHosts = {
-          "github.com".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+        ssh = {
+          knownHosts = {
+            "github.com".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+          };
         };
       };
-    };
 
-    environment.shells = [pkgs.bash pkgs.zsh];
+      environment.shells = [pkgs.bash pkgs.zsh];
 
-    users.users."${metadata.usernameLower}" = {
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqR0nOLKUM0sAeisBDdfgUhT0d/XzzArEi3I678XOND"
+      users.users."${metadata.usernameLower}" = {
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPqR0nOLKUM0sAeisBDdfgUhT0d/XzzArEi3I678XOND"
+        ];
+      };
+
+      time.timeZone = "Asia/Seoul";
+
+      environment.systemPackages = with pkgs; [
+        vim
+        curl
+        git
       ];
-    };
-
-    time.timeZone = "Asia/Seoul";
-
-    environment.systemPackages = with pkgs; [
-      vim
-      curl
-      git
-    ];
-  };
-  hm = [
+    })
+  ];
+  homeModules = [
     (
       {pkgs, ...}: {
         home.packages = with pkgs; [

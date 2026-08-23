@@ -2,13 +2,15 @@
   metadata,
   agenix,
 }: {
-  base = [
-    agenix.nixosModules.default
-    {
+  systemModules = [
+    (_: {
+      imports = [agenix.nixosModules.default];
+    })
+    (_: {
       environment.systemPackages = [agenix.packages.${metadata.platform}.default];
-    }
+    })
   ];
-  hm = [
+  homeModules = [
     (import ../../../lib/agenix/hm.nix {inherit agenix metadata;})
   ];
 }

@@ -1,7 +1,7 @@
 _: {
-  base = [
-    {
+  systemModules = [
+    (_: {
       nix.gc.dates = "weekly";
-    }
+    })
   ];
 }

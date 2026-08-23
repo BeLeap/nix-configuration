@@ -1,7 +1,9 @@
 _: {
-  base = _: {
-    programs._1password-gui = {
-      enable = true;
-    };
-  };
+  systemModules = [
+    (_: {
+      programs._1password-gui = {
+        enable = true;
+      };
+    })
+  ];
 }

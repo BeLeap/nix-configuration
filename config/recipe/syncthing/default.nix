@@ -1,5 +1,5 @@
 _: {
-  hm = [
+  homeModules = [
     ({config, ...}: {
       services.syncthing = {
         enable = true;

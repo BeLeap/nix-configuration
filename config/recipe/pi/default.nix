@@ -4,7 +4,7 @@
   metadata,
   ...
 }: {
-  hm = [
+  homeModules = [
     (
       {
         config,

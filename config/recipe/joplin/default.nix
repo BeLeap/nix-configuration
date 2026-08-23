@@ -3,7 +3,7 @@
   agenix,
   ...
 }: {
-  hm = [
+  homeModules = [
     ({
       config,
       pkgs,

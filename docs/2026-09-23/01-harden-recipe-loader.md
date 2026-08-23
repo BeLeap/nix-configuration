@@ -2,13 +2,13 @@
 
 ## Goal
 
-Keep named recipe composition, but make `config/recipe-loader.nix` a strict and testable graph resolver rather than a permissive recursive flattener.
+Keep named recipe composition, but make `config/recipe-assembly.nix` a strict and testable graph resolver rather than a permissive recursive flattener.
 
 Estimated implementation time: **3–5 hours**, including migration of existing declarations and focused graph tests.
 
 ## Current problem
 
-`config/recipe-loader.nix` currently:
+`config/recipe-assembly.nix` currently:
 
 - treats missing `recipes`, `base`, and `hm` fields as empty;
 - ignores unknown fields, so a typo can silently remove configuration;
@@ -27,16 +27,16 @@ Every selectable recipe must return exactly this shape:
 ```nix
 {
   includes = ["other-recipe"];
-  systemModules = [./system.nix];
-  homeModules = [./home.nix];
+  systemModules = [(_: {})];
+  homeModules = [(_: {})];
 }
 ```
 
 All three fields are optional, but when present they must be lists:
 
 - `includes`: list of recipe-name strings;
-- `systemModules`: list of NixOS or nix-darwin modules;
-- `homeModules`: list of Home Manager modules.
+- `systemModules`: list of function-valued NixOS or nix-darwin modules;
+- `homeModules`: list of function-valued Home Manager modules.
 
 Reject every unknown top-level field. Normalize neither a single module nor an arbitrarily nested list. A malformed declaration must fail with the recipe name, offending field, expected shape, and actual type.
 
@@ -47,7 +47,7 @@ Reject every unknown top-level field. Normalize neither a single module nor an a
 Extract pure graph work from system assembly, for example into `lib/recipe-graph.nix`. It should accept:
 
 - root recipe names;
-- a function or registry that resolves a name to a declaration;
+- a function that resolves a name to a declaration;
 - no NixOS, nix-darwin, or Home Manager configuration state.
 
 Return an ordered list of unique recipe declarations or an explicit structure containing ordered recipe names plus aggregated system and home modules.

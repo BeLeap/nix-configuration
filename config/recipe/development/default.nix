@@ -1,5 +1,5 @@
 _: {
-  recipes = [
+  includes = [
     "wezterm"
     "zsh"
     "lsd"
@@ -18,7 +18,7 @@ _: {
     "pi"
     "try"
   ];
-  hm = [
+  homeModules = [
     (
       {pkgs, ...}: {
         home = {

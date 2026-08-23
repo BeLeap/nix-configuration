@@ -1,42 +1,44 @@
 _: {
-  base = {inputs, ...}: {
-    nixpkgs.overlays = [
-      (import ./pkgs/overlay.nix {
-        inherit (inputs) kubectl-check boda;
-      })
-      inputs.nur.overlays.default
-      inputs.beleap-overlay.overlays.default
-      inputs.jj-starship.overlays.default
-      (_final: prev: let
-        withoutBundledModules = discord:
-          discord.override {
-            # Nixpkgs adds these files under the signed app bundle, which
-            # invalidates Discord's upstream notarized resource seal.
-            # see: https://github.com/NixOS/nixpkgs/issues/544338
-            source =
-              discord.source
-              // {
-                modules = {};
-              };
+  systemModules = [
+    ({inputs, ...}: {
+      nixpkgs.overlays = [
+        (import ./pkgs/overlay.nix {
+          inherit (inputs) kubectl-check boda;
+        })
+        inputs.nur.overlays.default
+        inputs.beleap-overlay.overlays.default
+        inputs.jj-starship.overlays.default
+        (_final: prev: let
+          withoutBundledModules = discord:
+            discord.override {
+              # Nixpkgs adds these files under the signed app bundle, which
+              # invalidates Discord's upstream notarized resource seal.
+              # see: https://github.com/NixOS/nixpkgs/issues/544338
+              source =
+                discord.source
+                // {
+                  modules = {};
+                };
+            };
+          unstable = import inputs.nixpkgs-unstable {
+            inherit (prev) config;
+            inherit (prev.stdenv.hostPlatform) system;
           };
-        unstable = import inputs.nixpkgs-unstable {
-          inherit (prev) config;
-          inherit (prev.stdenv.hostPlatform) system;
-        };
-      in {
-        python313 = prev.python313.override {
-          packageOverrides = pyf: pyp: {
-            accelerate = pyp.accelerate.overridePythonAttrs (_: {doCheck = false;});
-            peft = pyp.peft.overridePythonAttrs (_: {doCheck = false;});
+        in {
+          python313 = prev.python313.override {
+            packageOverrides = pyf: pyp: {
+              accelerate = pyp.accelerate.overridePythonAttrs (_: {doCheck = false;});
+              peft = pyp.peft.overridePythonAttrs (_: {doCheck = false;});
+            };
           };
-        };
-        discord = withoutBundledModules prev.discord;
-        unstable =
-          unstable
-          // {
-            discord = withoutBundledModules unstable.discord;
-          };
-      })
-    ];
-  };
+          discord = withoutBundledModules prev.discord;
+          unstable =
+            unstable
+            // {
+              discord = withoutBundledModules unstable.discord;
+            };
+        })
+      ];
+    })
+  ];
 }

@@ -1,10 +1,10 @@
 _: {
-  recipes = [
+  includes = [
     "joplin"
     "syncthing"
     "keepassxc"
   ];
-  hm = [
+  homeModules = [
     ({pkgs, ...}: {
       programs.firefox.profiles."beleap".extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         joplin-web-clipper

@@ -1,9 +1,13 @@
 {home-manager, ...}: {
-  base = [
-    home-manager.nixosModules.home-manager
+  systemModules = [
+    (_: {
+      imports = [home-manager.nixosModules.home-manager];
+    })
   ];
 
-  hm = [
-    ./module.nix
+  homeModules = [
+    (_: {
+      imports = [./module.nix];
+    })
   ];
 }

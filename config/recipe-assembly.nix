@@ -1,0 +1,38 @@
+{
+  inputs,
+  recipes,
+}: let
+  inherit (inputs) lib metadata;
+  callRecipe = entrypoint: let
+    recipe = import entrypoint;
+    actualType = builtins.typeOf recipe;
+  in
+    if actualType != "lambda"
+    then throw "Recipe entrypoint '${toString entrypoint}' must be a function; actual type '${actualType}'."
+    else recipe (builtins.intersectAttrs (builtins.functionArgs recipe) inputs);
+  recipeGraph = import ../lib/recipe-graph.nix {inherit lib;};
+
+  resolveRecipe = name: let
+    entrypoint = ./. + "/recipe/${name}/default.nix";
+  in
+    if builtins.pathExists entrypoint
+    then callRecipe entrypoint
+    else throw "Recipe '${name}' is missing its entrypoint at '${toString entrypoint}'.";
+
+  graph = recipeGraph {
+    roots = recipes;
+    resolve = resolveRecipe;
+  };
+
+  # Compatibility ordering is preorder depth-first traversal: roots retain
+  # host order, each recipe precedes its includes, includes retain declaration
+  # order, and the first occurrence wins. Module precedence must use explicit
+  # Nix module priorities rather than relying on this graph order.
+  homeManagerModule = {
+    home-manager.users."${metadata.usernameLower}" = {
+      imports = graph.homeModules;
+    };
+  };
+in
+  graph.systemModules
+  ++ lib.optional (graph.homeModules != []) homeManagerModule

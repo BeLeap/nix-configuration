@@ -14,7 +14,7 @@ This section is optimized for code agents making safe, reviewable changes.
   - `nixosConfigurations.<host>.*`
 - Host inventory: `config/hosts.nix`
 - Default recipe set: `config/recipe/default/default.nix`
-- Recipe loader: `config/recipe-loader.nix`
+- Recipe assembly: `config/recipe-assembly.nix`
 
 ### Important Paths
 
@@ -24,8 +24,18 @@ This section is optimized for code agents making safe, reviewable changes.
 - `config/recipe/nixos/`: host-specific NixOS recipes
 - `config/recipe/default/`: shared baseline recipe list
 - `lib/mkSystem.nix`: per-host system assembly
+- `lib/recipe-graph.nix`: pure recipe graph resolver
 - `lib/build-configs.nix`: folds host metadata into flake outputs
 - `bin/run-vm`: helper for VM builds
+
+### Recipe Graph Contract
+
+Recipe entrypoints return an attribute set containing only the optional fields
+`includes`, `systemModules`, and `homeModules`. `includes` is a list of recipe
+names; the two module fields are lists of function-valued modules. The resolver
+expands roots in compatibility order: a recipe precedes its includes,
+include order is preserved, and the first occurrence wins. Module precedence
+must use explicit Nix module priorities rather than relying on graph order.
 
 ### Common Commands
 

@@ -2,14 +2,14 @@
   metadata,
   home-manager,
 }: {
-  base = [
-    {
+  systemModules = [
+    (_: {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
         backupFileExtension = "bak";
         extraSpecialArgs = {inherit metadata;};
       };
-    }
+    })
   ];
 }

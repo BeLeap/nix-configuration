@@ -1,5 +1,5 @@
 _: {
-  hm = [
+  homeModules = [
     (
       {pkgs, ...}: {
         launchd.agents."podman-machine-start" = {

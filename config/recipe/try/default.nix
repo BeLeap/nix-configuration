@@ -1,5 +1,5 @@
 {try}: {
-  hm = [
+  homeModules = [
     try.homeModules.default
     ({pkgs, ...}: let
       tryPackage = try.packages.${pkgs.stdenv.hostPlatform.system}.default.override {

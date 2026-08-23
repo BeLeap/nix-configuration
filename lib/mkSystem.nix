@@ -18,7 +18,7 @@ inputs @ {
 }: let
   # TODO: we could remove metadata from specialArgs after migration to configs finishes
   specialArgs = {inherit inputs metadata;};
-  modules = import ../config/recipe-loader.nix {inherit inputs recipes;};
+  modules = import ../config/recipe-assembly.nix {inherit inputs recipes;};
 in {
   nixosConfigurations = lib.optionalAttrs (metadata.distribution == "nixos") {
     "${metadata.name}" = inputs.nixpkgs.lib.nixosSystem {

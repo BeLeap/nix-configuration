@@ -1,11 +1,13 @@
 {metadata, ...}: {
-  base = {pkgs, ...}: {
-    programs.zsh.enable = true;
+  systemModules = [
+    ({pkgs, ...}: {
+      programs.zsh.enable = true;
 
-    users.users."${metadata.usernameLower}".shell = pkgs.zsh;
-  };
+      users.users."${metadata.usernameLower}".shell = pkgs.zsh;
+    })
+  ];
 
-  hm = [
+  homeModules = [
     (
       _: {
         programs.zsh = {

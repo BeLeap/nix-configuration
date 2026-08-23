@@ -1,11 +1,13 @@
 _: {
-  base = {pkgs, ...}: {
-    system.defaults.dock.persistent-apps = [
-      {app = "${pkgs.unstable.discord}/Applications/Discord.app";}
-    ];
-  };
+  systemModules = [
+    ({pkgs, ...}: {
+      system.defaults.dock.persistent-apps = [
+        {app = "${pkgs.unstable.discord}/Applications/Discord.app";}
+      ];
+    })
+  ];
 
-  hm = [
+  homeModules = [
     (_: {
       programs.discord = {
         enable = true;

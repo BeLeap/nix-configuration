@@ -1,6 +1,6 @@
 _: {
-  base = [
-    {
+  systemModules = [
+    (_: {
       nix = {
         gc = {
           automatic = true;
@@ -27,6 +27,6 @@ _: {
           };
         };
       };
-    }
+    })
   ];
 }

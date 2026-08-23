@@ -1,6 +1,6 @@
 _: {
-  base = [
-    {
+  systemModules = [
+    (_: {
       nix = {
         optimise.automatic = true;
 
@@ -29,6 +29,6 @@ _: {
         config.allowUnfree = true;
         config.android_sdk.accept_license = true;
       };
-    }
+    })
   ];
 }

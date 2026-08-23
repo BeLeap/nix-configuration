@@ -1,36 +1,38 @@
 {metadata}: {
-  recipes = [
+  includes = [
     "hm/nixos"
     "nix/nixos"
     "nh/nixos"
     "ws-cleanup/nixos"
   ];
 
-  base = {pkgs, ...}: {
-    environment.systemPackages = with pkgs; [
-      nftables
-      bcc
-      bind
-      bpftrace
-      ethtool
-      iproute2
-      lsof
-      procps
-      strace
-      tcpdump
-    ];
+  systemModules = [
+    ({pkgs, ...}: {
+      environment.systemPackages = with pkgs; [
+        nftables
+        bcc
+        bind
+        bpftrace
+        ethtool
+        iproute2
+        lsof
+        procps
+        strace
+        tcpdump
+      ];
 
-    security.polkit.enable = true;
+      security.polkit.enable = true;
 
-    users.groups.beleap = {};
-    users.users."${metadata.usernameLower}" = {
-      isNormalUser = true;
-      home = "/home/${metadata.usernameLower}";
-      group = "beleap";
-      extraGroups = ["wheel"];
-    };
-  };
-  hm = [
+      users.groups.beleap = {};
+      users.users."${metadata.usernameLower}" = {
+        isNormalUser = true;
+        home = "/home/${metadata.usernameLower}";
+        group = "beleap";
+        extraGroups = ["wheel"];
+      };
+    })
+  ];
+  homeModules = [
     (_: {
       xdg.userDirs = {
         enable = true;

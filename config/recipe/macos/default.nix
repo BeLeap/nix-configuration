@@ -1,5 +1,5 @@
 {metadata}: {
-  recipes = [
+  includes = [
     "hm/macos"
     "macAppUtil"
     "nix/macos"
@@ -9,71 +9,73 @@
     "aerospace"
   ];
 
-  base = {
-    pkgs,
-    inputs,
-    ...
-  }: {
-    environment.systemPackages = [pkgs.keeping-you-awake];
+  systemModules = [
+    ({
+      pkgs,
+      inputs,
+      ...
+    }: {
+      environment.systemPackages = [pkgs.keeping-you-awake];
 
-    # The platform the configuration will be used on.
-    nixpkgs.hostPlatform = "aarch64-darwin";
+      # The platform the configuration will be used on.
+      nixpkgs.hostPlatform = "aarch64-darwin";
 
-    system = {
-      # Set Git commit hash for darwin-version.
-      configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+      system = {
+        # Set Git commit hash for darwin-version.
+        configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
 
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      stateVersion = 6;
+        # Used for backwards compatibility, please read the changelog before changing.
+        # $ darwin-rebuild changelog
+        stateVersion = 6;
 
-      keyboard = {
-        enableKeyMapping = true;
-        nonUS.remapTilde = false;
+        keyboard = {
+          enableKeyMapping = true;
+          nonUS.remapTilde = false;
+        };
+
+        defaults = {
+          dock.autohide = true;
+
+          dock.persistent-apps = [
+            {app = "/System/Applications/Apps.app";}
+            {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
+            {app = "${pkgs.firefox}/Applications/Firefox.app";}
+            {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
+          ];
+
+          NSGlobalDomain = {
+            AppleShowAllFiles = true;
+            NSAutomaticQuoteSubstitutionEnabled = false;
+          };
+
+          finder = {
+            AppleShowAllExtensions = true;
+            AppleShowAllFiles = true;
+
+            NewWindowTarget = "Other";
+
+            ShowStatusBar = true;
+            ShowPathbar = true;
+            NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
+          };
+
+          screencapture = {
+            include-date = true;
+            target = "file";
+            show-thumbnail = true;
+          };
+        };
       };
 
-      defaults = {
-        dock.autohide = true;
+      security.pam.services.sudo_local.touchIdAuth = true;
 
-        dock.persistent-apps = [
-          {app = "/System/Applications/Apps.app";}
-          {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
-          {app = "${pkgs.firefox}/Applications/Firefox.app";}
-          {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
-        ];
-
-        NSGlobalDomain = {
-          AppleShowAllFiles = true;
-          NSAutomaticQuoteSubstitutionEnabled = false;
-        };
-
-        finder = {
-          AppleShowAllExtensions = true;
-          AppleShowAllFiles = true;
-
-          NewWindowTarget = "Other";
-
-          ShowStatusBar = true;
-          ShowPathbar = true;
-          NewWindowTargetPath = "file:///Users/${metadata.usernameLower}";
-        };
-
-        screencapture = {
-          include-date = true;
-          target = "file";
-          show-thumbnail = true;
-        };
+      system.primaryUser = metadata.usernameLower;
+      users.users."${metadata.usernameLower}" = {
+        home = "/Users/${metadata.usernameLower}";
       };
-    };
-
-    security.pam.services.sudo_local.touchIdAuth = true;
-
-    system.primaryUser = metadata.usernameLower;
-    users.users."${metadata.usernameLower}" = {
-      home = "/Users/${metadata.usernameLower}";
-    };
-  };
-  hm = [
+    })
+  ];
+  homeModules = [
     (_: {
       home.sessionPath = [
         "/opt/homebrew/bin"
