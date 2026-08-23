@@ -1,0 +1,6 @@
+target=$(fd . ~/ --type d | fzf)
+if [[ -z "${target}" ]]; then
+  exit 1
+fi
+
+ln -s ${target} .
