@@ -12,7 +12,7 @@ _: {
           kubectl-check
           kubernetes-helm
           kind
-          k9s
+          unstable.k9s
         ];
 
         home.shellAliases = {
