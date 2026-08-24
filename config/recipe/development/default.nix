@@ -15,6 +15,7 @@ _: {
     "ssh"
     "podman"
     "nodejs"
+    "linux-builder"
     "pi"
     "try"
   ];
