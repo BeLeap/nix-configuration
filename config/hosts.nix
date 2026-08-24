@@ -6,6 +6,7 @@
     recipes = [
       "default"
       "macos"
+      "homebrew"
       "beleap-m1air"
       "personal"
       "onedrive"
@@ -20,6 +21,7 @@
     recipes = [
       "default"
       "macos"
+      "homebrew"
       "beleap-macmini"
       "personal"
       "onedrive"
@@ -36,6 +38,7 @@
     recipes = [
       "default"
       "macos"
+      "homebrew"
       "work"
     ];
   }
