@@ -47,19 +47,6 @@ _: {
             ];
             options = "--delete-older-than 3d";
           };
-
-          linux-builder = {
-            enable = true;
-            ephemeral = true;
-
-            config = {
-              virtualisation = {
-                darwin-builder = {
-                  diskSize = 64 * 1024;
-                };
-              };
-            };
-          };
         };
       })
     ];
