@@ -2,6 +2,12 @@ local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = wezterm.config_builder()
 local terminal_font = wezterm.font 'CaskaydiaCove Nerd Font Mono'
+local copy_mode = nil
+
+if wezterm.gui then
+  copy_mode = wezterm.gui.default_key_tables().copy_mode
+  table.insert(copy_mode, { key = 'j', mods = 'CMD', action = act.QuickSelect })
+end
 
 config.default_prog = { '@zsh@', '-l' }
 config.default_workspace = 'sp'
@@ -24,6 +30,9 @@ config.window_padding = {
 }
 
 config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.key_tables = {
+  copy_mode = copy_mode,
+}
 
 wezterm.on('user-var-changed', function(window, pane, name, value)
   if name ~= 'DO_FOCUS_WEZTERM_WORKSPACE' or value == '' then
