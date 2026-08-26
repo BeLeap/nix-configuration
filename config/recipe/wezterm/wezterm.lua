@@ -22,6 +22,9 @@ config.window_frame = {
 config.font_size = 16
 config.window_decorations = 'RESIZE'
 config.notification_handling = 'AlwaysShow'
+config.quick_select_patterns = {
+  'push-.*',
+}
 config.window_padding = {
   left = 8,
   right = 8,
