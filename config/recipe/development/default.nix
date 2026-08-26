@@ -58,6 +58,9 @@ _: {
             mycli
             ssm-session-manager-plugin
             awscli2
+            (google-cloud-sdk.withExtraComponents [
+              google-cloud-sdk.components.gke-gcloud-auth-plugin
+            ])
             just
             vault-bin
             ts
