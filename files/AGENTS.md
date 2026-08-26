@@ -19,6 +19,12 @@ tools to resolve library id and get library docs without me having to explicitly
 - Surface error states in logs/output/UI so failures are easy to notice and debug.
 - If a temporary workaround is unavoidable, document the limitation and the real failure clearly.
 
+# Tool availability
+
+- When a required tool is unavailable, use Nix to run it (for example,
+  `nix shell nixpkgs#<package> --command <tool>`) instead of skipping the related
+  work or installing the tool globally.
+
 # Architecture
 
 - Always consider structural enhancement first.
