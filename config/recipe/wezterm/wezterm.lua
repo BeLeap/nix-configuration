@@ -23,7 +23,7 @@ config.font_size = 16
 config.window_decorations = 'RESIZE'
 config.notification_handling = 'AlwaysShow'
 config.quick_select_patterns = {
-  'push-.*',
+  [[push-\S*]],
 }
 config.window_padding = {
   left = 8,
