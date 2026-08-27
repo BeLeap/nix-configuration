@@ -49,6 +49,7 @@ _: {
 
                   alt-f = "layout floating";
                   alt-t = "layout tiling";
+                  cmd-n = "exec-and-forget ${pkgs.beleap-utils}/bin/click-notification";
                 }
                 // lib.listToAttrs (lib.flatten (
                   lib.map (
