@@ -32,5 +32,12 @@ _: {
         ];
       })
     ];
+    home = [
+      ({pkgs, ...}: {
+        home.packages = [
+          pkgs.unstable.betterdisplay
+        ];
+      })
+    ];
   };
 }
