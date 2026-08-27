@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+pid="$(
+  ax list --bundle com.apple.notificationcenterui --json |
+    jq -r '.[0].pid'
+)"
+
+notifications() {
+  ax find \
+    --pid "$pid" \
+    --subrole AXNotificationCenter \
+    --visible \
+    --json
+}
+
+click_top() {
+  jq -r '
+    sort_by(.frame.y)
+    | .[0].frame
+    | "\(.x + 15),\(.y + .height / 2)"
+  ' |
+  xargs -I{} ax click --point '{}'
+}
+
+before="$(notifications)"
+before_count="$(jq 'length' <<<"$before")"
+
+[[ "$before_count" -gt 0 ]] || exit 1
+
+click_top <<<"$before"
+
+# Give Notification Center enough time to expand a grouped notification.
+sleep 0.1
+
+after="$(notifications)"
+after_count="$(jq 'length' <<<"$after")"
+
+# A collapsed group expanding should expose additional notification items.
+if (( after_count > before_count )); then
+  click_top <<<"$after"
+fi
