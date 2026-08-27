@@ -12,6 +12,7 @@
       "onedrive"
       "1password"
       "kdeconnect-mac"
+      "homerow"
     ];
   }
   {
@@ -40,6 +41,7 @@
       "macos"
       "homebrew"
       "work"
+      "homerow"
     ];
   }
   {
