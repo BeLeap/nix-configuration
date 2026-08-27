@@ -2,9 +2,6 @@ _: {
   system = [
     ({inputs, ...}: {
       nixpkgs.overlays = [
-        (import ./pkgs/overlay.nix {
-          inherit (inputs) kubectl-check boda;
-        })
         inputs.nur.overlays.default
         inputs.beleap-overlay.overlays.default
         inputs.jj-starship.overlays.default
@@ -37,6 +34,9 @@ _: {
             // {
               discord = withoutBundledModules unstable.discord;
             };
+        })
+        (import ./pkgs/overlay.nix {
+          inherit (inputs) kubectl-check boda;
         })
       ];
     })
