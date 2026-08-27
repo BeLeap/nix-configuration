@@ -41,6 +41,7 @@
           packages = [
             pi
             torpi
+            pkgs.poke-token-bar
           ];
 
           file = {
