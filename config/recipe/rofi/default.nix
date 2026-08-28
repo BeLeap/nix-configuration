@@ -5,7 +5,7 @@ _: {
         programs.rofi = {
           enable = true;
 
-          font = "CaskaydiaCove Nerd Font 14";
+          font = "Monoplex KR Nerd 14";
         };
       })
     ];

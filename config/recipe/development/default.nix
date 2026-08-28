@@ -26,7 +26,7 @@ _: {
           packages = with pkgs; [
             htop
             wireshark
-            nerd-fonts.caskaydia-cove
+            monoplex-kr-nerd
             nanum-gothic-coding
             ipcalc
             mtr
