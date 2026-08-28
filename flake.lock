@@ -356,6 +356,26 @@
         "type": "indirect"
       }
     },
+    "hanadia-mono": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787889095,
+        "narHash": "sha256-m87bWJv5MGpIlFwZOqKYWMEvxVLzi2HAigLYgdlEwc8=",
+        "owner": "BeLeap",
+        "repo": "hanadia",
+        "rev": "fb546255c6e5d4d35f3bb3e763206f22a727b2fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BeLeap",
+        "repo": "hanadia",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -796,6 +816,7 @@
         "beleap-overlay": "beleap-overlay",
         "direnv-instant": "direnv-instant",
         "direnv-overlay": "direnv-overlay",
+        "hanadia-mono": "hanadia-mono",
         "home-manager": "home-manager_3",
         "jj-starship": "jj-starship",
         "llm-agents": "llm-agents",

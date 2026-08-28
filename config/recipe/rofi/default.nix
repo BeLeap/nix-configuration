@@ -5,7 +5,7 @@ _: {
         programs.rofi = {
           enable = true;
 
-          font = "Monoplex KR Nerd 14";
+          font = "Hanadia Mono 14";
         };
       })
     ];

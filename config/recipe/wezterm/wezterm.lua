@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
 local config = wezterm.config_builder()
-local terminal_font = wezterm.font 'Monoplex KR Nerd'
+local terminal_font = wezterm.font 'Hanadia Mono'
 local copy_mode = nil
 
 if wezterm.gui then

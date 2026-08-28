@@ -21,12 +21,18 @@ _: {
   ];
   home = [
     (
-      {pkgs, ...}: {
+      {
+        inputs,
+        pkgs,
+        ...
+      }: {
+        fonts.fontconfig.enable = true;
+
         home = {
           packages = with pkgs; [
             htop
             wireshark
-            monoplex-kr-nerd
+            inputs.hanadia-mono.packages.${pkgs.stdenv.hostPlatform.system}.default
             nanum-gothic-coding
             ipcalc
             mtr
