@@ -14,10 +14,17 @@ tools to resolve library id and get library docs without me having to explicitly
 
 # Error handling
 
+- Prefer failing safely over pursuing success at any cost.
 - Do not hide, swallow, or ignore errors just to keep things running.
 - Prefer explicit failures with clear error messages over silent fallbacks.
 - Surface error states in logs/output/UI so failures are easy to notice and debug.
 - If a temporary workaround is unavoidable, document the limitation and the real failure clearly.
+
+# Assumptions
+
+- Question every assumption: identify what is being assumed and why, verify it
+  when possible, and prefer designs that eliminate or minimize reliance on
+  assumptions.
 
 # Tool availability
 
@@ -36,7 +43,8 @@ tools to resolve library id and get library docs without me having to explicitly
 
 # Journal
 
-- Record non-trivial work in `.journal/<date>/<appropriate_title>.md`.
+- Record work history and any information useful for the next task in
+  `journal/<date>/<appropriate_title>.md`.
 - Treat journal entries as append-only: append new information to an existing entry
   instead of rewriting or deleting its prior contents. Record corrections as new
   notes so the original history remains visible.
