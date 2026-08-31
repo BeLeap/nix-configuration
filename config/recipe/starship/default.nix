@@ -19,7 +19,7 @@ _: {
             {
               scan_timeout = 1;
 
-              format = "$jobs$directory$character";
+              format = "$shlvl$jobs$directory$character";
               right_format = "$all";
 
               kubernetes = {
