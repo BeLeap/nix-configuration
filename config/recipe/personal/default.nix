@@ -36,6 +36,7 @@ _: {
       ({pkgs, ...}: {
         home.packages = [
           pkgs.unstable.betterdisplay
+          pkgs.local-transcript
         ];
       })
     ];
