@@ -56,6 +56,6 @@ tools to resolve library id and get library docs without me having to explicitly
 - Do not invent retrospective findings merely to fill every category; omit sections
   that have nothing useful to record.
 - Before related work, search relevant journal entries for prior context and lessons.
-- Do not force add journal entries to version control.
+- Treat journal entries like ordinary files for version control; do not force-add them if they are ignored.
 - Note: a coding agent is actively recording entries in `.journal/`, so treat it as
   an existing source of task history and operational context.
