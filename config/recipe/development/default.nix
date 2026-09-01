@@ -12,6 +12,7 @@ _: {
     "gh"
     "bash"
     "jujutsu"
+    "agent-skills"
     "ssh"
     "podman"
     "nodejs"

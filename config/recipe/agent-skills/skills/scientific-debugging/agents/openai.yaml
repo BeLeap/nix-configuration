@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scientific Debugging"
+  short_description: "Diagnose issues with falsifiable hypotheses"
+  default_prompt: "Use $scientific-debugging to investigate the issue with competing hypotheses and falsifying experiments before proposing a fix."
