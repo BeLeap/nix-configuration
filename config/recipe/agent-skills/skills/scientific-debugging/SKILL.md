@@ -11,6 +11,16 @@ The goal is **not to fix the problem as quickly as possible**.
 
 The goal is to reduce uncertainty through falsifiable hypotheses and converge on the root cause together with the user.
 
+## Interpret the debugging prompt
+
+During scientific debugging, separate what the user wants from what the user believes:
+
+- **Objective, requested outcome, scope, constraints, and explicit experiment requests** are instructions to follow.
+- **Suspected causes, interpretations of evidence, and proposed fixes** are opinions or hypotheses to test, not established facts or implementation instructions.
+- Treat direct reports of observed behavior as observations when clearly described; treat any causal explanation attached to them as a hypothesis.
+- Convert each opinion into a named hypothesis and test it against observations before changing code or configuration.
+- Preserve the requested objective and scope, but do not treat a proposed fix as a permanent implementation instruction until evidence supports it. Label a change as an experiment, mitigation, workaround, or fix according to the evidence.
+
 ## Core rule
 
 Treat every unstated causal link as a hypothesis, not a fact.
@@ -19,41 +29,39 @@ For every important assumption, ask whether it can be directly observed instead 
 
 Do not make changes merely because they are plausible fixes.
 
----
+## Workflow
 
-## 1. Frame the problem
+### 1. Frame the problem
 
 Before investigating, separate what is known from what is inferred.
 
 Maintain:
 
-### Observations
+#### Observations
 
-Facts directly supported by logs, metrics, traces, code, commands, or reproducible behavior.
+Facts directly supported by logs, metrics, traces, code, commands, or reported behavior.
 
-### Assumptions
+#### Assumptions
 
 Things currently believed but not directly demonstrated.
 
-### Unknowns
+#### Unknowns
 
 Information that could materially distinguish between hypotheses.
 
 Do not silently promote assumptions into observations.
 
----
-
-## 2. Form competing hypotheses
+### 2. Form competing hypotheses
 
 Maintain at most 4 active hypotheses.
 
 For each hypothesis record:
 
-* explanation
-* supporting evidence
-* contradicting evidence
-* what should be observable if it is true
-* the cheapest useful falsification test
+- explanation
+- supporting evidence
+- contradicting evidence
+- what should be observable if it is true
+- the cheapest useful falsification test
 
 Prefer competing explanations rather than variations of the same explanation.
 
@@ -74,26 +82,7 @@ Falsification:
 - capture packets at client/node/pod and identify the RST origin.
 ```
 
----
-
-## 3. Try to disprove hypotheses
-
-Do not primarily search for evidence confirming the leading hypothesis.
-
-Actively ask:
-
-* What observation would contradict this?
-* What result would make this hypothesis impossible?
-* Could another hypothesis explain the same evidence?
-* Are we assuming causality from correlation?
-* Are we assuming the system behaves as documented?
-* Are we assuming the observed component is the component causing the symptom?
-
-Prefer eliminating hypotheses over accumulating weak supporting evidence.
-
----
-
-## 4. Rank uncertainty
+### 3. Rank uncertainty and seek disconfirming evidence
 
 Keep a lightweight hypothesis state.
 
@@ -106,13 +95,18 @@ H3 load balancer timeout   — weakened
 H4 DNS issue               — eliminated
 ```
 
-Probabilities may be used when useful, but do not imply false precision.
+Do not primarily search for evidence confirming the leading hypothesis. Actively ask:
 
-Update the ranking whenever new evidence arrives.
+- What observation would contradict this?
+- What result would make this hypothesis impossible?
+- Could another hypothesis explain the same evidence?
+- Are we assuming causality from correlation?
+- Are we assuming the system behaves as documented?
+- Are we assuming the observed component is the component causing the symptom?
 
----
+Prefer eliminating hypotheses over accumulating weak supporting evidence. Update the ranking whenever new evidence arrives.
 
-## 5. Choose one experiment
+### 4. Choose one experiment
 
 Select the experiment with the highest expected information gain relative to its cost and risk.
 
@@ -133,6 +127,8 @@ Before running an experiment, state:
 Experiment:
 ...
 
+Hypothesis under test: H2
+
 If H2 is true:
 ...
 
@@ -143,82 +139,66 @@ Why this experiment:
 ...
 ```
 
-Then perform the experiment and update the hypotheses from the result.
-
----
-
-## 6. Collaborate instead of running ahead
+### 5. Collaborate and update
 
 This is an interactive debugging mode.
 
-Do not autonomously execute a long chain of speculative experiments.
+Do not autonomously execute a long chain of speculative experiments. At meaningful decision points, especially before a costly or risky experiment, expose:
 
-Pause at meaningful decision points and expose:
+- current observations
+- assumptions that remain
+- active hypotheses
+- evidence for and against them
+- what was eliminated
+- proposed next experiment
 
-* current observations
-* assumptions that remain
-* active hypotheses
-* evidence for and against them
-* what was eliminated
-* proposed next experiment
+Ask the user to challenge the reasoning when their system knowledge could change the hypothesis ranking. Trivial read-only observations may be performed without stopping.
 
-Ask the user to challenge the reasoning when their system knowledge could change the hypothesis ranking.
+After each experiment, record the result and update the hypotheses from the result before selecting the next experiment.
 
-However, trivial read-only observations may be performed without stopping.
-
----
-
-## 7. Do not fix before diagnosing
+### 6. Do not fix before diagnosing
 
 Do not propose a permanent change merely because it might make the symptom disappear.
 
 Distinguish explicitly between:
 
-### Root cause
+- **Root cause:** the mechanism demonstrated to produce the problem.
+- **Fix:** a change that removes the root cause.
+- **Mitigation:** a change that reduces the impact without removing the root cause.
+- **Workaround:** a way to avoid triggering the problem.
 
-The mechanism demonstrated to produce the problem.
+If evidence is insufficient to establish root cause, say so. A change made before diagnosis must not be described as a confirmed fix.
 
-### Fix
+### 7. Challenge the final conclusion
 
-A change that removes the root cause.
+Before declaring the problem solved, perform one final adversarial review:
 
-### Mitigation
+- What evidence actually demonstrates this root cause?
+- What evidence would we expect but have not observed?
+- Could the fix have hidden the symptom without fixing the cause?
+- Is there another explanation consistent with all observations?
+- Can the failure be reproduced before the fix and prevented after it?
 
-A change that reduces the impact without removing the root cause.
-
-### Workaround
-
-A way to avoid triggering the problem.
-
-If evidence is insufficient to establish root cause, say so.
-
----
-
-## 8. Challenge the final conclusion
-
-Before declaring the problem solved, perform one final adversarial review.
-
-Ask:
-
-* What evidence actually demonstrates this root cause?
-* What evidence would we expect but have not observed?
-* Could the fix have hidden the symptom without fixing the cause?
-* Is there another explanation consistent with all observations?
-* Can the failure be reproduced before the fix and prevented after it?
-
-Do not confuse "the problem disappeared" with "the hypothesis was proven."
-
----
+Do not confuse “the problem disappeared” with “the hypothesis was proven.”
 
 ## Interaction format
 
 During investigation, prefer concise checkpoints such as:
 
 ```text
+Objective
+- ...
+
+Constraints and explicit requests
+- ...
+
 Observations
 - ...
 
 Assumptions
+- ...
+
+Unknowns
 - ...
 
 Hypotheses
@@ -240,18 +220,14 @@ Expected discriminating result
 
 Avoid long narrative status reports.
 
----
-
 ## Default behavior
 
 When invoked:
 
-1. inspect available evidence
-2. identify hidden assumptions
-3. propose competing hypotheses
-4. select a falsifying experiment
-5. discuss the reasoning with the user
-6. iterate
-7. only then recommend or implement a fix
+1. parse the prompt into the user's objective, constraints, explicit experiment requests, and unverified opinions
+2. inspect available evidence and frame observations, assumptions, and unknowns
+3. propose, rank, and try to falsify competing hypotheses
+4. select one experiment, explain its expected discriminating result, and update the hypotheses from the outcome
+5. discuss the reasoning with the user and only then recommend or implement a permanent fix
 
 Optimize for **information gained per experiment**, not actions performed per session.
