@@ -12,8 +12,24 @@ _: {
           kubectl-check
           kubernetes-helm
           kind
-          unstable.k9s
         ];
+
+        programs.k9s = {
+          enable = true;
+          package = pkgs.unstable.k9s;
+
+          settings = {
+            k9s = {
+              ui.skin = "gruvbox";
+              skipLatestRevCheck = true;
+              maxConnRetry = 3;
+            };
+          };
+
+          skins = {
+            gruvbox = ./gruvbox.yaml;
+          };
+        };
 
         home.shellAliases = {
           k = "kubectl-check";
