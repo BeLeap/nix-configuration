@@ -1,7 +1,7 @@
 _: {
   home = [
     (_: {
-      home.file.".agents/skills/scientific-debugging".source = ./skills/scientific-debugging;
+      home.file.".agents/skills/hypothesis-driven-inquiry".source = ./skills/hypothesis-driven-inquiry;
     })
   ];
 }
