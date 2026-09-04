@@ -66,7 +66,7 @@ let
     grep = "allow";
     find = "allow";
     ls = "allow";
-    bash = {"*" = "allow";};
+    bash = "allow";
     web_search = "allow";
     tool = "allow";
     skill = "allow";
