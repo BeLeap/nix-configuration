@@ -1,0 +1,38 @@
+[skill]
+name = "pi_delegate"
+description = "Delegate complex coding, repository investigation, and multi-step planning to Pi after explicit user approval."
+version = "0.1.0"
+tags = ["delegation", "coding", "pi"]
+prompts = [
+  '''
+Use this skill for complex coding, repository investigation, or multi-step planning that would consume the small local model's context. Handle short, simple requests directly.
+
+Delegation protocol:
+1. Explain to the user what will be delegated and why.
+2. Ask for explicit approval. Do not call `pi_delegate.start` before the user approves.
+3. After approval, use `file_write` to write a self-contained task with no secrets to `.pi-delegate/task.md`.
+4. Use `file_write` to write the target project directory to `.pi-delegate/cwd`. Use an absolute path or a path relative to the user's home directory. The directory must already exist and be under the user's home directory.
+5. Call `pi_delegate.start` with `{}`.
+6. Call `pi_delegate.status` to wait for or retrieve the report. If it is still running, tell the user and check again when asked instead of starting a second delegation.
+
+Pi runs without a second approval prompt, so the approval in step 2 is mandatory. Never put API keys, tokens, passwords, or other secrets in the task file. Surface Pi errors, timeouts, and cancellations honestly.
+'''
+]
+
+[[tools]]
+name = "start"
+description = "Start the approved task saved in .pi-delegate/task.md for the project saved in .pi-delegate/cwd. Requires explicit user approval before use."
+kind = "shell"
+command = "@runner@ start"
+
+[[tools]]
+name = "status"
+description = "Wait for and retrieve the current Pi delegation report. This is read-only and does not start new work."
+kind = "shell"
+command = "@runner@ status"
+
+[[tools]]
+name = "cancel"
+description = "Cancel the currently running Pi delegation. Use only when the user asks to cancel it."
+kind = "shell"
+command = "@runner@ cancel"
