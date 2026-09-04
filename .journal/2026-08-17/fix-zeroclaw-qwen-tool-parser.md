@@ -8,3 +8,10 @@
   - Evaluated `darwinConfigurations.beleap-m1air.config.system.build.toplevel.drvPath`
 - `alejandra --check` was unavailable in the current shell.
 - Applying the configuration still requires the normal Darwin activation on the Mac mini; no live service restart was performed here.
+
+## 2026-09-04 — Disable Discord mention-only mode
+
+- Changed `channels.discord.mention_only` from `true` to `false` in `config/recipe/beleap-macmini/default.nix`, so the bot responds to channel messages without requiring an @mention.
+- `alejandra --check` and Darwin configuration evaluation passed. `nh darwin switch` built successfully but could not complete system activation because `sudo` requires an interactive password.
+- Activated the newly built launchd plist manually, then verified the generated runtime config contains `mention_only = false`, `zeroclaw config get channels.discord.mention-only` returns `false`, the Discord channel doctor reports healthy, and port `42617` has one listener.
+- The source change is durable in Nix; run `sudo nh darwin switch` from `/Users/beleap/nix-configuration` when an interactive password prompt is available so Home Manager owns the currently installed launchd plist again.

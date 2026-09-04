@@ -59,7 +59,7 @@ _: {
           enabled = true
           bot_token = "$ZEROCLAW_DISCORD_BOT_TOKEN"
           allowed_users = ["*"]
-          mention_only = true
+          mention_only = false
           listen_to_bots = false
 
           [memory]
