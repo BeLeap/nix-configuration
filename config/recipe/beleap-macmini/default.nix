@@ -10,18 +10,12 @@ _: {
         };
       })
       ({config, ...}: {
-        age.secrets.github-runner-token = {
-          file = ./secrets/github-runner-token.age;
-          owner = "_github-runner";
-          group = "_github-runner";
-          mode = "0400";
-        };
-
         services.github-runners."beleap-macmini" = {
           enable = true;
           url = "https://github.com/BeLeap/nix-configuration";
-          tokenFile = config.age.secrets.github-runner-token.path;
+          tokenFile = "/run/secrets/github-runner.token";
           extraLabels = ["beleap-macmini"];
+          ephemeral = false;
         };
       })
     ];
