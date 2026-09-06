@@ -55,13 +55,13 @@ jobs:
       matrix:
         include:
           - name: "beleap-m1air"
-            runner: macos-latest
+            runner: beleap-macmini
             flakeAttrPath: "darwinConfigurations.beleap-m1air.system"
           - name: "beleap-macmini"
-            runner: macos-latest
+            runner: beleap-macmini
             flakeAttrPath: "darwinConfigurations.beleap-macmini.system"
           - name: "csjang-m3pro"
-            runner: macos-latest
+            runner: beleap-macmini
             flakeAttrPath: "darwinConfigurations.csjang-m3pro.system"
           # - name: "vm-arm64-Darwin-presonal"
           #   runner: macos-latest
