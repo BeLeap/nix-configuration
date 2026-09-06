@@ -27,6 +27,7 @@ _: {
         ...
       }: let
         ollamaModel = "qwen3.5:4b";
+        zeroclawProvider = "custom:http://127.0.0.1:11434/v1";
         zeroclawBin = "${pkgs.zeroclaw}/bin/zeroclaw";
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
         configFile = "${stateDir}/config.toml";
@@ -53,10 +54,10 @@ _: {
           schema_version = 2
 
           [providers]
-          fallback = "ollama"
+          fallback = "${zeroclawProvider}"
 
-          [providers.models.ollama]
-          base_url = "http://127.0.0.1:11434"
+          [providers.models."${zeroclawProvider}"]
+          base_url = "http://127.0.0.1:11434/v1"
           max_tokens = 4096
           temperature = 0.2
           timeout_secs = 300
