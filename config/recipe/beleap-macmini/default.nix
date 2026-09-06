@@ -33,6 +33,7 @@ _: {
         configFile = "${stateDir}/config.toml";
         discordTokenFile = "${stateDir}/discord-bot-token";
         piDelegateStateDir = "${stateDir}/workspace/.pi-delegate";
+        piDelegateWorkspace = "${config.home.homeDirectory}/ws";
         piDelegateRunner = pkgs.writeShellScriptBin "zeroclaw-pi-delegate" (
           lib.replaceStrings
           ["@stateDir@" "@homeDir@" "@piBin@" "@coreutils@"]
@@ -46,8 +47,8 @@ _: {
         );
         piDelegateSkill = pkgs.writeText "zeroclaw-pi-delegate-SKILL.toml" (
           lib.replaceStrings
-          ["@runner@"]
-          ["${piDelegateRunner}/bin/zeroclaw-pi-delegate"]
+          ["@runner@" "@projectRoot@"]
+          ["${piDelegateRunner}/bin/zeroclaw-pi-delegate" piDelegateWorkspace]
           (builtins.readFile ./pi-delegate-skill.toml)
         );
         zeroclawConfigSource = pkgs.writeText "zeroclaw-config.toml" ''
@@ -85,12 +86,12 @@ _: {
 
           [agent]
           compact_context = true
-          max_tool_iterations = 8
+          max_tool_iterations = 16
           max_context_tokens = 8192
 
           [channels]
           cli = true
-          message_timeout_secs = 300
+          message_timeout_secs = 600
           ack_reactions = true
           show_tool_calls = false
           session_persistence = true
@@ -126,9 +127,10 @@ _: {
           state_dir=${lib.escapeShellArg stateDir}
           config_file=${lib.escapeShellArg configFile}
           token_file=${lib.escapeShellArg discordTokenFile}
+          project_root=${lib.escapeShellArg piDelegateWorkspace}
           config_source=${lib.escapeShellArg zeroclawConfigSource}
 
-          /bin/mkdir -p "$state_dir/workspace/skills/pi_delegate" "$state_dir/workspace/.pi-delegate"
+          /bin/mkdir -p "$project_root" "$state_dir/workspace/skills/pi_delegate" "$state_dir/workspace/.pi-delegate"
           skill_file="$state_dir/workspace/skills/pi_delegate/SKILL.toml"
           if [ -L "$skill_file" ]; then
             echo "Refusing to replace symlinked ZeroClaw skill: $skill_file" >&2
