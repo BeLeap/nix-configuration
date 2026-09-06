@@ -40,3 +40,16 @@
 - Read the complete skill after editing and confirmed the workflow order is coherent.
 - Ruby/Psych validation confirmed the skill frontmatter.
 - No build checks were needed for this documentation-only reorganization.
+
+## Generalize into hypothesis-driven inquiry
+
+- Renamed the skill from `scientific-debugging` to `hypothesis-driven-inquiry` so the framework applies to ideation, learning, explanation, decisions, planning, and diagnosis.
+- Added explicit inquiry modes and separated divergent exploration from candidate evaluation to avoid prematurely criticizing new ideas.
+- Generalized experiments into probes that include thought experiments, comparisons, calculations, feedback, prototypes, and reversible actions while preserving falsification and evidence updates.
+- Updated the OpenAI metadata and Home Manager source path to use the new skill name.
+
+## Generalization validation
+
+- Confirmed no active configuration references remain to `scientific-debugging`; historical journal references remain intentionally append-only.
+- Ruby/Psych metadata validation passed.
+- Alejandra formatting validation passed for `config/recipe/agent-skills/default.nix`.

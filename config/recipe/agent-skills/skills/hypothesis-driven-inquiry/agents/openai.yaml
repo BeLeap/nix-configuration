@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hypothesis-Driven Inquiry"
+  short_description: "Explore, test, and refine ideas with explicit models"
+  default_prompt: "Use $hypothesis-driven-inquiry to reason through this with an explicit objective, assumptions, competing hypotheses or options, and the smallest useful thought experiment or real-world test. Separate observations from interpretations, preserve divergent ideation before narrowing, update the model from evidence, and distinguish candidates, mitigations, and confirmed fixes."
