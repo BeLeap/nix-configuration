@@ -9,6 +9,15 @@ _: {
           ];
         };
       })
+      (_: {
+        services.github-runners."beleap-macmini" = {
+          enable = true;
+          url = "https://github.com/BeLeap/nix-configuration";
+          tokenFile = "/run/secrets/github-runner.token";
+          extraLabels = ["beleap-macmini"];
+          ephemeral = false;
+        };
+      })
     ];
     home = [
       ({
