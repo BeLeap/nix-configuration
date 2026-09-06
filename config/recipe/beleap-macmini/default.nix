@@ -9,7 +9,7 @@ _: {
           ];
         };
       })
-      ({config, ...}: {
+      (_: {
         services.github-runners."beleap-macmini" = {
           enable = true;
           url = "https://github.com/BeLeap/nix-configuration";
