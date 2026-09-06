@@ -207,7 +207,7 @@ $task"
   printf '%s\n' "$pid" > "$PID_FILE"
 
   printf 'Pi delegation started in %s.\n' "$resolved_cwd"
-  printf 'Use pi_delegate.status to retrieve its report.\n'
+  printf 'Use pi_delegate__status to retrieve its report.\n'
 }
 
 status_delegation() {
@@ -237,7 +237,7 @@ status_delegation() {
       ;;
     running)
       printf 'Pi delegation is still running after %s seconds.\n' "$waited"
-      printf 'Run pi_delegate.status again later.\n'
+      printf 'Run pi_delegate__status again later.\n'
       ;;
     completed)
       printf 'Pi delegation completed successfully.\n'

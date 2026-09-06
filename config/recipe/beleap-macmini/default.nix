@@ -28,12 +28,12 @@ _: {
       }: let
         ollamaModel = "qwen3.5:4b";
         discordUserId = "540435382853173280";
-        zeroclawProvider = "custom:http://127.0.0.1:11434/v1";
         zeroclawBin = "${pkgs.unstable.zeroclaw}/bin/zeroclaw";
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
         configFile = "${stateDir}/config.toml";
         discordTokenFile = "${stateDir}/discord-bot-token";
-        piDelegateStateDir = "${stateDir}/workspace/.pi-delegate";
+        piDelegateAgentWorkspace = "${stateDir}/agents/default/workspace";
+        piDelegateStateDir = "${piDelegateAgentWorkspace}/.pi-delegate";
         piDelegateWorkspace = "${config.home.homeDirectory}/ws";
         piDelegateRunner = pkgs.writeShellScriptBin "zeroclaw-pi-delegate" (
           lib.replaceStrings
@@ -54,42 +54,65 @@ _: {
           (builtins.readFile ./pi-delegate-skill.toml)
         );
         zeroclawConfigSource = pkgs.writeText "zeroclaw-config.toml" ''
-          schema_version = 2
+          schema_version = 3
 
           [providers]
-          fallback = "${zeroclawProvider}"
 
-          [providers.models."${zeroclawProvider}"]
-          base_url = "http://127.0.0.1:11434/v1"
+          [providers.models.custom.default]
+          uri = "http://127.0.0.1:11434/v1"
           max_tokens = 4096
           temperature = 0.2
           timeout_secs = 300
           wire_api = "chat_completions"
           model = "${ollamaModel}"
+          native_tools = true
+          replay_assistant_reasoning = false
+          think = false
+          context_window = 32768
 
-          [autonomy]
+          [channels.discord.default]
+          enabled = true
+          bot_token = "$ZEROCLAW_DISCORD_BOT_TOKEN"
+          mention_only = false
+          listen_to_bots = false
+
+          [agents.default]
+          model_provider = "custom.default"
+          risk_profile = "default"
+          runtime_profile = "default"
+          channels = ["discord.default"]
+
+          [peer_groups.discord_default]
+          channel = "discord"
+          agents = ["default"]
+          external_peers = ["${discordUserId}"]
+
+          [risk_profiles.default]
           level = "supervised"
           workspace_only = true
           require_approval_for_medium_risk = true
           block_high_risk_commands = true
           allowed_commands = ["git", "npm", "cargo", "ls", "cat", "grep", "find", "echo", "pwd", "wc", "head", "tail", "date", "df", "du", "uname", "uptime", "hostname", "python", "python3", "pip", "node", "zeroclaw-pi-delegate"]
-          auto_approve = ["file_read", "memory_recall", "web_search_tool", "web_fetch", "calculator", "glob_search", "content_search", "image_info", "weather", "browser", "browser_open", "read_skill", "pi_delegate.status"]
-          always_ask = ["pi_delegate.start", "pi_delegate.cancel"]
+          auto_approve = ["file_read", "memory_recall", "web_search_tool", "web_fetch", "calculator", "glob_search", "content_search", "image_info", "weather", "browser", "browser_open", "read_skill", "pi_delegate__status"]
+          always_ask = ["pi_delegate__start", "pi_delegate__cancel"]
           allowed_roots = []
           forbidden_paths = ["/etc", "/root", "/home", "/usr", "/bin", "/sbin", "/lib", "/opt", "/boot", "/dev", "/proc", "/sys", "/var", "/tmp", "~/.ssh", "~/.gnupg", "~/.aws", "~/.config"]
           max_actions_per_hour = 20
           max_cost_per_day_cents = 500
-          non_cli_excluded_tools = []
+          excluded_tools = []
           shell_env_passthrough = []
+          shell_timeout_secs = 60
+
+          [runtime_profiles.default]
+          compact_context = true
+          max_tool_iterations = 16
+          max_context_tokens = 32768
+          max_actions_per_hour = 20
+          max_cost_per_day_cents = 500
           shell_timeout_secs = 60
 
           [skills]
           prompt_injection_mode = "compact"
-
-          [agent]
-          compact_context = true
-          max_tool_iterations = 16
-          max_context_tokens = 8192
 
           [channels]
           cli = true
@@ -98,14 +121,6 @@ _: {
           show_tool_calls = false
           session_persistence = true
           session_backend = "sqlite"
-
-          [channels.discord]
-          enabled = true
-          bot_token = "$ZEROCLAW_DISCORD_BOT_TOKEN"
-          # ZeroClaw 0.8.3 drops schema-v2 wildcard allowlists during migration.
-          allowed_users = ["${discordUserId}"]
-          mention_only = false
-          listen_to_bots = false
 
           [memory]
           backend = "sqlite"
@@ -131,10 +146,12 @@ _: {
           config_file=${lib.escapeShellArg configFile}
           token_file=${lib.escapeShellArg discordTokenFile}
           project_root=${lib.escapeShellArg piDelegateWorkspace}
+          agent_workspace=${lib.escapeShellArg piDelegateAgentWorkspace}
+          delegate_state_dir=${lib.escapeShellArg piDelegateStateDir}
           config_source=${lib.escapeShellArg zeroclawConfigSource}
 
-          /bin/mkdir -p "$project_root" "$state_dir/workspace/skills/pi_delegate" "$state_dir/workspace/.pi-delegate"
-          skill_file="$state_dir/workspace/skills/pi_delegate/SKILL.toml"
+          /bin/mkdir -p "$project_root" "$agent_workspace/skills/pi_delegate" "$delegate_state_dir"
+          skill_file="$agent_workspace/skills/pi_delegate/SKILL.toml"
           if [ -L "$skill_file" ]; then
             echo "Refusing to replace symlinked ZeroClaw skill: $skill_file" >&2
             exit 1

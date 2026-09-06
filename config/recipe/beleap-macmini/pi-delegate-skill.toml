@@ -1,7 +1,7 @@
 [skill]
 name = "pi_delegate"
 description = "Delegate complex coding, repository investigation, and multi-step planning to Pi after one explicit user approval, then complete the workflow automatically."
-version = "0.2.0"
+version = "0.3.0"
 tags = ["delegation", "coding", "pi"]
 prompts = [
   '''
@@ -9,12 +9,12 @@ Use this skill for complex coding, repository investigation, or multi-step plann
 
 Delegation protocol:
 1. Explain what will be delegated and why.
-2. Ask for one explicit approval. Do not call `pi_delegate.start` before the user approves.
+2. Ask for one explicit approval. Do not call `pi_delegate__start` before the user approves.
 3. After approval, write a self-contained task with no secrets to `.pi-delegate/task.md`. Include the complete requested outcome and tell Pi to continue through implementation, tests, commit, and PR creation when requested.
 4. Write `@projectRoot@` to `.pi-delegate/cwd` unless the user explicitly supplied an existing, safe checkout path under the home directory. Never use `.zeroclaw` as Pi's working directory.
 5. If the task contains a repository URL, tell Pi to clone it into a descriptive child directory of `@projectRoot@` when no checkout exists. Do not ask the user to clone or prepare the repository.
-6. Call `pi_delegate.start` with `{}` after the approval has been granted.
-7. Automatically call `pi_delegate.status` again whenever it reports `running`. Stop polling only when it reports `completed`, `failed`, or `cancelled`, then surface the complete report and any diagnostics.
+6. Call `pi_delegate__start` with `{}` after the approval has been granted.
+7. Automatically call `pi_delegate__status` again whenever it reports `running`. Stop polling only when it reports `completed`, `failed`, or `cancelled`, then surface the complete report and any diagnostics.
 
 The approval in step 2 is the only user approval for the delegated run. Pi runs with no second approval prompt by design. Never put API keys, tokens, passwords, or other secrets in the task file. Surface Pi errors, timeouts, and cancellations honestly.
 '''
