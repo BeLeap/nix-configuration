@@ -22,6 +22,24 @@ _: {
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
         configFile = "${stateDir}/config.toml";
         discordTokenFile = "${stateDir}/discord-bot-token";
+        piDelegateStateDir = "${stateDir}/workspace/.pi-delegate";
+        piDelegateRunner = pkgs.writeShellScriptBin "zeroclaw-pi-delegate" (
+          lib.replaceStrings
+          ["@stateDir@" "@homeDir@" "@piBin@" "@coreutils@"]
+          [
+            piDelegateStateDir
+            config.home.homeDirectory
+            "${config.home.profileDirectory}/bin/pi"
+            "${pkgs.coreutils}"
+          ]
+          (builtins.readFile ./pi-delegate-runner.sh)
+        );
+        piDelegateSkill = pkgs.writeText "zeroclaw-pi-delegate-SKILL.toml" (
+          lib.replaceStrings
+          ["@runner@"]
+          ["${piDelegateRunner}/bin/zeroclaw-pi-delegate"]
+          (builtins.readFile ./pi-delegate-skill.toml)
+        );
         zeroclawConfigSource = pkgs.writeText "zeroclaw-config.toml" ''
           schema_version = 2
 
@@ -41,6 +59,19 @@ _: {
           workspace_only = true
           require_approval_for_medium_risk = true
           block_high_risk_commands = true
+          allowed_commands = ["git", "npm", "cargo", "ls", "cat", "grep", "find", "echo", "pwd", "wc", "head", "tail", "date", "df", "du", "uname", "uptime", "hostname", "python", "python3", "pip", "node", "zeroclaw-pi-delegate"]
+          auto_approve = ["file_read", "memory_recall", "web_search_tool", "web_fetch", "calculator", "glob_search", "content_search", "image_info", "weather", "browser", "browser_open", "read_skill", "pi_delegate.status"]
+          always_ask = ["pi_delegate.start", "pi_delegate.cancel"]
+          allowed_roots = []
+          forbidden_paths = ["/etc", "/root", "/home", "/usr", "/bin", "/sbin", "/lib", "/opt", "/boot", "/dev", "/proc", "/sys", "/var", "/tmp", "~/.ssh", "~/.gnupg", "~/.aws", "~/.config"]
+          max_actions_per_hour = 20
+          max_cost_per_day_cents = 500
+          non_cli_excluded_tools = []
+          shell_env_passthrough = []
+          shell_timeout_secs = 60
+
+          [skills]
+          prompt_injection_mode = "compact"
 
           [agent]
           compact_context = true
@@ -87,7 +118,15 @@ _: {
           token_file=${lib.escapeShellArg discordTokenFile}
           config_source=${lib.escapeShellArg zeroclawConfigSource}
 
-          /bin/mkdir -p "$state_dir"
+          /bin/mkdir -p "$state_dir/workspace/skills/pi_delegate" "$state_dir/workspace/.pi-delegate"
+          skill_file="$state_dir/workspace/skills/pi_delegate/SKILL.toml"
+          if [ -L "$skill_file" ]; then
+            echo "Refusing to replace symlinked ZeroClaw skill: $skill_file" >&2
+            exit 1
+          fi
+          /bin/cp -f ${piDelegateSkill} "$skill_file"
+          /bin/chmod 600 "$skill_file"
+
           if [ ! -s "$token_file" ]; then
             echo "Waiting for Discord bot token at $token_file" >&2
           fi
@@ -116,6 +155,7 @@ _: {
         home.packages = with pkgs; [
           isync
           zeroclaw
+          piDelegateRunner
         ];
         launchd.agents.zeroclaw = {
           enable = true;
