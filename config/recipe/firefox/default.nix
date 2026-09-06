@@ -60,7 +60,6 @@ _: {
               wappalyzer
               consent-o-matic
               wayback-machine
-              container-tab-groups
               pkgs.saml-tracer
             ];
           };
