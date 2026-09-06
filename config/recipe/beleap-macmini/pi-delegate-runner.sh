@@ -3,6 +3,7 @@ set -eu
 
 STATE_DIR="@stateDir@"
 HOME_DIR="@homeDir@"
+PROJECT_ROOT="@projectRoot@"
 PI_BIN="@piBin@"
 COREUTILS="@coreutils@/bin"
 
@@ -31,7 +32,7 @@ REPORT_TAIL_BYTES=16000
 PI_TIMEOUT_SECS=540
 STATUS_WAIT_SECS=45
 
-"$MKDIR" -p "$STATE_DIR"
+"$MKDIR" -p "$STATE_DIR" "$PROJECT_ROOT"
 
 fail() {
   printf 'Pi delegation error: %s\n' "$1" >&2
@@ -79,9 +80,16 @@ print_bounded() {
   "$TAIL" -c "$REPORT_TAIL_BYTES" "$file"
 }
 
+resolve_managed_cwd() (
+  cd "$PROJECT_ROOT" 2>/dev/null || fail "managed project root does not exist: $PROJECT_ROOT"
+  pwd -P
+)
+
 resolve_cwd() (
   if [ ! -s "$CWD_FILE" ]; then
-    fail "missing target directory in $CWD_FILE"
+    printf 'No target directory was staged; using managed project root: %s\n' "$PROJECT_ROOT" >&2
+    resolve_managed_cwd
+    return
   fi
 
   raw_cwd=$("$CAT" "$CWD_FILE")
@@ -113,7 +121,9 @@ resolve_cwd() (
     "$home_root/.gnupg"|"$home_root/.gnupg/"*|\
     "$home_root/.config"|"$home_root/.config/"*|\
     "$home_root/.zeroclaw"|"$home_root/.zeroclaw/"*)
-      fail "target directory is protected: $resolved"
+      printf 'Configured target directory is protected: %s; using managed project root: %s\n' "$resolved" "$PROJECT_ROOT" >&2
+      resolve_managed_cwd
+      return
       ;;
   esac
 
@@ -134,6 +144,16 @@ start_delegation() {
   fi
   task=$("$CAT" "$TASK_FILE")
   [ -n "$task" ] || fail "task is empty"
+
+  delegation_instructions='You are executing an already-approved delegated task. Work end-to-end without asking the user to prepare a checkout or approve routine steps. The current working directory is a managed staging root. If the task references a remote repository URL and no checkout exists, clone it into a descriptive child directory of the current working directory before editing. Implement, test, and complete the requested delivery; report failures explicitly.'
+  task="$delegation_instructions
+
+User task:
+$task"
+  task_bytes=$(printf '%s' "$task" | "$WC" -c | "$TR" -d '[:space:]')
+  if [ "$task_bytes" -gt "$MAX_TASK_BYTES" ]; then
+    fail "task with delegation instructions is too large (maximum: $MAX_TASK_BYTES bytes)"
+  fi
 
   current_status=$(read_status)
   if [ "$current_status" = "running" ]; then

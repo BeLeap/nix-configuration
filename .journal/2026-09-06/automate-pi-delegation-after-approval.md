@@ -19,3 +19,9 @@ The generated daemon now creates `/Users/beleap/ws`, injects that path into the 
 ## Limitation
 
 The Nix generation and daemon activation were not applied to the running service. A Darwin/Home Manager activation is still required before the updated skill is used by ZeroClaw.
+
+## Follow-up diagnosis
+
+The live skill was updated, but the existing `.pi-delegate/cwd` still pointed to `/Users/beleap/.zeroclaw/workspace`. The runner previously failed on that stale protected path. Added a managed-root fallback and an execution preamble: protected or missing staged targets use `/Users/beleap/ws`, and Pi is instructed to clone remote repositories there when needed. A fake-Pi integration check passed for the protected-path fallback and task preamble. The Darwin build passed again after this follow-up.
+
+Activation was attempted with `darwin-rebuild switch --flake .#beleap-macmini` but was blocked because this host now requires system activation to run as root.

@@ -36,10 +36,11 @@ _: {
         piDelegateWorkspace = "${config.home.homeDirectory}/ws";
         piDelegateRunner = pkgs.writeShellScriptBin "zeroclaw-pi-delegate" (
           lib.replaceStrings
-          ["@stateDir@" "@homeDir@" "@piBin@" "@coreutils@"]
+          ["@stateDir@" "@homeDir@" "@projectRoot@" "@piBin@" "@coreutils@"]
           [
             piDelegateStateDir
             config.home.homeDirectory
+            piDelegateWorkspace
             "${config.home.profileDirectory}/bin/pi"
             "${pkgs.coreutils}"
           ]
