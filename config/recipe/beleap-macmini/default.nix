@@ -27,6 +27,7 @@ _: {
         ...
       }: let
         ollamaModel = "qwen3.5:4b";
+        discordUserId = "540435382853173280";
         zeroclawProvider = "custom:http://127.0.0.1:11434/v1";
         zeroclawBin = "${pkgs.unstable.zeroclaw}/bin/zeroclaw";
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
@@ -101,7 +102,8 @@ _: {
           [channels.discord]
           enabled = true
           bot_token = "$ZEROCLAW_DISCORD_BOT_TOKEN"
-          allowed_users = ["*"]
+          # ZeroClaw 0.8.3 drops schema-v2 wildcard allowlists during migration.
+          allowed_users = ["${discordUserId}"]
           mention_only = false
           listen_to_bots = false
 
