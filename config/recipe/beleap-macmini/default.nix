@@ -28,7 +28,7 @@ _: {
       }: let
         ollamaModel = "qwen3.5:4b";
         zeroclawProvider = "custom:http://127.0.0.1:11434/v1";
-        zeroclawBin = "${pkgs.zeroclaw}/bin/zeroclaw";
+        zeroclawBin = "${pkgs.unstable.zeroclaw}/bin/zeroclaw";
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
         configFile = "${stateDir}/config.toml";
         discordTokenFile = "${stateDir}/discord-bot-token";
@@ -154,8 +154,7 @@ _: {
           fi
           export ZEROCLAW_DISCORD_BOT_TOKEN="$discord_token"
 
-          # ZeroClaw 0.7.5 has no nested environment override for channel secrets.
-          # Render the external token into a private runtime config instead.
+          # Render the external token into a private runtime config instead of the Nix store.
           tmp_config="$config_file.tmp.$$"
           ${pkgs.gettext}/bin/envsubst '$ZEROCLAW_DISCORD_BOT_TOKEN' < "$config_source" > "$tmp_config"
           /bin/chmod 600 "$tmp_config"
@@ -167,7 +166,7 @@ _: {
       in {
         home.packages = with pkgs; [
           isync
-          zeroclaw
+          unstable.zeroclaw
           piDelegateRunner
         ];
         launchd.agents.zeroclaw = {
