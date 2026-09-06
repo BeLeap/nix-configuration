@@ -84,9 +84,9 @@ _: {
                   run = ["layout floating"];
                 }
                 {
-                  check-further-callbacks = true;
+                  check-further-callbacks = false;
                   "if" = {
-                    app-id = "org.virtualbox.app.VirtualBoxVM";
+                    app-id = "org.keepassxc.keepassxc";
                   };
                   run = ["layout floating"];
                 }
