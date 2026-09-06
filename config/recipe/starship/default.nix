@@ -59,17 +59,6 @@ _: {
               };
 
               custom = {
-                wezterm = {
-                  when = "test -n \"$WEZTERM_PANE\"";
-                  symbol = "󰖲";
-                  format = "\\[[$symbol $output]($style)\\]";
-                  style = "bold blue";
-                  command = ''
-                    wezterm cli list --format json |
-                      jq -r --arg pane "$WEZTERM_PANE" \
-                      '.[] | select((.pane_id | tostring) == $pane) | .workspace'
-                  '';
-                };
                 git_branch = {
                   when = "! jj --ignore-working-copy root >/dev/null 2>&1";
                   command = "starship module git_branch";

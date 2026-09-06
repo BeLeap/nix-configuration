@@ -48,6 +48,10 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
   end
 end)
 
+wezterm.on('update-right-status', function(window, pane)
+  window:set_right_status(window:active_workspace() .. ' ')
+end)
+
 config.keys = {
   { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey { key = 'a', mods = 'CTRL' } },
   { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
