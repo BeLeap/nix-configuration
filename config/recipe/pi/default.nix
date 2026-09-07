@@ -3,6 +3,13 @@
   host,
   ...
 }: {
+  darwin = {
+    home = [
+      ({pkgs, ...}: {
+        home.packages = [pkgs.poke-token-bar];
+      })
+    ];
+  };
   home = [
     (
       {
@@ -41,7 +48,6 @@
           packages = [
             pi
             torpi
-            pkgs.poke-token-bar
           ];
 
           file = {
