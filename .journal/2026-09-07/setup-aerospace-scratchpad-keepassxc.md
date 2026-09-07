@@ -37,3 +37,20 @@ The v0.6.0 upstream Nix expression contains stale source and Go vendor hashes. T
 - Confirmed the live AeroSpace output identifies KeePassXC as `org.keepassxc.keepassxc` and reports its current workspace.
 - Rebuilt the Darwin configuration successfully and verified the generated toggle script contains the corrected command.
 - Alejandra formatting check passed for `config/recipe/aerospace/default.nix`.
+
+## Recipe organization
+
+- Split the Aerospace recipe into purpose-specific files:
+  - `default.nix` assembles packages, scripts, keybindings, and settings.
+  - `app-assignments.nix` owns scratchpad, floating, and workspace rules.
+  - `keybindings.nix` owns workspace and action bindings.
+  - `scripts.nix` owns the scratchpad toggle, PiP handler, and workspace hook.
+- Kept the generated binding values and 13 window-rule ordering unchanged.
+- Replaced repeated executable lookups and shell pipelines with shared helpers and JSON parsing.
+
+## Validation
+
+- Alejandra, Statix, and Deadnix checks passed.
+- Darwin configuration build passed.
+- Live checks detected KeePassXC as running and returned no PiP window.
+- `nix flake check --no-build --all-systems --show-trace` remains blocked by the unrelated NixOS-only `poke-token-bar` package on `aarch64-linux`.
