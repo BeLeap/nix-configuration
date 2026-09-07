@@ -24,6 +24,11 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    aerospace-scratchpad = {
+      url = "github:cristianoliveira/aerospace-scratchpad/v0.6.0";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     home-manager = {
       url = "github:BeLeap/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
