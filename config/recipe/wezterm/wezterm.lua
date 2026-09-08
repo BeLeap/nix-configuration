@@ -14,6 +14,8 @@ config.default_workspace = 'sp'
 
 config.front_end = 'WebGpu'
 
+config.window_close_confirmation = "NeverPrompt"
+
 config.color_scheme = 'Gruvbox dark, medium (base16)'
 config.font = terminal_font
 config.window_frame = {
