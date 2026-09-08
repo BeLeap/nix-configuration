@@ -1,4 +1,4 @@
-_: {
+{inputs, ...}: {
   darwin = {
     system = [
       (_: {
@@ -28,7 +28,7 @@ _: {
       }: let
         ollamaModel = "qwen3.5:4b";
         discordUserId = "540435382853173280";
-        zeroclawBin = "${pkgs.llm-agents.zeroclaw}/bin/zeroclaw";
+        zeroclawBin = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.zeroclaw}";
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
         configFile = "${stateDir}/config.toml";
         discordTokenFile = "${stateDir}/discord-bot-token";
