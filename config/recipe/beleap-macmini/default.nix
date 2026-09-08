@@ -29,6 +29,8 @@
         ollamaModel = "qwen3.5:4b";
         discordUserId = "540435382853173280";
         zeroclawBin = "${lib.getExe inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.zeroclaw}";
+        agentBrowser = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
+        agentBrowserSkill = "${agentBrowser}/share/agent-browser/skills/agent-browser/SKILL.md";
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
         configFile = "${stateDir}/config.toml";
         discordTokenFile = "${stateDir}/discord-bot-token";
@@ -92,7 +94,7 @@
           workspace_only = true
           require_approval_for_medium_risk = true
           block_high_risk_commands = true
-          allowed_commands = ["git", "npm", "cargo", "ls", "cat", "grep", "find", "echo", "pwd", "wc", "head", "tail", "date", "df", "du", "uname", "uptime", "hostname", "python", "python3", "pip", "node", "zeroclaw-pi-delegate"]
+          allowed_commands = ["git", "npm", "cargo", "ls", "cat", "grep", "find", "echo", "pwd", "wc", "head", "tail", "date", "df", "du", "uname", "uptime", "hostname", "python", "python3", "pip", "node", "agent-browser", "zeroclaw-pi-delegate"]
           auto_approve = ["file_read", "memory_recall", "web_search_tool", "web_fetch", "calculator", "glob_search", "content_search", "image_info", "weather", "browser", "browser_open", "read_skill", "pi_delegate__status"]
           always_ask = ["pi_delegate__start", "pi_delegate__cancel"]
           allowed_roots = []
@@ -150,7 +152,7 @@
           delegate_state_dir=${lib.escapeShellArg piDelegateStateDir}
           config_source=${lib.escapeShellArg zeroclawConfigSource}
 
-          /bin/mkdir -p "$project_root" "$agent_workspace/skills/pi_delegate" "$delegate_state_dir"
+          /bin/mkdir -p "$project_root" "$agent_workspace/skills/pi_delegate" "$agent_workspace/skills/agent-browser" "$delegate_state_dir"
           skill_file="$agent_workspace/skills/pi_delegate/SKILL.toml"
           if [ -L "$skill_file" ]; then
             echo "Refusing to replace symlinked ZeroClaw skill: $skill_file" >&2
@@ -158,6 +160,14 @@
           fi
           /bin/cp -f ${piDelegateSkill} "$skill_file"
           /bin/chmod 600 "$skill_file"
+
+          browser_skill_file="$agent_workspace/skills/agent-browser/SKILL.md"
+          if [ -L "$browser_skill_file" ]; then
+            echo "Refusing to replace symlinked agent-browser skill: $browser_skill_file" >&2
+            exit 1
+          fi
+          /bin/cp -f ${agentBrowserSkill} "$browser_skill_file"
+          /bin/chmod 600 "$browser_skill_file"
 
           if [ ! -s "$token_file" ]; then
             echo "Waiting for Discord bot token at $token_file" >&2
@@ -197,6 +207,9 @@
             RunAtLoad = true;
             StandardOutPath = "/tmp/zeroclaw.out.log";
             StandardErrorPath = "/tmp/zeroclaw.err.log";
+            EnvironmentVariables = {
+              PATH = "${config.home.profileDirectory}/bin:${config.home.homeDirectory}/.npm-global/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+            };
           };
         };
         launchd.agents.ollama = {
