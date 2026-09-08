@@ -28,7 +28,7 @@ _: {
       }: let
         ollamaModel = "qwen3.5:4b";
         discordUserId = "540435382853173280";
-        zeroclawBin = "${pkgs.unstable.zeroclaw}/bin/zeroclaw";
+        zeroclawBin = "${pkgs.llm-agents.zeroclaw}/bin/zeroclaw";
         stateDir = "${config.home.homeDirectory}/.zeroclaw";
         configFile = "${stateDir}/config.toml";
         discordTokenFile = "${stateDir}/discord-bot-token";
