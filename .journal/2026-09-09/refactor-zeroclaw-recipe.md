@@ -20,3 +20,14 @@
 ## Limitation
 
 - Repository-wide `nix flake check --all-systems` remains blocked by the existing unsupported `ax-cli` package while evaluating the aarch64-linux VM configuration.
+
+## Follow-up diagnosis — ZeroClaw package split
+
+- `config/recipe/zeroclaw/default.nix` currently runs the daemon from `inputs.llm-agents.packages.${system}.zeroclaw` but exposes `pkgs.unstable.zeroclaw` as the interactive `zeroclaw` command.
+- Evaluated versions are `llm-agents` ZeroClaw 0.8.5 and `nixpkgs-unstable` ZeroClaw 0.8.3. The split originated when the daemon reference moved to `llm-agents`; the Home Manager package remained from the earlier unstable-package change.
+- No package-level limitation requires two ZeroClaw derivations. Unless the version divergence is intentional, use one derivation for both the LaunchAgent and `home.packages` to avoid CLI/daemon version skew.
+
+## Follow-up implementation
+
+- Removed `zeroclawCliPackage`; `home.packages` now installs the same `zeroclawPackage` used by the LaunchAgent.
+- Validation passed: Nix parsing, Alejandra, Statix, and the `beleap-macmini` Darwin build.

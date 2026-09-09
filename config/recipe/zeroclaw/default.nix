@@ -11,7 +11,6 @@
         zeroclawPackage = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.zeroclaw;
         agentBrowser = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
         agentBrowserSkill = "${agentBrowser}/share/agent-browser/skills/agent-browser/SKILL.md";
-        zeroclawCliPackage = pkgs.unstable.zeroclaw;
         inherit (cfg) stateDirectory;
         configFile = "${stateDirectory}/config.toml";
         piDelegateAgentWorkspace = "${stateDirectory}/agents/default/workspace";
@@ -168,7 +167,7 @@
             }
           ];
 
-          home.packages = [zeroclawCliPackage piDelegateRunner];
+          home.packages = [zeroclawPackage piDelegateRunner];
 
           launchd.agents.zeroclaw = {
             enable = true;
