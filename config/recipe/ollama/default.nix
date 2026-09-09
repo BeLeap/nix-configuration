@@ -1,0 +1,32 @@
+_: {
+  darwin = {
+    system = [
+      (_: {
+        homebrew.brews = ["ollama"];
+      })
+    ];
+
+    home = [
+      (_: {
+        launchd.agents.ollama = {
+          enable = true;
+          config = {
+            Program = "/opt/homebrew/bin/ollama";
+            ProgramArguments = ["serve"];
+            KeepAlive = true;
+            RunAtLoad = true;
+            StandardOutPath = "/tmp/ollama.out.log";
+            StandardErrorPath = "/tmp/ollama.err.log";
+            EnvironmentVariables = {
+              OLLAMA_HOST = "0.0.0.0:11434";
+              OLLAMA_CONTEXT_LENGTH = "32768";
+              OLLAMA_NUM_PARALLEL = "1";
+              OLLAMA_MAX_LOADED_MODELS = "1";
+              OLLAMA_NO_CLOUD = "1";
+            };
+          };
+        };
+      })
+    ];
+  };
+}

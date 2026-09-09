@@ -1,0 +1,96 @@
+schema_version = 3
+
+[providers]
+
+[providers.models.custom.default]
+uri = @providerUrl@
+max_tokens = 4096
+temperature = 0.2
+timeout_secs = 300
+wire_api = "chat_completions"
+model = @model@
+native_tools = true
+replay_assistant_reasoning = false
+think = false
+context_window = 32768
+
+[mcp]
+enabled = true
+deferred_loading = true
+
+[[mcp.servers]]
+name = "google_calendar"
+transport = "http"
+url = "https://calendarmcp.googleapis.com/mcp/v1"
+
+[mcp_bundles.google_calendar]
+servers = ["google_calendar"]
+
+[channels.discord.default]
+enabled = true
+bot_token = "$ZEROCLAW_DISCORD_BOT_TOKEN"
+mention_only = false
+listen_to_bots = false
+
+[agents.default]
+model_provider = "custom.default"
+mcp_bundles = ["google_calendar"]
+risk_profile = "default"
+runtime_profile = "default"
+channels = ["discord.default"]
+
+[peer_groups.discord_default]
+channel = "discord"
+agents = ["default"]
+external_peers = [@discordUserId@]
+
+[risk_profiles.default]
+level = "supervised"
+workspace_only = true
+require_approval_for_medium_risk = true
+block_high_risk_commands = true
+allowed_commands = ["git", "npm", "cargo", "ls", "cat", "grep", "find", "echo", "pwd", "wc", "head", "tail", "date", "df", "du", "uname", "uptime", "hostname", "python", "python3", "pip", "node", "agent-browser", "zeroclaw-pi-delegate"]
+auto_approve = ["file_read", "memory_recall", "web_search_tool", "web_fetch", "calculator", "glob_search", "content_search", "image_info", "weather", "tool_search", "browser", "browser_open", "read_skill", "pi_delegate__status"]
+always_ask = ["pi_delegate__start", "pi_delegate__cancel"]
+allowed_roots = []
+forbidden_paths = ["/etc", "/root", "/home", "/usr", "/bin", "/sbin", "/lib", "/opt", "/boot", "/dev", "/proc", "/sys", "/var", "/tmp", "~/.ssh", "~/.gnupg", "~/.aws", "~/.config"]
+max_actions_per_hour = 20
+max_cost_per_day_cents = 500
+excluded_tools = []
+shell_env_passthrough = []
+shell_timeout_secs = 60
+
+[runtime_profiles.default]
+compact_context = true
+max_tool_iterations = 16
+max_context_tokens = 32768
+max_actions_per_hour = 20
+max_cost_per_day_cents = 500
+shell_timeout_secs = 60
+
+[skills]
+prompt_injection_mode = "compact"
+
+[channels]
+cli = true
+message_timeout_secs = 600
+ack_reactions = true
+show_tool_calls = false
+session_persistence = true
+session_backend = "sqlite"
+
+[memory]
+backend = "sqlite"
+auto_save = true
+embedding_provider = "none"
+search_mode = "bm25"
+
+[runtime]
+kind = "native"
+reasoning_enabled = false
+
+[gateway]
+host = @gatewayHost@
+port = @gatewayPort@
+require_pairing = true
+allow_public_bind = @gatewayAllowPublicBind@

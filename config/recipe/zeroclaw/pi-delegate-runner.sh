@@ -1,11 +1,11 @@
 #!/bin/sh
 set -eu
 
-STATE_DIR="@stateDir@"
-HOME_DIR="@homeDir@"
-PROJECT_ROOT="@projectRoot@"
-PI_BIN="@piBin@"
-COREUTILS="@coreutils@/bin"
+STATE_DIR=@stateDir@
+HOME_DIR=@homeDir@
+PROJECT_ROOT=@projectRoot@
+PI_BIN=@piBin@
+COREUTILS=@coreutilsBin@
 
 CAT="$COREUTILS/cat"
 HEAD="$COREUTILS/head"
