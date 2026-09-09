@@ -12,6 +12,9 @@ model = @model@
 native_tools = true
 replay_assistant_reasoning = false
 think = false
+# Ollama's OpenAI-compatible /v1 endpoint ignores `think`; use its
+# OpenAI-compatible reasoning switch to keep Qwen from exhausting the output budget.
+provider_extra = { reasoning_effort = "none" }
 context_window = 32768
 
 [mcp]
