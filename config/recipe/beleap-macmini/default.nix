@@ -72,6 +72,18 @@
           think = false
           context_window = 32768
 
+          [mcp]
+          enabled = true
+          deferred_loading = true
+
+          [[mcp.servers]]
+          name = "google_calendar"
+          transport = "http"
+          url = "https://calendarmcp.googleapis.com/mcp/v1"
+
+          [mcp_bundles.google_calendar]
+          servers = ["google_calendar"]
+
           [channels.discord.default]
           enabled = true
           bot_token = "$ZEROCLAW_DISCORD_BOT_TOKEN"
@@ -80,6 +92,7 @@
 
           [agents.default]
           model_provider = "custom.default"
+          mcp_bundles = ["google_calendar"]
           risk_profile = "default"
           runtime_profile = "default"
           channels = ["discord.default"]
@@ -95,7 +108,7 @@
           require_approval_for_medium_risk = true
           block_high_risk_commands = true
           allowed_commands = ["git", "npm", "cargo", "ls", "cat", "grep", "find", "echo", "pwd", "wc", "head", "tail", "date", "df", "du", "uname", "uptime", "hostname", "python", "python3", "pip", "node", "agent-browser", "zeroclaw-pi-delegate"]
-          auto_approve = ["file_read", "memory_recall", "web_search_tool", "web_fetch", "calculator", "glob_search", "content_search", "image_info", "weather", "browser", "browser_open", "read_skill", "pi_delegate__status"]
+          auto_approve = ["file_read", "memory_recall", "web_search_tool", "web_fetch", "calculator", "glob_search", "content_search", "image_info", "weather", "tool_search", "browser", "browser_open", "read_skill", "pi_delegate__status"]
           always_ask = ["pi_delegate__start", "pi_delegate__cancel"]
           allowed_roots = []
           forbidden_paths = ["/etc", "/root", "/home", "/usr", "/bin", "/sbin", "/lib", "/opt", "/boot", "/dev", "/proc", "/sys", "/var", "/tmp", "~/.ssh", "~/.gnupg", "~/.aws", "~/.config"]
