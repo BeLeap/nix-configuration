@@ -1,0 +1,9 @@
+_: {
+  home = [
+    ({pkgs, ...}: {
+      home.packages = with pkgs; [
+        yubikey-manager
+      ];
+    })
+  ];
+}

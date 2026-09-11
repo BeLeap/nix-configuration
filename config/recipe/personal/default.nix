@@ -4,6 +4,7 @@ _: {
     "syncthing"
     "keepassxc"
     "discord"
+    "yubikey"
   ];
   home = [
     ({pkgs, ...}: {
