@@ -24,8 +24,8 @@
 
   scratchpad-apps = [
     {
-      app-id = "com.bitwarden.desktop";
-      app-name = "Bitwarden";
+      app-id = "com.1password.1password";
+      app-name = "1Password";
     }
   ];
   scratchpad-window-rules =
