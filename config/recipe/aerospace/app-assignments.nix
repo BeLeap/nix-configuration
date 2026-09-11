@@ -24,8 +24,8 @@
 
   scratchpad-apps = [
     {
-      app-id = "org.keepassxc.keepassxc";
-      app-name = "KeePassXC";
+      app-id = "com.bitwarden.desktop";
+      app-name = "Bitwarden";
     }
   ];
   scratchpad-window-rules =

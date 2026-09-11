@@ -2,7 +2,7 @@ _: {
   includes = [
     "joplin"
     "syncthing"
-    "keepassxc"
+    "bitwarden"
     "discord"
     "yubikey"
   ];
@@ -10,7 +10,7 @@ _: {
     ({pkgs, ...}: {
       programs.firefox.profiles."beleap".extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         joplin-web-clipper
-        keepassxc-browser
+        bitwarden
       ];
     })
   ];
