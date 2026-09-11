@@ -1,8 +1,8 @@
 _: {
   includes = [
+    "1password"
     "joplin"
     "syncthing"
-    "bitwarden"
     "discord"
     "yubikey"
   ];
