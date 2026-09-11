@@ -10,7 +10,6 @@
       "beleap-m1air"
       "personal"
       "onedrive"
-      "1password"
       "kdeconnect-mac"
       "homerow"
     ];
@@ -26,7 +25,6 @@
       "beleap-macmini"
       "personal"
       "onedrive"
-      "1password"
       "kdeconnect-mac"
     ];
   }
@@ -53,7 +51,6 @@
       "nixos"
       "vm"
       "personal"
-      "1password"
     ];
   }
   {

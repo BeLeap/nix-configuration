@@ -84,12 +84,6 @@
     })
     (floating-window-rule {app-id = "com.kakao.KakaoTalkMac";})
   ];
-  one-password-window-rule = window-rule {
-    condition = {
-      window-title-regex-substring = "1Password";
-    };
-    run = ["layout floating"];
-  };
   default-window-rule = window-rule {
     condition = {
       app-name-regex-substring = ".*";
@@ -102,7 +96,6 @@
     ++ floating-window-rules
     ++ workspace-window-rules
     ++ [
-      one-password-window-rule
       default-window-rule
     ];
 in {
