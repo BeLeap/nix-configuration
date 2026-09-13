@@ -11,6 +11,7 @@ const CURL_BIN = "@curl@";
 const SANDBOX_EXEC_BIN = "/usr/bin/sandbox-exec";
 const STARTUP_TIMEOUT_MS = 120_000;
 const CHECK_URL = "https://check.torproject.org/api/ip";
+const DIRECT_TAILSCALE_DESTINATION = "beleap-macmini:11434";
 const PROXY_VARIABLES = [
   "HTTP_PROXY",
   "HTTPS_PROXY",
@@ -158,6 +159,8 @@ async function startPrivoxy(root, torPort, proxyPort) {
       `logdir ${root}`,
       `listen-address  127.0.0.1:${proxyPort}`,
       `forward-socks5t / 127.0.0.1:${torPort} .`,
+      // Keep the Mac mini's Ollama endpoint on the Tailscale route instead of Tor.
+      `forward ${DIRECT_TAILSCALE_DESTINATION} .`,
       "toggle  1",
       "enable-remote-toggle  0",
       "enable-edit-actions  0",
