@@ -44,7 +44,7 @@ tools to resolve library id and get library docs without me having to explicitly
 # Journal
 
 - Record work history and any information useful for the next task in
-  `journal/<date>/<appropriate_title>.md`.
+  `.journal/<date>/<appropriate_title>.md`.
 - Treat journal entries as append-only: append new information to an existing entry
   instead of rewriting or deleting its prior contents. Record corrections as new
   notes so the original history remains visible.
