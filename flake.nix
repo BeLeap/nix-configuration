@@ -17,6 +17,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    # Temporary package source until Nixpkgs PR #562806 merges.
+    nixpkgs-joplin.url = "github:NixOS/nixpkgs/pull/562806/head";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin = {

@@ -21,6 +21,11 @@ _: {
             inherit (prev) config;
             inherit (prev.stdenv.hostPlatform) system;
           };
+          # Keep the PR's package set isolated; only its Joplin package is overlaid.
+          joplinPkgs = import inputs.nixpkgs-joplin {
+            inherit (prev) config;
+            inherit (prev.stdenv.hostPlatform) system;
+          };
         in {
           python313 = prev.python313.override {
             packageOverrides = _: pyp: {
@@ -29,6 +34,7 @@ _: {
             };
           };
           discord = withoutBundledModules prev.discord;
+          inherit (joplinPkgs) joplin-desktop;
           unstable =
             unstable
             // {
