@@ -29,7 +29,6 @@ _: {
 
         system.defaults.dock.persistent-apps = [
           {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
-          {app = "${pkgs.google-messages}/Applications/Messages.app";}
         ];
       })
     ];
