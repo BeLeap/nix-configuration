@@ -9,8 +9,6 @@
       }: let
         cfg = config.beleap.services.zeroclaw;
         zeroclawPackage = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.zeroclaw;
-        agentBrowser = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser;
-        agentBrowserSkill = "${agentBrowser}/share/agent-browser/skills/agent-browser/SKILL.md";
         inherit (cfg) stateDirectory;
         configFile = "${stateDirectory}/config.toml";
         piDelegateAgentWorkspace = "${stateDirectory}/agents/default/workspace";
@@ -59,7 +57,6 @@
             "@discordTokenFile@"
             "@envsubst@"
             "@piDelegateSkill@"
-            "@agentBrowserSkill@"
             "@projectRoot@"
             "@agentWorkspace@"
             "@delegateStateDir@"
@@ -72,7 +69,6 @@
             (lib.escapeShellArg cfg.discordTokenFile)
             (lib.escapeShellArg "${pkgs.gettext}/bin/envsubst")
             (lib.escapeShellArg piDelegateSkill)
-            (lib.escapeShellArg agentBrowserSkill)
             (lib.escapeShellArg cfg.projectRoot)
             (lib.escapeShellArg piDelegateAgentWorkspace)
             (lib.escapeShellArg piDelegateStateDirectory)

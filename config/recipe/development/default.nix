@@ -12,7 +12,6 @@ _: {
     "gh"
     "bash"
     "jujutsu"
-    "agent-browser"
     "agent-skills"
     "ssh"
     "podman"
