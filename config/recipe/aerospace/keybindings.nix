@@ -25,6 +25,7 @@ in
 
     alt-f = "layout floating";
     alt-t = "layout tiling";
+    alt-a = "layout accordion";
     cmd-n = "exec-and-forget ${click-notification}";
   }
   // workspace-bindings
