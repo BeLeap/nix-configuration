@@ -50,6 +50,13 @@
             }
             add-zsh-hook precmd set-shell-terminal-title
 
+            # Kubernetes completion, including the short `k` alias.
+            if (( $+commands[kubectl] )); then
+              source <(kubectl completion zsh)
+              # `k` expands to `kubectl-check`, so register that command too.
+              compdef _kubectl kubectl-check
+            fi
+
             fcd() {
               local file
               local dir
