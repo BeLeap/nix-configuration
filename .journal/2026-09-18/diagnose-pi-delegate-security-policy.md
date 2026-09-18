@@ -38,3 +38,9 @@ No security policy, daemon, skill, or delegate task was changed during this diag
 - TOML parsing, Nix parsing, and `nix build .#darwinConfigurations.beleap-macmini.system --no-link` passed.
 - The generated skill artifact contains only bare runner commands.
 - The live daemon was not activated; it still uses the previous generated skill until Darwin/Home Manager activation.
+
+## 2026-09-18 — Activation verified
+
+- The new LaunchAgent was loaded but had not spawned (`runs = 0`), so its already-activated service was kickstarted once.
+- The running ZeroClaw daemon now uses the generated skill with bare `zeroclaw-pi-delegate` commands; the live service is running under LaunchAgent `org.nix-community.home.zeroclaw`.
+- `zeroclaw-pi-delegate status` returned `No Pi delegation is waiting.` No delegation was started.
