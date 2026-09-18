@@ -27,8 +27,8 @@
         );
         piDelegateSkill = pkgs.writeText "zeroclaw-pi-delegate-SKILL.toml" (
           lib.replaceStrings
-          ["@runner@" "@projectRoot@"]
-          ["${piDelegateRunner}/bin/zeroclaw-pi-delegate" cfg.projectRoot]
+          ["@projectRoot@"]
+          [cfg.projectRoot]
           (builtins.readFile ./pi-delegate-skill.toml)
         );
         zeroclawConfigSource = pkgs.writeText "zeroclaw-config.toml" (

@@ -24,16 +24,16 @@ The approval in step 2 is the only user approval for the delegated run. Pi runs 
 name = "start"
 description = "Start the approved task saved in .pi-delegate/task.md for the project saved in .pi-delegate/cwd. Requires explicit user approval before use."
 kind = "shell"
-command = "@runner@ start"
+command = "zeroclaw-pi-delegate start"
 
 [[tools]]
 name = "status"
 description = "Wait for and retrieve the current Pi delegation report. Repeat automatically while it is running; this is read-only and does not start new work."
 kind = "shell"
-command = "@runner@ status"
+command = "zeroclaw-pi-delegate status"
 
 [[tools]]
 name = "cancel"
 description = "Cancel the currently running Pi delegation. Use only when the user asks to cancel it."
 kind = "shell"
-command = "@runner@ cancel"
+command = "zeroclaw-pi-delegate cancel"
