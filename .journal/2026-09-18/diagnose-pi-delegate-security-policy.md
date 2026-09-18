@@ -44,3 +44,11 @@ No security policy, daemon, skill, or delegate task was changed during this diag
 - The new LaunchAgent was loaded but had not spawned (`runs = 0`), so its already-activated service was kickstarted once.
 - The running ZeroClaw daemon now uses the generated skill with bare `zeroclaw-pi-delegate` commands; the live service is running under LaunchAgent `org.nix-community.home.zeroclaw`.
 - `zeroclaw-pi-delegate status` returned `No Pi delegation is waiting.` No delegation was started.
+
+## 2026-09-18 — Daemon non-start diagnosis
+
+- The Home Manager activation script's LaunchAgent handler calls `launchctl bootout`, installs the plist, and calls `launchctl bootstrap`; it does not call `launchctl kickstart`.
+- At activation time, launchd logged `service inactive`, removed the old job, then reported `pending spawn, domain in on-demand-only mode` while the bootstrap still returned success.
+- The resulting service state was `not running`, `runs = 0`, and `last exit code = (never exited)`. This rules out a ZeroClaw crash or configuration failure: the daemon process had not run at all.
+- A manual `launchctl kickstart -k gui/501/org.nix-community.home.zeroclaw` started the already-loaded job. It reached `running`, copied the new skill, and remains active.
+- Best-supported explanation: this activation encountered a launchd/Home Manager bootstrap lifecycle quirk where `RunAtLoad` did not trigger the initial spawn. The service's `KeepAlive` and `RunAtLoad` settings are present; no ZeroClaw code change caused the stop.
