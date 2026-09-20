@@ -1,7 +1,6 @@
 {host, ...}: {
   includes = [
     "hm"
-    "macAppUtil"
     "nix"
     "nh"
     "podman"
