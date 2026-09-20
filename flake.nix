@@ -36,6 +36,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager-darwin = {
+      url = "github:BeLeap/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
+
     hanadia-mono = {
       url = "github:BeLeap/hanadia";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -344,6 +344,27 @@
         "type": "github"
       }
     },
+    "home-manager-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-darwin"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780893873,
+        "narHash": "sha256-vCx3QM9uhCd1ECSDp2jE2JZDS9qNVjWnRLalwLBzX9c=",
+        "owner": "BeLeap",
+        "repo": "home-manager",
+        "rev": "bcdb8d077195b3b0d32a773e460a06c4ec3d3579",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BeLeap",
+        "ref": "release-26.05",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "home-manager_2": {
       "inputs": {
         "nixpkgs": [
@@ -696,6 +717,7 @@
         "direnv-overlay": "direnv-overlay",
         "hanadia-mono": "hanadia-mono",
         "home-manager": "home-manager_3",
+        "home-manager-darwin": "home-manager-darwin",
         "jj-starship": "jj-starship",
         "llm-agents": "llm-agents",
         "nix-darwin": "nix-darwin",

@@ -17,7 +17,7 @@
   darwin = {
     system = [
       (_: {
-        imports = [inputs.home-manager.darwinModules.home-manager];
+        imports = [inputs.home-manager-darwin.darwinModules.home-manager];
       })
     ];
     home = [
