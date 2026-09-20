@@ -12,7 +12,7 @@ in
 
     postBuild = ''
       for bin in $out/bin/*; do
-        wrapProgram "$bin" --prefix PATH : ${lib.makeBinPath (with pkgs; [findutils coreutils jq fd ax-cli])}
+        wrapProgram "$bin" --prefix PATH : ${lib.makeBinPath (with pkgs; [findutils coreutils jq fd] ++ lib.optional stdenv.hostPlatform.isDarwin ax-cli)}
       done
     '';
   }
