@@ -1,8 +1,15 @@
 _: {
   home = [
-    ({pkgs, ...}: {
+    ({config, pkgs, ...}: let
+      firefoxConfigPath = "Library/Application Support/org.nixos.firefox";
+    in {
       programs.firefox = {
         enable = true;
+        # Keep Nixpkgs Firefox data outside macOS's Mozilla-owned app-data path.
+        package = pkgs.firefox.override {
+          appDataDir = "${config.home.homeDirectory}/${firefoxConfigPath}";
+        };
+        configPath = firefoxConfigPath;
 
         policies = {
           DontCheckDefaultBrowser = true;
