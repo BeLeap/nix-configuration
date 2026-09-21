@@ -34,4 +34,14 @@
       xdg.configFile."joplin-desktop/plugins".source = ./desktop-plugins;
     })
   ];
+
+  darwin = {
+    system = [
+      ({pkgs, ...}: {
+        system.defaults.dock.persistent-apps = [
+          {app = "${pkgs.unstable.joplin-desktop}/Applications/Joplin.app";}
+        ];
+      })
+    ];
+  };
 }

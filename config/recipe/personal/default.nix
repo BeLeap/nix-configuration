@@ -26,10 +26,6 @@ _: {
             KakaoTalk = 869223134;
           };
         };
-
-        system.defaults.dock.persistent-apps = [
-          {app = "${pkgs.joplin-desktop}/Applications/Joplin.app";}
-        ];
       })
     ];
     home = [
