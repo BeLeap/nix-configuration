@@ -7,12 +7,7 @@ _: {
     ];
   };
   home = [
-    ({
-      config,
-      pkgs,
-      lib,
-      ...
-    }: let
+    ({pkgs, ...}: let
       firefox =
         if pkgs.stdenv.hostPlatform.isDarwin
         then null

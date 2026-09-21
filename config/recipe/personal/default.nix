@@ -17,7 +17,7 @@ _: {
 
   darwin = {
     system = [
-      ({pkgs, ...}: {
+      (_: {
         homebrew = {
           casks = [
             "tailscale-app"
