@@ -39,7 +39,7 @@
             dock.persistent-apps = [
               {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
               # Use the Home Manager launcher so Dock starts the relocated Nix profile.
-              {app = "/Users/${host.usernameLower}/Applications/Home Manager Apps/Firefox.app";}
+              {app = "/Applications/Firefox.app";}
               {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
             ];
 

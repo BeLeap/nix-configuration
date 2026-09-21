@@ -48,7 +48,7 @@
       workspace = "2";
     }
     {
-      app-id = "org.nixos.firefox";
+      app-id = "org.mozilla.firefox";
       workspace = "2";
     }
     {
