@@ -27,7 +27,7 @@ _: {
           };
         };
 
-        defaults.dock.persistent-apps = [
+        system.defaults.dock.persistent-apps = [
           {app = "/System/Applications/Utilities/Screen Sharing.app";}
         ];
       })
