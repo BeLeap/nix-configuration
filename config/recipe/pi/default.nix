@@ -23,6 +23,14 @@
           privoxyConfigDir = "${pkgs.privoxy}/etc";
           tor = "${pkgs.tor}/bin/tor";
         };
+        # pi-permission-modes uses sandbox-exec on macOS and needs these
+        # executables on PATH for its Linux sandbox.
+        piRuntimePathPackages =
+          [pkgs.ripgrep]
+          ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+            pkgs.bubblewrap
+            pkgs.socat
+          ];
         pi = pkgs.symlinkJoin {
           name = "pi";
           paths = [inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi];
@@ -30,7 +38,7 @@
           postBuild = ''
             wrapProgram $out/bin/pi \
               --set PI_SKIP_VERSION_CHECK 1 \
-              --prefix PATH : ${pkgs.lib.makeBinPath [pkgs.ripgrep]} \
+              --prefix PATH : ${pkgs.lib.makeBinPath piRuntimePathPackages} \
               --run 'export CONTEXT7_API_KEY="$(${pkgs.coreutils}/bin/cat ${config.age.secrets."context7-api-key".path})"'
           '';
         };
