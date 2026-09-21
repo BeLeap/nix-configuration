@@ -48,6 +48,16 @@
               NSAutomaticQuoteSubstitutionEnabled = false;
             };
 
+            CustomUserPreferences = {
+              NSGlobalDomain = {
+                AppleLanguages = [
+                  "en-US"
+                  "ko-KR"
+                ];
+                AppleLocale = "en_KR";
+              };
+            };
+
             finder = {
               AppleShowAllExtensions = true;
               AppleShowAllFiles = true;
