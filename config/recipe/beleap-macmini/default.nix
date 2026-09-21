@@ -1,4 +1,4 @@
-_: {
+{inputs, ...}: {
   includes = [
     "ollama"
     "zeroclaw"
@@ -22,7 +22,7 @@ _: {
 
     home = [
       ({pkgs, ...}: {
-        home.packages = [pkgs.isync];
+        home.packages = [pkgs.isync inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt];
       })
       (_: {
         beleap.services.zeroclaw = {
