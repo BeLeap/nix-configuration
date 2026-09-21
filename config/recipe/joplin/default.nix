@@ -26,6 +26,7 @@
 
       programs.joplin-desktop = {
         enable = true;
+        package = pkgs.unstable.joplin-desktop;
         sync = {
           target = "onedrive";
         };
