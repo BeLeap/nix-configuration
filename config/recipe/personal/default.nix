@@ -26,6 +26,10 @@ _: {
             KakaoTalk = 869223134;
           };
         };
+
+        defaults.dock.persistent-apps = [
+          {app = "/System/Applications/Utilities/Screen Sharing.app";}
+        ];
       })
     ];
     home = [
