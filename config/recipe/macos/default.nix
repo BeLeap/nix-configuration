@@ -37,7 +37,6 @@
             dock.autohide = true;
 
             dock.persistent-apps = [
-              {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
               {app = "${pkgs.wireshark}/Applications/Wireshark.app";}
             ];
 

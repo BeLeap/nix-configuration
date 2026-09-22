@@ -1,4 +1,13 @@
 _: {
+  darwin = {
+    system = [
+      ({pkgs, ...}: {
+        system.defaults.dock.persistent-apps = [
+          {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
+        ];
+      })
+    ];
+  };
   home = [
     ({
       lib,
