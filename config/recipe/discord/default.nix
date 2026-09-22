@@ -1,18 +1,17 @@
 _: {
-  home = [
-    (_: {
-      programs.discord = {
-        enable = true;
-        package = null;
-        settings.SKIP_HOST_UPDATE = true;
-      };
-    })
-  ];
+  nixos = {
+    home = [
+      ({pkgs, ...}: {
+        home.packages = [pkgs.discord];
+      })
+    ];
+  };
   darwin = {
     system = [
       ({pkgs, ...}: {
+        homebrew.casks = ["discord"];
         system.defaults.dock.persistent-apps = [
-          {app = "${pkgs.unstable.discord}/Applications/Discord.app";}
+          {app = "/Applications/Discord.app";}
         ];
       })
     ];
