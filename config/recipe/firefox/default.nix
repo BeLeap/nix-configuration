@@ -3,81 +3,81 @@ _: {
     system = [
       (_: {
         homebrew.casks = ["firefox"];
+        system.defaults.dock.persistent-apps = [
+          {app = "/Applications/Firefox.app";}
+        ];
       })
     ];
   };
-  home = [
-    ({pkgs, ...}: let
-      firefox =
-        if pkgs.stdenv.hostPlatform.isDarwin
-        then null
-        else pkgs.firefox;
-    in {
-      programs.firefox = {
-        enable = true;
-        package = firefox;
+  nixos = {
+    home = [
+      ({pkgs, ...}: {
+        programs.firefox = {
+          enable = true;
+          package = pkgs.firefox;
 
-        policies = {
-          DontCheckDefaultBrowser = true;
-          DisableFirefoxStudies = true;
-          DisableTelemetry = true;
-          DisableFirefoxAccounts = false;
-          NoDefaultBookmarks = true;
-          OfferToSaveLogins = false;
-          OfferToSaveLoginsDefault = false;
-          PasswordManagerEnabled = false;
-          FirefoxHome = {
-            Search = true;
-            Pocket = false;
-            Snippets = false;
-            TopSites = false;
-            Highlights = false;
+          policies = {
+            DontCheckDefaultBrowser = true;
+            DisableFirefoxStudies = true;
+            DisableTelemetry = true;
+            DisableFirefoxAccounts = false;
+            NoDefaultBookmarks = true;
+            OfferToSaveLogins = false;
+            OfferToSaveLoginsDefault = false;
+            PasswordManagerEnabled = false;
+            FirefoxHome = {
+              Search = true;
+              Pocket = false;
+              Snippets = false;
+              TopSites = false;
+              Highlights = false;
+            };
+            UserMessaging = {
+              ExtensionRecommendations = false;
+              SkipOnboarding = true;
+            };
           };
-          UserMessaging = {
-            ExtensionRecommendations = false;
-            SkipOnboarding = true;
-          };
-        };
 
-        profiles = {
-          "beleap" = {
-            search = {
-              force = true;
-              default = "ddg";
-              engines = {
-                ddg = {
-                  name = "DuckDuckGo";
-                  urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
-                  icon = "https://duckduckgo.com/favicon.ico";
-                  updateInterval = 24 * 60 * 60 * 1000;
+          profiles = {
+            "beleap" = {
+              search = {
+                force = true;
+                default = "ddg";
+                engines = {
+                  ddg = {
+                    name = "DuckDuckGo";
+                    urls = [{template = "https://duckduckgo.com/?q={searchTerms}";}];
+                    icon = "https://duckduckgo.com/favicon.ico";
+                    updateInterval = 24 * 60 * 60 * 1000;
+                  };
                 };
               };
+              settings = {
+                "browser.aboutConfig.showWarning" = false;
+
+                "browser.translations.automaticallyPopup" = false;
+
+                "sidebar.verticalTabs" = true;
+                "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
+
+                "app.update.auto" = false;
+
+                "signon.rememberSignons" = false;
+                "signon.autofillForms" = false;
+                "signon.generation.enabled" = false;
+                "signon.management.page.breach-alerts.enabled" = false;
+              };
+              extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+                sidebery
+                wappalyzer
+                consent-o-matic
+                wayback-machine
+                pkgs.saml-tracer
+              ];
             };
-            settings = {
-              "browser.aboutConfig.showWarning" = false;
-
-              "browser.translations.automaticallyPopup" = false;
-
-              "sidebar.verticalTabs" = true;
-              "sidebar.verticalTabs.dragToPinPromo.dismissed" = true;
-
-              "app.update.auto" = false;
-
-              "signon.rememberSignons" = false;
-              "signon.autofillForms" = false;
-              "signon.generation.enabled" = false;
-              "signon.management.page.breach-alerts.enabled" = false;
-            };
-            extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-              sidebery
-              wappalyzer
-              consent-o-matic
-              wayback-machine
-              pkgs.saml-tracer
-            ];
           };
         };
-      };
-    })
-  ];
+      })
+    ];
+  };
 }
