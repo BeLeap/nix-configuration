@@ -20,7 +20,7 @@
       };
 
       home.packages = with pkgs; [
-        joplin-terminal
+        unstable.joplin-cli
       ];
       home.file.".agents/skills/joplin-cli".source = ./skills/joplin-cli;
 
