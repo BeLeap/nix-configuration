@@ -4,6 +4,7 @@ _: {
       {pkgs, ...}: {
         home.packages = with pkgs; [
           kubectl
+          kubectl-rexec
           kubelogin-oidc
           kubectl-node-shell
           kubectl-view-secret
