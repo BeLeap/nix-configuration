@@ -62,15 +62,15 @@
             ".pi/agent/AGENTS.md".source = ../../../files/AGENTS.md;
             ".pi/agent/settings.json".text = builtins.toJSON {
               defaultProvider = "openai-codex";
-              defaultModel = "gpt-5.6-luna";
+              defaultModel = "gpt-6-luna";
               defaultThinkingLevel = "max";
               defaultProjectTrust = "ask";
               enableInstallTelemetry = false;
               theme = "gruvbox";
               enabledModels = [
                 "gpt-6-astra"
-                "gpt-5.6-sol"
-                "gpt-5.6-luna"
+                "gpt-6-sol"
+                "gpt-6-luna"
                 "openrouter/z-ai/glm-5.2"
                 "ollama/qwen3.5:4b"
               ];
