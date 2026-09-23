@@ -26,6 +26,9 @@ _: {
                 "start"
               ];
               RunAtLoad = true;
+              # podman machine start exits after spawning vfkit; keep the VM
+              # process alive after this one-shot launchd job exits.
+              AbandonProcessGroup = true;
               StandardOutPath = "/tmp/podman-machine-start.out.log";
               StandardErrorPath = "/tmp/podman-machine-start.err.log";
             };
