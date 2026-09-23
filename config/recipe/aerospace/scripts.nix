@@ -61,6 +61,7 @@
     fi
 
     if [ "$scratchpad_visible" = true ]; then
+      :
       ${lib.concatMapStringsSep "\n" (
         app: ''
           if app_is_running ${lib.escapeShellArg app.app-id}; then
@@ -70,6 +71,7 @@
       )
       scratchpad-apps}
     else
+      :
       ${lib.concatMapStringsSep "\n" (
         app: ''
           if app_is_running ${lib.escapeShellArg app.app-id}; then

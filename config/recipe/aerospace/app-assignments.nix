@@ -22,12 +22,7 @@
       run = ["layout floating"];
     };
 
-  scratchpad-apps = [
-    {
-      app-id = "com.1password.1password";
-      app-name = "1Password";
-    }
-  ];
+  scratchpad-apps = [];
   scratchpad-window-rules =
     lib.map (
       app:
