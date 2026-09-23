@@ -8,7 +8,7 @@ _: {
   };
   darwin = {
     system = [
-      ({pkgs, ...}: {
+      (_: {
         homebrew.casks = ["discord"];
         system.defaults.dock.persistent-apps = [
           {app = "/Applications/Discord.app";}
