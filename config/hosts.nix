@@ -9,6 +9,7 @@
       "homebrew"
       "beleap-m1air"
       "personal"
+      "discord"
       "onedrive"
       "kdeconnect-mac"
       "homerow"
@@ -24,6 +25,7 @@
       "homebrew"
       "beleap-macmini"
       "personal"
+      "discord"
       "onedrive"
       "kdeconnect-mac"
     ];

@@ -3,7 +3,6 @@
     "1password"
     "joplin"
     "syncthing"
-    "discord"
     "yubikey"
   ];
   home = [
