@@ -5,7 +5,7 @@
 }: {
   programs.home-manager.enable = true;
   home = {
-    stateVersion = "25.05";
+    stateVersion = "26.05";
 
     sessionVariables = {
       LANG = "en_US.UTF-8";
