@@ -12,7 +12,7 @@ end
 config.default_prog = { '@zsh@', '-l' }
 config.default_workspace = 'sp'
 
-config.front_end = 'WebGpu'
+config.front_end = 'Software'
 
 config.window_close_confirmation = "NeverPrompt"
 
