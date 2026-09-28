@@ -31,4 +31,26 @@ _: {
       };
     })
   ];
+
+  darwin = {
+    system = [
+      ({pkgs, ...}: {
+        system.activationScripts.nixStatic.text = ''
+          ${pkgs.coreutils}/bin/install -d -m 0755 /usr/local/sbin
+          ${pkgs.coreutils}/bin/ln -sfnT ${pkgs.nixStatic}/bin/nix /usr/local/sbin/nix
+        '';
+      })
+    ];
+  };
+
+  nixos = {
+    system = [
+      ({pkgs, ...}: {
+        system.activationScripts.nixStatic = ''
+          install -d -m 0755 /usr/local/sbin
+          ln -sfnT ${pkgs.nixStatic}/bin/nix /usr/local/sbin/nix
+        '';
+      })
+    ];
+  };
 }
