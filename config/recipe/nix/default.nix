@@ -1,13 +1,5 @@
 _: {
   system = [
-    ({pkgs, ...}: {
-      environment.systemPackages = [
-        (pkgs.runCommand "nix-static-bin" {} ''
-          mkdir -p "$out/bin"
-          ln -s ${pkgs.nixStatic}/bin/nix "$out/bin/nix-static"
-        '')
-      ];
-    })
     (_: {
       nix = {
         optimise.automatic = true;
