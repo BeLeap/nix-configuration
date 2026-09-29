@@ -34,6 +34,7 @@ _: {
               diff-expected-exit-codes = [0 1];
             };
             aliases = {
+              c = ["commit"];
               d = ["describe"];
               n = ["new"];
               p = ["git" "push"];
