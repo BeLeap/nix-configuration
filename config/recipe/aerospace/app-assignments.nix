@@ -10,7 +10,7 @@
     inherit check-further-callbacks run;
     "if" = condition;
   };
-  app-window-rule = app-id: run:
+  app-id-rule = app-id: run:
     window-rule {
       condition = {inherit app-id;};
       inherit run;
@@ -26,7 +26,7 @@
   scratchpad-window-rules =
     lib.map (
       app:
-        app-window-rule app.app-id [
+        app-id-rule app.app-id [
           "layout floating"
           "exec-and-forget ${scratchpad-exe} move --all-matching ${lib.escapeShellArg app.app-name}"
         ]
@@ -69,7 +69,7 @@
   ];
   workspace-window-rules =
     lib.map (
-      app: app-window-rule app.app-id ["move-node-to-workspace ${app.workspace}"]
+      app: app-id-rule app.app-id ["move-node-to-workspace ${app.workspace}"]
     )
     workspace-apps;
 
@@ -87,7 +87,13 @@
   };
 
   on-window-detected =
-    scratchpad-window-rules
+    [
+      (window-rule {
+        condition = {app-id = "com.mitchellh.ghostty";};
+        run = ["move-node-to-workspace 1" "layout floating" "layout tiling"];
+      })
+    ]
+    ++ scratchpad-window-rules
     ++ floating-window-rules
     ++ workspace-window-rules
     ++ [
