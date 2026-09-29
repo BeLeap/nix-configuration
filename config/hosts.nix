@@ -13,6 +13,7 @@
       "onedrive"
       "kdeconnect-mac"
       "homerow"
+      "ghostty"
     ];
   }
   {
