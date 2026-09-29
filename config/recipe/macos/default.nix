@@ -5,7 +5,7 @@
     "nh"
     "podman"
     "ws-cleanup"
-    "aerospace"
+    "omniwm"
   ];
 
   darwin = {
