@@ -3,7 +3,7 @@ _: {
     system = [
       ({pkgs, ...}: {
         system.defaults.dock.persistent-apps = [
-          {app = "${pkgs.wezterm}/Applications/WezTerm.app";}
+          {app = "${pkgs.wezterm-upstream}/Applications/WezTerm.app";}
         ];
       })
     ];
@@ -19,11 +19,7 @@ _: {
       );
     in {
       home.packages = [
-        (
-          if pkgs.stdenv.isDarwin
-          then pkgs.wezterm-dmg
-          else pkgs.wezterm
-        )
+        pkgs.wezterm-upstream
       ];
 
       xdg.configFile."wezterm/wezterm.lua".source = weztermConfig;
