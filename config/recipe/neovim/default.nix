@@ -9,6 +9,10 @@
     }: let
       anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in {
+      home.packages = [
+        # Telescope grep_string require ripgrep
+        pkgs.ripgrep
+      ];
       programs.nixvim = {
         enable = true;
         enableMan = true;
@@ -60,6 +64,11 @@
             mode = "n";
             key = "<space>f";
             action = "<cmd>Telescope find_files<CR>";
+          }
+          {
+            mode = "n";
+            key = "<space>r";
+            action = "<cmd>Telescope grep_string<CR>";
           }
           {
             mode = "n";
