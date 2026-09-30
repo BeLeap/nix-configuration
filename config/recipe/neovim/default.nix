@@ -41,6 +41,10 @@
           completeopt = ["menu" "menuone" "noselect"];
 
           scrolloff = 999;
+
+          makeprg = "nix build";
+
+          exrc = true;
         };
 
         keymaps = [
