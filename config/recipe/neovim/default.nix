@@ -19,6 +19,7 @@
 
 	keymaps = [
 	  { mode = "n"; key = "<space>f"; action = "<cmd>Telescope find_files<CR>"; }
+	  { mode = "n"; key = "<leader>r"; action = "<cmd>source ~/.config/nvim/init.lua<CR>"; }
 	];
 
 	plugins = {
