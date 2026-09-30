@@ -53,6 +53,7 @@
           completeopt = ["menu" "menuone" "noselect"];
 
           scrolloff = 999;
+          foldlevelstart = 99;
 
           makeprg = "nix build";
 
