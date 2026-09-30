@@ -17,7 +17,8 @@ _: {
               with builtins; (fromTOML (readFile "${pkgs.starship}/share/starship/presets/bracketed-segments.toml"))
             )
             {
-              scan_timeout = 1;
+              scan_timeout = 100;
+              command_timeout = 100;
 
               format = "$shlvl$jobs$directory$character";
               right_format = "$all";
