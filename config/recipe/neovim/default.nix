@@ -13,6 +13,8 @@
 	opts = {
 	  number = true;
 	  relativenumber = true;
+
+	  scrolloff = 999;
 	};
 
 	keymaps = [
