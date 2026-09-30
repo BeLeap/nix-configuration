@@ -57,7 +57,7 @@
           {
             mode = "n";
             key = "<leader>f";
-            action = "<cmd>source ~/.config/nvim/init.lua<CR>";
+            action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
           }
         ];
 
