@@ -77,7 +77,7 @@
             settings = {
               completion = {
                 documentation.auto_show = true;
-                accept.auto_brakets.enabled = true;
+                accept.auto_brackets.enabled = true;
               };
             };
           };
