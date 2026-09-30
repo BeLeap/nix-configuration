@@ -15,6 +15,10 @@
 	  relativenumber = true;
 	};
 
+	keymaps = [
+	  { mode = "n"; key = "<space>f"; action = "<cmd>Telescope find_files<CR>"; }
+	];
+
 	plugins = {
 	  telescope.enable = true;
 	  gitgutter.enable = true;
