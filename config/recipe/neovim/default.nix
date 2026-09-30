@@ -10,6 +10,7 @@
 
 	plugins = {
 	  telescope.enable = true;
+	  gitgutter.enable = true;
 	};
       };
     })
