@@ -7,6 +7,10 @@
         enableMan = true;
 
 	colorschemes.gruvbox.enable = true;
+
+	plugins = {
+	  telescope.enable = true;
+	};
       };
     })
   ];
