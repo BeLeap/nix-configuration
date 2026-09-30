@@ -51,6 +51,7 @@
 	plugins = {
 	  telescope.enable = true;
 	  gitsigns.enable = true;
+	  oil.enable = true;
 	  lsp.enable = true;
 	};
 
