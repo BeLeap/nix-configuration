@@ -54,6 +54,11 @@
             key = "<leader>r";
             action = "<cmd>source ~/.config/nvim/init.lua<CR>";
           }
+          {
+            mode = "n";
+            key = "<leader>f";
+            action = "<cmd>source ~/.config/nvim/init.lua<CR>";
+          }
         ];
 
         plugins = {
@@ -106,6 +111,7 @@
           servers = {
             nil_ls.enable = true;
             lua_ls.enable = true;
+            helm_ls.enable = true;
           };
         };
 
