@@ -26,7 +26,7 @@
 	  splitright = true;
 	  splitbelow = true;
 
-	  clipboard = "uunnamedplus";
+	  clipboard = "unnamedplus";
 	  undofile = true;
 	  updatetime = 250;
 	  timeoutlen = 300;
