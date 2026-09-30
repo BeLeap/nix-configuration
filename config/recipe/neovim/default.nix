@@ -115,19 +115,19 @@
           keymaps = [
             {
               key = "gd";
-              lspBufAction = "definition";
+              action = "<cmd>Trouble lsp_definitions toggle focus=true<cr>";
             }
             {
               key = "gr";
-              lspBufAction = "references";
+              action = "<cmd>Trouble lsp_references toggle focus=true<cr>";
             }
             {
               key = "gt";
-              lspBufAction = "type_definition";
+              action = "<cmd>Trouble lsp_type_definitions toggle focus=true<c>";
             }
             {
               key = "gi";
-              lspBufAction = "implementation";
+              action = "<cmd>Trouble lsp_implementations toggle focus=true<cr>";
             }
             {
               key = "K";
