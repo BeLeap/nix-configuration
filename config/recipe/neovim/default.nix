@@ -14,6 +14,32 @@
 	  number = true;
 	  relativenumber = true;
 
+	  expandtab = true;
+	  shiftwidth = 2;
+	  tabstop = 2;
+	  smartindent = true;
+
+	  ignorecase = true;
+	  smartcase = true;
+	  incsearch = true;
+
+	  splitright = true;
+	  splitbelow = true;
+
+	  clipboard = "uunnamedplus";
+	  undofile = true;
+	  updatetime = 250;
+	  timeoutlen = 300;
+	  confirm = true;
+
+	  list = true;
+	  listchars = {
+	    tab = "» ";
+	    trail = "·";
+	  };
+
+	  completeopt = ["menu" "menuone" "noselect"];
+
 	  scrolloff = 999;
 	};
 
