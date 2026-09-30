@@ -2,13 +2,17 @@
   home = [
     (_: {imports = [inputs.nixvim.homeModules.nixvim];})
     ({
+      inputs,
       pkgs,
       lib,
       ...
-    }: {
+    }: let
+      anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    in {
       programs.nixvim = {
         enable = true;
         enableMan = true;
+        defaultEditor = true;
 
         colorschemes.gruvbox.enable = true;
 
@@ -142,6 +146,14 @@
             source = true;
           };
         };
+
+        extraConfigLua = ''
+          vim.lsp.config("any-lsp", {
+            cmd = { "${anyLsp}/bin/any-lsp" },
+            root_markers = { { ".git", ".jj" }, "." },
+          })
+          vim.lsp.enable("any-lsp")
+        '';
       };
     })
   ];

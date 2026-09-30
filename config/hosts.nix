@@ -13,7 +13,6 @@
       "onedrive"
       "kdeconnect-mac"
       "homerow"
-      "neovim"
     ];
   }
   {

@@ -4,7 +4,7 @@ _: {
     "zsh"
     "lsd"
     "starship"
-    "helix"
+    "neovim"
     "zoxide"
     "direnv"
     "git"
@@ -87,7 +87,7 @@ _: {
           };
 
           sessionVariables = {
-            EDITOR = "hx";
+            EDITOR = "nvim";
             MAKEFLAGS = "-j$(${pkgs.coreutils-full}/bin/nproc)";
             LC_ALL = "en_US.UTF-8";
           };
