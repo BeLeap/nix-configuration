@@ -24,7 +24,7 @@
 
 	plugins = {
 	  telescope.enable = true;
-	  gitgutter.enable = true;
+	  gitsigns.enable = true;
 	  lsp.enable = true;
 	};
 
