@@ -22,7 +22,7 @@
 
         globals.mapleader = ",";
 
-        editorConfig.enable = true;
+        editorconfig.enable = true;
 
         filetype = {
             extension = {
