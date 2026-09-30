@@ -70,6 +70,7 @@
 	  completion.enable = true;
 	  documentColor.enable = true;
 	  inlayHints.enable = true;
+	  onTypeFormatting.enable = true;
 
 	  keymaps = [
 	    {key="gd"; lspBufAction="definition";}
