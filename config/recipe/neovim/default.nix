@@ -25,6 +25,26 @@
 	plugins = {
 	  telescope.enable = true;
 	  gitgutter.enable = true;
+	  lsp.enable = true;
+	};
+
+	lsp = {
+	  completion.enable = true;
+	  documentColor.enable = true;
+	  inlayHints.enable = true;
+
+	  keymaps = [
+	    {key="gd"; lspBufAction="definition";}
+	    {key="gr"; lspBufAction="references";}
+	    {key="gt"; lspBufAction="type_definition";}
+	    {key="gi"; lspBufAction="implementation";}
+	    {key="K"; lspBufAction="hover";}
+	  ];
+
+	  servers = {
+	    nil_ls.enable = true;
+	    lua_ls.enable = true;
+	  };
 	};
       };
     })
