@@ -5,6 +5,8 @@
       programs.nixvim = {
         enable = true;
         enableMan = true;
+
+	colorschemes.gruvbox.enable = true;
       };
     })
   ];
