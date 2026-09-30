@@ -8,6 +8,8 @@
 
 	colorschemes.gruvbox.enable = true;
 
+	globals.mapleader = ",";
+
 	opts = {
 	  number = true;
 	  relativenumber = true;
