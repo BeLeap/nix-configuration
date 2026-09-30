@@ -108,6 +108,17 @@
             lua_ls.enable = true;
           };
         };
+
+        diagnostic.settings = {
+          virtual_text = true;
+          signs = true;
+          underline = true;
+          severity_sort = true;
+          float = {
+            border = "rounded";
+            source = true;
+          };
+        };
       };
     })
   ];
