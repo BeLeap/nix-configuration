@@ -22,6 +22,14 @@
 
         globals.mapleader = ",";
 
+        editorConfig.enable = true;
+
+        filetype = {
+            extension = {
+              jjdescription = "diff";
+            };
+        };
+
         opts = {
           number = true;
           relativenumber = true;
