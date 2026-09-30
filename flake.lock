@@ -40,6 +40,27 @@
         "type": "github"
       }
     },
+    "any-lsp": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "staticBinaries": "staticBinaries"
+      },
+      "locked": {
+        "lastModified": 1790522614,
+        "narHash": "sha256-fJTcJD0oifRMfKqZmRnVTRZBEcwybqhsir9OQdFnqVk=",
+        "owner": "BeLeap",
+        "repo": "any-lsp",
+        "rev": "27922c7d70b84964e1200f8be47824bb0ff38bca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BeLeap",
+        "repo": "any-lsp",
+        "type": "github"
+      }
+    },
     "beleap-overlay": {
       "inputs": {
         "boda-flake": "boda-flake",
@@ -759,6 +780,7 @@
       "inputs": {
         "aerospace-scratchpad": "aerospace-scratchpad",
         "agenix": "agenix",
+        "any-lsp": "any-lsp",
         "beleap-overlay": "beleap-overlay",
         "direnv-instant": "direnv-instant",
         "direnv-overlay": "direnv-overlay",
@@ -797,6 +819,20 @@
         "repo": "rust-overlay",
         "type": "github"
       }
+    },
+    "staticBinaries": {
+      "flake": false,
+      "locked": {
+        "path": "./static-binaries",
+        "type": "path"
+      },
+      "original": {
+        "path": "./static-binaries",
+        "type": "path"
+      },
+      "parent": [
+        "any-lsp"
+      ]
     },
     "systems": {
       "locked": {

@@ -148,6 +148,14 @@
             };
             lua_ls.enable = true;
             helm_ls.enable = true;
+            "any-lsp" = {
+              enable = true;
+              package = anyLsp;
+              config = {
+                cmd = ["any-lsp"];
+                root_markers = [[".git" ".jj"] "."];
+              };
+            };
           };
         };
 
@@ -161,14 +169,6 @@
             source = true;
           };
         };
-
-        extraConfigLua = ''
-          vim.lsp.config("any-lsp", {
-            cmd = { "${anyLsp}/bin/any-lsp" },
-            root_markers = { { ".git", ".jj" }, "." },
-          })
-          vim.lsp.enable("any-lsp")
-        '';
       };
     })
   ];
