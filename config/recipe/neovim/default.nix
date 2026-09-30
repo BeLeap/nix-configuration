@@ -53,6 +53,17 @@
 	  gitsigns.enable = true;
 	  oil.enable = true;
 	  lsp.enable = true;
+	  fidget.enable = true;
+	  trouble.enable = true;
+	  blink-cmp = {
+	    enable = true;
+	    settings = {
+	      completion = {
+	        documentation.auto_show = true;
+		accept.auto_brakets.enabled = true;
+	      };
+	    };
+	  };
 	};
 
 	lsp = {
