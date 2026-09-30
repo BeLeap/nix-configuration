@@ -1,7 +1,11 @@
 {inputs, ...}: {
   home = [
     (_: {imports = [inputs.nixvim.homeModules.nixvim];})
-    (_: {
+    ({
+      pkgs,
+      lib,
+      ...
+    }: {
       programs.nixvim = {
         enable = true;
         enableMan = true;
@@ -113,7 +117,16 @@
           ];
 
           servers = {
-            nil_ls.enable = true;
+            nil_ls = {
+              enable = true;
+              config = {
+                settings = {
+                  nil = {
+                    formatting = {command = ["${lib.getExe pkgs.alejandra}"];};
+                  };
+                };
+              };
+            };
             lua_ls.enable = true;
             helm_ls.enable = true;
           };

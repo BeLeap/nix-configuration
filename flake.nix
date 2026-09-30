@@ -29,6 +29,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
+    any-lsp = {
+      url = "github:BeLeap/any-lsp";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     home-manager = {
       url = "github:BeLeap/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
