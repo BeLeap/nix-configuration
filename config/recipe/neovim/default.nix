@@ -8,6 +8,11 @@
 
 	colorschemes.gruvbox.enable = true;
 
+	opts = {
+	  number = true;
+	  relativenumber = true;
+	};
+
 	plugins = {
 	  telescope.enable = true;
 	  gitgutter.enable = true;
