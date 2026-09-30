@@ -25,9 +25,9 @@
         editorconfig.enable = true;
 
         filetype = {
-            extension = {
-              jjdescription = "diff";
-            };
+          extension = {
+            jjdescription = "diff";
+          };
         };
 
         opts = {
