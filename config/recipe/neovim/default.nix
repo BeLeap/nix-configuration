@@ -9,9 +9,9 @@
     }: let
       anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in {
-      home.packages = [
+      home.packages = with pkgs; [
         # Telescope grep_string require ripgrep
-        pkgs.ripgrep
+        ripgrep
       ];
       programs.nixvim = {
         enable = true;
