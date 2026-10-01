@@ -69,7 +69,7 @@
               theme = "gruvbox";
               enabledModels = [
                 "gpt-6-astra"
-                "gpt-6-sol"
+                "gpt-6.1-sol"
                 "gpt-6-luna"
                 "openrouter/z-ai/glm-5.2"
                 "ollama/qwen3.5:4b"
@@ -79,7 +79,6 @@
                 "npm:@upstash/context7-pi"
                 "npm:pi-btw"
                 "npm:pi-chrome"
-                "npm:pi-mcp-adapter"
                 "npm:pi-notify"
                 "npm:pi-permission-modes"
                 "npm:pi-web-access"
