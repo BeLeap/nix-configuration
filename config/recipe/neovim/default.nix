@@ -76,7 +76,7 @@
           }
           {
             mode = "n";
-            key = "<space>r";
+            key = "<space>/";
             action = "<cmd>Telescope grep_string<CR>";
           }
           {
