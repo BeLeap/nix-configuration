@@ -21,6 +21,10 @@ _: {
             inherit (prev) config;
             inherit (prev.stdenv.hostPlatform) system;
           };
+          master = import inputs.nixpkgs-master {
+            inherit (prev) config;
+            inherit (prev.stdenv.hostPlatform) system;
+          };
         in {
           python313 = prev.python313.override {
             packageOverrides = _: pyp: {
@@ -29,11 +33,7 @@ _: {
             };
           };
           discord = withoutBundledModules prev.discord;
-          unstable =
-            unstable
-            // {
-              discord = withoutBundledModules unstable.discord;
-            };
+          inherit unstable master;
         })
         (import ./pkgs/overlay.nix {
           inherit (inputs) kubectl-check boda;
