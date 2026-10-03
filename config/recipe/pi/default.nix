@@ -61,7 +61,7 @@
           file = {
             ".pi/agent/AGENTS.md".source = ../../../files/AGENTS.md;
             ".pi/agent/settings.json".text = builtins.toJSON {
-              defaultProvider = "openai-codex";
+              defaultProvider = "openai";
               defaultModel = "gpt-6-luna";
               defaultThinkingLevel = "max";
               defaultProjectTrust = "ask";
