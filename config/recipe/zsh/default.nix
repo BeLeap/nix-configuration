@@ -23,6 +23,9 @@
           };
 
           initContent = ''
+            # Let Starship's right prompt use the terminal's final column.
+            ZLE_RPROMPT_INDENT=0
+
             # Safety
             setopt noclobber nomatch
 
