@@ -138,10 +138,6 @@
               key = "gi";
               action = "<cmd>Trouble lsp_implementations toggle focus=true<cr>";
             }
-            {
-              key = "K";
-              lspBufAction = "hover";
-            }
           ];
 
           servers = {
