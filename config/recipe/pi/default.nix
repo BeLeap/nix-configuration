@@ -75,7 +75,7 @@
                 "ollama/qwen3.5:4b"
               ];
               packages = [
-                "https://github.com/ayghri/i-have-adhd"
+                "https://github.com/chpl/i-have-adhd-and-aphantasia"
                 "npm:@upstash/context7-pi"
                 "npm:pi-btw"
                 "npm:pi-chrome"
