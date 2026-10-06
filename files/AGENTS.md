@@ -16,9 +16,10 @@
 
 # Assumptions
 
-- Question every assumption: identify what is being assumed and why, verify it
-  when possible, and prefer designs that eliminate or minimize reliance on
-  assumptions.
+- Review the relevant files and existing patterns before editing.
+- Identify assumptions, verify them when possible, and state those that affect
+  the approach. Ask when an unresolved ambiguity would materially change the
+  result; otherwise use the simplest reasonable interpretation.
 
 # Tool availability
 
@@ -28,12 +29,25 @@
 
 # Architecture
 
-- Always consider structural enhancement first.
-- Follow a tidy-first approach in code and system design decisions.
-- Leave code cleaner than you found it while preserving behavior.
-- Prefer cohesive, well-factored designs with clear boundaries and minimal complexity.
+- Consider structural improvements when they directly advance the requested
+  outcome, and prefer the smallest cohesive design that solves it.
+- Keep edits focused on the request. Avoid speculative features, abstractions,
+  and unrelated refactors or formatting changes.
+- Preserve behavior and style. Clean up only code made unnecessary by your own
+  changes; don't remove unrelated existing code.
 - Adopt a broad **design for changeability** principle across all work, not just code: architecture, configuration, operations, and workflows should all stay easy to modify.
   - Example (operational changeability): for long-running commands/processes, prefer approaches that are interruptible and restartable (or resumable) so changes can be applied safely without starting over.
+
+# Goal-Driven Execution
+
+- For multi-step work, state a brief plan and how completion will be checked.
+- Run checks relevant to the changed area and follow the project-specific
+  workflow where documented.
+- Report which checks ran and any failures or limitations; don't claim that
+  unchecked work passed.
+
+These working principles are adapted in part from
+[multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md).
 
 # Journal
 
