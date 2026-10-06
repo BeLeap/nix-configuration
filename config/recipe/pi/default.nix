@@ -66,6 +66,7 @@
               defaultThinkingLevel = "max";
               defaultProjectTrust = "ask";
               enableInstallTelemetry = false;
+              tuiMode = "regular";
               theme = "gruvbox";
               enabledModels = [
                 "gpt-6-astra"
