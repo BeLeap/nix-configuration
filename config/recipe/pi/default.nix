@@ -85,7 +85,7 @@
                 "npm:pi-web-access"
                 "https://github.com/tmustier/pi-queue-steer"
                 "npm:pi-title-renamer"
-                "git:github.com/noguerol/pi-poke"
+                "https://github.com/monotykamary/pi-invisible-continue"
               ];
             };
             ".pi/agent/models.json".text = builtins.toJSON {
