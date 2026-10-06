@@ -80,7 +80,6 @@ in {
         lua_ls.enable = true;
         helm_ls.enable = true;
         yamlls.enable = true;
-        basedpyright.enable = true;
         "any-lsp" = {
           enable = true;
           package = anyLsp;
