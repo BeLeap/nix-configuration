@@ -7,6 +7,19 @@
   anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
   programs.nixvim = {
+    files = {
+      "plugin/enable-all-lsp.lua" = {
+        extraConfigLua = ''
+          local servers = vim.iter(vim.lsp.get_configs())
+            :map(function(config)
+              return config.name
+            end)
+            :totable()
+
+          vim.lsp.enable(servers)
+        '';
+      };
+    };
     keymaps = [
       {
         mode = "n";
