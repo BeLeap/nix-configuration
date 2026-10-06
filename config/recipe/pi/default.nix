@@ -85,6 +85,7 @@
                 "npm:pi-web-access"
                 "https://github.com/tmustier/pi-queue-steer"
                 "npm:pi-title-renamer"
+                "git:github.com/noguerol/pi-poke"
               ];
             };
             ".pi/agent/models.json".text = builtins.toJSON {
