@@ -103,10 +103,6 @@
         };
       };
     })
-    ({
-      pkgs,
-      lib,
-      ...
-    }: {imports = [./lsp.nix];})
+    (_: {imports = [./lsp.nix];})
   ];
 }
