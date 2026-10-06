@@ -1,11 +1,12 @@
 {
   inputs,
   pkgs,
-  lib,
   ...
-}: let
+}:
+let
   anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in {
+in
+{
   programs.nixvim = {
     files = {
       "plugin/enable-all-lsp.lua" = {
@@ -40,6 +41,27 @@ in {
           };
         };
       };
+      none-ls = {
+        enable = true;
+        sources = {
+          code_actions = {
+            statix.enable = true;
+          };
+          diagnostics = {
+            codespell.enable = true;
+            deadnix.enable = true;
+            editorconfig_checker.enable = true;
+            golangci_lint.enable = true;
+            statix.enable = true;
+          };
+          formatting = {
+            alejandra.enable = true;
+            clang_format.enable = true;
+            gofmt.enable = true;
+            shfmt.enable = true;
+          };
+        };
+      };
     };
     lsp = {
       completion.enable = true;
@@ -67,16 +89,7 @@ in {
       ];
 
       servers = {
-        nil_ls = {
-          enable = true;
-          config = {
-            settings = {
-              nil = {
-                formatting = {command = ["${lib.getExe pkgs.alejandra}"];};
-              };
-            };
-          };
-        };
+        nil_ls.enable = true;
         lua_ls.enable = true;
         helm_ls.enable = true;
         yamlls.enable = true;
@@ -84,8 +97,14 @@ in {
           enable = true;
           package = anyLsp;
           config = {
-            cmd = ["any-lsp"];
-            root_markers = [[".git" ".jj"] "."];
+            cmd = [ "any-lsp" ];
+            root_markers = [
+              [
+                ".git"
+                ".jj"
+              ]
+              "."
+            ];
           };
         };
       };
