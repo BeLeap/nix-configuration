@@ -76,3 +76,6 @@ order.
 
 - CI currently builds only macOS host outputs in `.github/workflows/build.yml`.
 - Keep branch naming assumptions out of scripts unless required by target repo.
+
+Agent guidance in [`files/AGENTS.md`](files/AGENTS.md) adapts principles from
+the [`CLAUDE.md` guide](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md).

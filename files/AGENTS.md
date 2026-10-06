@@ -46,9 +46,6 @@
 - Report which checks ran and any failures or limitations; don't claim that
   unchecked work passed.
 
-These working principles are adapted in part from
-[multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md).
-
 # Journal
 
 - Record work history and any information useful for the next task in
