@@ -2,11 +2,9 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in
-{
+in {
   programs.nixvim = {
     files = {
       "plugin/enable-all-lsp.lua" = {
@@ -25,7 +23,7 @@ in
       {
         mode = "n";
         key = "<leader>f";
-        action = "<cmd>lua vim.lsp.buf.format({ async = true })<CR>";
+        action = "<cmd>lua vim.lsp.buf.format({ async = true, filter = function(client) return client.name ~= 'nil_ls' end })<CR>";
       }
     ];
     plugins = {
@@ -89,7 +87,18 @@ in
       ];
 
       servers = {
-        nil_ls.enable = true;
+        nil_ls = {
+          enable = true;
+          config = {
+            settings = {
+              nil = {
+                formatting = {
+                  command.__raw = "vim.NIL";
+                };
+              };
+            };
+          };
+        };
         lua_ls.enable = true;
         helm_ls.enable = true;
         yamlls.enable = true;
@@ -97,7 +106,7 @@ in
           enable = true;
           package = anyLsp;
           config = {
-            cmd = [ "any-lsp" ];
+            cmd = ["any-lsp"];
             root_markers = [
               [
                 ".git"
