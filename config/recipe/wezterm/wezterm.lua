@@ -50,10 +50,6 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
   end
 end)
 
-wezterm.on('update-right-status', function(window, pane)
-  window:set_right_status(window:active_workspace() .. ' ')
-end)
-
 local function get_right_column_panes(tab)
   local panes = tab:panes_with_info()
   local rightmost_left = 0
@@ -109,6 +105,79 @@ local function equalize_right_panes(window, tab)
   end
 end
 
+local known_pane_ids_by_tab = {}
+
+local function get_pane_ids(tab)
+  local pane_ids = {}
+
+  for _, pane in ipairs(tab:panes()) do
+    pane_ids[pane:pane_id()] = true
+  end
+
+  return pane_ids
+end
+
+local function has_removed_pane(previous_pane_ids, current_pane_ids)
+  if not previous_pane_ids then
+    return false
+  end
+
+  for pane_id in pairs(previous_pane_ids) do
+    if not current_pane_ids[pane_id] then
+      return true
+    end
+  end
+
+  return false
+end
+
+wezterm.on('update-right-status', function(window, pane)
+  local tab = pane:tab()
+  if tab then
+    local tab_id = tab:tab_id()
+    local current_pane_ids = get_pane_ids(tab)
+    local previous_pane_ids = known_pane_ids_by_tab[tab_id]
+
+    known_pane_ids_by_tab[tab_id] = current_pane_ids
+
+    if has_removed_pane(previous_pane_ids, current_pane_ids) then
+      equalize_right_panes(window, tab)
+      pane:activate()
+    end
+  end
+
+  window:set_right_status(window:active_workspace() .. ' ')
+end)
+
+local function close_tiled_pane(window, pane)
+  local tab = pane:tab()
+  if not tab then
+    window:perform_action(act.CloseCurrentPane { confirm = true }, pane)
+    return
+  end
+
+  local previous_panes = tab:panes()
+  local previous_pane_ids = get_pane_ids(tab)
+
+  window:perform_action(act.CloseCurrentPane { confirm = true }, pane)
+
+  if #previous_panes == 1 then
+    return
+  end
+
+  local current_pane_ids = get_pane_ids(tab)
+  known_pane_ids_by_tab[tab:tab_id()] = current_pane_ids
+
+  if has_removed_pane(previous_pane_ids, current_pane_ids) then
+    equalize_right_panes(window, tab)
+
+    local active_pane = tab:active_pane()
+    if active_pane then
+      active_pane:activate()
+    end
+  end
+end
+
 local function spawn_tiled_pane(window, pane)
   local tab = pane:tab()
   local right_panes = get_right_column_panes(tab)
@@ -124,6 +193,7 @@ local function spawn_tiled_pane(window, pane)
   local new_pane = split_target:split { direction = direction }
   equalize_right_panes(window, tab)
   new_pane:activate()
+  known_pane_ids_by_tab[tab:tab_id()] = get_pane_ids(tab)
 end
 
 config.keys = {
@@ -133,7 +203,7 @@ config.keys = {
   { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
   { key = '%', mods = 'LEADER|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = '"', mods = 'LEADER|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-  { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
+  { key = 'x', mods = 'LEADER', action = wezterm.action_callback(close_tiled_pane) },
   { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
   { key = 's', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
   { key = '[', mods = 'LEADER', action = act.ActivateCopyMode },
