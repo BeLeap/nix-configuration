@@ -1,11 +1,13 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }: let
   anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in {
   programs.nixvim = {
+    extraPackages = [pkgs.ste];
     files = {
       "plugin/enable-all-lsp.lua" = {
         extraConfigLua = ''
@@ -41,6 +43,7 @@ in {
       };
       none-ls = {
         enable = true;
+        settings.sources = lib.mkDefault [(builtins.readFile ./ste_none_ls.lua)];
         sources = {
           code_actions = {
             statix.enable = true;
