@@ -12,3 +12,5 @@
 - Changed pane split and clockwise rotation bindings to `LEADER+n` and `LEADER+r`. Moved next-tab navigation from `LEADER+n` to `LEADER+Shift+n` to avoid a duplicate key assignment.
 - Removed relative next/previous tab navigation at the user's request; numbered tab shortcuts remain.
 - Replaced alternating splits with the requested ㅑ layout: first split right to keep the main pane on the left, then split the rightmost tallest pane top/bottom.
+- Reworked right-column insertion to split its bottom pane and resize the vertical dividers so all right panes have equal heights, distributing any row remainder across panes.
+- No tests or configuration checks were run for the equal-height update.

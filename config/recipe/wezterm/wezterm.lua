@@ -54,28 +54,70 @@ wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace() .. ' ')
 end)
 
-local function spawn_tiled_pane(_, pane)
-  local panes = pane:tab():panes_with_info()
+local function get_right_column_panes(tab)
+  local panes = tab:panes_with_info()
+  local rightmost_left = 0
+
+  for _, pane_info in ipairs(panes) do
+    rightmost_left = math.max(rightmost_left, pane_info.left)
+  end
+
+  local right_panes = {}
+  for _, pane_info in ipairs(panes) do
+    if pane_info.left == rightmost_left then
+      table.insert(right_panes, pane_info)
+    end
+  end
+
+  table.sort(right_panes, function(a, b)
+    if a.top == b.top then
+      return a.index < b.index
+    end
+    return a.top < b.top
+  end)
+
+  return right_panes
+end
+
+local function equalize_right_panes(window, tab)
+  local right_panes = get_right_column_panes(tab)
+  local total_height = 0
+
+  for _, pane_info in ipairs(right_panes) do
+    total_height = total_height + pane_info.height
+  end
+
+  local target_height = math.floor(total_height / #right_panes)
+  local extra_rows = total_height % #right_panes
+
+  for index = 1, #right_panes - 1 do
+    local pane_info = right_panes[index]
+    local target = target_height + (index <= extra_rows and 1 or 0)
+    local delta = target - pane_info.height
+
+    if delta ~= 0 then
+      local direction = delta > 0 and 'Down' or 'Up'
+      window:perform_action(act.AdjustPaneSize { direction, math.abs(delta) }, pane_info.pane)
+      right_panes = get_right_column_panes(tab)
+    end
+  end
+end
+
+local function spawn_tiled_pane(window, pane)
+  local tab = pane:tab()
+  local right_panes = get_right_column_panes(tab)
   local split_target = pane
   local direction = 'Right'
 
-  if #panes > 1 then
-    local rightmost
-
-    for _, pane_info in ipairs(panes) do
-      if not rightmost
-        or pane_info.left > rightmost.left
-        or (pane_info.left == rightmost.left and pane_info.height > rightmost.height)
-      then
-        rightmost = pane_info
-      end
-    end
-
-    split_target = rightmost.pane
+  if #right_panes > 0 and #tab:panes() > 1 then
+    -- Split the bottom pane so the right column stays a resizeable vertical chain.
+    split_target = right_panes[#right_panes].pane
     direction = 'Bottom'
   end
 
-  split_target:split { direction = direction }
+  local new_pane = split_target:split { direction = direction }
+  equalize_right_panes(window, tab)
+  new_pane:activate()
 end
 
 config.keys = {
