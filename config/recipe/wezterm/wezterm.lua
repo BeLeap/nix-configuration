@@ -11,6 +11,7 @@ end
 
 config.default_prog = { '@zsh@', '-l' }
 config.default_workspace = 'sp'
+config.exit_behavior = 'Close'
 
 config.front_end = 'Software'
 
@@ -149,35 +150,6 @@ wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace() .. ' ')
 end)
 
-local function close_tiled_pane(window, pane)
-  local tab = pane:tab()
-  if not tab then
-    window:perform_action(act.CloseCurrentPane { confirm = true }, pane)
-    return
-  end
-
-  local previous_panes = tab:panes()
-  local previous_pane_ids = get_pane_ids(tab)
-
-  window:perform_action(act.CloseCurrentPane { confirm = true }, pane)
-
-  if #previous_panes == 1 then
-    return
-  end
-
-  local current_pane_ids = get_pane_ids(tab)
-  known_pane_ids_by_tab[tab:tab_id()] = current_pane_ids
-
-  if has_removed_pane(previous_pane_ids, current_pane_ids) then
-    equalize_right_panes(window, tab)
-
-    local active_pane = tab:active_pane()
-    if active_pane then
-      active_pane:activate()
-    end
-  end
-end
-
 local function spawn_tiled_pane(window, pane)
   local tab = pane:tab()
   local right_panes = get_right_column_panes(tab)
@@ -203,7 +175,7 @@ config.keys = {
   { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
   { key = '%', mods = 'LEADER|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
   { key = '"', mods = 'LEADER|SHIFT', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-  { key = 'x', mods = 'LEADER', action = wezterm.action_callback(close_tiled_pane) },
+  { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
   { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
   { key = 's', mods = 'LEADER', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
   { key = '[', mods = 'LEADER', action = act.ActivateCopyMode },
