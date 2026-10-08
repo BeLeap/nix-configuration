@@ -54,14 +54,28 @@ wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace() .. ' ')
 end)
 
-local next_split_direction_by_tab = {}
-
 local function spawn_tiled_pane(_, pane)
-  local tab_id = pane:tab():tab_id()
-  local direction = next_split_direction_by_tab[tab_id] or 'Bottom'
+  local panes = pane:tab():panes_with_info()
+  local split_target = pane
+  local direction = 'Right'
 
-  pane:split { direction = direction }
-  next_split_direction_by_tab[tab_id] = direction == 'Bottom' and 'Right' or 'Bottom'
+  if #panes > 1 then
+    local rightmost
+
+    for _, pane_info in ipairs(panes) do
+      if not rightmost
+        or pane_info.left > rightmost.left
+        or (pane_info.left == rightmost.left and pane_info.height > rightmost.height)
+      then
+        rightmost = pane_info
+      end
+    end
+
+    split_target = rightmost.pane
+    direction = 'Bottom'
+  end
+
+  split_target:split { direction = direction }
 end
 
 config.keys = {
