@@ -1,11 +1,27 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }: let
   anyLsp = inputs.any-lsp.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  steVersion = "0-unstable-2026-07-29";
+  ste = pkgs.buildGoModule {
+    pname = "ste";
+    version = steVersion;
+    src = pkgs.fetchFromGitHub {
+      owner = "stazelabs";
+      repo = "ste";
+      rev = "922c9773d0004f4c40b2e1373db9ed949321373d";
+      hash = "sha256-k9avMPXP+82vRDEC/AUvMCgAYDKpRrl0c0AjzTfeqII=";
+    };
+    vendorHash = "sha256-SAwFoIPeDPuAR1OEoKqO9B3UZ912PiZPWg8Ggy4IlfE=";
+    subPackages = ["cmd/ste"];
+    ldflags = ["-s" "-w" "-X" "main.version=${steVersion}"];
+  };
 in {
   programs.nixvim = {
+    extraPackages = [ste];
     files = {
       "plugin/enable-all-lsp.lua" = {
         extraConfigLua = ''
@@ -41,6 +57,7 @@ in {
       };
       none-ls = {
         enable = true;
+        settings.sources = lib.mkDefault [(builtins.readFile ./ste_none_ls.lua)];
         sources = {
           code_actions = {
             statix.enable = true;
