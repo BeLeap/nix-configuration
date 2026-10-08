@@ -80,10 +80,7 @@ graph order to set module precedence.
 4. Run formatting and static checks before you submit a change.
 5. Build at least one affected host output. This checks for evaluation and build failures.
 
-### Known Caveats
-
-- The CI workflow currently builds only macOS host outputs. See `.github/workflows/build.yml`.
-- Do not add branch-name assumptions to scripts unless the target repository requires them.
+## Credits
 
 The instructions in [`files/AGENTS.md`](files/AGENTS.md) use principles from
 the [`CLAUDE.md` guide](https://github.com/multica-ai/andrej-karpathy-skills/blob/main/CLAUDE.md).
