@@ -17,3 +17,13 @@
 - A headless Neovim test confirmed default and `.ste.yml` findings, suggestions, zero-based diagnostic positions, and clearing after clean text.
 - The packaged CLI reported `ste 0-unstable-2026-07-29`.
 - No system activation was performed.
+
+## Follow-up: move the package to nix-overlay
+
+- Moved the Go package definition to the BeLeap overlay and changed Neovim to use `pkgs.ste`.
+- Updated `flake.lock` to pin overlay commit `b350934d8870bb24f798478a4a57ae83f654dc30`.
+- Committed the overlay package as `b350934d` and pushed it to `master`.
+- GitHub reported that the push bypassed the required `success` status check.
+- After the move, the `beleap-m1air` system build and headless Neovim test passed with `ste` from `pkgs.ste`.
+- No system activation was performed after the move.
+- The `nix-configuration` lock and consumer changes remain uncommitted.
