@@ -14,3 +14,4 @@
 - Replaced alternating splits with the requested ㅑ layout: first split right to keep the main pane on the left, then split the rightmost tallest pane top/bottom.
 - Reworked right-column insertion to split its bottom pane and resize the vertical dividers so all right panes have equal heights, distributing any row remainder across panes.
 - No tests or configuration checks were run for the equal-height update.
+- Fixed the equalizer to refresh pane geometry before each divider adjustment, since adjusting an upper divider also changes the measured sizes of panes below it. No tests or configuration checks were run.

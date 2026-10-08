@@ -81,6 +81,10 @@ end
 
 local function equalize_right_panes(window, tab)
   local right_panes = get_right_column_panes(tab)
+  if #right_panes < 2 then
+    return
+  end
+
   local total_height = 0
 
   for _, pane_info in ipairs(right_panes) do
@@ -91,6 +95,7 @@ local function equalize_right_panes(window, tab)
   local extra_rows = total_height % #right_panes
 
   for index = 1, #right_panes - 1 do
+    right_panes = get_right_column_panes(tab)
     local pane_info = right_panes[index]
     local target = target_height + (index <= extra_rows and 1 or 0)
     local delta = target - pane_info.height
@@ -98,7 +103,6 @@ local function equalize_right_panes(window, tab)
     if delta ~= 0 then
       local direction = delta > 0 and 'Down' or 'Up'
       window:perform_action(act.AdjustPaneSize { direction, math.abs(delta) }, pane_info.pane)
-      right_panes = get_right_column_panes(tab)
     end
   end
 end
