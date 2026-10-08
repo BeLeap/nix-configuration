@@ -102,6 +102,8 @@ local function equalize_right_panes(window, tab)
 
     if delta ~= 0 then
       local direction = delta > 0 and 'Down' or 'Up'
+      -- AdjustPaneSize acts on the active pane; perform_action's pane argument only supplies context.
+      pane_info.pane:activate()
       window:perform_action(act.AdjustPaneSize { direction, math.abs(delta) }, pane_info.pane)
     end
   end

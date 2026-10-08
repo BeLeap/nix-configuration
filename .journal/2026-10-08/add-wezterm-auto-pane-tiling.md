@@ -15,3 +15,4 @@
 - Reworked right-column insertion to split its bottom pane and resize the vertical dividers so all right panes have equal heights, distributing any row remainder across panes.
 - No tests or configuration checks were run for the equal-height update.
 - Fixed the equalizer to refresh pane geometry before each divider adjustment, since adjusting an upper divider also changes the measured sizes of panes below it. No tests or configuration checks were run.
+- Activated each target pane before calling `AdjustPaneSize`, which acts on the tab's active pane; passing a pane as the `window:perform_action` context alone does not make it active. No tests or configuration checks were run.
