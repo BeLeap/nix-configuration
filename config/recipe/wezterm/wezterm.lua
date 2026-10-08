@@ -51,121 +51,18 @@ wezterm.on('user-var-changed', function(window, pane, name, value)
   end
 end)
 
-local function get_right_column_panes(tab)
-  local panes = tab:panes_with_info()
-  local rightmost_left = 0
-
-  for _, pane_info in ipairs(panes) do
-    rightmost_left = math.max(rightmost_left, pane_info.left)
-  end
-
-  local right_panes = {}
-  for _, pane_info in ipairs(panes) do
-    if pane_info.left == rightmost_left then
-      table.insert(right_panes, pane_info)
-    end
-  end
-
-  table.sort(right_panes, function(a, b)
-    if a.top == b.top then
-      return a.index < b.index
-    end
-    return a.top < b.top
-  end)
-
-  return right_panes
-end
-
-local function equalize_right_panes(window, tab)
-  local right_panes = get_right_column_panes(tab)
-  if #right_panes < 2 then
-    return
-  end
-
-  local total_height = 0
-
-  for _, pane_info in ipairs(right_panes) do
-    total_height = total_height + pane_info.height
-  end
-
-  local target_height = math.floor(total_height / #right_panes)
-  local extra_rows = total_height % #right_panes
-
-  for index = 1, #right_panes - 1 do
-    right_panes = get_right_column_panes(tab)
-    local pane_info = right_panes[index]
-    local target = target_height + (index <= extra_rows and 1 or 0)
-    local delta = target - pane_info.height
-
-    if delta ~= 0 then
-      local direction = delta > 0 and 'Down' or 'Up'
-      -- AdjustPaneSize acts on the active pane; perform_action's pane argument only supplies context.
-      pane_info.pane:activate()
-      window:perform_action(act.AdjustPaneSize { direction, math.abs(delta) }, pane_info.pane)
-    end
-  end
-end
-
-local known_pane_ids_by_tab = {}
-
-local function get_pane_ids(tab)
-  local pane_ids = {}
-
-  for _, pane in ipairs(tab:panes()) do
-    pane_ids[pane:pane_id()] = true
-  end
-
-  return pane_ids
-end
-
-local function has_removed_pane(previous_pane_ids, current_pane_ids)
-  if not previous_pane_ids then
-    return false
-  end
-
-  for pane_id in pairs(previous_pane_ids) do
-    if not current_pane_ids[pane_id] then
-      return true
-    end
-  end
-
-  return false
-end
-
 wezterm.on('update-status', function(window, pane)
-  local tab = pane:tab()
-  if tab then
-    local tab_id = tab:tab_id()
-    local current_pane_ids = get_pane_ids(tab)
-    local previous_pane_ids = known_pane_ids_by_tab[tab_id]
-
-    known_pane_ids_by_tab[tab_id] = current_pane_ids
-
-    if has_removed_pane(previous_pane_ids, current_pane_ids) then
-      equalize_right_panes(window, tab)
-      pane:activate()
-    end
-  end
-
   window:set_right_status(window:active_workspace() .. ' ')
 end)
 
-local function spawn_tiled_pane(window, pane)
-  local tab = pane:tab()
-  local right_panes = get_right_column_panes(tab)
-  local split_target = pane
-  local direction = 'Right'
+local next_split_direction_by_tab = {}
 
-  if #right_panes > 0 and #tab:panes() > 1 then
-    -- Split the bottom pane so the right column stays a resizeable vertical chain.
-    split_target = right_panes[#right_panes].pane
-    direction = 'Bottom'
-  end
+local function spawn_tiled_pane(_, pane)
+  local tab_id = pane:tab():tab_id()
+  local direction = next_split_direction_by_tab[tab_id] or 'Bottom'
 
-  local new_pane = split_target:split { direction = direction }
-  equalize_right_panes(window, tab)
-  new_pane:activate()
-  known_pane_ids_by_tab[tab:tab_id()] = get_pane_ids(tab)
+  pane:split { direction = direction }
+  next_split_direction_by_tab[tab_id] = direction == 'Bottom' and 'Right' or 'Bottom'
 end
 
 config.keys = {
