@@ -132,7 +132,7 @@ local function has_removed_pane(previous_pane_ids, current_pane_ids)
   return false
 end
 
-wezterm.on('update-right-status', function(window, pane)
+wezterm.on('update-status', function(window, pane)
   local tab = pane:tab()
   if tab then
     local tab_id = tab:tab_id()
