@@ -65,8 +65,8 @@ local function spawn_tiled_pane(_, pane)
 end
 
 config.keys = {
-  { key = 'n', mods = 'CTRL', action = wezterm.action_callback(spawn_tiled_pane) },
-  { key = 'r', mods = 'CTRL', action = act.RotatePanes 'Clockwise' },
+  { key = 'n', mods = 'LEADER', action = wezterm.action_callback(spawn_tiled_pane) },
+  { key = 'r', mods = 'LEADER', action = act.RotatePanes 'Clockwise' },
   { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey { key = 'a', mods = 'CTRL' } },
   { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
   { key = '%', mods = 'LEADER|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
@@ -83,8 +83,6 @@ config.keys = {
   { key = 'J', mods = 'LEADER|SHIFT', action = act.AdjustPaneSize { 'Down', 5 } },
   { key = 'K', mods = 'LEADER|SHIFT', action = act.AdjustPaneSize { 'Up', 5 } },
   { key = 'L', mods = 'LEADER|SHIFT', action = act.AdjustPaneSize { 'Right', 5 } },
-  { key = 'n', mods = 'LEADER', action = act.ActivateTabRelative(1) },
-  { key = 'p', mods = 'LEADER', action = act.ActivateTabRelative(-1) },
   { key = '1', mods = 'LEADER', action = act.ActivateTab(0) },
   { key = '2', mods = 'LEADER', action = act.ActivateTab(1) },
   { key = '3', mods = 'LEADER', action = act.ActivateTab(2) },

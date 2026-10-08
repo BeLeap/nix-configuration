@@ -9,3 +9,5 @@
 - Added `Ctrl+r` to rotate the active tab's pane layout clockwise.
 - Removed the added `Ctrl+n` binding and its callback at the user's request because they already have a Ctrl+N keymap.
 - Restored `Ctrl+n` at the user's request; it alternates top/bottom and left/right splits per tab. `Ctrl+r` remains bound to clockwise rotation.
+- Changed pane split and clockwise rotation bindings to `LEADER+n` and `LEADER+r`. Moved next-tab navigation from `LEADER+n` to `LEADER+Shift+n` to avoid a duplicate key assignment.
+- Removed relative next/previous tab navigation at the user's request; numbered tab shortcuts remain.
