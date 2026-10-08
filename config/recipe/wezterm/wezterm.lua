@@ -54,7 +54,19 @@ wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace() .. ' ')
 end)
 
+local next_split_direction_by_tab = {}
+
+local function spawn_tiled_pane(_, pane)
+  local tab_id = pane:tab():tab_id()
+  local direction = next_split_direction_by_tab[tab_id] or 'Bottom'
+
+  pane:split { direction = direction }
+  next_split_direction_by_tab[tab_id] = direction == 'Bottom' and 'Right' or 'Bottom'
+end
+
 config.keys = {
+  { key = 'n', mods = 'CTRL', action = wezterm.action_callback(spawn_tiled_pane) },
+  { key = 'r', mods = 'CTRL', action = act.RotatePanes 'Clockwise' },
   { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey { key = 'a', mods = 'CTRL' } },
   { key = 'c', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
   { key = '%', mods = 'LEADER|SHIFT', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
