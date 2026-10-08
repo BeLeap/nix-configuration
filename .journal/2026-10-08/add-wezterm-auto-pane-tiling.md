@@ -21,3 +21,4 @@
 - Set `exit_behavior = 'Close'` so a shell exiting with Ctrl-D closes its pane even if it exits with a nonzero status; the existing periodic pane-removal watcher then equalizes the remaining right panes. Removed the custom leader+x close wrapper and restored WezTerm's native close action. No tests or configuration checks were run.
 - Migrated the periodic pane-removal watcher from deprecated `update-right-status` to `update-status`; retained the existing workspace label in the tab bar. No tests or configuration checks were run.
 - Replaced equal-height right-column tiling with the earlier per-tab alternating split behavior: first bottom (top/bottom), then right (left/right). Removed pane resize/equalization tracking; kept Ctrl-D shell exit behavior. No tests or configuration checks were run.
+- Changed the alternating split sequence to start with a right split, then alternate bottom/right per tab. No tests or configuration checks were run.

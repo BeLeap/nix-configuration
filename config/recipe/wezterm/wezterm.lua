@@ -59,10 +59,10 @@ local next_split_direction_by_tab = {}
 
 local function spawn_tiled_pane(_, pane)
   local tab_id = pane:tab():tab_id()
-  local direction = next_split_direction_by_tab[tab_id] or 'Bottom'
+  local direction = next_split_direction_by_tab[tab_id] or 'Right'
 
   pane:split { direction = direction }
-  next_split_direction_by_tab[tab_id] = direction == 'Bottom' and 'Right' or 'Bottom'
+  next_split_direction_by_tab[tab_id] = direction == 'Right' and 'Bottom' or 'Right'
 end
 
 config.keys = {
