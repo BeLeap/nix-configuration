@@ -85,7 +85,7 @@ in {
         }
         {
           key = "gt";
-          action = "<cmd>Trouble lsp_type_definitions toggle focus=true<c>";
+          action = "<cmd>Trouble lsp_type_definitions toggle focus=true<cr>";
         }
         {
           key = "gi";
