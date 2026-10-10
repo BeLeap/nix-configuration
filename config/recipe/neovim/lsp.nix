@@ -9,9 +9,16 @@ in {
     files = {
       "plugin/enable-all-lsp.lua" = {
         extraConfigLua = ''
+          local disabled = {
+            ["gitlab_duo"] = true,
+          }
+
           local servers = vim.iter(vim.lsp.get_configs())
             :map(function(config)
               return config.name
+            end)
+            :filter(function(name)
+              return disabled[name] ~= true
             end)
             :totable()
 
