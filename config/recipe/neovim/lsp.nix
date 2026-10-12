@@ -11,6 +11,7 @@ in {
         extraConfigLua = ''
           local disabled = {
             ["gitlab_duo"] = true,
+            ["oxfmt"] = true,
           }
 
           local servers = vim.iter(vim.lsp.get_configs())
