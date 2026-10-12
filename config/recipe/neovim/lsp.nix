@@ -118,13 +118,26 @@ in {
           package = anyLsp;
           config = {
             cmd = ["any-lsp"];
-            root_markers = [
-              [
-                ".git"
-                ".jj"
-              ]
-              "."
-            ];
+            root_dir.__raw = ''
+              function(bufnr, on_dir)
+                local filetype = vim.bo[bufnr].filetype
+
+                for _, config in ipairs(vim.lsp.get_configs()) do
+                  if config.name ~= "any-lsp"
+                    and vim.lsp.is_enabled(config.name)
+                    and (config.filetypes == nil or vim.tbl_contains(config.filetypes, filetype)) then
+                    return
+                  end
+                end
+
+                local filename = vim.api.nvim_buf_get_name(bufnr)
+                local root = vim.fs.root(bufnr, { ".git", ".jj" })
+                  or (filename ~= "" and vim.fs.dirname(filename))
+                  or vim.fn.getcwd()
+
+                on_dir(root)
+              end
+            '';
           };
         };
       };
