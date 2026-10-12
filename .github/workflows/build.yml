@@ -85,6 +85,8 @@ jobs:
           purge-prefixes: nix-${{ runner.os }}-
           purge-created: 0
           purge-primary-key: never
+      - id: install_nix
+        uses: cachix/install-nix-action@v31
       - id: build
         run: |
           set -xeou pipefail
@@ -114,6 +116,9 @@ jobs:
         with:
           name: diff-${{ matrix.name }}
           path: diff-${{ matrix.name }}.md
+      - name: Garbage collect Nix store
+        if: ${{ always() && steps.install_nix.outcome == 'success' && matrix.runner == 'beleap-macmini' }}
+        run: nix store gc
 
   pr-comment:
     if: github.event_name == 'pull_request'
