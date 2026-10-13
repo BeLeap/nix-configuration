@@ -55,7 +55,7 @@ jobs:
       matrix:
         include:
           - name: "beleap-m1air"
-            runner: macos-lastest
+            runner: macos-latest
             flakeAttrPath: "darwinConfigurations.beleap-m1air.system"
           - name: "beleap-macmini"
             runner: macos-latest
