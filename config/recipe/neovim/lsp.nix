@@ -28,6 +28,19 @@ in {
           vim.lsp.enable(servers)
         '';
       };
+      "plugin/disable-c-inlay-hints.lua" = {
+        extraConfigLua = ''
+          local group = vim.api.nvim_create_augroup("disable-c-inlay-hints", { clear = true })
+
+          vim.api.nvim_create_autocmd("FileType", {
+            group = group,
+            pattern = "c",
+            callback = function(event)
+              vim.lsp.inlay_hint.enable(false, { bufnr = event.buf })
+            end,
+          })
+        '';
+      };
     };
     keymaps = [
       {
