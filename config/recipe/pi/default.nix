@@ -86,6 +86,7 @@
                 "https://github.com/tmustier/pi-queue-steer"
                 "npm:pi-title-renamer"
                 "https://github.com/monotykamary/pi-invisible-continue"
+                "npm:pi-context-view"
               ];
             };
             ".pi/agent/models.json".text = builtins.toJSON {
