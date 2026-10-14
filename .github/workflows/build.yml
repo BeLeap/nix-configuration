@@ -75,34 +75,31 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - uses: cachix/install-nix-action@v31
-      - uses: nix-community/cache-nix-action@v7
-        with:
-          primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
-          restore-prefixes-first-match: nix-${{ runner.os }}-
-          gc-max-store-size-linux: 2G
-          purge: true
-          purge-prefixes: nix-${{ runner.os }}-
-          purge-created: 0
-          purge-primary-key: never
       - id: install_nix
         uses: cachix/install-nix-action@v31
+      - name: Restore Nix store cache
+        if: matrix.runner == 'macos-latest'
+        id: nix_cache
+        uses: nix-community/cache-nix-action/restore@v7
+        with:
+          primary-key: nix-store-v1-${{ runner.os }}-${{ runner.arch }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-prefixes-first-match: nix-store-v1-${{ runner.os }}-${{ runner.arch }}-
       - id: build
         run: |
           set -xeou pipefail
-          HEAD_PATH="$(nix build ".#${{ matrix.flakeAttrPath }}" --accept-flake-config --no-link --print-out-paths)"
+          HEAD_PATH="$(nix build ".#${{ matrix.flakeAttrPath }}" --accept-flake-config --out-link "$RUNNER_TEMP/nix-build-head" --print-out-paths)"
           echo "head_path=${HEAD_PATH}" >> "$GITHUB_OUTPUT"
       - if: github.event_name == 'pull_request' || github.event_name == 'push'
         run: |
           set -xeou pipefail
-          trap 'git worktree remove --force ../base' EXIT
+          trap 'git worktree remove --force ../base && rm -f "$RUNNER_TEMP/nix-build-base"' EXIT
           if [ "${{ github.event_name }}" = 'pull_request' ]; then
             BASE_SHA="${{ github.event.pull_request.base.sha }}"
           else
             BASE_SHA="${{ github.event.before }}"
           fi
           git worktree add ../base "$BASE_SHA"
-          BASE_PATH="$(nix build "../base#${{ matrix.flakeAttrPath }}" --accept-flake-config --no-link --print-out-paths)"
+          BASE_PATH="$(nix build "../base#${{ matrix.flakeAttrPath }}" --accept-flake-config --out-link "$RUNNER_TEMP/nix-build-base" --print-out-paths)"
 
           {
             echo "### ${{ matrix.name }}"
@@ -116,9 +113,21 @@ jobs:
         with:
           name: diff-${{ matrix.name }}
           path: diff-${{ matrix.name }}.md
+      - name: Save latest Nix store cache
+        if: matrix.runner == 'macos-latest' && github.event_name == 'push'
+        uses: nix-community/cache-nix-action/save@v7
+        with:
+          primary-key: ${{ steps.nix_cache.outputs.primary-key }}
+          gc-max-store-size-macos: 5G
+          purge: true
+          purge-prefixes: nix-store-v1-${{ runner.os }}-
+          purge-created: 0
+          purge-primary-key: never
       - name: Garbage collect Nix store
         if: ${{ always() && steps.install_nix.outcome == 'success' && matrix.runner == 'beleap-macmini' }}
-        run: nix store gc
+        run: |
+          rm -f "$RUNNER_TEMP/nix-build-head" "$RUNNER_TEMP/nix-build-base"
+          nix store gc
 
   pr-comment:
     if: github.event_name == 'pull_request'
