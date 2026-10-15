@@ -23,10 +23,13 @@
           privoxyConfigDir = "${pkgs.privoxy}/etc";
           tor = "${pkgs.tor}/bin/tor";
         };
-        # pi-permission-modes uses sandbox-exec on macOS and needs these
-        # executables on PATH for its Linux sandbox.
+        # Runtime tools exposed to Pi and its shell; bubblewrap and socat
+        # support pi-permission-modes' Linux sandbox.
         piRuntimePathPackages =
-          [pkgs.ripgrep]
+          [
+            pkgs.ripgrep
+            inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
+          ]
           ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
             pkgs.bubblewrap
             pkgs.socat
@@ -79,6 +82,7 @@
                 "https://github.com/BeLeap/i-have-adhd-and-aphantasia"
                 "npm:@upstash/context7-pi"
                 "npm:pi-btw"
+                "npm:pi-agent-browser-native"
                 "npm:pi-chrome"
                 "npm:pi-notify"
                 "npm:pi-permission-modes"
