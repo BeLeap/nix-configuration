@@ -17,6 +17,7 @@
         pkgs,
         ...
       }: let
+        piPermissionModeConfig = import ./permission-mode.nix;
         torpiLauncherSource = pkgs.replaceVars ./torpi-launcher.mjs {
           curl = "${pkgs.curl}/bin/curl";
           privoxy = "${pkgs.privoxy}/bin/privoxy";
@@ -30,6 +31,8 @@
             pkgs.bubblewrap
             pkgs.socat
           ];
+        # Seed the extension's session-start fallback while preserving any mode
+        # forwarded to child Pi processes.
         pi = pkgs.symlinkJoin {
           name = "pi";
           paths = [inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.pi];
@@ -38,7 +41,10 @@
             wrapProgram $out/bin/pi \
               --set PI_SKIP_VERSION_CHECK 1 \
               --prefix PATH : ${pkgs.lib.makeBinPath piRuntimePathPackages} \
-              --run 'export CONTEXT7_API_KEY="$(${pkgs.coreutils}/bin/cat ${config.age.secrets."context7-api-key".path})"'
+              --run '
+                export PI_PERMISSION_MODE="''${PI_PERMISSION_MODE:-${piPermissionModeConfig.defaultMode}}"
+                export CONTEXT7_API_KEY="$(${pkgs.coreutils}/bin/cat ${config.age.secrets."context7-api-key".path})"
+              '
           '';
         };
         torpi = pkgs.writeShellScriptBin "torpi" ''
@@ -121,7 +127,7 @@
                 };
               };
             };
-            ".pi/agent/permission-mode/permission-mode.json".text = builtins.toJSON (import ./permission-mode.nix);
+            ".pi/agent/permission-mode/permission-mode.json".text = builtins.toJSON piPermissionModeConfig;
             ".pi/agent/extensions/notify-osc.ts".source = ./notify-osc.ts;
             ".pi/agent/extensions/tor-status.ts".source = ./tor-status.ts;
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
