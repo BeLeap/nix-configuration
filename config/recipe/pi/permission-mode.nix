@@ -86,7 +86,7 @@ let
   };
 in {
   "$schema" = "https://raw.githubusercontent.com/wynainfo/pi-permission-modes/v2.2.0/schemas/permission-mode.schema.json";
-  defaultMode = "build";
+  defaultMode = "yolo";
   cycleOrder = [
     "default"
     "plan"
