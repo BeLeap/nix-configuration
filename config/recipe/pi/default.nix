@@ -23,12 +23,9 @@
           privoxyConfigDir = "${pkgs.privoxy}/etc";
           tor = "${pkgs.tor}/bin/tor";
         };
-        # Runtime tools exposed to Pi and its shell; bubblewrap and socat
-        # support pi-permission-modes' Linux sandbox.
+        # Pi uses ripgrep for its grep tool; Linux sandbox modes need bwrap/socat.
         piRuntimePathPackages =
-          [
-            pkgs.ripgrep
-          ]
+          [pkgs.ripgrep]
           ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
             pkgs.bubblewrap
             pkgs.socat
@@ -58,7 +55,6 @@
           packages = [
             pi
             torpi
-            inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
           ];
 
           file = {
@@ -82,7 +78,6 @@
                 "https://github.com/BeLeap/i-have-adhd-and-aphantasia"
                 "npm:@upstash/context7-pi"
                 "npm:pi-btw"
-                "npm:pi-agent-browser-native"
                 "npm:pi-chrome"
                 "npm:pi-notify"
                 "npm:pi-permission-modes"
