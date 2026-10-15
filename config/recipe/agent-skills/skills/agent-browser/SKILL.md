@@ -1,17 +1,16 @@
 ---
 name: agent-browser
 description: >-
-  Use Pi's agent-browser CLI to interact with live websites and web apps, such
-  as navigating, clicking, filling forms, extracting page data, taking
-  screenshots, or testing a browser flow. Not for ordinary web searches or
-  reading local files.
+  Use the agent-browser CLI to automate live websites and web apps, including
+  navigation, interaction, data extraction, screenshots, and browser-flow
+  testing. Not for ordinary web searches or reading local files.
 ---
 
 # agent-browser
 
 Use this skill for browser automation. The `agent-skills` recipe installs
-`agent-browser` into the user's profile, so Pi and other profile shells can run
-it directly.
+`agent-browser` into the user's profile, making it available to agents that
+use that environment.
 
 Before using the CLI, load the workflow guidance that matches the installed
 version:
