@@ -28,7 +28,6 @@
         piRuntimePathPackages =
           [
             pkgs.ripgrep
-            inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
           ]
           ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
             pkgs.bubblewrap
@@ -59,6 +58,7 @@
           packages = [
             pi
             torpi
+            inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.agent-browser
           ];
 
           file = {
