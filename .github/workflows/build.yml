@@ -124,10 +124,19 @@ jobs:
           purge-created: 0
           purge-primary-key: never
       - name: Garbage collect Nix store
+        id: gc
         if: ${{ always() && steps.install_nix.outcome == 'success' && matrix.runner == 'beleap-macmini' }}
+        timeout-minutes: 10
+        continue-on-error: true
         run: |
           rm -f "$RUNNER_TEMP/nix-build-head" "$RUNNER_TEMP/nix-build-base"
           nix store gc
+      - name: Kill lingering Nix GC processes
+        if: ${{ always() && steps.gc.outcome == 'failure' }}
+        run: |
+          pkill -TERM -u "$(id -u)" -f '^nix store gc$' || true
+          sleep 5
+          pkill -KILL -u "$(id -u)" -f '^nix store gc$' || true
 
   pr-comment:
     if: github.event_name == 'pull_request'
