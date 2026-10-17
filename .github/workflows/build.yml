@@ -125,6 +125,8 @@ jobs:
           purge-primary-key: never
       - name: Garbage collect Nix store
         if: ${{ always() && steps.install_nix.outcome == 'success' && matrix.runner == 'beleap-macmini' }}
+        timeout-minutes: 10
+        continue-on-error: true
         run: |
           rm -f "$RUNNER_TEMP/nix-build-head" "$RUNNER_TEMP/nix-build-base"
           nix store gc
