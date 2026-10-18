@@ -134,9 +134,9 @@ jobs:
       - name: Kill lingering Nix GC processes
         if: ${{ always() && steps.gc.outcome == 'failure' }}
         run: |
-          pkill -TERM -u "$(id -u)" -f '^nix store gc$' || true
-          sleep 5
-          pkill -KILL -u "$(id -u)" -f '^nix store gc$' || true
+          /usr/bin/pkill -TERM -u "$(/usr/bin/id -u)" -f '^nix store gc$' || true
+          /bin/sleep 5
+          /usr/bin/pkill -KILL -u "$(/usr/bin/id -u)" -f '^nix store gc$' || true
 
   pr-comment:
     if: github.event_name == 'pull_request'
