@@ -25,6 +25,11 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    nix-mac-app-identity = {
+      url = "github:natsukium/nix-mac-app-identity";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     aerospace-scratchpad = {
       url = "github:cristianoliveira/aerospace-scratchpad/v0.6.0";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

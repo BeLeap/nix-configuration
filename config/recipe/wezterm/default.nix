@@ -1,15 +1,27 @@
 _: {
   darwin = {
     system = [
-      ({pkgs, ...}: {
+      ({
+        inputs,
+        pkgs,
+        ...
+      }: let
+        wezterm = (import inputs.nix-mac-app-identity {inherit pkgs;}).stabilizeApp pkgs.wezterm-upstream;
+      in {
         system.defaults.dock.persistent-apps = [
-          {app = "${pkgs.wezterm-upstream}/Applications/WezTerm.app";}
+          {app = "${wezterm}/Applications/WezTerm.app";}
         ];
       })
     ];
   };
+  darwin.home = [
+    ({pkgs, ...}: {
+      targets.darwin.appIdentity.apps = [pkgs.wezterm-upstream];
+    })
+  ];
   home = [
     ({
+      host,
       lib,
       pkgs,
       ...
@@ -18,9 +30,7 @@ _: {
         builtins.replaceStrings ["@zsh@"] ["${lib.getExe pkgs.zsh}"] (builtins.readFile ./wezterm.lua)
       );
     in {
-      home.packages = [
-        pkgs.wezterm-upstream
-      ];
+      home.packages = lib.optionals (host.backend != "darwin") [pkgs.wezterm-upstream];
 
       xdg.configFile."wezterm/wezterm.lua".source = weztermConfig;
     })
