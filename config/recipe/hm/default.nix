@@ -23,11 +23,15 @@
     home = [
       (
         {
+          inputs,
           pkgs,
           host,
           ...
         }: {
-          imports = [./common.nix];
+          imports = [
+            ./common.nix
+            inputs.nix-mac-app-identity.homeManagerModules.default
+          ];
 
           home = {
             packages = with pkgs; [
