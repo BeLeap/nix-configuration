@@ -13,6 +13,7 @@
       "onedrive"
       "kdeconnect-mac"
       "homerow"
+      "pi-auto-model-personal"
     ];
   }
   {
@@ -28,6 +29,7 @@
       "discord"
       "onedrive"
       "kdeconnect-mac"
+      "pi-auto-model-personal"
     ];
   }
   {
@@ -42,6 +44,7 @@
       "homebrew"
       "work"
       "homerow"
+      "pi-auto-model-work"
     ];
   }
   {
@@ -53,6 +56,7 @@
       "nixos"
       "vm"
       "personal"
+      "pi-auto-model-personal"
     ];
   }
   {
@@ -66,6 +70,7 @@
       "nixos"
       "vm"
       "work"
+      "pi-auto-model-work"
     ];
   }
 ]

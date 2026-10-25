@@ -73,13 +73,6 @@
               enableInstallTelemetry = false;
               tuiMode = "regular";
               theme = "gruvbox";
-              enabledModels = [
-                "gpt-6-astra"
-                "gpt-6.1-sol"
-                "gpt-6-luna"
-                "openrouter/z-ai/glm-5.2"
-                "ollama/qwen3.5:4b"
-              ];
               packages = [
                 "https://github.com/BeLeap/i-have-adhd-and-aphantasia"
                 "npm:@upstash/context7-pi"
