@@ -65,6 +65,7 @@
 
           file = {
             ".pi/agent/AGENTS.md".source = ../../../files/AGENTS.md;
+            ".pi/agent/extensions/project-write-guard.ts".source = ./project-write-guard.ts;
             ".pi/agent/settings.json".text = builtins.toJSON {
               defaultProvider = "openai";
               defaultModel = "gpt-6-luna";

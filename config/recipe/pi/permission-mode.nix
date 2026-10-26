@@ -1,39 +1,63 @@
 let
-  allowWrite = [
-    "."
-    "/tmp"
-    "~/.config/jj"
-  ];
-  denyRead = [
+  allowWrite = ["."];
+  sensitiveReadPaths = [
     "~/.ssh"
+    "~/.ssh/**"
     "~/.aws"
+    "~/.aws/**"
     "~/.gnupg"
-    "~/.pi/agent"
+    "~/.gnupg/**"
+    "~/.azure"
+    "~/.azure/**"
+    "~/.netrc"
+    "~/.git-credentials"
+    "~/.pypirc"
+    "~/.gem/credentials"
+    "~/.vault-token"
+    "~/.password-store"
+    "~/.password-store/**"
+    "~/.pi/agent/auth.json"
+    "~/.pi/agent/oauth.json"
+    "~/.config/gh/hosts.yml"
+    "~/.config/gcloud/application_default_credentials.json"
+    "~/.config/gcloud/credentials.db"
+    "~/.config/gcloud/access_tokens.db"
+    "~/.kube/config"
+    "~/.docker/config.json"
     ".env"
     ".env.*"
     "**/.env"
     "**/.env.*"
     ".envrc*"
     "**/.envrc*"
+    ".direnv"
     ".direnv/**"
+    "**/.direnv"
     "**/.direnv/**"
+    ".npmrc"
+    "**/.npmrc"
+    ".yarnrc.yml"
+    "**/.yarnrc.yml"
+    ".pypirc"
+    "**/.pypirc"
+    "*.pem"
+    "**/*.pem"
+    "*.key"
+    "**/*.key"
+    "**/id_rsa"
+    "**/id_ed25519"
+    "**/id_ecdsa"
+    "**/id_dsa"
   ];
-  pathPermission = {
-    "*" = "allow";
-    ".env" = "deny";
-    ".env.*" = "deny";
-    "**/.env" = "deny";
-    "**/.env.*" = "deny";
-    ".envrc*" = "deny";
-    "**/.envrc*" = "deny";
-    ".direnv/**" = "deny";
-    "**/.direnv/**" = "deny";
-  };
-  externalDirectoryPermission = {
-    "*" = "ask";
-    "~/.agent/skills" = "allow";
-    "~/.agent/skills/**" = "allow";
-  };
+  denyRead = sensitiveReadPaths;
+  pathPermission =
+    {"*" = "allow";}
+    // builtins.listToAttrs (map (path: {
+        name = path;
+        value = "deny";
+      })
+      sensitiveReadPaths);
+  externalDirectoryPermission = "allow";
   askToolPermission = {
     "*" = "ask";
     "resolve-library-id" = "allow";
@@ -56,10 +80,14 @@ let
     external_directory = externalDirectoryPermission;
     inherit tool skill;
     path = pathPermission;
+    read = "allow";
+    grep = "allow";
+    find = "allow";
+    ls = "allow";
   };
   yoloPermission = {
     external_directory = "allow";
-    path = {"*" = "allow";};
+    path = pathPermission;
     read = "allow";
     write = "allow";
     edit = "allow";
@@ -96,7 +124,13 @@ in {
   modes = {
     default = {
       sandbox = makeSandbox true bootstrapNetwork;
-      permission = makePermission askToolPermission askSkillPermission;
+      permission =
+        makePermission askToolPermission askSkillPermission
+        // {
+          bash = "allow";
+          write = "allow";
+          edit = "allow";
+        };
     };
     plan = {
       sandbox = makeSandbox false filteredNetwork;
@@ -104,14 +138,20 @@ in {
     };
     build = {
       sandbox = makeSandbox true filteredNetwork;
-      permission = makePermission allowToolPermission allowSkillPermission;
+      permission =
+        makePermission allowToolPermission allowSkillPermission
+        // {
+          bash = "allow";
+          write = "allow";
+          edit = "allow";
+        };
     };
     yolo = {
       sandbox = {
-        enabled = false;
+        enabled = true;
         writable = true;
+        inherit allowWrite denyRead;
       };
-      bypassProtectedPaths = true;
       permission = yoloPermission;
     };
   };
