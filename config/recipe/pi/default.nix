@@ -129,6 +129,7 @@
             };
             ".pi/agent/permission-mode/permission-mode.json".text = builtins.toJSON piPermissionModeConfig;
             ".pi/agent/extensions/notify-osc.ts".source = ./notify-osc.ts;
+            ".pi/agent/extensions/session-id-footer.ts".source = ./session-id-footer.ts;
             ".pi/agent/extensions/tor-status.ts".source = ./tor-status.ts;
             ".pi/agent/themes/gruvbox.json".source = ./gruvbox.json;
           };
