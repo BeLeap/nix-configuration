@@ -81,6 +81,7 @@
                 "ollama/qwen3.5:4b"
               ];
               packages = [
+                "npm:@graelo/pi-vim"
                 "https://github.com/BeLeap/i-have-adhd-and-aphantasia"
                 "npm:@upstash/context7-pi"
                 "npm:pi-btw"
