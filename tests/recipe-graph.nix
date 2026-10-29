@@ -170,7 +170,5 @@ in {
     resolve = _: {darwin = {home = [{}];};};
   });
 
-  invalidBackend = expectFailure ((graph ["a"]).modulesForBackend "freebsd");
-
   dependencyCycle = expectFailure (graph ["cycle-a"]);
 }

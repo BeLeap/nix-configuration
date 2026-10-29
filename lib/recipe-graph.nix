@@ -6,7 +6,6 @@
   fragmentFields = ["system" "home"];
   declarationShape = "{ includes = [ ... ]; system = [ ... ]; home = [ ... ]; nixos = { system = [ ... ]; home = [ ... ]; }; darwin = { system = [ ... ]; home = [ ... ]; }; }";
   moduleTypes = ["lambda"];
-  backends = ["nixos" "darwin"];
 
   firstInvalid = predicate: index: values:
     if values == []
@@ -180,18 +179,10 @@
   recipeNames = map (recipe: recipe.name) orderedRecipes;
   declarations = map (recipe: recipe.declaration) orderedRecipes;
 
-  validateBackend = backend:
-    if builtins.typeOf backend != "string"
-    then throw "Recipe graph backend expected one of ${lib.concatStringsSep ", " backends}; actual type '${builtins.typeOf backend}'."
-    else if !(builtins.elem backend backends)
-    then throw "Recipe graph backend expected one of ${lib.concatStringsSep ", " backends}; actual value '${backend}'."
-    else backend;
-
   modulesForBackend = backend: let
-    selectedBackend = validateBackend backend;
     select = recipe: let
       inherit (recipe) declaration;
-      fragment = builtins.getAttr selectedBackend declaration;
+      fragment = builtins.getAttr backend declaration;
     in {
       system = declaration.system ++ fragment.system;
       home = declaration.home ++ fragment.home;

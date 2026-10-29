@@ -10,9 +10,11 @@ in
   in {
     nixosConfigurations = acc.nixosConfigurations // system.nixosConfigurations;
     darwinConfigurations = acc.darwinConfigurations // system.darwinConfigurations;
+    homeConfigurations = acc.homeConfigurations // system.homeConfigurations;
   })
   {
     nixosConfigurations = {};
     darwinConfigurations = {};
+    homeConfigurations = {};
   }
   hosts

@@ -12,7 +12,7 @@ in
     platform =
       if effective.backend == "darwin"
       then "${effective.arch}-darwin"
-      else if effective.backend == "nixos"
+      else if builtins.elem effective.backend ["nixos" "home-manager"]
       then "${effective.arch}-linux"
-      else throw "Unsupported host backend '${effective.backend}'; expected 'darwin' or 'nixos'.";
+      else throw "Unsupported host backend '${effective.backend}'; expected 'darwin', 'nixos', or 'home-manager'.";
   }
