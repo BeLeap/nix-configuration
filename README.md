@@ -1,6 +1,6 @@
 # nix-configuration
 
-Personal Nix flake for macOS (`nix-darwin`) and NixOS hosts.
+Personal Nix flake for macOS (`nix-darwin`), NixOS, and standalone Home Manager hosts.
 
 ## For Coding Agents
 
@@ -12,7 +12,9 @@ Use this section to make changes that are small and easy to review.
 - Generated outputs:
   - `darwinConfigurations.<host>.system`
   - `nixosConfigurations.<host>.*`
+  - `homeConfigurations.<username>@<host>`
 - Host inventory: `config/hosts.nix`
+- Home Manager-only hosts use `backend = "home-manager"` and an explicit platform such as `platform = "x86_64-linux"`. Their home directory defaults to `/home/<username>` on Linux or `/Users/<username>` on Darwin; set `homeDirectory` to override it.
 - Default recipe set: `config/recipe/default/default.nix`
 - Recipe assembly: `config/recipe-assembly.nix`
 
@@ -70,6 +72,8 @@ graph order to set module precedence.
   - `sudo nix --extra-experimental-features "nix-command flakes" run "nix-darwin/master#darwin-rebuild" -- switch --flake ".#<darwin-host>"`
 - Apply a macOS configuration after setup:
   - `nh darwin switch`
+- Apply a standalone Home Manager host:
+  - `home-manager switch --flake .#<username>@<host>`
 
 ### Change Workflow (Agent-Friendly)
 

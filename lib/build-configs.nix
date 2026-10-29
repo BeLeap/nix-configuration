@@ -3,21 +3,63 @@
   lib,
 }: hosts: let
   mkSystem = import ./mkSystem.nix {inherit inputs lib;};
+  overlays = import ../config/recipe/overlay/overlays.nix;
 in
   lib.foldr
   (host: acc: let
-    system = mkSystem {inherit host;};
+    isHomeManagerOnly = host.backend == "home-manager";
+    isDarwin = lib.hasSuffix "-darwin" host.platform;
+    system =
+      if isHomeManagerOnly
+      then {
+        nixosConfigurations = {};
+        darwinConfigurations = {};
+      }
+      else mkSystem {inherit host;};
     systemConfiguration =
       if host.backend == "nixos"
       then system.nixosConfigurations.${host.name}
-      else system.darwinConfigurations.${host.name};
+      else if host.backend == "darwin"
+      then system.darwinConfigurations.${host.name}
+      else null;
     homeManager =
-      if host.backend == "nixos"
-      then inputs.home-manager
-      else inputs.home-manager-darwin;
+      if isDarwin
+      then inputs.home-manager-darwin
+      else inputs.home-manager;
+    pkgs =
+      if isHomeManagerOnly
+      then
+        import
+        (
+          if isDarwin
+          then inputs.nixpkgs-darwin
+          else inputs.nixpkgs
+        )
+        {
+          system = host.platform;
+          config = import ./nixpkgs-config.nix;
+          overlays = overlays {inherit inputs;};
+        }
+      else systemConfiguration.pkgs;
+    recipeBackend =
+      if isHomeManagerOnly
+      then
+        if isDarwin
+        then "darwin"
+        else "nixos"
+      else host.backend;
     homeModules = import ../config/recipe-modules.nix {
       inherit inputs host;
-      backend = host.backend;
+      backend = recipeBackend;
+    };
+    standaloneHomeModule = lib.optional isHomeManagerOnly {
+      home.homeDirectory =
+        host.homeDirectory
+          or (
+          if isDarwin
+          then "/Users/${host.usernameLower}"
+          else "/home/${host.usernameLower}"
+        );
     };
   in {
     nixosConfigurations = acc.nixosConfigurations // system.nixosConfigurations;
@@ -26,9 +68,9 @@ in
       acc.homeConfigurations
       // {
         "${host.usernameLower}@${host.name}" = homeManager.lib.homeManagerConfiguration {
-          pkgs = systemConfiguration.pkgs;
+          inherit pkgs;
           extraSpecialArgs = {inherit inputs host;};
-          modules = homeModules.home;
+          modules = homeModules.home ++ standaloneHomeModule;
         };
       };
   })

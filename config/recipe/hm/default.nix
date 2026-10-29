@@ -38,7 +38,7 @@
               mas
             ];
 
-            homeDirectory = "/Users/${host.usernameLower}";
+            homeDirectory = host.homeDirectory or "/Users/${host.usernameLower}";
 
             file.".config/nixpkgs/config.nix".text = ''
               {

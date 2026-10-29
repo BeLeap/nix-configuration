@@ -30,7 +30,7 @@ _: {
         builtins.replaceStrings ["@zsh@"] ["${lib.getExe pkgs.zsh}"] (builtins.readFile ./wezterm.lua)
       );
     in {
-      home.packages = lib.optionals (host.backend != "darwin") [pkgs.wezterm-upstream];
+      home.packages = lib.optionals (!(lib.hasSuffix "-darwin" host.platform)) [pkgs.wezterm-upstream];
 
       xdg.configFile."wezterm/wezterm.lua".source = weztermConfig;
     })

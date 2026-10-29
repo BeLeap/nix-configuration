@@ -25,10 +25,7 @@ _: {
         gc = {};
       };
 
-      nixpkgs = {
-        config.allowUnfree = true;
-        config.android_sdk.accept_license = true;
-      };
+      nixpkgs.config = import ../../../lib/nixpkgs-config.nix;
     })
   ];
 
