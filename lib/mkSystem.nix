@@ -17,4 +17,14 @@ in {
       inherit specialArgs modules;
     };
   };
+  homeConfigurations = lib.optionalAttrs (host.backend == "home-manager") {
+    "${host.name}" = inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = import inputs.nixpkgs {
+        system = host.platform;
+        config.allowUnfree = true;
+      };
+      extraSpecialArgs = specialArgs;
+      inherit modules;
+    };
+  };
 }
