@@ -59,6 +59,7 @@
 
         home = {
           packages = [
+            pkgs.nodejs
             pi
             torpi
           ];
