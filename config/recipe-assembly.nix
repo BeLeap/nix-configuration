@@ -24,7 +24,7 @@
     roots = host.recipes;
     resolve = resolveRecipe;
   };
-  modules = graph.modulesForBackend backend;
+  modules = graph.modulesForBackend (if backend == "home-manager" then "nixos" else backend);
 
   # Compatibility ordering is preorder depth-first traversal: roots retain
   # host order, each recipe precedes its includes, includes retain declaration
