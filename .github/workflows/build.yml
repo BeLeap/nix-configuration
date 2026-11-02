@@ -52,16 +52,17 @@ jobs:
     needs: check
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         include:
           - name: "beleap-m1air"
-            runner: macos-latest
+            runner: beleap-macmini
             flakeAttrPath: "darwinConfigurations.beleap-m1air.system"
           - name: "beleap-macmini"
-            runner: macos-latest
+            runner: beleap-macmini
             flakeAttrPath: "darwinConfigurations.beleap-macmini.system"
           - name: "csjang-m3pro"
-            runner: macos-latest
+            runner: beleap-macmini
             flakeAttrPath: "darwinConfigurations.csjang-m3pro.system"
           - name: "vm-arm64-Darwin-personal"
             runner: beleap-macmini
@@ -89,7 +90,6 @@ jobs:
           nix store gc
           df -h /nix/store
       - name: Restore Nix store cache
-        if: matrix.runner == 'macos-latest'
         id: nix_cache
         uses: nix-community/cache-nix-action/restore@v7
         with:
@@ -132,13 +132,13 @@ jobs:
           name: diff-${{ matrix.name }}
           path: diff-${{ matrix.name }}.md
       - name: Save latest Nix store cache
-        if: matrix.runner == 'macos-latest' && github.event_name == 'push'
+        if: github.event_name == 'push'
         uses: nix-community/cache-nix-action/save@v7
         with:
           primary-key: ${{ steps.nix_cache.outputs.primary-key }}
           gc-max-store-size-macos: 5G
           purge: true
-          purge-prefixes: nix-store-v1-${{ runner.os }}-
+          purge-prefixes: nix-store-v1-${{ runner.os }}-${{ runner.arch }}-
           purge-created: 0
           purge-primary-key: never
       - name: Garbage collect Nix store
