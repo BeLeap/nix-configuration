@@ -37,7 +37,6 @@
           pkgs.unstable.betterdisplay
           pkgs.element-desktop
           pkgs.minute
-          inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.chatgpt
         ];
       })
     ];
