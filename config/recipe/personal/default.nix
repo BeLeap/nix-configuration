@@ -1,4 +1,4 @@
-{inputs, ...}: {
+_: {
   includes = [
     "1password"
     "joplin"
