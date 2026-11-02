@@ -7,7 +7,9 @@ _: {
         settings = {
           trusted-users = ["@admin"];
           experimental-features = "nix-command flakes";
-          min-free = "1M";
+          # Start collecting before large downloads exhaust the store filesystem.
+          min-free = 8 * 1024 * 1024 * 1024;
+          max-free = 16 * 1024 * 1024 * 1024;
           accept-flake-config = true;
 
           extra-substituters = [
