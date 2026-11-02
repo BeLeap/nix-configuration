@@ -77,6 +77,17 @@ jobs:
           fetch-depth: 0
       - id: install_nix
         uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            min-free = 8589934592
+            max-free = 17179869184
+      - name: Garbage collect before build
+        if: matrix.runner == 'beleap-macmini'
+        timeout-minutes: 10
+        run: |
+          rm -f "$RUNNER_TEMP/nix-build-head" "$RUNNER_TEMP/nix-build-base"
+          nix store gc
+          df -h /nix/store
       - name: Restore Nix store cache
         if: matrix.runner == 'macos-latest'
         id: nix_cache
@@ -89,6 +100,13 @@ jobs:
           set -xeou pipefail
           HEAD_PATH="$(nix build ".#${{ matrix.flakeAttrPath }}" --accept-flake-config --out-link "$RUNNER_TEMP/nix-build-head" --print-out-paths)"
           echo "head_path=${HEAD_PATH}" >> "$GITHUB_OUTPUT"
+      - name: Garbage collect before comparison build
+        if: matrix.runner == 'beleap-macmini' && (github.event_name == 'pull_request' || github.event_name == 'push')
+        timeout-minutes: 10
+        run: |
+          # Keep nix-build-head rooted for the closure comparison.
+          nix store gc
+          df -h /nix/store
       - if: github.event_name == 'pull_request' || github.event_name == 'push'
         run: |
           set -xeou pipefail
