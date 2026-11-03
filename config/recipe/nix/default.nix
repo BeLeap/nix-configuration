@@ -9,7 +9,7 @@ _: {
           experimental-features = "nix-command flakes";
           # Start collecting before large downloads exhaust the store filesystem.
           min-free = 8 * 1024 * 1024 * 1024;
-          max-free = 64 * 1024 * 1024 * 1024;
+          max-free = 128 * 1024 * 1024 * 1024;
           accept-flake-config = true;
 
           extra-substituters = [
