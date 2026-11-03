@@ -17,8 +17,8 @@ _: {
           boot.binfmt.emulatedSystems = ["x86_64-linux"];
           virtualisation.darwin-builder = {
             diskSize = 64 * 1024;
-            min-free = 8 * 1024 * 1024 * 1024;
-            max-free = 16 * 1024 * 1024 * 1024;
+            min-free = 56 * 1024 * 1024 * 1024;
+            max-free = 60 * 1024 * 1024 * 1024;
           };
         };
       };
