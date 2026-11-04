@@ -1,7 +1,10 @@
 _: {
   system = [
-    (_: {
+    ({pkgs, ...}: {
       nix = {
+        # Nix 2.34 can garbage-collect paths still needed by active builds.
+        package = pkgs.nixVersions.latest;
+
         optimise.automatic = true;
 
         settings = {
