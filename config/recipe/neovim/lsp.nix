@@ -73,6 +73,7 @@ in {
             codespell.enable = true;
             deadnix.enable = true;
             editorconfig_checker.enable = true;
+            gitleaks.enable = true;
             golangci_lint.enable = true;
             statix.enable = true;
           };
