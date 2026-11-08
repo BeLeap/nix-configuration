@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+disk=/dev/nvme0n1
+efi_partition=/dev/nvme0n1p1
+root_partition=/dev/nvme0n1p2
+
+fail() {
+  printf 'vm/bootstrap0: %s\n' "$*" >&2
+  exit 1
+}
+
+[[ "$(findmnt -n -o FSTYPE -T /)" == tmpfs ]] || fail 'Boot from the NixOS installer ISO first.'
+[[ "$(findmnt -n -o FSTYPE -T /iso)" == iso9660 ]] || fail 'The NixOS installer ISO is not mounted at /iso.'
+[[ -d /sys/firmware/efi ]] || fail 'Boot the installer in UEFI mode.'
+[[ -b "$disk" ]] || fail "$disk does not exist."
+[[ "$(lsblk -dnro TYPE "$disk" | tr -d '[:space:]')" == disk ]] || fail "$disk is not a whole disk."
+
+for tool in parted partprobe udevadm mkfs.fat mkfs.ext4 blkid nixos-generate-config nixos-install; do
+  command -v "$tool" >/dev/null || fail "Required command is missing: $tool"
+done
+
+mounted_partitions="$(lsblk -nrpo MOUNTPOINT "$disk" | tr -d '[:space:]')"
+[[ -z "$mounted_partitions" ]] || fail "$disk has mounted partitions."
+if mountpoint -q /mnt; then
+  fail '/mnt is already mounted.'
+fi
+
+printf 'Target disk and current mounts:\n'
+lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS "$disk"
+read -r -p 'Type WIPE /dev/nvme0n1 to erase this VM disk: ' confirmation </dev/tty
+[[ "$confirmation" == 'WIPE /dev/nvme0n1' ]] || fail 'Disk confirmation did not match.'
+
+parted --script "$disk" mklabel gpt
+parted --script "$disk" mkpart ESP fat32 1MiB 513MiB
+parted --script "$disk" set 1 esp on
+parted --script "$disk" mkpart primary ext4 513MiB 100%
+partprobe "$disk"
+udevadm settle
+[[ -b "$efi_partition" ]] || fail "Partition did not appear: $efi_partition"
+[[ -b "$root_partition" ]] || fail "Partition did not appear: $root_partition"
+
+mkfs.fat -F 32 -n BOOT "$efi_partition"
+mkfs.ext4 -F -L nixos "$root_partition"
+udevadm trigger --subsystem-match=block
+udevadm settle
+[[ "$(blkid -s LABEL -o value "$efi_partition")" == BOOT ]] || fail 'EFI label is not BOOT.'
+[[ "$(blkid -s LABEL -o value "$root_partition")" == nixos ]] || fail 'Root label is not nixos.'
+mount "$root_partition" /mnt
+mkdir -p /mnt/boot
+mount "$efi_partition" /mnt/boot
+
+nixos-generate-config --root /mnt
+cat > /mnt/etc/nixos/configuration.nix <<'NIXOS'
+{...}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./bootstrap.nix
+  ];
+}
+NIXOS
+cat > /mnt/etc/nixos/bootstrap.nix <<'NIXOS'
+{...}: {
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  networking.hostName = "nixos";
+  networking.interfaces.enp2s0.useDHCP = true;
+  networking.resolvconf.dnsExtensionMechanism = false;
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "yes";
+    };
+  };
+  system.stateVersion = "25.05";
+}
+NIXOS
+
+nixos-install --root /mnt
+sync
+umount /mnt/boot
+umount /mnt
+rm -f -- "$0"
+printf '\nBootstrap installed. Eject the ISO and boot from the VM disk.\n'
+printf 'Then run: NIXADDR=<guest-ip> NIXUSER=root make vm/switch\n'

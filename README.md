@@ -66,8 +66,18 @@ graph order to set module precedence.
 - Run the personal x86_64 NixOS VM:
   - `bin/run-vm personal x86_64`
 
+### VMware Fusion Guest
+
+- Boot the ARM64 NixOS minimal ISO in UEFI mode. Fusion exposes the VM disk as `/dev/nvme0n1`.
+- Install a minimal system with `make vm/bootstrap0 NIXADDR=<installer-ip> ERASE_VM_DISK=/dev/nvme0n1`. The target formats that disk, creates an EFI partition labeled `BOOT` and an ext4 root labeled `nixos`, and creates no swap. It requires the Make variable and a typed confirmation in the guest. `nixos-install` prompts for a root password.
+- Eject the ISO and boot from the installed disk. Apply the first system configuration with `make vm/switch NIXADDR=<guest-ip> NIXUSER=root`.
+- Later switches use the configured `beleap` SSH key: `make vm/switch NIXADDR=<guest-ip>`.
+- The Mac evaluates the flake. The guest builds and activates it. Use `make vm/copy NIXADDR=<guest-ip>` only for a separate repository copy.
+
 ### Local Apply Commands
 
+- Select a macOS host for Makefile-based switching:
+  - `make switch NIXNAME=<darwin-host>`
 - Apply the first macOS configuration:
   - `sudo nix --extra-experimental-features "nix-command flakes" run "nix-darwin/master#darwin-rebuild" -- switch --flake ".#<darwin-host>"`
 - Apply a macOS configuration after setup:

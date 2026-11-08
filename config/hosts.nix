@@ -56,6 +56,17 @@
     ];
   }
   {
+    name = "vmware-arm64-Darwin-personal";
+    arch = "aarch64";
+    backend = "nixos";
+    recipes = [
+      "default"
+      "nixos"
+      "vmware"
+      "personal"
+    ];
+  }
+  {
     name = "vm-x86_64-Darwin-personal";
     arch = "x86_64";
     backend = "nixos";
