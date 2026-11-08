@@ -63,6 +63,8 @@ graph order to set module precedence.
   - `nix build ".#darwinConfigurations.<darwin-host>.system" --accept-flake-config --no-link`
 - Build a NixOS host VM without linking the result:
   - `nix build ".#nixosConfigurations.<nixos-host>.config.system.build.vm" --accept-flake-config --no-link`
+- Run the personal x86_64 NixOS VM:
+  - `bin/run-vm personal x86_64`
 
 ### Local Apply Commands
 

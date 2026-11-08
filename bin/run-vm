@@ -1,3 +1,22 @@
-name=$1
+#!/usr/bin/env bash
+set -euo pipefail
 
-nix --accept-flake-config run ".#nixosConfigurations.vm-$(uname -m)-$(uname -s)-$name.config.system.build.vm"
+if (($# < 1 || $# > 2)); then
+  printf 'Usage: %s <name> [architecture]\n' "${0##*/}" >&2
+  exit 2
+fi
+
+name=$1
+architecture=${2:-$(uname -m)}
+system=$(uname -s)
+
+case "$architecture" in
+  arm64|x86_64) ;;
+  *)
+    printf 'Unsupported VM architecture: %s\n' "$architecture" >&2
+    printf 'Supported architectures: arm64, x86_64\n' >&2
+    exit 2
+    ;;
+esac
+
+nix --accept-flake-config run ".#nixosConfigurations.vm-${architecture}-${system}-${name}.config.system.build.vm"

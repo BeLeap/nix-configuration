@@ -56,6 +56,17 @@
     ];
   }
   {
+    name = "vm-x86_64-Darwin-personal";
+    arch = "x86_64";
+    backend = "nixos";
+    recipes = [
+      "default"
+      "nixos"
+      "vm"
+      "personal"
+    ];
+  }
+  {
     name = "vm-arm64-Darwin-work";
     username = "cs.jang";
     email = "cs.jang@toss.im";

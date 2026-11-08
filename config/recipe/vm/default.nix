@@ -5,9 +5,9 @@
 }: {
   nixos = {
     system = [
-      (_: {
+      ({lib, ...}: {
         virtualisation.host.pkgs = import inputs.nixpkgs {system = "aarch64-darwin";};
-        boot.binfmt.emulatedSystems = [
+        boot.binfmt.emulatedSystems = lib.optionals (host.arch == "aarch64") [
           "x86_64-linux"
         ];
         virtualisation.sharedDirectories = {
