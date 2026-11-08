@@ -17,3 +17,10 @@
 - The x86_64 system evaluated as `x86_64-linux`. Its binfmt list is empty, while the ARM guest retains `x86_64-linux` emulation.
 - `nix build '.#nixosConfigurations.vm-x86_64-Darwin-personal.config.system.build.vm' --accept-flake-config --no-link` timed out after 900 seconds before producing the VM artifact.
 - The build planned 761 derivations. Nix ignored substitutes from `beleap-nix-overlay.cachix.org` because their signatures did not match the configured trusted keys.
+
+## Cachix signature warning
+
+- Cachix currently reports `beleap-nix-overlay.cachix.org-1:SJdfYkwp5t+YoeraOtUcqyKIxvnWQ1GdiNoC21F+En0=` as the cache public key.
+- `flake.nix` and `/etc/nix/nix.conf` already contained that key. `~/.config/nix/nix.conf` instead contained the stale key ending in `ohTqgCzvf6utSvpz73lPpOIPkRo9L5DZT3ON0F4f7Kc=`.
+- Replaced the stale user-level key with the current Cachix key.
+- `nix config show --json` reports the current key. `nix copy --from https://beleap-nix-overlay.cachix.org /nix/store/bjspal6x43134fyrsn5ykqazxrpvjvmx-zvariant-4.2.0` accepted a previously warned path without a signature warning.
