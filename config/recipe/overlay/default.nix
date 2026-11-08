@@ -33,6 +33,14 @@ _: {
             };
           };
           discord = withoutBundledModules prev.discord;
+          direnv-instant = (prev.callPackage "${inputs.direnv-instant}/default.nix" {}).overrideAttrs (old: {
+            checkFlags =
+              (old.checkFlags or [])
+              ++ prev.lib.optionals (prev.stdenv.hostPlatform.system == "x86_64-linux") [
+                # The x86_64 Linux builder fails to create the real tmux watch pane.
+                "--skip=blocking_envrc_calls_tmux"
+              ];
+          });
           inherit unstable master;
         })
         (import ./pkgs/overlay.nix {

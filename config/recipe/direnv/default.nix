@@ -22,6 +22,7 @@
           direnv-overlay.enable = true;
           direnv-instant = {
             enable = true;
+            package = pkgs.direnv-instant;
             settings = {
               mux_delay = 1;
             };
