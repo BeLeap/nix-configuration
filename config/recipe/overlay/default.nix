@@ -25,6 +25,11 @@ _: {
             inherit (prev) config;
             inherit (prev.stdenv.hostPlatform) system;
           };
+          # The configured stdenv changes these utilities' hashes. Use the cached upstream derivations.
+          cachedPkgs = import inputs.nixpkgs {
+            inherit (prev.stdenv.hostPlatform) system;
+            inherit (prev) config;
+          };
         in {
           python313 = prev.python313.override {
             packageOverrides = _: pyp: {
@@ -37,10 +42,20 @@ _: {
             checkFlags =
               (old.checkFlags or [])
               ++ prev.lib.optionals (prev.stdenv.hostPlatform.system == "x86_64-linux") [
-                # The x86_64 Linux builder fails to create the real tmux watch pane.
+                # The x86_64 Linux builder cannot create real tmux watch panes.
                 "--skip=blocking_envrc_calls_tmux"
+                "--skip=input_forwarded_to_direnv_in_async_mode"
+                "--skip=watch_propagates_terminal_size"
               ];
           });
+          coreutils =
+            if prev.stdenv.hostPlatform.system == "x86_64-linux"
+            then cachedPkgs.coreutils
+            else prev.coreutils;
+          findutils =
+            if prev.stdenv.hostPlatform.system == "x86_64-linux"
+            then cachedPkgs.findutils
+            else prev.findutils;
           inherit unstable master;
         })
         (import ./pkgs/overlay.nix {
