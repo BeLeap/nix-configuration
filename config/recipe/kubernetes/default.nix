@@ -2,18 +2,27 @@ _: {
   home = [
     (
       {pkgs, ...}: {
-        home.packages = with pkgs; [
-          kubectl
-          kubectl-rexec
-          kubelogin-oidc
-          kubectl-node-shell
-          kubectl-view-secret
-          kubectl-view-allocations
-          kubectl-sniff
-          kubectl-check
-          kubernetes-helm
-          kind
-        ];
+        home = {
+          packages = with pkgs; [
+            kubectl
+            kubectl-rexec
+            kubelogin-oidc
+            kubectl-node-shell
+            kubectl-view-secret
+            kubectl-view-allocations
+            kubectl-sniff
+            kubectl-check
+            kubernetes-helm
+            kind
+          ];
+
+          file.".kube/kuberc".source = ./kuberc.yaml;
+
+          shellAliases = {
+            k = "kubectl-check";
+            ku = "k9s";
+          };
+        };
 
         programs.k9s = {
           enable = true;
@@ -30,11 +39,6 @@ _: {
           skins = {
             gruvbox = ./gruvbox.yaml;
           };
-        };
-
-        home.shellAliases = {
-          k = "kubectl-check";
-          ku = "k9s";
         };
       }
     )
