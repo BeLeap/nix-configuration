@@ -74,6 +74,7 @@ _: {
             gettext
             minio-client
             ulid
+            unstable.utm
           ];
 
           shellAliases = {
