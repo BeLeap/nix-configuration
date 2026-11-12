@@ -71,11 +71,11 @@
         "wezterm-flake": "wezterm-flake"
       },
       "locked": {
-        "lastModified": 1794328162,
-        "narHash": "sha256-Wlm8vgFNawTMUmQkGyKz7SNe3Jlqhff9Uaop2S8W17M=",
+        "lastModified": 1794447277,
+        "narHash": "sha256-9+/iDYFVpvCM9e2k1Ls2zeeHIZTL43iTF6Y8PGocoH0=",
         "owner": "BeLeap",
         "repo": "nix-overlay",
-        "rev": "08c5be4703eb9c3b05ffa2b35a757cb7678e86b0",
+        "rev": "6acbdd1972778f35f5bb95701445b564384dede1",
         "type": "github"
       },
       "original": {
