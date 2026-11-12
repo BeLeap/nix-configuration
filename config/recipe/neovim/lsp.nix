@@ -42,6 +42,30 @@ in {
         '';
       };
     };
+    filetype = {
+      pattern = {
+        ".*%.yaml".__raw = ''
+          function(path)
+            local dir = vim.fs.dirname(path)
+            while dir do
+              if vim.uv.fs_stat(vim.fs.joinpath(dir, "Chart.yaml")) then
+                return "helm"
+              end
+
+              local parent = vim.fs.dirname(dir)
+              if parent == dir then
+                break
+              end
+              dir = parent
+            end
+
+            if path:find("playbook", 1, true) then
+              return "yaml.ansible"
+            end
+          end
+        '';
+      };
+    };
     keymaps = [
       {
         mode = "n";
