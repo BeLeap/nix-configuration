@@ -1,10 +1,19 @@
 theme "gruvbox-dark"
 default_shell "@zsh@"
+scrollback_editor "@nvim@"
 default_mode "locked"
 host_notification_protocol "osc9"
 session_serialization false
 show_startup_tips false
 simplified_ui true
+
+plugins {
+    config-reloader location="@reload-config-plugin@" {
+        permissions {
+            Reconfigure
+        }
+    }
+}
 
 keybinds clear-defaults=true {
     locked {
@@ -15,7 +24,14 @@ keybinds clear-defaults=true {
         bind "Ctrl a" { Write 1; SwitchToMode "Locked"; }
         bind "Esc" { SwitchToMode "Locked"; }
         bind "n" { NewPane; SwitchToMode "Locked"; }
-        bind "r" { MovePane; SwitchToMode "Locked"; }
+        bind "m" { MovePane; SwitchToMode "Locked"; }
+        bind "r" {
+            MessagePlugin "config-reloader" {
+                name "reload-config"
+                payload "reload"
+            };
+            SwitchToMode "Locked";
+        }
         bind "c" { NewTab; SwitchToMode "Locked"; }
         bind "%" { NewPane "Right"; SwitchToMode "Locked"; }
         bind "\"" { NewPane "Down"; SwitchToMode "Locked"; }
