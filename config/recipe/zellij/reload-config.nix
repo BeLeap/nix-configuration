@@ -26,7 +26,7 @@
   };
   wasmRustPlatform = pkgs.makeRustPlatform {
     rustc = wasmRustc;
-    cargo = prebuiltRust.cargo;
+    inherit (prebuiltRust) cargo;
   };
 in
   wasmRustPlatform.buildRustPackage {
