@@ -4,6 +4,7 @@ default_mode "locked"
 host_notification_protocol "osc9"
 session_serialization false
 show_startup_tips false
+simplified_ui true
 
 keybinds clear-defaults=true {
     locked {
