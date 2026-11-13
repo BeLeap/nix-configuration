@@ -346,11 +346,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789008163,
-        "narHash": "sha256-JjZhq7tf9wIMcJ0aHp8Z6sMHTU3kjOlJweHFTbRrrdg=",
+        "lastModified": 1794661221,
+        "narHash": "sha256-Rkp20MrsYphmMDU4O/2QJCMl0xrKr0+tWsTeypfcimU=",
         "owner": "BeLeap",
         "repo": "hanadia",
-        "rev": "1d21fa5e25d462b0767ec9e2872cd398dd933cb6",
+        "rev": "6808eeba53c6737bdb31d3403fa40dba1db6b7e2",
         "type": "github"
       },
       "original": {
