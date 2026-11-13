@@ -10,6 +10,7 @@ _: {
       );
     in {
       home.packages = [pkgs.unstable.zellij];
+      home.sessionVariables.ZELLIJ_SOCKET_DIR = "\${TMPDIR%/}/zellij-\${UID}";
       xdg.configFile."zellij/config.kdl".source = zellijConfig;
     })
   ];
