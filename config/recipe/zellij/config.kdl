@@ -56,6 +56,8 @@ keybinds clear-defaults=true {
         bind "k" "Up" { ScrollUp; }
         bind "Ctrl f" "PageDown" { PageScrollDown; }
         bind "Ctrl b" "PageUp" { PageScrollUp; }
+        bind "Ctrl u" { HalfPageScrollUp; }
+        bind "Ctrl d" { HalfPageScrollDown; }
         bind "g" { ScrollToTop; }
         bind "Shift g" { ScrollToBottom; SwitchToMode "Locked"; }
     }
