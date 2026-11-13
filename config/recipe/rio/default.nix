@@ -69,6 +69,7 @@ in {
           size = 16.0;
         };
         navigation.mode = "Plain";
+        window.mode = "Maximized";
         panel.padding = [
           0
           8
