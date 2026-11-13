@@ -30,9 +30,24 @@ if [[ -z "$session_name" ]]; then
 fi
 
 if [[ -n "${ZELLIJ_SESSION_NAME:-}" ]]; then
-  if ! zellij attach --create-background "$session_name"; then
-    printf 'wts: failed to create or find Zellij session %s\n' "$session_name" >&2
+  if ! sessions=$(zellij list-sessions --short --no-formatting); then
+    printf 'wts: failed to list Zellij sessions\n' >&2
     exit 1
+  fi
+
+  session_exists=false
+  while IFS= read -r existing_session; do
+    if [[ "$existing_session" == "$session_name" ]]; then
+      session_exists=true
+      break
+    fi
+  done <<< "$sessions"
+
+  if [[ "$session_exists" == false ]]; then
+    if ! zellij attach --create-background "$session_name"; then
+      printf 'wts: failed to create Zellij session %s\n' "$session_name" >&2
+      exit 1
+    fi
   fi
 
   if ! zellij action switch-session --cwd "$workspace_dir" "$session_name"; then
