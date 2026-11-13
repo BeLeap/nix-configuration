@@ -53,3 +53,8 @@
 - Built the stabilized Rio app and verified its code signature with designated identifier `com.raphaelamorim.rio`.
 - `nix build .#darwinConfigurations.beleap-m1air.system --accept-flake-config` passed.
 - The Darwin system remains unapplied.
+
+## Disable Zellij session recovery
+
+- Set `session_serialization false` in `config/recipe/zellij/config.kdl` to disable session serialization and resurrection.
+- Zellij 0.45.1 `setup --check` accepted the generated configuration.
