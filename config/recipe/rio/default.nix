@@ -76,7 +76,7 @@ in {
           8
         ];
         shell = {
-          program = lib.getExe pkgs.zellij;
+          program = lib.getExe pkgs.unstable.zellij;
           args = [
             "attach"
             "--create"

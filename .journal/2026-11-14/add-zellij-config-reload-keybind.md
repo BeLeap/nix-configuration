@@ -30,3 +30,10 @@
 - This host/plugin version mismatch is the likely cause of the plugin load error. I did not restart `sp` because that could terminate active shell work.
 - Alejandra passed for both Zellij Nix files. Darwin system evaluation and build passed.
 - Zellij 0.46.0 `setup --check` accepted the generated config. `file` identified the plugin artifact as WebAssembly.
+
+## Follow-up: align Rio's server version with the plugin
+
+- Rio's generated config used the stable `pkgs.zellij` package, which resolved to Zellij 0.45.1. The plugin uses `zellij-tile` 0.46.0.
+- Changed Rio to launch `pkgs.unstable.zellij`, matching the plugin host version.
+- The generated Rio config now runs Zellij 0.46.0. The Darwin system build and Alejandra checks passed.
+- The active `sp` process still runs Zellij 0.45.1. I did not restart it because that could terminate active shell work.
