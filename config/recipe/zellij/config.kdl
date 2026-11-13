@@ -51,6 +51,7 @@ keybinds clear-defaults=true {
 
     scroll {
         bind "q" "Esc" { SwitchToMode "Locked"; }
+        bind "e" { EditScrollback; SwitchToMode "Locked"; }
         bind "j" "Down" { ScrollDown; }
         bind "k" "Up" { ScrollUp; }
         bind "Ctrl f" "PageDown" { PageScrollDown; }
