@@ -23,6 +23,14 @@ _: {
               format = "$shlvl$jobs$directory$character";
               right_format = "$all";
 
+              # Avoid emoji variation selectors that Zsh and Rio measure differently.
+              nix_shell = {
+                symbol = " ";
+              };
+              aws = {
+                symbol = " ";
+              };
+
               kubernetes = {
                 disabled = false;
               };
@@ -55,7 +63,7 @@ _: {
                 disabled = false;
                 symbols = {
                   Macos = "🍎";
-                  NixOS = "❄️";
+                  NixOS = "";
                 };
               };
 

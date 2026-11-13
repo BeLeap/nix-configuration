@@ -23,8 +23,8 @@
           };
 
           initContent = ''
-            # Let Starship's right prompt use the terminal's final column.
-            ZLE_RPROMPT_INDENT=0
+            # Keep the terminal's final column clear to avoid right-edge wrapping.
+            ZLE_RPROMPT_INDENT=1
 
             # Safety
             setopt noclobber nomatch
