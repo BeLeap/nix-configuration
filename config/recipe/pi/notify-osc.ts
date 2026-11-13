@@ -2,7 +2,6 @@ import type {
   ExtensionAPI,
   ExtensionContext,
 } from "@earendil-works/pi-coding-agent";
-import { execFileSync } from "node:child_process";
 
 const PATCHED_NOTIFY = Symbol.for("beleap.notify-osc.patched");
 const PATCHED_SELECT = Symbol.for("beleap.notify-osc.select-patched");
@@ -11,10 +10,6 @@ const OSC = "\x1b]";
 const BEL = "\x07";
 
 type NotifyLevel = "info" | "warning" | "error";
-type WezTermPane = {
-  pane_id?: number;
-  workspace?: string;
-};
 type PatchableUi = ExtensionContext["ui"] & {
   [PATCHED_NOTIFY]?: boolean;
   [PATCHED_SELECT]?: boolean;
@@ -25,51 +20,15 @@ function sanitizeOscField(value: string): string {
   return value.replace(/[\x00-\x1f\x7f;]/g, " ").trim();
 }
 
-function weztermWorkspace(): string | undefined {
-  const paneId = process.env.WEZTERM_PANE;
-  if (!paneId) {
-    return undefined;
-  }
-
-  try {
-    const output = execFileSync(
-      "wezterm",
-      ["cli", "list", "--format", "json"],
-      {
-        encoding: "utf8",
-      },
-    );
-    const panes: unknown = JSON.parse(output);
-    if (!Array.isArray(panes)) {
-      throw new Error("wezterm cli list returned a value that is not an array");
-    }
-
-    const pane = (panes as WezTermPane[]).find(
-      ({ pane_id }) => String(pane_id) === paneId,
-    );
-    if (!pane) {
-      throw new Error(
-        `pane ${paneId} was not present in wezterm cli list output`,
-      );
-    }
-    if (typeof pane.workspace !== "string" || !pane.workspace.trim()) {
-      throw new Error(`pane ${paneId} did not have a workspace name`);
-    }
-
-    return pane.workspace;
-  } catch (error) {
-    const detail = error instanceof Error ? error.message : String(error);
-    process.stderr.write(
-      `notify-osc: failed to determine WezTerm workspace: ${detail}\n`,
-    );
-    return undefined;
-  }
+function zellijSession(): string | undefined {
+  const sessionName = process.env.ZELLIJ_SESSION_NAME?.trim();
+  return sessionName || undefined;
 }
 
 function osc777Notification(message: string): string {
   const body = sanitizeOscField(message);
-  const workspace = weztermWorkspace();
-  const title = sanitizeOscField(workspace ? `Pi (${workspace})` : "Pi");
+  const sessionName = zellijSession();
+  const title = sanitizeOscField(sessionName ? `Pi (${sessionName})` : "Pi");
 
   return `${OSC}777;notify;${title};${body}${BEL}`;
 }

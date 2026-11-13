@@ -35,7 +35,7 @@
 
   workspace-apps = [
     {
-      app-id = "com.github.wez.wezterm";
+      app-id = "com.raphaelamorim.rio";
       workspace = "1";
     }
     {

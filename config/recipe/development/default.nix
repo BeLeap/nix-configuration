@@ -1,6 +1,7 @@
 _: {
   includes = [
-    "wezterm"
+    "rio"
+    "zellij"
     "zsh"
     "lsd"
     "starship"

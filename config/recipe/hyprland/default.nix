@@ -17,7 +17,7 @@ _: {
 
               bind = [
                 "$mod, x, exec, ${pkgs.foot}/bin/foot"
-                "$mod, t, exec, ${pkgs.wezterm}/bin/wezterm"
+                "$mod, t, exec, ${pkgs.unstable.rio}/bin/rio"
                 "$mod, r, exec, ${pkgs.rofi}/bin/rofi -show drun"
                 "$mod shift, k, killactive"
               ];
