@@ -9,7 +9,7 @@ _: {
         builtins.replaceStrings ["@zsh@"] [(lib.getExe pkgs.zsh)] (builtins.readFile ./config.kdl)
       );
     in {
-      home.packages = [pkgs.zellij];
+      home.packages = [pkgs.unstable.zellij];
       xdg.configFile."zellij/config.kdl".source = zellijConfig;
     })
   ];
