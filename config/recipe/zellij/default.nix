@@ -1,4 +1,4 @@
-_: {
+{inputs, ...}: {
   home = [
     ({
       config,
@@ -6,7 +6,7 @@ _: {
       pkgs,
       ...
     }: let
-      reloadPlugin = import ./reload-config.nix {inherit pkgs;};
+      reloadPlugin = inputs.zellij-config-reloader.packages.${pkgs.stdenv.hostPlatform.system}.default;
       zellijConfig = pkgs.writeText "zellij-config.kdl" (
         builtins.replaceStrings
         ["@zsh@" "@reload-config-plugin@" "@nvim@"]

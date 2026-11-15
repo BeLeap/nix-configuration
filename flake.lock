@@ -854,7 +854,8 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nixvim": "nixvim",
         "nur": "nur",
-        "try": "try"
+        "try": "try",
+        "zellij-config-reloader": "zellij-config-reloader"
       }
     },
     "rust-overlay": {
@@ -1079,6 +1080,26 @@
         "dir": "nix",
         "owner": "wezterm",
         "repo": "wezterm",
+        "type": "github"
+      }
+    },
+    "zellij-config-reloader": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794761361,
+        "narHash": "sha256-8SluXmSceuxBFjrfLQDOQkekhpJXVy4pj0spewKn7Ew=",
+        "owner": "BeLeap",
+        "repo": "zellij-config-reloader",
+        "rev": "343a8a5bd1695994f5202cb2b5b105f566c409a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BeLeap",
+        "repo": "zellij-config-reloader",
         "type": "github"
       }
     },
