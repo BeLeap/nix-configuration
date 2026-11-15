@@ -8,17 +8,17 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1784095634,
-        "narHash": "sha256-BOy4wTvqWCgNxqKybLAl3iVe0T+P9Y9JcbupXb3KhyM=",
+        "lastModified": 1791184820,
+        "narHash": "sha256-r4/GsoeGey1YdMvW9b9XEgRkjc1VT80umqYERJ1xzSM=",
         "owner": "cristianoliveira",
         "repo": "aerospace-scratchpad",
-        "rev": "6efbfdc0c84d4fee7d2a0276c1a282552770d52f",
+        "rev": "5a21995dba7ad7a04c79a421c78a5b8eeeeb5f07",
         "type": "github"
       },
       "original": {
         "owner": "cristianoliveira",
-        "ref": "v0.6.0",
         "repo": "aerospace-scratchpad",
+        "rev": "5a21995dba7ad7a04c79a421c78a5b8eeeeb5f07",
         "type": "github"
       }
     },
