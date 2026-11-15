@@ -50,7 +50,7 @@ if [[ -n "${ZELLIJ_SESSION_NAME:-}" ]]; then
     fi
   fi
 
-  if ! zellij action switch-session --cwd "$workspace_dir" "$session_name"; then
+  if ! zellij --session "$ZELLIJ_SESSION_NAME" action switch-session --cwd "$workspace_dir" "$session_name"; then
     printf 'wts: failed to switch to Zellij session %s\n' "$session_name" >&2
     exit 1
   fi
