@@ -1090,11 +1090,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794764584,
-        "narHash": "sha256-v6B3jH8K4n8BaRbUCJ0UdXCZTfUuUrl9UY+BQpgHebs=",
+        "lastModified": 1794765986,
+        "narHash": "sha256-kKdGsuqiELciNvGBJ4ltURtfca5trJmGQ5KgEjJXs34=",
         "owner": "BeLeap",
         "repo": "zellij-config-reloader",
-        "rev": "0603f8e8f0222be63f4228757d0eb0f2fcdb322a",
+        "rev": "076160eba8cb42184287ae95ef18461805406e91",
         "type": "github"
       },
       "original": {
