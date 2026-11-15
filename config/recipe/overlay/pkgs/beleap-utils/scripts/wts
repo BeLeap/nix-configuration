@@ -1,0 +1,100 @@
+set -euo pipefail
+
+workspace_root="$HOME/ws"
+if [[ ! -d "$workspace_root" ]]; then
+  printf 'wts: workspace directory does not exist: %s\n' "$workspace_root" >&2
+  exit 1
+fi
+
+query="$*"
+if selection_output=$(
+  find "$workspace_root" -mindepth 1 -maxdepth 1 -type d -print0 |
+    while IFS= read -r -d '' directory; do
+      basename "$directory"
+    done |
+    fzf --query "$query" --print-query --bind 'enter:accept-or-print-query' --prompt='wts> '
+); then
+  :
+else
+  selection_status=$?
+  if [[ "$selection_status" -eq 130 ]]; then
+    exit 0
+  fi
+  printf 'wts: workspace selection failed with exit status %s\n' "$selection_status" >&2
+  exit "$selection_status"
+fi
+
+selection="${selection_output##*$'\n'}"
+if [[ -z "$selection" ]]; then
+  exit 0
+fi
+
+if [[ -d "$workspace_root/$selection" ]]; then
+  target_dir="$workspace_root/$selection"
+  session_name="$selection"
+else
+  name=$(printf '%s' "$selection" | sed 's/ /-/g')
+  if [[ "$name" == *"/"* ]]; then
+    printf 'wts: workspace name cannot contain /: %s\n' "$selection" >&2
+    exit 2
+  fi
+  if [[ -z "$name" ]]; then
+    exit 0
+  fi
+
+  session_name="$(date +%F)-$name"
+  target_dir="$workspace_root/$session_name"
+  if ! mkdir -- "$target_dir"; then
+    printf 'wts: could not create workspace directory: %s\n' "$target_dir" >&2
+    exit 1
+  fi
+fi
+
+if [[ -n "${ZELLIJ:-}" ]]; then
+  if [[ "${ZELLIJ_SESSION_NAME:-}" == "$session_name" ]]; then
+    exit 0
+  fi
+
+  if sessions=$(zellij list-sessions --short 2>&1); then
+    :
+  else
+    zellij_status=$?
+    if [[ "$zellij_status" -eq 1 && "$sessions" == 'No active zellij sessions found.' ]]; then
+      sessions=''
+    else
+      printf 'wts: could not list Zellij sessions: %s\n' "$sessions" >&2
+      exit "$zellij_status"
+    fi
+  fi
+
+  session_exists=false
+  while IFS= read -r session; do
+    if [[ "$session" == "$session_name" ]]; then
+      session_exists=true
+      break
+    fi
+  done <<< "$sessions"
+
+  if [[ "$session_exists" == true ]]; then
+    exec zellij action switch-session "$session_name"
+  fi
+
+  if [[ -z "${SHELL:-}" ]]; then
+    printf 'wts: SHELL is not set; cannot start a shell in the new Zellij session\n' >&2
+    exit 1
+  fi
+
+  cd "$target_dir"
+  if env -u ZELLIJ -u ZELLIJ_SESSION_NAME -u ZELLIJ_PANE_ID \
+    zellij attach --create-background "$session_name" -- "$SHELL"; then
+    :
+  else
+    zellij_status=$?
+    printf 'wts: could not create Zellij session: %s\n' "$session_name" >&2
+    exit "$zellij_status"
+  fi
+  exec zellij action switch-session "$session_name"
+fi
+
+cd "$target_dir"
+exec zellij attach --create "$session_name"
