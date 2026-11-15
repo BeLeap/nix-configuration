@@ -12,16 +12,7 @@ _: {
           aerospace-exe = lib.getExe aerospace;
           jq-exe = lib.getExe pkgs.jq;
 
-          scratchpad = inputs.aerospace-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (_: {
-            # v0.6.0 shipped with a stale source hash in its Nix expression.
-            src = pkgs.fetchFromGitHub {
-              owner = "cristianoliveira";
-              repo = "aerospace-scratchpad";
-              rev = "v0.6.0";
-              hash = "sha256-BOy4wTvqWCgNxqKybLAl3iVe0T+P9Y9JcbupXb3KhyM=";
-            };
-            vendorHash = "sha256-jYCA3DNoi9Mj55t6ru76voENM8VSJt7Gp74JV7Vq19k=";
-          });
+          scratchpad = inputs.aerospace-scratchpad.packages.${pkgs.stdenv.hostPlatform.system}.default;
           scratchpad-exe = lib.getExe' scratchpad "aerospace-scratchpad";
 
           app-assignments = import ./app-assignments.nix {

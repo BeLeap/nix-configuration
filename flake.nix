@@ -31,7 +31,8 @@
     };
 
     aerospace-scratchpad = {
-      url = "github:cristianoliveira/aerospace-scratchpad/v0.6.0";
+      # v0.7.1 packaging fix, published after the release tag.
+      url = "github:cristianoliveira/aerospace-scratchpad/5a21995dba7ad7a04c79a421c78a5b8eeeeb5f07";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
