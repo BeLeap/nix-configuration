@@ -23,7 +23,7 @@ _: {
               format = "$shlvl$jobs$directory$character";
               right_format = "$all";
 
-              # Avoid emoji variation selectors that Zsh and Rio measure differently.
+              # Avoid emoji variation selectors that Zsh and WezTerm measure differently.
               nix_shell = {
                 symbol = " ";
               };

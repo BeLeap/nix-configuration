@@ -68,10 +68,6 @@
     direnv-instant.url = "github:Mic92/direnv-instant/1.2.0";
     jj-starship.url = "github:dmmulroy/jj-starship/v0.7.1";
     try.url = "github:tobi/try/v1.9.0";
-    zellij-config-reloader = {
-      url = "github:BeLeap/zellij-config-reloader";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     nixvim.url = "github:nix-community/nixvim";
   };
 

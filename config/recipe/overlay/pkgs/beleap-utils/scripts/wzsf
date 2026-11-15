@@ -1,0 +1,32 @@
+#!/usr/bin/env /bin/bash
+
+set -euo pipefail
+
+workspaces=$(
+  wezterm cli list --format json |
+    jq -r '.[].workspace' |
+    awk '!seen[$0]++'
+)
+
+if [[ -p /dev/stdin ]]; then
+  workspaces=$(
+    {
+      printf '%s\n' "$workspaces"
+      cat
+    } | awk 'NF && !seen[$0]++'
+  )
+fi
+
+count=$(printf '%s\n' "$workspaces" | awk 'NF { count++ } END { print count + 0 }')
+
+case "$count" in
+  0)
+    exit 0
+    ;;
+  1)
+    printf '%s\n' "$workspaces"
+    ;;
+  *)
+    printf '%s\n' "$workspaces" | fzf
+    ;;
+esac
