@@ -11,6 +11,7 @@ plugins {
     config-reloader location="@reload-config-plugin@" {
         permissions {
             Reconfigure
+            OpenTerminalsOrPlugins
         }
     }
 }
