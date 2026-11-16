@@ -31,8 +31,7 @@
     };
 
     aerospace-scratchpad = {
-      # v0.7.1 packaging fix, published after the release tag.
-      url = "github:cristianoliveira/aerospace-scratchpad/5a21995dba7ad7a04c79a421c78a5b8eeeeb5f07";
+      url = "github:cristianoliveira/aerospace-scratchpad/v0.6.0";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
@@ -63,6 +62,10 @@
 
     agenix.url = "github:ryantm/agenix";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    socratic-tutor = {
+      url = "github:janestreet/agent_skills";
+      flake = false;
+    };
     beleap-overlay.url = "github:BeLeap/nix-overlay";
     direnv-overlay.url = "github:BeLeap/direnv-overlay";
     direnv-instant.url = "github:Mic92/direnv-instant/1.2.0";
