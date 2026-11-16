@@ -8,6 +8,7 @@
         file = {
           ".agents/skills/hypothesis-driven-inquiry".source = ./skills/hypothesis-driven-inquiry;
           ".agents/skills/agent-browser".source = ./skills/agent-browser;
+          ".agents/skills/socratic-tutor".source = ./skills/socratic-tutor;
         };
       };
     })
