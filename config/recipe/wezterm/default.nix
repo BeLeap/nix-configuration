@@ -1,15 +1,9 @@
-_: {
+{host, ...}: {
   darwin = {
     system = [
-      ({
-        inputs,
-        pkgs,
-        ...
-      }: let
-        wezterm = (import inputs.nix-mac-app-identity {inherit pkgs;}).stabilizeApp pkgs.wezterm-upstream;
-      in {
+      (_: {
         system.defaults.dock.persistent-apps = [
-          {app = "${wezterm}/Applications/WezTerm.app";}
+          {app = "/Users/${host.usernameLower}/Applications/Home Manager Apps/WezTerm.app";}
         ];
       })
     ];
