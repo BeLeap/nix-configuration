@@ -7,32 +7,51 @@ if [[ ! -d "$workspace_root" ]]; then
 fi
 
 query="$*"
-if selection_output=$(
+new_session_option='New Session'
+
+list_workspace_options() {
   find "$workspace_root" -mindepth 1 -maxdepth 1 -type d -print0 |
     while IFS= read -r -d '' directory; do
       basename "$directory"
-    done |
-    fzf --query "$query" --print-query --bind 'enter:accept-or-print-query' --prompt='wts> '
+    done || return
+
+  printf '%s\n' "$new_session_option"
+}
+
+if workspace_options=$(list_workspace_options); then
+  :
+else
+  list_status=$?
+  printf 'wts: could not list workspace options with exit status %s\n' "$list_status" >&2
+  exit "$list_status"
+fi
+
+if selection_output=$(
+  printf '%s\n' "$workspace_options" | fzf --query "$query" --prompt='wts> '
 ); then
   :
 else
   selection_status=$?
-  if [[ "$selection_status" -eq 130 ]]; then
+  if [[ "$selection_status" -eq 1 || "$selection_status" -eq 130 ]]; then
     exit 0
   fi
   printf 'wts: workspace selection failed with exit status %s\n' "$selection_status" >&2
   exit "$selection_status"
 fi
 
-selection="${selection_output##*$'\n'}"
+selection="$selection_output"
 if [[ -z "$selection" ]]; then
   exit 0
 fi
 
-if [[ -d "$workspace_root/$selection" ]]; then
-  target_dir="$workspace_root/$selection"
-  workspace_name="$selection"
-else
+if [[ "$selection" == "$new_session_option" ]]; then
+  if ! IFS= read -r -p 'Session name: ' selection; then
+    exit 0
+  fi
+  if [[ -z "$selection" ]]; then
+    exit 0
+  fi
+
   name=$(printf '%s' "$selection" | sed 's/ /-/g')
   if [[ "$name" == *"/"* ]]; then
     printf 'wts: workspace name cannot contain /: %s\n' "$selection" >&2
@@ -48,6 +67,13 @@ else
     printf 'wts: could not create workspace directory: %s\n' "$target_dir" >&2
     exit 1
   fi
+else
+  target_dir="$workspace_root/$selection"
+  if [[ ! -d "$target_dir" ]]; then
+    printf 'wts: selected workspace directory does not exist: %s\n' "$target_dir" >&2
+    exit 1
+  fi
+  workspace_name="$selection"
 fi
 
 if [[ -z "${WEZTERM_PANE:-}" ]]; then
