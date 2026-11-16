@@ -88,7 +88,7 @@
     // {
       formatter = lib.genAttrs systems (system: (import nixpkgs {inherit system;}).alejandra);
       devShells = lib.genAttrs systems (system: let
-        pkgs = import nixpkgs {inherit system;};      
+        pkgs = import nixpkgs {inherit system;};
       in {
         default = pkgs.mkShell {
           packages = with pkgs; [
