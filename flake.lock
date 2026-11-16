@@ -68,14 +68,15 @@
         "kubectl-check-flake": "kubectl-check-flake",
         "nix-github-actions": "nix-github-actions",
         "nixpkgs": "nixpkgs_2",
+        "socratic-tutor": "socratic-tutor",
         "wezterm-flake": "wezterm-flake"
       },
       "locked": {
-        "lastModified": 1794447277,
-        "narHash": "sha256-9+/iDYFVpvCM9e2k1Ls2zeeHIZTL43iTF6Y8PGocoH0=",
+        "lastModified": 1794821866,
+        "narHash": "sha256-jXge5tjehDcOGHnWIWGvAz6GwV0kAVByzs1gwvXwO3Q=",
         "owner": "BeLeap",
         "repo": "nix-overlay",
-        "rev": "6acbdd1972778f35f5bb95701445b564384dede1",
+        "rev": "539c87eb8841f33b6cd5c7fcfe8947b983194701",
         "type": "github"
       },
       "original": {
@@ -876,6 +877,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "socratic-tutor": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793728425,
+        "narHash": "sha256-bKGKDaK2pSJsp5uVMUQDcj8J+N9nX2fDdeU1DXM2qLw=",
+        "owner": "janestreet",
+        "repo": "agent_skills",
+        "rev": "7c6715c29548a3b39d4a9545c698ee4fd17a7213",
+        "type": "github"
+      },
+      "original": {
+        "owner": "janestreet",
+        "repo": "agent_skills",
         "type": "github"
       }
     },
