@@ -63,10 +63,6 @@
 
     agenix.url = "github:ryantm/agenix";
     llm-agents.url = "github:numtide/llm-agents.nix";
-    socratic-tutor = {
-      url = "github:janestreet/agent_skills";
-      flake = false;
-    };
     beleap-overlay.url = "github:BeLeap/nix-overlay";
     direnv-overlay.url = "github:BeLeap/direnv-overlay";
     direnv-instant.url = "github:Mic92/direnv-instant/1.2.0";
