@@ -36,7 +36,6 @@ _: {
         home.packages = [
           pkgs.unstable.betterdisplay
           pkgs.element-desktop
-          pkgs.minute
         ];
       })
     ];

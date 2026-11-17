@@ -7,6 +7,7 @@
       "default"
       "macos"
       "homebrew"
+      "workstation"
       "beleap-m1air"
       "personal"
       "discord"
@@ -23,6 +24,7 @@
       "default"
       "macos"
       "homebrew"
+      "workstation"
       "beleap-macmini"
       "personal"
       "discord"
@@ -40,6 +42,7 @@
       "default"
       "macos"
       "homebrew"
+      "workstation"
       "work"
       "homerow"
     ];
