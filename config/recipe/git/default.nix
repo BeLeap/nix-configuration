@@ -1,7 +1,11 @@
 _: {
   home = [
     (
-      {host, pkgs, ...}: {
+      {
+        host,
+        pkgs,
+        ...
+      }: {
         home.shellAliases = {
           ga = "git add";
           gc = "git commit -v";
