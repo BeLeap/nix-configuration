@@ -1,7 +1,11 @@
 _: {
   home = [
     (
-      {host, ...}: {
+      {
+        host,
+        pkgs,
+        ...
+      }: {
         home.shellAliases = {
           ga = "git add";
           gc = "git commit -v";
@@ -17,6 +21,37 @@ _: {
         };
         programs.git = {
           enable = true;
+
+          hooks.pre-commit = pkgs.writeShellScript "gitleaks-pre-commit" ''
+            ${pkgs.gitleaks}/bin/gitleaks protect --staged --redact --exit-code 10
+            status=$?
+
+            case "$status" in
+              0) exit 0 ;;
+              10) ;;
+              *)
+                printf '%s\n' 'Gitleaks scan failed. Commit aborted.' >&2
+                exit "$status"
+                ;;
+            esac
+
+            # Git hooks may have redirected stdin; read from the terminal instead.
+            if ! { exec 3<> /dev/tty; } 2>/dev/null; then
+              printf '%s\n' 'Secrets detected, but no terminal is available for confirmation. Commit aborted.' >&2
+              exit 1
+            fi
+
+            printf '%s' 'Secrets detected. Continue? [y/N] ' >&3
+            answer=
+            IFS= read -r answer <&3 || exit 1
+            case "$answer" in
+              y|Y) exit 0 ;;
+              *)
+                printf '%s\n' 'Commit aborted.' >&2
+                exit 1
+                ;;
+            esac
+          '';
 
           settings = {
             user = {
