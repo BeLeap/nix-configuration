@@ -82,7 +82,19 @@
         plugins = {
           hunk.enable = true;
           nui.enable = true;
-          telescope.enable = true;
+          telescope = {
+            enable = true;
+            settings.defaults = {
+              layout_strategy = "vertical";
+              path_display = {
+                truncate = true;
+                shorten = {
+                  len = 2;
+                  exclude = [1 (-1)];
+                };
+              };
+            };
+          };
           gitsigns.enable = true;
           oil.enable = true;
           treesitter = {
