@@ -27,11 +27,25 @@ _: {
 
               diff-formatter = "delta";
               conflict-marker-style = "git";
+              diff-editor = ["nvim" "-c" "DiffEditor $left $right $output"];
             };
             merge-tools.delta = {
               program = "${lib.getExe pkgs.delta}";
               diff-args = ["-s" "$left" "$right" "--width=$width"];
               diff-expected-exit-codes = [0 1];
+            };
+            merge-tools.hunk = {
+              program = "sh";
+              diff-invocation-mode = "dir";
+              diff-do-chdir = false;
+              conflict-marker-style = "snapshot";
+              diff-args = [
+                "-c"
+                "exec nvim -c \"HunkDiffView $1 $2\" </dev/tty >/dev/tty"
+                "hunk-difftool"
+                "$left"
+                "$right"
+              ];
             };
             aliases = {
               c = ["commit"];
@@ -51,7 +65,7 @@ _: {
               b = ["bookmark"];
               ba = ["bookmark" "advance"];
               sq = ["squash" "-i"];
-              dfnav = ["diff" "--config=ui.diff-formatter=':git'" "--config=ui.pager='${lib.getExe pkgs.diffnav}'"];
+              dfui = ["diff" "--tool" "hunk" "--no-pager"];
             };
             templates = {
               draft_commit_description = ''

@@ -80,6 +80,8 @@
         ];
 
         plugins = {
+          hunk.enable = true;
+          nui.enable = true;
           telescope.enable = true;
           gitsigns.enable = true;
           oil.enable = true;
