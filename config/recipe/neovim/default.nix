@@ -11,15 +11,6 @@
         enableMan = true;
         defaultEditor = true;
 
-        extraPlugins = with pkgs.vimPlugins; [
-          hunk-nvim
-          nui-nvim
-        ];
-
-        extraConfigLua = ''
-          require("hunk").setup()
-        '';
-
         colorschemes.gruvbox.enable = true;
 
         globals.mapleader = ",";
@@ -89,6 +80,8 @@
         ];
 
         plugins = {
+          hunk.enable = true;
+          nui.enable = true;
           telescope.enable = true;
           gitsigns.enable = true;
           oil.enable = true;
