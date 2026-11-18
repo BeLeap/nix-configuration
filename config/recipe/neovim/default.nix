@@ -87,7 +87,7 @@
             settings.defaults = {
               layout_strategy = "vertical";
               path_display = {
-                __unkeyed = "truncate";
+                truncate = true;
                 shorten = {
                   len = 2;
                   exclude = [1 (-1)];
