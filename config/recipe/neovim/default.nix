@@ -86,7 +86,13 @@
             enable = true;
             settings.defaults = {
               layout_strategy = "vertical";
-              path_display = ["smart"];
+              path_display = {
+                __unkeyed-1 = "truncate";
+                shorten = {
+                  len = 2;
+                  exclude = [1 (-1)];
+                };
+              };
             };
           };
           gitsigns.enable = true;
