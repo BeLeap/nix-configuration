@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: gitleaks-files
+        name: Scan changed files with Gitleaks
+        entry: jj-gitleaks-files
+        language: system
+        pass_filenames: true
+        stages: [pre-push]
