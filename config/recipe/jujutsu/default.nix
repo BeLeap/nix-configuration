@@ -5,9 +5,19 @@ _: {
         host,
         pkgs,
         lib,
+        config,
         ...
       }: {
         home.file.".agents/skills/jj-vcs".source = ./skills/jj-vcs;
+        home.file.".config/jj/pre-commit-config.yaml".source = ./pre-commit-config.yaml;
+
+        home.packages = [
+          (pkgs.writeShellApplication {
+            name = "jj-gitleaks-files";
+            runtimeInputs = [pkgs.gitleaks];
+            text = builtins.readFile ./gitleaks-files.sh;
+          })
+        ];
 
         programs.jujutsu = {
           enable = true;
@@ -51,7 +61,16 @@ _: {
               c = ["commit"];
               d = ["describe"];
               n = ["new"];
-              p = ["git" "push"];
+              p = ["push"];
+              push = [
+                "util"
+                "exec"
+                "--"
+                "${lib.getExe pkgs.unstable.jj-pre-push}"
+                "--config"
+                "${config.xdg.configHome}/jj/pre-commit-config.yaml"
+                "push"
+              ];
               f = ["git" "fetch" "--all-remotes"];
               st = ["status"];
               l = ["log" "--limit=20"];
