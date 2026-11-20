@@ -3,6 +3,6 @@ repos:
     hooks:
       - id: gitleaks-files
         name: Scan changed files with Gitleaks
-        entry: scripts/gitleaks-files.sh
+        entry: bash scripts/gitleaks-files.sh
         language: system
         pass_filenames: true
