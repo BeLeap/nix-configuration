@@ -11,3 +11,5 @@ Added a repository-local pre-commit hook that `jj-pre-push` can run for files in
 ## Follow-up
 
 Switched the `jj-pre-push` alias from `uvx` to the packaged `pkgs.unstable.jj-pre-push`, so Home Manager installs and runs a pinned Nix package without a runtime package download.
+
+The initial checker config was repository-local. It has now been moved into the Jujutsu Home Manager recipe and passed explicitly to `jj-pre-push --config`, so the Gitleaks scan applies across repositories. The helper is installed as a Home Manager package with Gitleaks on its runtime PATH.
