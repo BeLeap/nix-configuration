@@ -56,8 +56,7 @@ _: {
                 "util"
                 "exec"
                 "--"
-                "${lib.getExe' pkgs.uv "uvx"}"
-                "jj-pre-push"
+                "${lib.getExe pkgs.unstable.jj-pre-push}"
                 "push"
               ];
               f = ["git" "fetch" "--all-remotes"];
