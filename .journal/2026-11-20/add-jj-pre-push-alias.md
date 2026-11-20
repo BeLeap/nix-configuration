@@ -7,3 +7,7 @@ Validation was limited to reviewing the configuration diff. This workspace has n
 ## Gitleaks integration
 
 Added a repository-local pre-commit hook that `jj-pre-push` can run for files in the outgoing bookmark diff. It calls `gitleaks dir` once per existing path rather than the upstream Git-staged hook, so it checks jj's checked-out file contents. Deleted paths are skipped because they have no working-tree contents; this also means this check does not inspect deleted content in commit history. The repo must have `gitleaks` on PATH and the pushed revision must include `.pre-commit-config.yaml` plus `scripts/gitleaks-files.sh` for the check to run.
+
+## Follow-up
+
+Switched the `jj-pre-push` alias from `uvx` to the packaged `pkgs.unstable.jj-pre-push`, so Home Manager installs and runs a pinned Nix package without a runtime package download.
