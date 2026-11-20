@@ -51,7 +51,15 @@ _: {
               c = ["commit"];
               d = ["describe"];
               n = ["new"];
-              p = ["git" "push"];
+              p = ["push"];
+              push = [
+                "util"
+                "exec"
+                "--"
+                "${lib.getExe' pkgs.uv "uvx"}"
+                "jj-pre-push"
+                "push"
+              ];
               f = ["git" "fetch" "--all-remotes"];
               st = ["status"];
               l = ["log" "--limit=20"];
