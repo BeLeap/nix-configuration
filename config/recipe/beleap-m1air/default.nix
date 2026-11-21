@@ -1,5 +1,16 @@
 _: {
   darwin = {
+    home = [
+      (_: {
+        programs.obsidian = {
+          enable = true;
+          vaults.personal = {
+            enable = true;
+            target = "Sync/Personal";
+          };
+        };
+      })
+    ];
     system = [
       (_: {
         networking.knownNetworkServices = [
