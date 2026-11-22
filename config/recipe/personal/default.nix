@@ -1,14 +1,13 @@
 _: {
   includes = [
     "1password"
-    "joplin"
+    "obsidian"
     "syncthing"
     "yubikey"
   ];
   home = [
     ({pkgs, ...}: {
       programs.firefox.profiles."beleap".extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-        joplin-web-clipper
         onepassword-password-manager
       ];
     })

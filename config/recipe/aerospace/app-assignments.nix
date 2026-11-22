@@ -51,7 +51,7 @@
       workspace = "3";
     }
     {
-      app-id = "net.cozic.joplin-desktop";
+      app-id = "md.obsidian";
       workspace = "3";
     }
     {
