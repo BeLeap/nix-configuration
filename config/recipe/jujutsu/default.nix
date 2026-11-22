@@ -27,7 +27,7 @@ _: {
 
               diff-formatter = "delta";
               conflict-marker-style = "git";
-              diff-editor = ["nvim" "-c" "DiffEditor $left $right $output"];
+              diff-editor = ["nvim" "-c" "HunkDiffEditor $left $right $output"];
             };
             merge-tools.delta = {
               program = "${lib.getExe pkgs.delta}";

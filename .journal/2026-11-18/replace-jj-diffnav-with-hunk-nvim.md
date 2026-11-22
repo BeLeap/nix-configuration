@@ -7,3 +7,5 @@
 - Confirmed both plugin package attributes are available in the stable and Darwin nixpkgs sources.
 - Parsed both changed Nix files and passed the Alejandra style check; no system build or test suite was run.
 - Renamed the Jujutsu viewer shortcut from `dfnav` to `dfui` in a follow-up.
+- Follow-up (2026-11-22): Replaced Jujutsu's deprecated `DiffEditor` command with `HunkDiffEditor` in `config/recipe/jujutsu/default.nix`.
+- Validation: `nix-instantiate --parse config/recipe/jujutsu/default.nix` and `alejandra --check config/recipe/jujutsu/default.nix` passed.
