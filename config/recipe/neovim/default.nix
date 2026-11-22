@@ -52,6 +52,9 @@
           };
 
           completeopt = ["menu" "menuone" "noselect"];
+          diffopt = {
+            __raw = "vim.opt.diffopt + 'followwrap'";
+          };
 
           scrolloff = 999;
           foldlevelstart = 99;
