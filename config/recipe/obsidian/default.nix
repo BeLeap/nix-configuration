@@ -7,6 +7,9 @@ _: {
           vaults.personal = {
             enable = true;
             target = "Sync/Personal";
+            settings.extraFiles."daily-notes.json".text = builtins.toJSON {
+              folder = "01_Journal";
+            };
           };
         };
       })
