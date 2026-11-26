@@ -20,6 +20,16 @@ _: {
             };
           };
           folders = {
+            "${config.home.homeDirectory}/Documents/Obsidian" = {
+              id = "obsidian";
+
+              devices = [
+                "beleap-m1air"
+                "beleap-macmini"
+                "beleap-s24"
+                "beleap-ipad"
+              ];
+            };
             "${config.home.homeDirectory}/Sync" = {
               id = "sync";
 
